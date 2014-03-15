@@ -10,4 +10,5 @@
 
 @interface MFCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @end

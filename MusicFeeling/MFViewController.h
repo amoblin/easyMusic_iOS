@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IDZAQAudioPlayer.h"
 
-@interface MFViewController : UIViewController <IDZAudioPlayerDelegate>
+@interface MFViewController : UIViewController <IDZAudioPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

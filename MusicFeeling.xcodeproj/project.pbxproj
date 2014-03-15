@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA35C8D418D3FA880021BD55 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA35C8D318D3FA880021BD55 /* Ogg.framework */; };
+		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
 		DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA118D3E623009A825E /* Foundation.framework */; };
 		DA527CA418D3E623009A825E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA318D3E623009A825E /* CoreGraphics.framework */; };
 		DA527CA618D3E623009A825E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA518D3E623009A825E /* UIKit.framework */; };
@@ -128,6 +129,8 @@
 
 /* Begin PBXFileReference section */
 		DA35C8D318D3FA880021BD55 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Ogg.framework; sourceTree = "<group>"; };
+		DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCollectionViewCell.h; sourceTree = "<group>"; };
+		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
 		DA527C9E18D3E623009A825E /* MusicFeeling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicFeeling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA527CA118D3E623009A825E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA527CA318D3E623009A825E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -315,6 +318,8 @@
 				DA527CB618D3E623009A825E /* Main_iPad.storyboard */,
 				DA527CB918D3E623009A825E /* MFViewController.h */,
 				DA527CBA18D3E623009A825E /* MFViewController.m */,
+				DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */,
+				DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */,
 				DA527CBC18D3E623009A825E /* Images.xcassets */,
 				DA527CA818D3E623009A825E /* Supporting Files */,
 			);
@@ -674,6 +679,7 @@
 				DA527CAE18D3E623009A825E /* main.m in Sources */,
 				DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */,
 				DA527CBB18D3E623009A825E /* MFViewController.m in Sources */,
+				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
 				DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */,
 			);
