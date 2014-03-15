@@ -32,6 +32,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapViewAction)];
+    tap.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap];
+
     self.inputField.delegate = self;
     [self replayTone:nil];
 }
@@ -103,5 +107,9 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     return YES;
+}
+
+- (void)tapViewAction {
+    [self.inputField endEditing:YES];
 }
 @end

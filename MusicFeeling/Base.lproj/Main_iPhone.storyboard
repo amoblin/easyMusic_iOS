@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--View Controller - 钢琴物语-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MFViewController" sceneMemberID="viewController">
@@ -71,7 +71,7 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SYF-pM-QkT" secondAttribute="bottom" id="xjn-at-Lqa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="qM5-9E-ZSJ">
+                    <navigationItem key="navigationItem" title="钢琴物语" id="qM5-9E-ZSJ">
                         <barButtonItem key="rightBarButtonItem" title="测试" style="plain" id="0rw-KU-xKb">
                             <connections>
                                 <segue destination="ncx-hV-yFt" kind="push" id="GBF-FV-4MW"/>
@@ -98,9 +98,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fk-zZ-hGe">
-                                <rect key="frame" x="130" y="103" width="60" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fk-zZ-hGe">
+                                <rect key="frame" x="130" y="114" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="UDt-Gr-kkI"/>
+                                    <constraint firstAttribute="height" constant="60" id="ZTB-Nq-oHQ"/>
+                                </constraints>
                                 <state key="normal" title="聆听">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -108,14 +112,24 @@
                                     <action selector="replayTone:" destination="ncx-hV-yFt" eventType="touchUpInside" id="c0E-1G-gJ7"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPP-Yj-w9c">
-                                <rect key="frame" x="112" y="269" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPP-Yj-w9c">
+                                <rect key="frame" x="120" y="240" width="80" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Oeq-Ai-xZU"/>
+                                    <constraint firstAttribute="width" constant="80" id="T2Y-d3-caU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="PPP-Yj-w9c" secondAttribute="centerY" constant="29" id="2tC-aM-uxA"/>
+                            <constraint firstItem="1fk-zZ-hGe" firstAttribute="leading" secondItem="CxT-7p-g1M" secondAttribute="leading" constant="130" id="CL6-9z-krL"/>
+                            <constraint firstItem="1fk-zZ-hGe" firstAttribute="top" secondItem="Jtp-BC-OvV" secondAttribute="bottom" constant="50" id="H3D-ln-WqX"/>
+                            <constraint firstAttribute="trailing" secondItem="PPP-Yj-w9c" secondAttribute="trailing" constant="120" id="zB9-2p-cGt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2bO-wY-bXY">
                         <barButtonItem key="rightBarButtonItem" title="下一个" id="0aS-oW-VZP">
