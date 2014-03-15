@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IDZAQAudioPlayer.h"
 
-@interface MFViewController : UIViewController
+@interface MFViewController : UIViewController <IDZAudioPlayerDelegate>
 
 @end
