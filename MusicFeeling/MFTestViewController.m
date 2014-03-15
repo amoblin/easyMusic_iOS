@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) id<IDZAudioPlayer> player;
 @property (nonatomic) NSInteger randomIndex;
+@property (nonatomic) BOOL isDone;
 @end
 
 @implementation MFTestViewController
@@ -80,6 +81,10 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ( ! self.isDone) {
+        return;
+    }
+    self.isDone = NO;
     NSLog(@"%@", textField.text);
     if ([textField.text isEqualToString:[self.tonesArray[self.randomIndex] stringByDeletingPathExtension]]) {
         [SVProgressHUD showSuccessWithStatus:@"Bingo!"];
@@ -91,6 +96,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    self.isDone = YES;
     [textField resignFirstResponder];
     return YES;
 }
