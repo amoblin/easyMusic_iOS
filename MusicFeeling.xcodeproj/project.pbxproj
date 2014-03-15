@@ -1,935 +1,3194 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		DA35C8D418D3FA880021BD55 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA35C8D318D3FA880021BD55 /* Ogg.framework */; };
-		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
-		DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D918D405770021BD55 /* MFTestViewController.m */; };
-		DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA118D3E623009A825E /* Foundation.framework */; };
-		DA527CA418D3E623009A825E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA318D3E623009A825E /* CoreGraphics.framework */; };
-		DA527CA618D3E623009A825E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA518D3E623009A825E /* UIKit.framework */; };
-		DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA527CAA18D3E623009A825E /* InfoPlist.strings */; };
-		DA527CAE18D3E623009A825E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CAD18D3E623009A825E /* main.m */; };
-		DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CB118D3E623009A825E /* MFAppDelegate.m */; };
-		DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA527CB318D3E623009A825E /* Main_iPhone.storyboard */; };
-		DA527CB818D3E623009A825E /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA527CB618D3E623009A825E /* Main_iPad.storyboard */; };
-		DA527CBB18D3E623009A825E /* MFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CBA18D3E623009A825E /* MFViewController.m */; };
-		DA527CBD18D3E623009A825E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA527CBC18D3E623009A825E /* Images.xcassets */; };
-		DA527CC418D3E623009A825E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CC318D3E623009A825E /* XCTest.framework */; };
-		DA527CC518D3E623009A825E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA118D3E623009A825E /* Foundation.framework */; };
-		DA527CC618D3E623009A825E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA518D3E623009A825E /* UIKit.framework */; };
-		DA527CCE18D3E623009A825E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA527CCC18D3E623009A825E /* InfoPlist.strings */; };
-		DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CCF18D3E623009A825E /* MusicFeelingTests.m */; };
-		DA527D3318D3E6E0009A825E /* a0.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CDB18D3E6E0009A825E /* a0.ogg */; };
-		DA527D3418D3E6E0009A825E /* a0m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CDC18D3E6E0009A825E /* a0m.ogg */; };
-		DA527D3518D3E6E0009A825E /* a1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CDD18D3E6E0009A825E /* a1.ogg */; };
-		DA527D3618D3E6E0009A825E /* a1m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CDE18D3E6E0009A825E /* a1m.ogg */; };
-		DA527D3718D3E6E0009A825E /* a2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CDF18D3E6E0009A825E /* a2.ogg */; };
-		DA527D3818D3E6E0009A825E /* a2m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE018D3E6E0009A825E /* a2m.ogg */; };
-		DA527D3918D3E6E0009A825E /* a3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE118D3E6E0009A825E /* a3.ogg */; };
-		DA527D3A18D3E6E0009A825E /* a3m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE218D3E6E0009A825E /* a3m.ogg */; };
-		DA527D3B18D3E6E0009A825E /* a4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE318D3E6E0009A825E /* a4.ogg */; };
-		DA527D3C18D3E6E0009A825E /* a4m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE418D3E6E0009A825E /* a4m.ogg */; };
-		DA527D3D18D3E6E0009A825E /* a5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE518D3E6E0009A825E /* a5.ogg */; };
-		DA527D3E18D3E6E0009A825E /* a5m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE618D3E6E0009A825E /* a5m.ogg */; };
-		DA527D3F18D3E6E0009A825E /* a6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE718D3E6E0009A825E /* a6.ogg */; };
-		DA527D4018D3E6E0009A825E /* a6m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE818D3E6E0009A825E /* a6m.ogg */; };
-		DA527D4118D3E6E0009A825E /* a7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CE918D3E6E0009A825E /* a7.ogg */; };
-		DA527D4218D3E6E0009A825E /* a7m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CEA18D3E6E0009A825E /* a7m.ogg */; };
-		DA527D4318D3E6E0009A825E /* b0.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CEB18D3E6E0009A825E /* b0.ogg */; };
-		DA527D4418D3E6E0009A825E /* b1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CEC18D3E6E0009A825E /* b1.ogg */; };
-		DA527D4518D3E6E0009A825E /* b2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CED18D3E6E0009A825E /* b2.ogg */; };
-		DA527D4618D3E6E0009A825E /* b3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CEE18D3E6E0009A825E /* b3.ogg */; };
-		DA527D4718D3E6E0009A825E /* b4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CEF18D3E6E0009A825E /* b4.ogg */; };
-		DA527D4818D3E6E0009A825E /* b5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF018D3E6E0009A825E /* b5.ogg */; };
-		DA527D4918D3E6E0009A825E /* b6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF118D3E6E0009A825E /* b6.ogg */; };
-		DA527D4A18D3E6E0009A825E /* b7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF218D3E6E0009A825E /* b7.ogg */; };
-		DA527D4B18D3E6E0009A825E /* c1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF318D3E6E0009A825E /* c1.ogg */; };
-		DA527D4C18D3E6E0009A825E /* c1m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF418D3E6E0009A825E /* c1m.ogg */; };
-		DA527D4D18D3E6E0009A825E /* c2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF518D3E6E0009A825E /* c2.ogg */; };
-		DA527D4E18D3E6E0009A825E /* c2m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF618D3E6E0009A825E /* c2m.ogg */; };
-		DA527D4F18D3E6E0009A825E /* c3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF718D3E6E0009A825E /* c3.ogg */; };
-		DA527D5018D3E6E0009A825E /* c3m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF818D3E6E0009A825E /* c3m.ogg */; };
-		DA527D5118D3E6E0009A825E /* c4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CF918D3E6E0009A825E /* c4.ogg */; };
-		DA527D5218D3E6E0009A825E /* c4m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CFA18D3E6E0009A825E /* c4m.ogg */; };
-		DA527D5318D3E6E0009A825E /* c5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CFB18D3E6E0009A825E /* c5.ogg */; };
-		DA527D5418D3E6E0009A825E /* c5m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CFC18D3E6E0009A825E /* c5m.ogg */; };
-		DA527D5518D3E6E0009A825E /* c6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CFD18D3E6E0009A825E /* c6.ogg */; };
-		DA527D5618D3E6E0009A825E /* c6m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CFE18D3E6E0009A825E /* c6m.ogg */; };
-		DA527D5718D3E6E0009A825E /* c7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527CFF18D3E6E0009A825E /* c7.ogg */; };
-		DA527D5818D3E6E0009A825E /* c7m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0018D3E6E0009A825E /* c7m.ogg */; };
-		DA527D5918D3E6E0009A825E /* c8.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0118D3E6E0009A825E /* c8.ogg */; };
-		DA527D5A18D3E6E0009A825E /* d1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0218D3E6E0009A825E /* d1.ogg */; };
-		DA527D5B18D3E6E0009A825E /* d1m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0318D3E6E0009A825E /* d1m.ogg */; };
-		DA527D5C18D3E6E0009A825E /* d2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0418D3E6E0009A825E /* d2.ogg */; };
-		DA527D5D18D3E6E0009A825E /* d2m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0518D3E6E0009A825E /* d2m.ogg */; };
-		DA527D5E18D3E6E0009A825E /* d3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0618D3E6E0009A825E /* d3.ogg */; };
-		DA527D5F18D3E6E0009A825E /* d3m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0718D3E6E0009A825E /* d3m.ogg */; };
-		DA527D6018D3E6E0009A825E /* d4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0818D3E6E0009A825E /* d4.ogg */; };
-		DA527D6118D3E6E0009A825E /* d4m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0918D3E6E0009A825E /* d4m.ogg */; };
-		DA527D6218D3E6E0009A825E /* d5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0A18D3E6E0009A825E /* d5.ogg */; };
-		DA527D6318D3E6E0009A825E /* d5m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0B18D3E6E0009A825E /* d5m.ogg */; };
-		DA527D6418D3E6E0009A825E /* d6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0C18D3E6E0009A825E /* d6.ogg */; };
-		DA527D6518D3E6E0009A825E /* d6m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0D18D3E6E0009A825E /* d6m.ogg */; };
-		DA527D6618D3E6E0009A825E /* d7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0E18D3E6E0009A825E /* d7.ogg */; };
-		DA527D6718D3E6E0009A825E /* d7m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D0F18D3E6E0009A825E /* d7m.ogg */; };
-		DA527D6818D3E6E0009A825E /* e1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1018D3E6E0009A825E /* e1.ogg */; };
-		DA527D6918D3E6E0009A825E /* e2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1118D3E6E0009A825E /* e2.ogg */; };
-		DA527D6A18D3E6E0009A825E /* e3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1218D3E6E0009A825E /* e3.ogg */; };
-		DA527D6B18D3E6E0009A825E /* e4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1318D3E6E0009A825E /* e4.ogg */; };
-		DA527D6C18D3E6E0009A825E /* e5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1418D3E6E0009A825E /* e5.ogg */; };
-		DA527D6D18D3E6E0009A825E /* e6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1518D3E6E0009A825E /* e6.ogg */; };
-		DA527D6E18D3E6E0009A825E /* e7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1618D3E6E0009A825E /* e7.ogg */; };
-		DA527D6F18D3E6E0009A825E /* f1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1718D3E6E0009A825E /* f1.ogg */; };
-		DA527D7018D3E6E0009A825E /* f1m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1818D3E6E0009A825E /* f1m.ogg */; };
-		DA527D7118D3E6E0009A825E /* f2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1918D3E6E0009A825E /* f2.ogg */; };
-		DA527D7218D3E6E0009A825E /* f2m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1A18D3E6E0009A825E /* f2m.ogg */; };
-		DA527D7318D3E6E0009A825E /* f3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1B18D3E6E0009A825E /* f3.ogg */; };
-		DA527D7418D3E6E0009A825E /* f3m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1C18D3E6E0009A825E /* f3m.ogg */; };
-		DA527D7518D3E6E0009A825E /* f4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1D18D3E6E0009A825E /* f4.ogg */; };
-		DA527D7618D3E6E0009A825E /* f4m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1E18D3E6E0009A825E /* f4m.ogg */; };
-		DA527D7718D3E6E0009A825E /* f5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D1F18D3E6E0009A825E /* f5.ogg */; };
-		DA527D7818D3E6E0009A825E /* f5m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2018D3E6E0009A825E /* f5m.ogg */; };
-		DA527D7918D3E6E0009A825E /* f6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2118D3E6E0009A825E /* f6.ogg */; };
-		DA527D7A18D3E6E0009A825E /* f6m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2218D3E6E0009A825E /* f6m.ogg */; };
-		DA527D7B18D3E6E0009A825E /* f7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2318D3E6E0009A825E /* f7.ogg */; };
-		DA527D7C18D3E6E0009A825E /* f7m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2418D3E6E0009A825E /* f7m.ogg */; };
-		DA527D7D18D3E6E0009A825E /* g1.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2518D3E6E0009A825E /* g1.ogg */; };
-		DA527D7E18D3E6E0009A825E /* g1m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2618D3E6E0009A825E /* g1m.ogg */; };
-		DA527D7F18D3E6E0009A825E /* g2.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2718D3E6E0009A825E /* g2.ogg */; };
-		DA527D8018D3E6E0009A825E /* g2m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2818D3E6E0009A825E /* g2m.ogg */; };
-		DA527D8118D3E6E0009A825E /* g3.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2918D3E6E0009A825E /* g3.ogg */; };
-		DA527D8218D3E6E0009A825E /* g3m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2A18D3E6E0009A825E /* g3m.ogg */; };
-		DA527D8318D3E6E0009A825E /* g4.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2B18D3E6E0009A825E /* g4.ogg */; };
-		DA527D8418D3E6E0009A825E /* g4m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2C18D3E6E0009A825E /* g4m.ogg */; };
-		DA527D8518D3E6E0009A825E /* g5.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2D18D3E6E0009A825E /* g5.ogg */; };
-		DA527D8618D3E6E0009A825E /* g5m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2E18D3E6E0009A825E /* g5m.ogg */; };
-		DA527D8718D3E6E0009A825E /* g6.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D2F18D3E6E0009A825E /* g6.ogg */; };
-		DA527D8818D3E6E0009A825E /* g6m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D3018D3E6E0009A825E /* g6m.ogg */; };
-		DA527D8918D3E6E0009A825E /* g7.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D3118D3E6E0009A825E /* g7.ogg */; };
-		DA527D8A18D3E6E0009A825E /* g7m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D3218D3E6E0009A825E /* g7m.ogg */; };
-		DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */; };
-		DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */; };
-		DA527D9A18D3F7B8009A825E /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527D9918D3F7B8009A825E /* Vorbis.framework */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DA527CC718D3E623009A825E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA527C9618D3E623009A825E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA527C9D18D3E623009A825E;
-			remoteInfo = MusicFeeling;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		DA35C8D318D3FA880021BD55 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Ogg.framework; sourceTree = "<group>"; };
-		DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCollectionViewCell.h; sourceTree = "<group>"; };
-		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
-		DA35C8D818D405770021BD55 /* MFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTestViewController.h; sourceTree = "<group>"; };
-		DA35C8D918D405770021BD55 /* MFTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTestViewController.m; sourceTree = "<group>"; };
-		DA527C9E18D3E623009A825E /* MusicFeeling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicFeeling.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA527CA118D3E623009A825E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		DA527CA318D3E623009A825E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		DA527CA518D3E623009A825E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		DA527CA918D3E623009A825E /* MusicFeeling-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicFeeling-Info.plist"; sourceTree = "<group>"; };
-		DA527CAB18D3E623009A825E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA527CAD18D3E623009A825E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DA527CAF18D3E623009A825E /* MusicFeeling-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MusicFeeling-Prefix.pch"; sourceTree = "<group>"; };
-		DA527CB018D3E623009A825E /* MFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFAppDelegate.h; sourceTree = "<group>"; };
-		DA527CB118D3E623009A825E /* MFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFAppDelegate.m; sourceTree = "<group>"; };
-		DA527CB418D3E623009A825E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		DA527CB718D3E623009A825E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		DA527CB918D3E623009A825E /* MFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFViewController.h; sourceTree = "<group>"; };
-		DA527CBA18D3E623009A825E /* MFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFViewController.m; sourceTree = "<group>"; };
-		DA527CBC18D3E623009A825E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicFeelingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA527CC318D3E623009A825E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DA527CCB18D3E623009A825E /* MusicFeelingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicFeelingTests-Info.plist"; sourceTree = "<group>"; };
-		DA527CCD18D3E623009A825E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA527CCF18D3E623009A825E /* MusicFeelingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicFeelingTests.m; sourceTree = "<group>"; };
-		DA527CDB18D3E6E0009A825E /* a0.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a0.ogg; sourceTree = "<group>"; };
-		DA527CDC18D3E6E0009A825E /* a0m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a0m.ogg; sourceTree = "<group>"; };
-		DA527CDD18D3E6E0009A825E /* a1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a1.ogg; sourceTree = "<group>"; };
-		DA527CDE18D3E6E0009A825E /* a1m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a1m.ogg; sourceTree = "<group>"; };
-		DA527CDF18D3E6E0009A825E /* a2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a2.ogg; sourceTree = "<group>"; };
-		DA527CE018D3E6E0009A825E /* a2m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a2m.ogg; sourceTree = "<group>"; };
-		DA527CE118D3E6E0009A825E /* a3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a3.ogg; sourceTree = "<group>"; };
-		DA527CE218D3E6E0009A825E /* a3m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a3m.ogg; sourceTree = "<group>"; };
-		DA527CE318D3E6E0009A825E /* a4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a4.ogg; sourceTree = "<group>"; };
-		DA527CE418D3E6E0009A825E /* a4m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a4m.ogg; sourceTree = "<group>"; };
-		DA527CE518D3E6E0009A825E /* a5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a5.ogg; sourceTree = "<group>"; };
-		DA527CE618D3E6E0009A825E /* a5m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a5m.ogg; sourceTree = "<group>"; };
-		DA527CE718D3E6E0009A825E /* a6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a6.ogg; sourceTree = "<group>"; };
-		DA527CE818D3E6E0009A825E /* a6m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a6m.ogg; sourceTree = "<group>"; };
-		DA527CE918D3E6E0009A825E /* a7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a7.ogg; sourceTree = "<group>"; };
-		DA527CEA18D3E6E0009A825E /* a7m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = a7m.ogg; sourceTree = "<group>"; };
-		DA527CEB18D3E6E0009A825E /* b0.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b0.ogg; sourceTree = "<group>"; };
-		DA527CEC18D3E6E0009A825E /* b1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b1.ogg; sourceTree = "<group>"; };
-		DA527CED18D3E6E0009A825E /* b2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b2.ogg; sourceTree = "<group>"; };
-		DA527CEE18D3E6E0009A825E /* b3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b3.ogg; sourceTree = "<group>"; };
-		DA527CEF18D3E6E0009A825E /* b4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b4.ogg; sourceTree = "<group>"; };
-		DA527CF018D3E6E0009A825E /* b5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b5.ogg; sourceTree = "<group>"; };
-		DA527CF118D3E6E0009A825E /* b6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b6.ogg; sourceTree = "<group>"; };
-		DA527CF218D3E6E0009A825E /* b7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = b7.ogg; sourceTree = "<group>"; };
-		DA527CF318D3E6E0009A825E /* c1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c1.ogg; sourceTree = "<group>"; };
-		DA527CF418D3E6E0009A825E /* c1m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c1m.ogg; sourceTree = "<group>"; };
-		DA527CF518D3E6E0009A825E /* c2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c2.ogg; sourceTree = "<group>"; };
-		DA527CF618D3E6E0009A825E /* c2m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c2m.ogg; sourceTree = "<group>"; };
-		DA527CF718D3E6E0009A825E /* c3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c3.ogg; sourceTree = "<group>"; };
-		DA527CF818D3E6E0009A825E /* c3m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c3m.ogg; sourceTree = "<group>"; };
-		DA527CF918D3E6E0009A825E /* c4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c4.ogg; sourceTree = "<group>"; };
-		DA527CFA18D3E6E0009A825E /* c4m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c4m.ogg; sourceTree = "<group>"; };
-		DA527CFB18D3E6E0009A825E /* c5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c5.ogg; sourceTree = "<group>"; };
-		DA527CFC18D3E6E0009A825E /* c5m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c5m.ogg; sourceTree = "<group>"; };
-		DA527CFD18D3E6E0009A825E /* c6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c6.ogg; sourceTree = "<group>"; };
-		DA527CFE18D3E6E0009A825E /* c6m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c6m.ogg; sourceTree = "<group>"; };
-		DA527CFF18D3E6E0009A825E /* c7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c7.ogg; sourceTree = "<group>"; };
-		DA527D0018D3E6E0009A825E /* c7m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c7m.ogg; sourceTree = "<group>"; };
-		DA527D0118D3E6E0009A825E /* c8.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = c8.ogg; sourceTree = "<group>"; };
-		DA527D0218D3E6E0009A825E /* d1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d1.ogg; sourceTree = "<group>"; };
-		DA527D0318D3E6E0009A825E /* d1m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d1m.ogg; sourceTree = "<group>"; };
-		DA527D0418D3E6E0009A825E /* d2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d2.ogg; sourceTree = "<group>"; };
-		DA527D0518D3E6E0009A825E /* d2m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d2m.ogg; sourceTree = "<group>"; };
-		DA527D0618D3E6E0009A825E /* d3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d3.ogg; sourceTree = "<group>"; };
-		DA527D0718D3E6E0009A825E /* d3m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d3m.ogg; sourceTree = "<group>"; };
-		DA527D0818D3E6E0009A825E /* d4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d4.ogg; sourceTree = "<group>"; };
-		DA527D0918D3E6E0009A825E /* d4m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d4m.ogg; sourceTree = "<group>"; };
-		DA527D0A18D3E6E0009A825E /* d5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d5.ogg; sourceTree = "<group>"; };
-		DA527D0B18D3E6E0009A825E /* d5m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d5m.ogg; sourceTree = "<group>"; };
-		DA527D0C18D3E6E0009A825E /* d6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d6.ogg; sourceTree = "<group>"; };
-		DA527D0D18D3E6E0009A825E /* d6m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d6m.ogg; sourceTree = "<group>"; };
-		DA527D0E18D3E6E0009A825E /* d7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d7.ogg; sourceTree = "<group>"; };
-		DA527D0F18D3E6E0009A825E /* d7m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = d7m.ogg; sourceTree = "<group>"; };
-		DA527D1018D3E6E0009A825E /* e1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e1.ogg; sourceTree = "<group>"; };
-		DA527D1118D3E6E0009A825E /* e2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e2.ogg; sourceTree = "<group>"; };
-		DA527D1218D3E6E0009A825E /* e3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e3.ogg; sourceTree = "<group>"; };
-		DA527D1318D3E6E0009A825E /* e4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e4.ogg; sourceTree = "<group>"; };
-		DA527D1418D3E6E0009A825E /* e5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e5.ogg; sourceTree = "<group>"; };
-		DA527D1518D3E6E0009A825E /* e6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e6.ogg; sourceTree = "<group>"; };
-		DA527D1618D3E6E0009A825E /* e7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = e7.ogg; sourceTree = "<group>"; };
-		DA527D1718D3E6E0009A825E /* f1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f1.ogg; sourceTree = "<group>"; };
-		DA527D1818D3E6E0009A825E /* f1m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f1m.ogg; sourceTree = "<group>"; };
-		DA527D1918D3E6E0009A825E /* f2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f2.ogg; sourceTree = "<group>"; };
-		DA527D1A18D3E6E0009A825E /* f2m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f2m.ogg; sourceTree = "<group>"; };
-		DA527D1B18D3E6E0009A825E /* f3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f3.ogg; sourceTree = "<group>"; };
-		DA527D1C18D3E6E0009A825E /* f3m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f3m.ogg; sourceTree = "<group>"; };
-		DA527D1D18D3E6E0009A825E /* f4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f4.ogg; sourceTree = "<group>"; };
-		DA527D1E18D3E6E0009A825E /* f4m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f4m.ogg; sourceTree = "<group>"; };
-		DA527D1F18D3E6E0009A825E /* f5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f5.ogg; sourceTree = "<group>"; };
-		DA527D2018D3E6E0009A825E /* f5m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f5m.ogg; sourceTree = "<group>"; };
-		DA527D2118D3E6E0009A825E /* f6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f6.ogg; sourceTree = "<group>"; };
-		DA527D2218D3E6E0009A825E /* f6m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f6m.ogg; sourceTree = "<group>"; };
-		DA527D2318D3E6E0009A825E /* f7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f7.ogg; sourceTree = "<group>"; };
-		DA527D2418D3E6E0009A825E /* f7m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = f7m.ogg; sourceTree = "<group>"; };
-		DA527D2518D3E6E0009A825E /* g1.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g1.ogg; sourceTree = "<group>"; };
-		DA527D2618D3E6E0009A825E /* g1m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g1m.ogg; sourceTree = "<group>"; };
-		DA527D2718D3E6E0009A825E /* g2.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g2.ogg; sourceTree = "<group>"; };
-		DA527D2818D3E6E0009A825E /* g2m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g2m.ogg; sourceTree = "<group>"; };
-		DA527D2918D3E6E0009A825E /* g3.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g3.ogg; sourceTree = "<group>"; };
-		DA527D2A18D3E6E0009A825E /* g3m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g3m.ogg; sourceTree = "<group>"; };
-		DA527D2B18D3E6E0009A825E /* g4.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g4.ogg; sourceTree = "<group>"; };
-		DA527D2C18D3E6E0009A825E /* g4m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g4m.ogg; sourceTree = "<group>"; };
-		DA527D2D18D3E6E0009A825E /* g5.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g5.ogg; sourceTree = "<group>"; };
-		DA527D2E18D3E6E0009A825E /* g5m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g5m.ogg; sourceTree = "<group>"; };
-		DA527D2F18D3E6E0009A825E /* g6.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g6.ogg; sourceTree = "<group>"; };
-		DA527D3018D3E6E0009A825E /* g6m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g6m.ogg; sourceTree = "<group>"; };
-		DA527D3118D3E6E0009A825E /* g7.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g7.ogg; sourceTree = "<group>"; };
-		DA527D3218D3E6E0009A825E /* g7m.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = g7m.ogg; sourceTree = "<group>"; };
-		DA527D9018D3EF0D009A825E /* IDZAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZAudioDecoder.h; sourceTree = "<group>"; };
-		DA527D9118D3EF0D009A825E /* IDZOggVorbisFileDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZOggVorbisFileDecoder.h; sourceTree = "<group>"; };
-		DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDZOggVorbisFileDecoder.mm; sourceTree = "<group>"; };
-		DA527D9418D3EF5E009A825E /* IDZAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDZAudioPlayer.h; sourceTree = "<group>"; };
-		DA527D9518D3EFEF009A825E /* IDZTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDZTrace.h; sourceTree = "<group>"; };
-		DA527D9618D3F013009A825E /* IDZAQAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZAQAudioPlayer.h; sourceTree = "<group>"; };
-		DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDZAQAudioPlayer.m; sourceTree = "<group>"; };
-		DA527D9918D3F7B8009A825E /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vorbis.framework; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		DA527C9B18D3E623009A825E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA35C8D418D3FA880021BD55 /* Ogg.framework in Frameworks */,
-				DA527CA418D3E623009A825E /* CoreGraphics.framework in Frameworks */,
-				DA527D9A18D3F7B8009A825E /* Vorbis.framework in Frameworks */,
-				DA527CA618D3E623009A825E /* UIKit.framework in Frameworks */,
-				DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DA527CBF18D3E623009A825E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CC418D3E623009A825E /* XCTest.framework in Frameworks */,
-				DA527CC618D3E623009A825E /* UIKit.framework in Frameworks */,
-				DA527CC518D3E623009A825E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		DA527C9518D3E623009A825E = {
-			isa = PBXGroup;
-			children = (
-				DA527D8F18D3EF0D009A825E /* vendor */,
-				DA527CD918D3E6E0009A825E /* resources */,
-				DA527CA718D3E623009A825E /* MusicFeeling */,
-				DA527CC918D3E623009A825E /* MusicFeelingTests */,
-				DA527CA018D3E623009A825E /* Frameworks */,
-				DA527C9F18D3E623009A825E /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		DA527C9F18D3E623009A825E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DA527C9E18D3E623009A825E /* MusicFeeling.app */,
-				DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DA527CA018D3E623009A825E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DA35C8D318D3FA880021BD55 /* Ogg.framework */,
-				DA527D9918D3F7B8009A825E /* Vorbis.framework */,
-				DA527CA118D3E623009A825E /* Foundation.framework */,
-				DA527CA318D3E623009A825E /* CoreGraphics.framework */,
-				DA527CA518D3E623009A825E /* UIKit.framework */,
-				DA527CC318D3E623009A825E /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DA527CA718D3E623009A825E /* MusicFeeling */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CB018D3E623009A825E /* MFAppDelegate.h */,
-				DA527CB118D3E623009A825E /* MFAppDelegate.m */,
-				DA527CB318D3E623009A825E /* Main_iPhone.storyboard */,
-				DA527CB618D3E623009A825E /* Main_iPad.storyboard */,
-				DA527CB918D3E623009A825E /* MFViewController.h */,
-				DA527CBA18D3E623009A825E /* MFViewController.m */,
-				DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */,
-				DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */,
-				DA35C8D818D405770021BD55 /* MFTestViewController.h */,
-				DA35C8D918D405770021BD55 /* MFTestViewController.m */,
-				DA527CBC18D3E623009A825E /* Images.xcassets */,
-				DA527CA818D3E623009A825E /* Supporting Files */,
-			);
-			path = MusicFeeling;
-			sourceTree = "<group>";
-		};
-		DA527CA818D3E623009A825E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CA918D3E623009A825E /* MusicFeeling-Info.plist */,
-				DA527CAA18D3E623009A825E /* InfoPlist.strings */,
-				DA527CAD18D3E623009A825E /* main.m */,
-				DA527CAF18D3E623009A825E /* MusicFeeling-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DA527CC918D3E623009A825E /* MusicFeelingTests */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CCF18D3E623009A825E /* MusicFeelingTests.m */,
-				DA527CCA18D3E623009A825E /* Supporting Files */,
-			);
-			path = MusicFeelingTests;
-			sourceTree = "<group>";
-		};
-		DA527CCA18D3E623009A825E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CCB18D3E623009A825E /* MusicFeelingTests-Info.plist */,
-				DA527CCC18D3E623009A825E /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DA527CD918D3E6E0009A825E /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CDA18D3E6E0009A825E /* Piano */,
-			);
-			path = resources;
-			sourceTree = "<group>";
-		};
-		DA527CDA18D3E6E0009A825E /* Piano */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CDB18D3E6E0009A825E /* a0.ogg */,
-				DA527CDC18D3E6E0009A825E /* a0m.ogg */,
-				DA527CDD18D3E6E0009A825E /* a1.ogg */,
-				DA527CDE18D3E6E0009A825E /* a1m.ogg */,
-				DA527CDF18D3E6E0009A825E /* a2.ogg */,
-				DA527CE018D3E6E0009A825E /* a2m.ogg */,
-				DA527CE118D3E6E0009A825E /* a3.ogg */,
-				DA527CE218D3E6E0009A825E /* a3m.ogg */,
-				DA527CE318D3E6E0009A825E /* a4.ogg */,
-				DA527CE418D3E6E0009A825E /* a4m.ogg */,
-				DA527CE518D3E6E0009A825E /* a5.ogg */,
-				DA527CE618D3E6E0009A825E /* a5m.ogg */,
-				DA527CE718D3E6E0009A825E /* a6.ogg */,
-				DA527CE818D3E6E0009A825E /* a6m.ogg */,
-				DA527CE918D3E6E0009A825E /* a7.ogg */,
-				DA527CEA18D3E6E0009A825E /* a7m.ogg */,
-				DA527CEB18D3E6E0009A825E /* b0.ogg */,
-				DA527CEC18D3E6E0009A825E /* b1.ogg */,
-				DA527CED18D3E6E0009A825E /* b2.ogg */,
-				DA527CEE18D3E6E0009A825E /* b3.ogg */,
-				DA527CEF18D3E6E0009A825E /* b4.ogg */,
-				DA527CF018D3E6E0009A825E /* b5.ogg */,
-				DA527CF118D3E6E0009A825E /* b6.ogg */,
-				DA527CF218D3E6E0009A825E /* b7.ogg */,
-				DA527CF318D3E6E0009A825E /* c1.ogg */,
-				DA527CF418D3E6E0009A825E /* c1m.ogg */,
-				DA527CF518D3E6E0009A825E /* c2.ogg */,
-				DA527CF618D3E6E0009A825E /* c2m.ogg */,
-				DA527CF718D3E6E0009A825E /* c3.ogg */,
-				DA527CF818D3E6E0009A825E /* c3m.ogg */,
-				DA527CF918D3E6E0009A825E /* c4.ogg */,
-				DA527CFA18D3E6E0009A825E /* c4m.ogg */,
-				DA527CFB18D3E6E0009A825E /* c5.ogg */,
-				DA527CFC18D3E6E0009A825E /* c5m.ogg */,
-				DA527CFD18D3E6E0009A825E /* c6.ogg */,
-				DA527CFE18D3E6E0009A825E /* c6m.ogg */,
-				DA527CFF18D3E6E0009A825E /* c7.ogg */,
-				DA527D0018D3E6E0009A825E /* c7m.ogg */,
-				DA527D0118D3E6E0009A825E /* c8.ogg */,
-				DA527D0218D3E6E0009A825E /* d1.ogg */,
-				DA527D0318D3E6E0009A825E /* d1m.ogg */,
-				DA527D0418D3E6E0009A825E /* d2.ogg */,
-				DA527D0518D3E6E0009A825E /* d2m.ogg */,
-				DA527D0618D3E6E0009A825E /* d3.ogg */,
-				DA527D0718D3E6E0009A825E /* d3m.ogg */,
-				DA527D0818D3E6E0009A825E /* d4.ogg */,
-				DA527D0918D3E6E0009A825E /* d4m.ogg */,
-				DA527D0A18D3E6E0009A825E /* d5.ogg */,
-				DA527D0B18D3E6E0009A825E /* d5m.ogg */,
-				DA527D0C18D3E6E0009A825E /* d6.ogg */,
-				DA527D0D18D3E6E0009A825E /* d6m.ogg */,
-				DA527D0E18D3E6E0009A825E /* d7.ogg */,
-				DA527D0F18D3E6E0009A825E /* d7m.ogg */,
-				DA527D1018D3E6E0009A825E /* e1.ogg */,
-				DA527D1118D3E6E0009A825E /* e2.ogg */,
-				DA527D1218D3E6E0009A825E /* e3.ogg */,
-				DA527D1318D3E6E0009A825E /* e4.ogg */,
-				DA527D1418D3E6E0009A825E /* e5.ogg */,
-				DA527D1518D3E6E0009A825E /* e6.ogg */,
-				DA527D1618D3E6E0009A825E /* e7.ogg */,
-				DA527D1718D3E6E0009A825E /* f1.ogg */,
-				DA527D1818D3E6E0009A825E /* f1m.ogg */,
-				DA527D1918D3E6E0009A825E /* f2.ogg */,
-				DA527D1A18D3E6E0009A825E /* f2m.ogg */,
-				DA527D1B18D3E6E0009A825E /* f3.ogg */,
-				DA527D1C18D3E6E0009A825E /* f3m.ogg */,
-				DA527D1D18D3E6E0009A825E /* f4.ogg */,
-				DA527D1E18D3E6E0009A825E /* f4m.ogg */,
-				DA527D1F18D3E6E0009A825E /* f5.ogg */,
-				DA527D2018D3E6E0009A825E /* f5m.ogg */,
-				DA527D2118D3E6E0009A825E /* f6.ogg */,
-				DA527D2218D3E6E0009A825E /* f6m.ogg */,
-				DA527D2318D3E6E0009A825E /* f7.ogg */,
-				DA527D2418D3E6E0009A825E /* f7m.ogg */,
-				DA527D2518D3E6E0009A825E /* g1.ogg */,
-				DA527D2618D3E6E0009A825E /* g1m.ogg */,
-				DA527D2718D3E6E0009A825E /* g2.ogg */,
-				DA527D2818D3E6E0009A825E /* g2m.ogg */,
-				DA527D2918D3E6E0009A825E /* g3.ogg */,
-				DA527D2A18D3E6E0009A825E /* g3m.ogg */,
-				DA527D2B18D3E6E0009A825E /* g4.ogg */,
-				DA527D2C18D3E6E0009A825E /* g4m.ogg */,
-				DA527D2D18D3E6E0009A825E /* g5.ogg */,
-				DA527D2E18D3E6E0009A825E /* g5m.ogg */,
-				DA527D2F18D3E6E0009A825E /* g6.ogg */,
-				DA527D3018D3E6E0009A825E /* g6m.ogg */,
-				DA527D3118D3E6E0009A825E /* g7.ogg */,
-				DA527D3218D3E6E0009A825E /* g7m.ogg */,
-			);
-			path = Piano;
-			sourceTree = "<group>";
-		};
-		DA527D8F18D3EF0D009A825E /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				DA527D9518D3EFEF009A825E /* IDZTrace.h */,
-				DA527D9418D3EF5E009A825E /* IDZAudioPlayer.h */,
-				DA527D9618D3F013009A825E /* IDZAQAudioPlayer.h */,
-				DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */,
-				DA527D9018D3EF0D009A825E /* IDZAudioDecoder.h */,
-				DA527D9118D3EF0D009A825E /* IDZOggVorbisFileDecoder.h */,
-				DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */,
-			);
-			path = vendor;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		DA527C9D18D3E623009A825E /* MusicFeeling */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeeling" */;
-			buildPhases = (
-				DA527C9A18D3E623009A825E /* Sources */,
-				DA527C9B18D3E623009A825E /* Frameworks */,
-				DA527C9C18D3E623009A825E /* Resources */,
-				DA35C8D218D3F9A20021BD55 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MusicFeeling;
-			productName = MusicFeeling;
-			productReference = DA527C9E18D3E623009A825E /* MusicFeeling.app */;
-			productType = "com.apple.product-type.application";
-		};
-		DA527CC118D3E623009A825E /* MusicFeelingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DA527CD618D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeelingTests" */;
-			buildPhases = (
-				DA527CBE18D3E623009A825E /* Sources */,
-				DA527CBF18D3E623009A825E /* Frameworks */,
-				DA527CC018D3E623009A825E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DA527CC818D3E623009A825E /* PBXTargetDependency */,
-			);
-			name = MusicFeelingTests;
-			productName = MusicFeelingTests;
-			productReference = DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		DA527C9618D3E623009A825E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				CLASSPREFIX = MF;
-				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = amoblin;
-				TargetAttributes = {
-					DA527CC118D3E623009A825E = {
-						TestTargetID = DA527C9D18D3E623009A825E;
-					};
-				};
-			};
-			buildConfigurationList = DA527C9918D3E623009A825E /* Build configuration list for PBXProject "MusicFeeling" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = DA527C9518D3E623009A825E;
-			productRefGroup = DA527C9F18D3E623009A825E /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				DA527C9D18D3E623009A825E /* MusicFeeling */,
-				DA527CC118D3E623009A825E /* MusicFeelingTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		DA527C9C18D3E623009A825E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527D8418D3E6E0009A825E /* g4m.ogg in Resources */,
-				DA527D6F18D3E6E0009A825E /* f1.ogg in Resources */,
-				DA527D4818D3E6E0009A825E /* b5.ogg in Resources */,
-				DA527D5C18D3E6E0009A825E /* d2.ogg in Resources */,
-				DA527D4318D3E6E0009A825E /* b0.ogg in Resources */,
-				DA527D3D18D3E6E0009A825E /* a5.ogg in Resources */,
-				DA527D3B18D3E6E0009A825E /* a4.ogg in Resources */,
-				DA527D3418D3E6E0009A825E /* a0m.ogg in Resources */,
-				DA527D3C18D3E6E0009A825E /* a4m.ogg in Resources */,
-				DA527D7118D3E6E0009A825E /* f2.ogg in Resources */,
-				DA527D5218D3E6E0009A825E /* c4m.ogg in Resources */,
-				DA527D7918D3E6E0009A825E /* f6.ogg in Resources */,
-				DA527D5E18D3E6E0009A825E /* d3.ogg in Resources */,
-				DA527D6818D3E6E0009A825E /* e1.ogg in Resources */,
-				DA527D4518D3E6E0009A825E /* b2.ogg in Resources */,
-				DA527D4618D3E6E0009A825E /* b3.ogg in Resources */,
-				DA527D5918D3E6E0009A825E /* c8.ogg in Resources */,
-				DA527D7518D3E6E0009A825E /* f4.ogg in Resources */,
-				DA527D7B18D3E6E0009A825E /* f7.ogg in Resources */,
-				DA527D7C18D3E6E0009A825E /* f7m.ogg in Resources */,
-				DA527D6E18D3E6E0009A825E /* e7.ogg in Resources */,
-				DA527D8318D3E6E0009A825E /* g4.ogg in Resources */,
-				DA527D6618D3E6E0009A825E /* d7.ogg in Resources */,
-				DA527D3918D3E6E0009A825E /* a3.ogg in Resources */,
-				DA527D4418D3E6E0009A825E /* b1.ogg in Resources */,
-				DA527D7018D3E6E0009A825E /* f1m.ogg in Resources */,
-				DA527D4F18D3E6E0009A825E /* c3.ogg in Resources */,
-				DA527D8618D3E6E0009A825E /* g5m.ogg in Resources */,
-				DA527D3E18D3E6E0009A825E /* a5m.ogg in Resources */,
-				DA527D5518D3E6E0009A825E /* c6.ogg in Resources */,
-				DA527D8818D3E6E0009A825E /* g6m.ogg in Resources */,
-				DA527D5318D3E6E0009A825E /* c5.ogg in Resources */,
-				DA527D4718D3E6E0009A825E /* b4.ogg in Resources */,
-				DA527D8A18D3E6E0009A825E /* g7m.ogg in Resources */,
-				DA527D7A18D3E6E0009A825E /* f6m.ogg in Resources */,
-				DA527D7D18D3E6E0009A825E /* g1.ogg in Resources */,
-				DA527D8518D3E6E0009A825E /* g5.ogg in Resources */,
-				DA527D5618D3E6E0009A825E /* c6m.ogg in Resources */,
-				DA527D3618D3E6E0009A825E /* a1m.ogg in Resources */,
-				DA527D7218D3E6E0009A825E /* f2m.ogg in Resources */,
-				DA527D4218D3E6E0009A825E /* a7m.ogg in Resources */,
-				DA527D7818D3E6E0009A825E /* f5m.ogg in Resources */,
-				DA527D7F18D3E6E0009A825E /* g2.ogg in Resources */,
-				DA527D5118D3E6E0009A825E /* c4.ogg in Resources */,
-				DA527D4A18D3E6E0009A825E /* b7.ogg in Resources */,
-				DA527D7318D3E6E0009A825E /* f3.ogg in Resources */,
-				DA527D7618D3E6E0009A825E /* f4m.ogg in Resources */,
-				DA527D5818D3E6E0009A825E /* c7m.ogg in Resources */,
-				DA527D5418D3E6E0009A825E /* c5m.ogg in Resources */,
-				DA527D6718D3E6E0009A825E /* d7m.ogg in Resources */,
-				DA527D6218D3E6E0009A825E /* d5.ogg in Resources */,
-				DA527D6518D3E6E0009A825E /* d6m.ogg in Resources */,
-				DA527D6918D3E6E0009A825E /* e2.ogg in Resources */,
-				DA527D3F18D3E6E0009A825E /* a6.ogg in Resources */,
-				DA527D8018D3E6E0009A825E /* g2m.ogg in Resources */,
-				DA527D3A18D3E6E0009A825E /* a3m.ogg in Resources */,
-				DA527D5A18D3E6E0009A825E /* d1.ogg in Resources */,
-				DA527D5B18D3E6E0009A825E /* d1m.ogg in Resources */,
-				DA527D3818D3E6E0009A825E /* a2m.ogg in Resources */,
-				DA527D5718D3E6E0009A825E /* c7.ogg in Resources */,
-				DA527D3318D3E6E0009A825E /* a0.ogg in Resources */,
-				DA527D6B18D3E6E0009A825E /* e4.ogg in Resources */,
-				DA527D6118D3E6E0009A825E /* d4m.ogg in Resources */,
-				DA527D7E18D3E6E0009A825E /* g1m.ogg in Resources */,
-				DA527D8718D3E6E0009A825E /* g6.ogg in Resources */,
-				DA527D4B18D3E6E0009A825E /* c1.ogg in Resources */,
-				DA527D8918D3E6E0009A825E /* g7.ogg in Resources */,
-				DA527D6D18D3E6E0009A825E /* e6.ogg in Resources */,
-				DA527D4E18D3E6E0009A825E /* c2m.ogg in Resources */,
-				DA527D7718D3E6E0009A825E /* f5.ogg in Resources */,
-				DA527D7418D3E6E0009A825E /* f3m.ogg in Resources */,
-				DA527D3718D3E6E0009A825E /* a2.ogg in Resources */,
-				DA527D4C18D3E6E0009A825E /* c1m.ogg in Resources */,
-				DA527D6C18D3E6E0009A825E /* e5.ogg in Resources */,
-				DA527D5F18D3E6E0009A825E /* d3m.ogg in Resources */,
-				DA527D6A18D3E6E0009A825E /* e3.ogg in Resources */,
-				DA527D4118D3E6E0009A825E /* a7.ogg in Resources */,
-				DA527D5018D3E6E0009A825E /* c3m.ogg in Resources */,
-				DA527D4018D3E6E0009A825E /* a6m.ogg in Resources */,
-				DA527D4918D3E6E0009A825E /* b6.ogg in Resources */,
-				DA527D4D18D3E6E0009A825E /* c2.ogg in Resources */,
-				DA527CB818D3E623009A825E /* Main_iPad.storyboard in Resources */,
-				DA527D6318D3E6E0009A825E /* d5m.ogg in Resources */,
-				DA527D6418D3E6E0009A825E /* d6.ogg in Resources */,
-				DA527CBD18D3E623009A825E /* Images.xcassets in Resources */,
-				DA527D6018D3E6E0009A825E /* d4.ogg in Resources */,
-				DA527D5D18D3E6E0009A825E /* d2m.ogg in Resources */,
-				DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */,
-				DA527D8118D3E6E0009A825E /* g3.ogg in Resources */,
-				DA527D8218D3E6E0009A825E /* g3m.ogg in Resources */,
-				DA527D3518D3E6E0009A825E /* a1.ogg in Resources */,
-				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DA527CC018D3E623009A825E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CCE18D3E623009A825E /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		DA35C8D218D3F9A20021BD55 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		DA527C9A18D3E623009A825E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CAE18D3E623009A825E /* main.m in Sources */,
-				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
-				DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */,
-				DA527CBB18D3E623009A825E /* MFViewController.m in Sources */,
-				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
-				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
-				DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DA527CBE18D3E623009A825E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DA527CC818D3E623009A825E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA527C9D18D3E623009A825E /* MusicFeeling */;
-			targetProxy = DA527CC718D3E623009A825E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		DA527CAA18D3E623009A825E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA527CAB18D3E623009A825E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA527CB318D3E623009A825E /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA527CB418D3E623009A825E /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		DA527CB618D3E623009A825E /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA527CB718D3E623009A825E /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		DA527CCC18D3E623009A825E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA527CCD18D3E623009A825E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		DA527CD118D3E623009A825E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "AC7DBDC3-E9A5-4AAB-8E82-6DD974F5839A";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DA527CD218D3E623009A825E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "AC7DBDC3-E9A5-4AAB-8E82-6DD974F5839A";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		DA527CD418D3E623009A825E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
-				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		DA527CD518D3E623009A825E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
-				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		DA527CD718D3E623009A825E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MusicFeeling.app/MusicFeeling";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "MusicFeelingTests/MusicFeelingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		DA527CD818D3E623009A825E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MusicFeeling.app/MusicFeeling";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
-				INFOPLIST_FILE = "MusicFeelingTests/MusicFeelingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		DA527C9918D3E623009A825E /* Build configuration list for PBXProject "MusicFeeling" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DA527CD118D3E623009A825E /* Debug */,
-				DA527CD218D3E623009A825E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeeling" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DA527CD418D3E623009A825E /* Debug */,
-				DA527CD518D3E623009A825E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DA527CD618D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeelingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DA527CD718D3E623009A825E /* Debug */,
-				DA527CD818D3E623009A825E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = DA527C9618D3E623009A825E /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0A50DF3D672A42A38705359D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Pods-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>7484A8F2F5F2420C81C98148</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>ADA1062402CB48B79EE619A4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C19C32FB76D74988964FFD1F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C19C32FB76D74988964FFD1F</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>D2FFDA095F804C0899AE0059</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Pods.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA35C8D218D3F9A20021BD55</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate
+if [ "${PLATFORM_NAME}" == "iphoneos" ]; then
+/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py "my.company.${PROJECT_NAME}" "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent";
+codesign -f -s "iPhone Developer" --entitlements "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent" "${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/"
+fi</string>
+		</dict>
+		<key>DA35C8D318D3FA880021BD55</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>path</key>
+			<string>Ogg.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA35C8D418D3FA880021BD55</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA35C8D318D3FA880021BD55</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA35C8D518D3FD030021BD55</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MFCollectionViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA35C8D618D3FD030021BD55</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MFCollectionViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA35C8D718D3FD030021BD55</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA35C8D618D3FD030021BD55</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA35C8D818D405770021BD55</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MFTestViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA35C8D918D405770021BD55</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MFTestViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA35C8DA18D405770021BD55</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA35C8D918D405770021BD55</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527C9518D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527D8F18D3EF0D009A825E</string>
+				<string>DA527CD918D3E6E0009A825E</string>
+				<string>DA527CA718D3E623009A825E</string>
+				<string>DA527CC918D3E623009A825E</string>
+				<string>DA527CA018D3E623009A825E</string>
+				<string>DA527C9F18D3E623009A825E</string>
+				<string>D2FFDA095F804C0899AE0059</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527C9618D3E623009A825E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>CLASSPREFIX</key>
+				<string>MF</string>
+				<key>LastUpgradeCheck</key>
+				<string>0510</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>amoblin</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>DA527CC118D3E623009A825E</key>
+					<dict>
+						<key>TestTargetID</key>
+						<string>DA527C9D18D3E623009A825E</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>DA527C9918D3E623009A825E</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>DA527C9518D3E623009A825E</string>
+			<key>productRefGroup</key>
+			<string>DA527C9F18D3E623009A825E</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>DA527C9D18D3E623009A825E</string>
+				<string>DA527CC118D3E623009A825E</string>
+			</array>
+		</dict>
+		<key>DA527C9918D3E623009A825E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>DA527CD118D3E623009A825E</string>
+				<string>DA527CD218D3E623009A825E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>DA527C9A18D3E623009A825E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DA527CAE18D3E623009A825E</string>
+				<string>DA35C8DA18D405770021BD55</string>
+				<string>DA527D9318D3EF0D009A825E</string>
+				<string>DA527CBB18D3E623009A825E</string>
+				<string>DA35C8D718D3FD030021BD55</string>
+				<string>DA527CB218D3E623009A825E</string>
+				<string>DA527D9818D3F013009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA527C9B18D3E623009A825E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DA35C8D418D3FA880021BD55</string>
+				<string>DA527CA418D3E623009A825E</string>
+				<string>DA527D9A18D3F7B8009A825E</string>
+				<string>DA527CA618D3E623009A825E</string>
+				<string>DA527CA218D3E623009A825E</string>
+				<string>ADA1062402CB48B79EE619A4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA527C9C18D3E623009A825E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DA527D8418D3E6E0009A825E</string>
+				<string>DA527D6F18D3E6E0009A825E</string>
+				<string>DA527D4818D3E6E0009A825E</string>
+				<string>DA527D5C18D3E6E0009A825E</string>
+				<string>DA527D4318D3E6E0009A825E</string>
+				<string>DA527D3D18D3E6E0009A825E</string>
+				<string>DA527D3B18D3E6E0009A825E</string>
+				<string>DA527D3418D3E6E0009A825E</string>
+				<string>DA527D3C18D3E6E0009A825E</string>
+				<string>DA527D7118D3E6E0009A825E</string>
+				<string>DA527D5218D3E6E0009A825E</string>
+				<string>DA527D7918D3E6E0009A825E</string>
+				<string>DA527D5E18D3E6E0009A825E</string>
+				<string>DA527D6818D3E6E0009A825E</string>
+				<string>DA527D4518D3E6E0009A825E</string>
+				<string>DA527D4618D3E6E0009A825E</string>
+				<string>DA527D5918D3E6E0009A825E</string>
+				<string>DA527D7518D3E6E0009A825E</string>
+				<string>DA527D7B18D3E6E0009A825E</string>
+				<string>DA527D7C18D3E6E0009A825E</string>
+				<string>DA527D6E18D3E6E0009A825E</string>
+				<string>DA527D8318D3E6E0009A825E</string>
+				<string>DA527D6618D3E6E0009A825E</string>
+				<string>DA527D3918D3E6E0009A825E</string>
+				<string>DA527D4418D3E6E0009A825E</string>
+				<string>DA527D7018D3E6E0009A825E</string>
+				<string>DA527D4F18D3E6E0009A825E</string>
+				<string>DA527D8618D3E6E0009A825E</string>
+				<string>DA527D3E18D3E6E0009A825E</string>
+				<string>DA527D5518D3E6E0009A825E</string>
+				<string>DA527D8818D3E6E0009A825E</string>
+				<string>DA527D5318D3E6E0009A825E</string>
+				<string>DA527D4718D3E6E0009A825E</string>
+				<string>DA527D8A18D3E6E0009A825E</string>
+				<string>DA527D7A18D3E6E0009A825E</string>
+				<string>DA527D7D18D3E6E0009A825E</string>
+				<string>DA527D8518D3E6E0009A825E</string>
+				<string>DA527D5618D3E6E0009A825E</string>
+				<string>DA527D3618D3E6E0009A825E</string>
+				<string>DA527D7218D3E6E0009A825E</string>
+				<string>DA527D4218D3E6E0009A825E</string>
+				<string>DA527D7818D3E6E0009A825E</string>
+				<string>DA527D7F18D3E6E0009A825E</string>
+				<string>DA527D5118D3E6E0009A825E</string>
+				<string>DA527D4A18D3E6E0009A825E</string>
+				<string>DA527D7318D3E6E0009A825E</string>
+				<string>DA527D7618D3E6E0009A825E</string>
+				<string>DA527D5818D3E6E0009A825E</string>
+				<string>DA527D5418D3E6E0009A825E</string>
+				<string>DA527D6718D3E6E0009A825E</string>
+				<string>DA527D6218D3E6E0009A825E</string>
+				<string>DA527D6518D3E6E0009A825E</string>
+				<string>DA527D6918D3E6E0009A825E</string>
+				<string>DA527D3F18D3E6E0009A825E</string>
+				<string>DA527D8018D3E6E0009A825E</string>
+				<string>DA527D3A18D3E6E0009A825E</string>
+				<string>DA527D5A18D3E6E0009A825E</string>
+				<string>DA527D5B18D3E6E0009A825E</string>
+				<string>DA527D3818D3E6E0009A825E</string>
+				<string>DA527D5718D3E6E0009A825E</string>
+				<string>DA527D3318D3E6E0009A825E</string>
+				<string>DA527D6B18D3E6E0009A825E</string>
+				<string>DA527D6118D3E6E0009A825E</string>
+				<string>DA527D7E18D3E6E0009A825E</string>
+				<string>DA527D8718D3E6E0009A825E</string>
+				<string>DA527D4B18D3E6E0009A825E</string>
+				<string>DA527D8918D3E6E0009A825E</string>
+				<string>DA527D6D18D3E6E0009A825E</string>
+				<string>DA527D4E18D3E6E0009A825E</string>
+				<string>DA527D7718D3E6E0009A825E</string>
+				<string>DA527D7418D3E6E0009A825E</string>
+				<string>DA527D3718D3E6E0009A825E</string>
+				<string>DA527D4C18D3E6E0009A825E</string>
+				<string>DA527D6C18D3E6E0009A825E</string>
+				<string>DA527D5F18D3E6E0009A825E</string>
+				<string>DA527D6A18D3E6E0009A825E</string>
+				<string>DA527D4118D3E6E0009A825E</string>
+				<string>DA527D5018D3E6E0009A825E</string>
+				<string>DA527D4018D3E6E0009A825E</string>
+				<string>DA527D4918D3E6E0009A825E</string>
+				<string>DA527D4D18D3E6E0009A825E</string>
+				<string>DA527CB818D3E623009A825E</string>
+				<string>DA527D6318D3E6E0009A825E</string>
+				<string>DA527D6418D3E6E0009A825E</string>
+				<string>DA527CBD18D3E623009A825E</string>
+				<string>DA527D6018D3E6E0009A825E</string>
+				<string>DA527D5D18D3E6E0009A825E</string>
+				<string>DA527CB518D3E623009A825E</string>
+				<string>DA527D8118D3E6E0009A825E</string>
+				<string>DA527D8218D3E6E0009A825E</string>
+				<string>DA527D3518D3E6E0009A825E</string>
+				<string>DA527CAC18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA527C9D18D3E623009A825E</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>DA527CD318D3E623009A825E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>7484A8F2F5F2420C81C98148</string>
+				<string>DA527C9A18D3E623009A825E</string>
+				<string>DA527C9B18D3E623009A825E</string>
+				<string>DA527C9C18D3E623009A825E</string>
+				<string>DA35C8D218D3F9A20021BD55</string>
+				<string>0A50DF3D672A42A38705359D</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MusicFeeling</string>
+			<key>productName</key>
+			<string>MusicFeeling</string>
+			<key>productReference</key>
+			<string>DA527C9E18D3E623009A825E</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>DA527C9E18D3E623009A825E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>MusicFeeling.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>DA527C9F18D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527C9E18D3E623009A825E</string>
+				<string>DA527CC218D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CA018D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA35C8D318D3FA880021BD55</string>
+				<string>DA527D9918D3F7B8009A825E</string>
+				<string>DA527CA118D3E623009A825E</string>
+				<string>DA527CA318D3E623009A825E</string>
+				<string>DA527CA518D3E623009A825E</string>
+				<string>DA527CC318D3E623009A825E</string>
+				<string>C19C32FB76D74988964FFD1F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CA118D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>DA527CA218D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CA118D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CA318D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>DA527CA418D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CA318D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CA518D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>DA527CA618D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CA518D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CA718D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CB018D3E623009A825E</string>
+				<string>DA527CB118D3E623009A825E</string>
+				<string>DA527CB318D3E623009A825E</string>
+				<string>DA527CB618D3E623009A825E</string>
+				<string>DA527CB918D3E623009A825E</string>
+				<string>DA527CBA18D3E623009A825E</string>
+				<string>DA35C8D518D3FD030021BD55</string>
+				<string>DA35C8D618D3FD030021BD55</string>
+				<string>DA35C8D818D405770021BD55</string>
+				<string>DA35C8D918D405770021BD55</string>
+				<string>DA527CBC18D3E623009A825E</string>
+				<string>DA527CA818D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>MusicFeeling</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CA818D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CA918D3E623009A825E</string>
+				<string>DA527CAA18D3E623009A825E</string>
+				<string>DA527CAD18D3E623009A825E</string>
+				<string>DA527CAF18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CA918D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>MusicFeeling-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CAA18D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CAB18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CAB18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CAC18D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CAA18D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CAD18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>main.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CAE18D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CAD18D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CAF18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MusicFeeling-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB018D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MFAppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB118D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MFAppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB218D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CB118D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CB318D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CB418D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>Main_iPhone.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB418D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/Main_iPhone.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB518D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CB318D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CB618D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CB718D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>Main_iPad.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB718D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/Main_iPad.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CB818D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CB618D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CB918D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MFViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CBA18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MFViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CBB18D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CBA18D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CBC18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CBD18D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CBC18D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CBE18D3E623009A825E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DA527CD018D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA527CBF18D3E623009A825E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DA527CC418D3E623009A825E</string>
+				<string>DA527CC618D3E623009A825E</string>
+				<string>DA527CC518D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA527CC018D3E623009A825E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DA527CCE18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA527CC118D3E623009A825E</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>DA527CD618D3E623009A825E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>DA527CBE18D3E623009A825E</string>
+				<string>DA527CBF18D3E623009A825E</string>
+				<string>DA527CC018D3E623009A825E</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>DA527CC818D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MusicFeelingTests</string>
+			<key>productName</key>
+			<string>MusicFeelingTests</string>
+			<key>productReference</key>
+			<string>DA527CC218D3E623009A825E</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>DA527CC218D3E623009A825E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>MusicFeelingTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>DA527CC318D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>DA527CC418D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CC318D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CC518D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CA118D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CC618D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CA518D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CC718D3E623009A825E</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>DA527C9618D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>DA527C9D18D3E623009A825E</string>
+			<key>remoteInfo</key>
+			<string>MusicFeeling</string>
+		</dict>
+		<key>DA527CC818D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>DA527C9D18D3E623009A825E</string>
+			<key>targetProxy</key>
+			<string>DA527CC718D3E623009A825E</string>
+		</dict>
+		<key>DA527CC918D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CCF18D3E623009A825E</string>
+				<string>DA527CCA18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>MusicFeelingTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CCA18D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CCB18D3E623009A825E</string>
+				<string>DA527CCC18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CCB18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>MusicFeelingTests-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CCC18D3E623009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CCD18D3E623009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CCD18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CCE18D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CCC18D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CCF18D3E623009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MusicFeelingTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CD018D3E623009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CCF18D3E623009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527CD118D3E623009A825E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>6.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string>AC7DBDC3-E9A5-4AAB-8E82-6DD974F5839A</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>DA527CD218D3E623009A825E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>6.0</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string>AC7DBDC3-E9A5-4AAB-8E82-6DD974F5839A</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>DA527CD318D3E623009A825E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>DA527CD418D3E623009A825E</string>
+				<string>DA527CD518D3E623009A825E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>DA527CD418D3E623009A825E</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D2FFDA095F804C0899AE0059</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>$(PROJECT_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MusicFeeling/MusicFeeling-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>MusicFeeling/MusicFeeling-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string></string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>DA527CD518D3E623009A825E</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D2FFDA095F804C0899AE0059</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>$(PROJECT_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MusicFeeling/MusicFeeling-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>MusicFeeling/MusicFeeling-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string></string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>DA527CD618D3E623009A825E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>DA527CD718D3E623009A825E</string>
+				<string>DA527CD818D3E623009A825E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>DA527CD718D3E623009A825E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/MusicFeeling.app/MusicFeeling</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MusicFeeling/MusicFeeling-Prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>MusicFeelingTests/MusicFeelingTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>DA527CD818D3E623009A825E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/MusicFeeling.app/MusicFeeling</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>MusicFeeling/MusicFeeling-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>MusicFeelingTests/MusicFeelingTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>DA527CD918D3E6E0009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CDA18D3E6E0009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CDA18D3E6E0009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527CDB18D3E6E0009A825E</string>
+				<string>DA527CDC18D3E6E0009A825E</string>
+				<string>DA527CDD18D3E6E0009A825E</string>
+				<string>DA527CDE18D3E6E0009A825E</string>
+				<string>DA527CDF18D3E6E0009A825E</string>
+				<string>DA527CE018D3E6E0009A825E</string>
+				<string>DA527CE118D3E6E0009A825E</string>
+				<string>DA527CE218D3E6E0009A825E</string>
+				<string>DA527CE318D3E6E0009A825E</string>
+				<string>DA527CE418D3E6E0009A825E</string>
+				<string>DA527CE518D3E6E0009A825E</string>
+				<string>DA527CE618D3E6E0009A825E</string>
+				<string>DA527CE718D3E6E0009A825E</string>
+				<string>DA527CE818D3E6E0009A825E</string>
+				<string>DA527CE918D3E6E0009A825E</string>
+				<string>DA527CEA18D3E6E0009A825E</string>
+				<string>DA527CEB18D3E6E0009A825E</string>
+				<string>DA527CEC18D3E6E0009A825E</string>
+				<string>DA527CED18D3E6E0009A825E</string>
+				<string>DA527CEE18D3E6E0009A825E</string>
+				<string>DA527CEF18D3E6E0009A825E</string>
+				<string>DA527CF018D3E6E0009A825E</string>
+				<string>DA527CF118D3E6E0009A825E</string>
+				<string>DA527CF218D3E6E0009A825E</string>
+				<string>DA527CF318D3E6E0009A825E</string>
+				<string>DA527CF418D3E6E0009A825E</string>
+				<string>DA527CF518D3E6E0009A825E</string>
+				<string>DA527CF618D3E6E0009A825E</string>
+				<string>DA527CF718D3E6E0009A825E</string>
+				<string>DA527CF818D3E6E0009A825E</string>
+				<string>DA527CF918D3E6E0009A825E</string>
+				<string>DA527CFA18D3E6E0009A825E</string>
+				<string>DA527CFB18D3E6E0009A825E</string>
+				<string>DA527CFC18D3E6E0009A825E</string>
+				<string>DA527CFD18D3E6E0009A825E</string>
+				<string>DA527CFE18D3E6E0009A825E</string>
+				<string>DA527CFF18D3E6E0009A825E</string>
+				<string>DA527D0018D3E6E0009A825E</string>
+				<string>DA527D0118D3E6E0009A825E</string>
+				<string>DA527D0218D3E6E0009A825E</string>
+				<string>DA527D0318D3E6E0009A825E</string>
+				<string>DA527D0418D3E6E0009A825E</string>
+				<string>DA527D0518D3E6E0009A825E</string>
+				<string>DA527D0618D3E6E0009A825E</string>
+				<string>DA527D0718D3E6E0009A825E</string>
+				<string>DA527D0818D3E6E0009A825E</string>
+				<string>DA527D0918D3E6E0009A825E</string>
+				<string>DA527D0A18D3E6E0009A825E</string>
+				<string>DA527D0B18D3E6E0009A825E</string>
+				<string>DA527D0C18D3E6E0009A825E</string>
+				<string>DA527D0D18D3E6E0009A825E</string>
+				<string>DA527D0E18D3E6E0009A825E</string>
+				<string>DA527D0F18D3E6E0009A825E</string>
+				<string>DA527D1018D3E6E0009A825E</string>
+				<string>DA527D1118D3E6E0009A825E</string>
+				<string>DA527D1218D3E6E0009A825E</string>
+				<string>DA527D1318D3E6E0009A825E</string>
+				<string>DA527D1418D3E6E0009A825E</string>
+				<string>DA527D1518D3E6E0009A825E</string>
+				<string>DA527D1618D3E6E0009A825E</string>
+				<string>DA527D1718D3E6E0009A825E</string>
+				<string>DA527D1818D3E6E0009A825E</string>
+				<string>DA527D1918D3E6E0009A825E</string>
+				<string>DA527D1A18D3E6E0009A825E</string>
+				<string>DA527D1B18D3E6E0009A825E</string>
+				<string>DA527D1C18D3E6E0009A825E</string>
+				<string>DA527D1D18D3E6E0009A825E</string>
+				<string>DA527D1E18D3E6E0009A825E</string>
+				<string>DA527D1F18D3E6E0009A825E</string>
+				<string>DA527D2018D3E6E0009A825E</string>
+				<string>DA527D2118D3E6E0009A825E</string>
+				<string>DA527D2218D3E6E0009A825E</string>
+				<string>DA527D2318D3E6E0009A825E</string>
+				<string>DA527D2418D3E6E0009A825E</string>
+				<string>DA527D2518D3E6E0009A825E</string>
+				<string>DA527D2618D3E6E0009A825E</string>
+				<string>DA527D2718D3E6E0009A825E</string>
+				<string>DA527D2818D3E6E0009A825E</string>
+				<string>DA527D2918D3E6E0009A825E</string>
+				<string>DA527D2A18D3E6E0009A825E</string>
+				<string>DA527D2B18D3E6E0009A825E</string>
+				<string>DA527D2C18D3E6E0009A825E</string>
+				<string>DA527D2D18D3E6E0009A825E</string>
+				<string>DA527D2E18D3E6E0009A825E</string>
+				<string>DA527D2F18D3E6E0009A825E</string>
+				<string>DA527D3018D3E6E0009A825E</string>
+				<string>DA527D3118D3E6E0009A825E</string>
+				<string>DA527D3218D3E6E0009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Piano</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CDB18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a0.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CDC18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a0m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CDD18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CDE18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a1m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CDF18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE018D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a2m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE118D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE218D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a3m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE318D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE418D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a4m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE518D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE618D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a5m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE718D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE818D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a6m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CE918D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CEA18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>a7m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CEB18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b0.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CEC18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CED18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CEE18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CEF18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF018D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF118D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF218D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>b7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF318D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF418D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c1m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF518D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF618D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c2m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF718D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF818D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c3m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CF918D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CFA18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c4m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CFB18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CFC18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c5m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CFD18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CFE18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c6m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527CFF18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0018D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c7m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0118D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>c8.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0218D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0318D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d1m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0418D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0518D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d2m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0618D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0718D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d3m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0818D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0918D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d4m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0A18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0B18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d5m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0C18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0D18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d6m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0E18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D0F18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>d7m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1018D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1118D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1218D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1318D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1418D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1518D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1618D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>e7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1718D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1818D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f1m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1918D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1A18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f2m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1B18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1C18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f3m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1D18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1E18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f4m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D1F18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2018D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f5m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2118D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2218D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f6m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2318D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2418D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>f7m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2518D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g1.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2618D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g1m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2718D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g2.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2818D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g2m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2918D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g3.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2A18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g3m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2B18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g4.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2C18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g4m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2D18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g5.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2E18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g5m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D2F18D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g6.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D3018D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g6m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D3118D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g7.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D3218D3E6E0009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>g7m.ogg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D3318D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CDB18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3418D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CDC18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3518D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CDD18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3618D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CDE18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3718D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CDF18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3818D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE018D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3918D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE118D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3A18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE218D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3B18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE318D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3C18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE418D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3D18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE518D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3E18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE618D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D3F18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE718D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4018D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE818D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4118D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CE918D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4218D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CEA18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4318D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CEB18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4418D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CEC18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4518D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CED18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4618D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CEE18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4718D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CEF18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4818D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF018D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4918D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF118D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4A18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF218D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4B18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF318D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4C18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF418D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4D18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF518D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4E18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF618D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D4F18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF718D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5018D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF818D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5118D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CF918D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5218D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CFA18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5318D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CFB18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5418D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CFC18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5518D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CFD18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5618D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CFE18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5718D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527CFF18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5818D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0018D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5918D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0118D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5A18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0218D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5B18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0318D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5C18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0418D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5D18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0518D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5E18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0618D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D5F18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0718D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6018D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0818D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6118D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0918D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6218D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0A18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6318D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0B18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6418D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0C18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6518D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0D18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6618D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0E18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6718D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D0F18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6818D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1018D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6918D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1118D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6A18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1218D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6B18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1318D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6C18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1418D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6D18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1518D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6E18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1618D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D6F18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1718D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7018D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1818D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7118D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1918D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7218D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1A18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7318D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1B18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7418D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1C18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7518D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1D18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7618D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1E18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7718D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D1F18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7818D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2018D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7918D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2118D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7A18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2218D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7B18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2318D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7C18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2418D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7D18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2518D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7E18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2618D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D7F18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2718D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8018D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2818D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8118D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2918D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8218D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2A18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8318D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2B18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8418D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2C18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8518D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2D18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8618D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2E18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8718D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D2F18D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8818D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D3018D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8918D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D3118D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8A18D3E6E0009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D3218D3E6E0009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D8F18D3EF0D009A825E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DA527D9518D3EFEF009A825E</string>
+				<string>DA527D9418D3EF5E009A825E</string>
+				<string>DA527D9618D3F013009A825E</string>
+				<string>DA527D9718D3F013009A825E</string>
+				<string>DA527D9018D3EF0D009A825E</string>
+				<string>DA527D9118D3EF0D009A825E</string>
+				<string>DA527D9218D3EF0D009A825E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>vendor</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9018D3EF0D009A825E</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IDZAudioDecoder.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9118D3EF0D009A825E</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IDZOggVorbisFileDecoder.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9218D3EF0D009A825E</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.cpp.objcpp</string>
+			<key>path</key>
+			<string>IDZOggVorbisFileDecoder.mm</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9318D3EF0D009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D9218D3EF0D009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D9418D3EF5E009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IDZAudioPlayer.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9518D3EFEF009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IDZTrace.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9618D3F013009A825E</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IDZAQAudioPlayer.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9718D3F013009A825E</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IDZAQAudioPlayer.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9818D3F013009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D9718D3F013009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DA527D9918D3F7B8009A825E</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>path</key>
+			<string>Vorbis.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DA527D9A18D3F7B8009A825E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA527D9918D3F7B8009A825E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>DA527C9618D3E623009A825E</string>
+</dict>
+</plist>

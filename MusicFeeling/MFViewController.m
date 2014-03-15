@@ -8,6 +8,7 @@
 
 #import "MFViewController.h"
 #import "MFCollectionViewCell.h"
+#import "MFTestViewController.h"
 
 #import "IDZTrace.h"
 #import "IDZOggVorbisFileDecoder.h"
@@ -44,6 +45,7 @@
 
 - (IBAction)play:(id)sender {
     IDZTrace();
+    [self.player stop];
     NSError *error;
     NSString *name = [self.tonesArray[self.currentIndex] stringByDeletingPathExtension];
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
@@ -102,5 +104,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.currentIndex = indexPath.item;
     [self play:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MFTestViewController *vc = segue.destinationViewController;
+    vc.tonesArray = self.tonesArray;
 }
 @end

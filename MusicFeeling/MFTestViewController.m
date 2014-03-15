@@ -7,9 +7,13 @@
 //
 
 #import "MFTestViewController.h"
+#import "IDZOggVorbisFileDecoder.h"
+#import <SVProgressHUD.h>
 
 @interface MFTestViewController ()
 
+@property (nonatomic, strong) id<IDZAudioPlayer> player;
+@property (nonatomic) NSInteger randomIndex;
 @end
 
 @implementation MFTestViewController
@@ -27,6 +31,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.inputField.delegate = self;
+    [self replayTone:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.player stop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,4 +57,45 @@
 }
 */
 
+- (IBAction)replayTone:(id)sender {
+    //IDZTrace();
+    [self.player stop];
+    NSError *error;
+    NSString *name = [self.tonesArray[self.randomIndex] stringByDeletingPathExtension];
+    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
+    IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
+    NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
+    self.player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
+    //self.player.delegate = self;
+    [self.player prepareToPlay];
+
+    //[self startTimer];
+    [self.player play];
+}
+
+- (IBAction)getNextRandomIndex {
+    self.inputField.text = @"";
+    self.randomIndex = arc4random() % self.tonesArray.count;
+    [self replayTone:nil];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSLog(@"%@", textField.text);
+    if ([textField.text isEqualToString:[self.tonesArray[self.randomIndex] stringByDeletingPathExtension]]) {
+        [SVProgressHUD showSuccessWithStatus:@"Bingo!"];
+        [self getNextRandomIndex];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"Try again"];
+        [self replayTone:nil];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return YES;
+}
 @end

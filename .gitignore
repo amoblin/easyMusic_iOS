@@ -1,1 +1,3 @@
 *.xcodeproj/
+Pods/
+Podfile.lock
