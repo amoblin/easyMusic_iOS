@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SYF-pM-QkT">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KaQ-wh-PNL">
@@ -66,8 +66,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SYF-pM-QkT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="He4-Cf-aSt"/>
+                            <constraint firstItem="SYF-pM-QkT" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Jdn-H3-XoD"/>
                             <constraint firstAttribute="trailing" secondItem="SYF-pM-QkT" secondAttribute="trailing" id="QOe-hT-7HB"/>
-                            <constraint firstItem="SYF-pM-QkT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="epG-xb-rY5"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SYF-pM-QkT" secondAttribute="bottom" id="xjn-at-Lqa"/>
                         </constraints>
                     </view>
