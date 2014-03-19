@@ -11,6 +11,7 @@
 
 @interface MFTestViewController : UIViewController <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *baseToneButton;
 @property (weak, nonatomic) IBOutlet UIButton *replayButton;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 

@@ -14,6 +14,9 @@
 
 @property (nonatomic, strong) id<IDZAudioPlayer> player;
 @property (nonatomic) NSInteger randomIndex;
+@property (nonatomic) NSInteger randomDegree;
+@property (nonatomic) NSString *toneName;
+@property (nonatomic) NSString *baseToneName;
 @property (nonatomic) BOOL isDone;
 @end
 
@@ -37,7 +40,7 @@
     [self.view addGestureRecognizer:tap];
 
     self.inputField.delegate = self;
-    [self replayTone:nil];
+    [self getNextRandomIndex];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -63,11 +66,18 @@
 */
 
 - (IBAction)replayTone:(id)sender {
+    [self playTone:self.toneName];
+}
+
+- (IBAction)playBaseTone:(id)sender {
+    [self playTone:self.baseToneName];
+}
+
+- (void) playTone:(NSString *)toneName {
     //IDZTrace();
     [self.player stop];
     NSError *error;
-    NSString *name = [self.tonesArray[self.randomIndex] stringByDeletingPathExtension];
-    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
+    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:toneName withExtension:@".ogg"];
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
     NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
     self.player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
@@ -80,7 +90,11 @@
 
 - (IBAction)getNextRandomIndex {
     self.inputField.text = @"";
-    self.randomIndex = arc4random() % self.tonesArray.count;
+    self.randomDegree = arc4random() % self.tonesArray.count;
+    self.randomIndex = arc4random() % [self.tonesArray[self.randomDegree] count];
+
+    self.toneName = [self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension];
+    self.baseToneName = [NSString stringWithFormat:@"c%@", [self.toneName substringWithRange:NSMakeRange(1, 1)]];
     [self replayTone:nil];
 }
 
@@ -90,13 +104,18 @@
     }
     self.isDone = NO;
     NSLog(@"%@", textField.text);
-    if ([textField.text isEqualToString:[self.tonesArray[self.randomIndex] stringByDeletingPathExtension]]) {
+    if ([textField.text isEqualToString:[self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension]]) {
         [SVProgressHUD showSuccessWithStatus:@"Bingo!"];
         [self getNextRandomIndex];
     } else {
         [SVProgressHUD showErrorWithStatus:@"Try again"];
         [self replayTone:nil];
     }
+}
+
+- (IBAction)showTip:(id)sender {
+    NSLog(@"%@", self.toneName);
+    [SVProgressHUD showWith:self.toneName];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

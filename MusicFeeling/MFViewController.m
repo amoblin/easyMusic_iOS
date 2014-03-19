@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) id<IDZAudioPlayer> player;
 @property (nonatomic, strong) NSMutableArray *tonesArray;
-@property (nonatomic) NSInteger currentIndex;
+@property (nonatomic) NSIndexPath *currentIndexPath;
 @end
 
 @implementation MFViewController
@@ -30,14 +30,20 @@
 
 - (NSMutableArray *)tonesArray {
     if (_tonesArray == nil) {
-        _tonesArray = [[NSMutableArray alloc] initWithCapacity:500];
+        _tonesArray = [[NSMutableArray alloc] initWithCapacity:10];
+        for (NSInteger i=0; i<10; i++) {
+            NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:20];
+            [_tonesArray addObject:array];
+        }
         NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
         NSError * error;
         NSArray * directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:&error];
         for (NSString *file in directoryContents) {
-            if ([file.pathExtension isEqualToString:@"ogg"]) {
-                [_tonesArray addObject:file];
+            if ( ! [file.pathExtension isEqualToString:@"ogg"]) {
+                continue;
             }
+            NSInteger number = [[file substringWithRange:NSMakeRange(1, 1)] integerValue];
+            [_tonesArray[number] addObject:file];
         }
     }
     return _tonesArray;
@@ -47,7 +53,7 @@
     IDZTrace();
     [self.player stop];
     NSError *error;
-    NSString *name = [self.tonesArray[self.currentIndex] stringByDeletingPathExtension];
+    NSString *name = [self.tonesArray[self.currentIndexPath.section][self.currentIndexPath.item] stringByDeletingPathExtension];
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
     NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
@@ -85,24 +91,24 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cell";
     MFCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    cell.titleLabel.text = [self.tonesArray[indexPath.item] stringByDeletingPathExtension];
+    cell.titleLabel.text = [self.tonesArray[indexPath.section][indexPath.item] stringByDeletingPathExtension];
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.tonesArray.count;
+    return [self.tonesArray[section] count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return self.tonesArray.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(80, 80);
+    return CGSizeMake(40, 40);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.currentIndex = indexPath.item;
+    self.currentIndexPath = indexPath;
     [self play:nil];
 }
 
