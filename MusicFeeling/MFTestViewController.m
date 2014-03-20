@@ -54,7 +54,7 @@
         NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
         NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading]};
         NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(44)]" options:0 metrics:matrics views:viewsDict];
-        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[button(80)]" options:0 metrics:nil views:viewsDict];
+        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[button(80)]" options:0 metrics:nil views:viewsDict];
         [self.view addConstraints:constraints];
         [self.view addConstraints:constraints2];
         leading += 45;
@@ -134,11 +134,13 @@
     NSLog(@"current tone: %@", currentTone);
     NSLog(@"text: %@", text);
     if ([currentTone hasPrefix:text]) {
+        NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
         if ([text isEqualToString:currentTone]) {
-            [SVProgressHUD showSuccessWithStatus:@"Bingo!"];
+            [SVProgressHUD showSuccessWithStatus:msg];
             [self getNextRandomIndex];
         } else {
-            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"OK! %@", currentTone]];
+            [SVProgressHUD showSuccessWithStatus:msg];
+            [self getNextRandomIndex];
         }
     } else {
         [SVProgressHUD showErrorWithStatus:@"Try again"];
