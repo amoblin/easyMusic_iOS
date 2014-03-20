@@ -9,6 +9,7 @@
 #import "MFTestViewController.h"
 #import "IDZOggVorbisFileDecoder.h"
 #import <SVProgressHUD.h>
+#import <PXAlertView.h>
 
 @interface MFTestViewController ()
 
@@ -40,6 +41,24 @@
     [self.view addGestureRecognizer:tap];
 
     self.inputField.delegate = self;
+
+    NSInteger leading = 2;
+    NSArray *titleArray = @[@"C", @"D", @"E", @"F", @"G", @"A", @"B"];
+    for (NSInteger i=0; i < 7; i++) {
+        UIButton *button = [[UIButton alloc] init];
+        [button setTitle:titleArray[i] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [button setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+        NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
+        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading]};
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(44)]" options:0 metrics:matrics views:viewsDict];
+        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[button(80)]" options:0 metrics:nil views:viewsDict];
+        [self.view addConstraints:constraints];
+        [self.view addConstraints:constraints2];
+        leading += 45;
+    }
     [self getNextRandomIndex];
 }
 
@@ -103,10 +122,24 @@
         return;
     }
     self.isDone = NO;
-    NSLog(@"%@", textField.text);
-    if ([textField.text isEqualToString:[self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension]]) {
-        [SVProgressHUD showSuccessWithStatus:@"Bingo!"];
-        [self getNextRandomIndex];
+    [self test:[textField.text lowercaseString]];
+}
+
+- (IBAction)toneButtonPressed:(UIButton *)sender {
+    [self test:[sender.titleLabel.text lowercaseString]];
+}
+
+- (void) test:(NSString *)text {
+    NSString *currentTone = [self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension];
+    NSLog(@"current tone: %@", currentTone);
+    NSLog(@"text: %@", text);
+    if ([currentTone hasPrefix:text]) {
+        if ([text isEqualToString:currentTone]) {
+            [SVProgressHUD showSuccessWithStatus:@"Bingo!"];
+            [self getNextRandomIndex];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"OK! %@", currentTone]];
+        }
     } else {
         [SVProgressHUD showErrorWithStatus:@"Try again"];
         [self replayTone:nil];
@@ -115,7 +148,8 @@
 
 - (IBAction)showTip:(id)sender {
     NSLog(@"%@", self.toneName);
-    [SVProgressHUD showWith:self.toneName];
+    [PXAlertView showAlertWithTitle:@"Tip" message:self.toneName];
+    //[SVProgressHUD showWith:self.toneName];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

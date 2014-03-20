@@ -30,7 +30,7 @@
 
 - (NSMutableArray *)tonesArray {
     if (_tonesArray == nil) {
-        _tonesArray = [[NSMutableArray alloc] initWithCapacity:10];
+        _tonesArray = [[NSMutableArray alloc] initWithCapacity:9];
         for (NSInteger i=0; i<10; i++) {
             NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:20];
             [_tonesArray addObject:array];
