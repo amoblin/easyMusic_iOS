@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *baseToneButton;
 @property (weak, nonatomic) IBOutlet UIButton *replayButton;
-@property (weak, nonatomic) IBOutlet UITextField *inputField;
+@property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;
 
 @property (nonatomic, strong) NSMutableArray *tonesArray;
 @end

@@ -11,6 +11,7 @@
 #import <SVProgressHUD.h>
 #import <PXAlertView.h>
 
+#define TOP @350
 #define WHITE_WIDTH @44
 #define WHITE_BUTTON_WIDTH @43
 #define BLACK_WIDTH @27
@@ -27,6 +28,7 @@
 @property (nonatomic) NSString *baseToneName;
 @property (nonatomic) BOOL isDone;
 @property (nonatomic) BOOL shouldGetNextRandom;
+@property (nonatomic) BOOL shouldRandomDegree;
 @end
 
 @implementation MFTestViewController
@@ -48,9 +50,9 @@
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
 
-    self.inputField.delegate = self;
+    [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree) forControlEvents:UIControlEventTouchUpInside];
 
-    NSInteger leading = 6;
+    NSInteger leading = 8;
     NSArray *titleArray = @[@"C", @"D", @"E", @"F", @"G", @"A", @"B"];
     for (NSInteger i=0; i < 7; i++) {
         UIButton *button = [[UIButton alloc] init];
@@ -62,14 +64,21 @@
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
         NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
-        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading], @"height":WHITE_HEIGHT, @"width": WHITE_BUTTON_WIDTH};
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(width)]" options:0 metrics:matrics views:viewsDict];
-        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[button(height)]" options:0 metrics:matrics views:viewsDict];
-        [self.view addConstraints:constraints];
-        [self.view addConstraints:constraints2];
+        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading],
+                                  @"height":WHITE_HEIGHT,
+                                  @"width": WHITE_BUTTON_WIDTH,
+                                  @"top": TOP};
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(width)]"
+                                                                          options:0
+                                                                          metrics:matrics
+                                                                            views:viewsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[button(height)]"
+                                                                          options:0
+                                                                          metrics:matrics
+                                                                            views:viewsDict]];
         leading += [WHITE_WIDTH integerValue];
     }
-    
+
     leading = 31;
     for (NSInteger i=0; i<5;i++) {
         UIButton *button = [[UIButton alloc] init];
@@ -79,11 +88,18 @@
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
         NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
-        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading], @"height":BLACK_HEIGHT, @"width": BLACK_WIDTH};
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(width)]" options:0 metrics:matrics views:viewsDict];
-        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[button(height)]" options:0 metrics:matrics views:viewsDict];
-        [self.view addConstraints:constraints];
-        [self.view addConstraints:constraints2];
+        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading],
+                                  @"height":BLACK_HEIGHT,
+                                  @"width": BLACK_WIDTH,
+                                  @"top": TOP};
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(width)]"
+                                                                          options:0
+                                                                          metrics:matrics
+                                                                            views:viewsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[button(height)]"
+                                                                          options:0
+                                                                          metrics:matrics
+                                                                            views:viewsDict]];
         leading += 45;
         if (i==1) {
             leading += 45;
@@ -121,15 +137,16 @@
     [self playTone:self.toneName];
 }
 
-- (IBAction)playBaseTone:(UIButton *)sender {
-}
-
 - (void) playTone:(NSString *)toneName {
     //IDZTrace();
     [self.player stop];
     NSError *error;
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:toneName withExtension:@".ogg"];
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
+    if (error != nil) {
+        NSLog(@"%@", error);
+        return;
+    }
     NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
     self.player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
     self.player.delegate = self;
@@ -140,12 +157,19 @@
 }
 
 - (IBAction)getNextRandomIndex {
+    [self.replayButton setTitle:@"聆听" forState:UIControlStateNormal];
     self.shouldGetNextRandom = NO;
-    self.inputField.text = @"";
-    self.randomDegree = arc4random() % self.tonesArray.count;
-    self.randomIndex = arc4random() % [self.tonesArray[self.randomDegree] count];
+    if (self.shouldRandomDegree) {
+        self.randomDegree = arc4random() % self.tonesArray.count;
+    } else {
+        self.randomDegree = 4;
+    }
 
-    self.toneName = [self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension];
+    do {
+        self.randomIndex = arc4random() % [self.tonesArray[self.randomDegree] count];
+        self.toneName = [self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension];
+    } while( [self.toneName hasSuffix:@"m"]);
+
     self.baseToneName = [NSString stringWithFormat:@"c%@", [self.toneName substringWithRange:NSMakeRange(1, 1)]];
     [self replayTone:nil];
 }
@@ -170,6 +194,7 @@
     NSLog(@"current tone: %@", currentTone);
     NSLog(@"text: %@", text);
     if ([currentTone hasPrefix:text]) {
+        [self.replayButton setTitle:currentTone forState:UIControlStateNormal];
         NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
         if ([text isEqualToString:currentTone]) {
             [SVProgressHUD showSuccessWithStatus:msg];
@@ -198,7 +223,6 @@
 }
 
 - (void)tapViewAction {
-    [self.inputField endEditing:YES];
 }
 
 #pragma mark - IDZAQPlayerDelegate
@@ -210,6 +234,11 @@
 }
 
 - (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error {
+}
+
+
+- (void)toggleRandomDegree {
+    self.shouldRandomDegree = ! self.shouldRandomDegree;
 }
 
 @end
