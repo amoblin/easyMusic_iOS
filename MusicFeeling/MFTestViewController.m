@@ -61,7 +61,7 @@
         [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [button setTranslatesAutoresizingMaskIntoConstraints:NO];
         button.tag = i;
-        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchDown];
         [self.view addSubview:button];
         NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
         NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading],
@@ -85,7 +85,7 @@
         button.backgroundColor = [UIColor blackColor];
         [button setTranslatesAutoresizingMaskIntoConstraints:NO];
         button.tag = 7 + i;
-        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchDown];
         [self.view addSubview:button];
         NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
         NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading],
@@ -138,7 +138,10 @@
 }
 
 - (void) playTone:(NSString *)toneName {
-    //IDZTrace();
+    IDZTrace();
+    if (self.shouldGetNextRandom) {
+        [self getNextRandomIndex];
+    }
     [self.player stop];
     NSError *error;
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:toneName withExtension:@".ogg"];

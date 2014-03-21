@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IDZAQAudioPlayer.h"
+#import "IDZTrace.h"
 
 @interface MFTestViewController : UIViewController <UITextFieldDelegate, IDZAudioPlayerDelegate>
 
