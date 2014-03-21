@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IDZAQAudioPlayer.h"
 
-@interface MFTestViewController : UIViewController <UITextFieldDelegate>
+@interface MFTestViewController : UIViewController <UITextFieldDelegate, IDZAudioPlayerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *baseToneButton;
 @property (weak, nonatomic) IBOutlet UIButton *replayButton;

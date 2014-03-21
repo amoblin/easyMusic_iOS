@@ -11,6 +11,13 @@
 #import <SVProgressHUD.h>
 #import <PXAlertView.h>
 
+#define WHITE_WIDTH @44
+#define WHITE_BUTTON_WIDTH @43
+#define BLACK_WIDTH @27
+#define LEFT_BLACK_WIDTH @16
+#define WHITE_HEIGHT @144
+#define BLACK_HEIGHT @90
+
 @interface MFTestViewController ()
 
 @property (nonatomic, strong) id<IDZAudioPlayer> player;
@@ -19,6 +26,7 @@
 @property (nonatomic) NSString *toneName;
 @property (nonatomic) NSString *baseToneName;
 @property (nonatomic) BOOL isDone;
+@property (nonatomic) BOOL shouldGetNextRandom;
 @end
 
 @implementation MFTestViewController
@@ -42,22 +50,44 @@
 
     self.inputField.delegate = self;
 
-    NSInteger leading = 2;
+    NSInteger leading = 6;
     NSArray *titleArray = @[@"C", @"D", @"E", @"F", @"G", @"A", @"B"];
     for (NSInteger i=0; i < 7; i++) {
         UIButton *button = [[UIButton alloc] init];
+        button.backgroundColor = [UIColor grayColor];
         [button setTitle:titleArray[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [button setTranslatesAutoresizingMaskIntoConstraints:NO];
+        button.tag = i;
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
         NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
-        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading]};
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(44)]" options:0 metrics:matrics views:viewsDict];
-        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[button(80)]" options:0 metrics:nil views:viewsDict];
+        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading], @"height":WHITE_HEIGHT, @"width": WHITE_BUTTON_WIDTH};
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(width)]" options:0 metrics:matrics views:viewsDict];
+        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[button(height)]" options:0 metrics:matrics views:viewsDict];
+        [self.view addConstraints:constraints];
+        [self.view addConstraints:constraints2];
+        leading += [WHITE_WIDTH integerValue];
+    }
+    
+    leading = 31;
+    for (NSInteger i=0; i<5;i++) {
+        UIButton *button = [[UIButton alloc] init];
+        button.backgroundColor = [UIColor blackColor];
+        [button setTranslatesAutoresizingMaskIntoConstraints:NO];
+        button.tag = 7 + i;
+        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+        NSDictionary *viewsDict = NSDictionaryOfVariableBindings(button);
+        NSDictionary *matrics = @{@"leading":[NSNumber numberWithInteger:leading], @"height":BLACK_HEIGHT, @"width": BLACK_WIDTH};
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leading-[button(width)]" options:0 metrics:matrics views:viewsDict];
+        NSArray *constraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-300-[button(height)]" options:0 metrics:matrics views:viewsDict];
         [self.view addConstraints:constraints];
         [self.view addConstraints:constraints2];
         leading += 45;
+        if (i==1) {
+            leading += 45;
+        }
     }
     [self getNextRandomIndex];
 }
@@ -85,11 +115,13 @@
 */
 
 - (IBAction)replayTone:(id)sender {
+    if (self.shouldGetNextRandom) {
+        [self getNextRandomIndex];
+    }
     [self playTone:self.toneName];
 }
 
-- (IBAction)playBaseTone:(id)sender {
-    [self playTone:self.baseToneName];
+- (IBAction)playBaseTone:(UIButton *)sender {
 }
 
 - (void) playTone:(NSString *)toneName {
@@ -100,7 +132,7 @@
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
     NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
     self.player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-    //self.player.delegate = self;
+    self.player.delegate = self;
     [self.player prepareToPlay];
 
     //[self startTimer];
@@ -108,6 +140,7 @@
 }
 
 - (IBAction)getNextRandomIndex {
+    self.shouldGetNextRandom = NO;
     self.inputField.text = @"";
     self.randomDegree = arc4random() % self.tonesArray.count;
     self.randomIndex = arc4random() % [self.tonesArray[self.randomDegree] count];
@@ -126,7 +159,10 @@
 }
 
 - (IBAction)toneButtonPressed:(UIButton *)sender {
-    [self test:[sender.titleLabel.text lowercaseString]];
+    NSArray *array = @[@"c%@", @"d%@", @"e%@", @"f%@", @"g%@", @"a%@", @"b%@", @"c%@m", @"d%@m", @"f%@m", @"g%@m", @"a%@m", @"b%@m"];
+    NSString *toneName = [NSString stringWithFormat:array[sender.tag], [NSNumber numberWithInteger:self.randomDegree]];
+    [self playTone:toneName];
+    [self test:toneName];
 }
 
 - (void) test:(NSString *)text {
@@ -137,14 +173,11 @@
         NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
         if ([text isEqualToString:currentTone]) {
             [SVProgressHUD showSuccessWithStatus:msg];
-            [self getNextRandomIndex];
+            self.shouldGetNextRandom = YES;
         } else {
             [SVProgressHUD showSuccessWithStatus:msg];
-            [self getNextRandomIndex];
+            self.shouldGetNextRandom = YES;
         }
-    } else {
-        [SVProgressHUD showErrorWithStatus:@"Try again"];
-        [self replayTone:nil];
     }
 }
 
@@ -167,4 +200,16 @@
 - (void)tapViewAction {
     [self.inputField endEditing:YES];
 }
+
+#pragma mark - IDZAQPlayerDelegate
+
+- (void)audioPlayerDidFinishPlaying:(id<IDZAudioPlayer>)player successfully:(BOOL)flag {
+    if (self.shouldGetNextRandom) {
+        [self getNextRandomIndex];
+    }
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error {
+}
+
 @end

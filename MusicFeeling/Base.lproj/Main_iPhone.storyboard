@@ -112,20 +112,6 @@
                                     <action selector="replayTone:" destination="ncx-hV-yFt" eventType="touchUpInside" id="c0E-1G-gJ7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyF-FC-oo2">
-                                <rect key="frame" x="20" y="84" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Rn0-Sq-qJr"/>
-                                    <constraint firstAttribute="width" constant="60" id="rQy-WT-ICr"/>
-                                </constraints>
-                                <state key="normal" title="基音C">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playBaseTone:" destination="ncx-hV-yFt" eventType="touchUpInside" id="BAB-Jr-PXS"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Xx-f4-jRC">
                                 <rect key="frame" x="278" y="526" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -136,9 +122,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PyF-FC-oo2" firstAttribute="leading" secondItem="CxT-7p-g1M" secondAttribute="leading" constant="20" id="8WR-Gf-6m9"/>
                             <constraint firstItem="1fk-zZ-hGe" firstAttribute="leading" secondItem="CxT-7p-g1M" secondAttribute="leading" constant="130" id="CL6-9z-krL"/>
-                            <constraint firstItem="PyF-FC-oo2" firstAttribute="top" secondItem="Jtp-BC-OvV" secondAttribute="bottom" constant="20" id="FEe-1Q-hb2"/>
                             <constraint firstItem="1fk-zZ-hGe" firstAttribute="top" secondItem="Jtp-BC-OvV" secondAttribute="bottom" constant="100" id="H3D-ln-WqX"/>
                             <constraint firstItem="H1H-YX-hAm" firstAttribute="top" secondItem="4Xx-f4-jRC" secondAttribute="bottom" constant="20" id="S98-kJ-4xA"/>
                             <constraint firstAttribute="trailing" secondItem="4Xx-f4-jRC" secondAttribute="trailing" constant="20" id="dGn-bs-U3m"/>
@@ -152,7 +136,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="baseToneButton" destination="PyF-FC-oo2" id="FdF-Zf-tSP"/>
                         <outlet property="replayButton" destination="1fk-zZ-hGe" id="iHo-QM-Xp4"/>
                     </connections>
                 </viewController>
