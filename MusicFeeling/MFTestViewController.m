@@ -297,5 +297,27 @@
 - (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error {
 }
 
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (NSArray *)keyCommands {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:26];
+    NSArray *keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b", @" "];
+    for (NSString *key in keys) {
+        UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
+        [array addObject:keyCommand];
+    }
+    return array;
+}
+
+- (void)keyPressed:(UIKeyCommand *)keyCommand {
+    NSLog(@"%@", keyCommand.input);
+    if ([keyCommand.input isEqualToString:@" "]) {
+        [self replayTone:nil];
+    } else {
+        [self test:keyCommand.input];
+    }
+}
 
 @end

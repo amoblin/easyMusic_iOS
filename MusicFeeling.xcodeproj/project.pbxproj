@@ -116,6 +116,7 @@
 		DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */; };
 		DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */; };
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
+		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +253,7 @@
 		DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDZAQAudioPlayer.m; sourceTree = "<group>"; };
 		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
 		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
+		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +368,7 @@
 		DA527CD918D3E6E0009A825E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DADCEE8E18DD23730044455D /* music@2x.png */,
 				DA527CDA18D3E6E0009A825E /* Piano */,
 			);
 			path = resources;
@@ -613,6 +616,7 @@
 				DA527D6218D3E6E0009A825E /* d5.ogg in Resources */,
 				DA527D6518D3E6E0009A825E /* d6m.ogg in Resources */,
 				DA527D6918D3E6E0009A825E /* e2.ogg in Resources */,
+				DADCEE8F18DD23730044455D /* music@2x.png in Resources */,
 				DA527D3F18D3E6E0009A825E /* a6.ogg in Resources */,
 				DA527D8018D3E6E0009A825E /* g2m.ogg in Resources */,
 				DA527D3A18D3E6E0009A825E /* a3m.ogg in Resources */,
