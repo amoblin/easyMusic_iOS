@@ -49,14 +49,42 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapViewAction)];
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
+    self.view.backgroundColor = [UIColor colorWithRed:238.0f/255 green:238.0f/255 blue:238.0f/255 alpha:1.0];
+    //self.view.backgroundColor = [UIColor blueColor];
 
-    [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree) forControlEvents:UIControlEventTouchUpInside];
+    // test button
+    /*
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(100, 0, 100, 100)];
+    [button setTitle:@"?" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor whiteColor];
+    [button setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [button addTarget:self action:@selector(replayTone:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[button(44)]-(160)-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:NSDictionaryOfVariableBindings(button)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-150-[button(44)]"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:NSDictionaryOfVariableBindings(button)]];
+
+    self.toneButton = button;
+    [self addDynamicEffect];
+    */
+    //button.transform = CGAffineTransformRotate(button.transform, 45);
+    /*
+    [UIView animateWithDuration:10 animations:^(void) {
+        button.transform = CGAffineTransformMakeTranslation(-320, 0);
+    }];
+     */
 
     NSInteger leading = 8;
     NSArray *titleArray = @[@"C", @"D", @"E", @"F", @"G", @"A", @"B"];
     for (NSInteger i=0; i < 7; i++) {
-        UIButton *button = [[UIButton alloc] init];
-        button.backgroundColor = [UIColor grayColor];
+        UIButton *button = [UIButton new];
+        button.backgroundColor = [UIColor whiteColor];
         [button setTitle:titleArray[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [button setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -108,6 +136,11 @@
     [self getNextRandomIndex];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.shouldRandomDegree = [[NSUserDefaults standardUserDefaults] boolForKey:@"randomDegree"];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.player stop];
@@ -119,6 +152,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)addDynamicEffect {
+    UIButton *button = self.replayButton;
+    //UIButton *button = self.toneButton;
+    UIDynamicAnimator* animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    UIGravityBehavior* gravityBeahvior = [[UIGravityBehavior alloc] initWithItems:@[button]];
+    gravityBeahvior.magnitude = [[NSUserDefaults standardUserDefaults] floatForKey:@"speed"];
+    [animator addBehavior:gravityBeahvior];
+
+    UICollisionBehavior* collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[button]];
+    collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
+    collisionBehavior.collisionDelegate = self;
+    [animator addBehavior:collisionBehavior];
+
+    self.animator = animator;
+}
 /*
 #pragma mark - Navigation
 
@@ -160,7 +208,14 @@
 }
 
 - (IBAction)getNextRandomIndex {
+    UIButton *button = self.replayButton;
+    CGRect frame = button.frame;
+    frame.origin.y = 50;
+    button.frame = frame;
+    [self addDynamicEffect];
+
     [self.replayButton setTitle:@"聆听" forState:UIControlStateNormal];
+    [self.toneButton setTitle:@"聆听" forState:UIControlStateNormal];
     self.shouldGetNextRandom = NO;
     if (self.shouldRandomDegree) {
         self.randomDegree = arc4random() % self.tonesArray.count;
@@ -198,12 +253,15 @@
     NSLog(@"text: %@", text);
     if ([currentTone hasPrefix:text]) {
         [self.replayButton setTitle:currentTone forState:UIControlStateNormal];
-        NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
+        [self.toneButton setTitle:currentTone forState:UIControlStateNormal];
         if ([text isEqualToString:currentTone]) {
-            [SVProgressHUD showSuccessWithStatus:msg];
-            self.shouldGetNextRandom = YES;
-        } else {
-            [SVProgressHUD showSuccessWithStatus:msg];
+            //NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
+            //[SVProgressHUD showSuccessWithStatus:msg];
+            [UIView animateWithDuration:0.5 animations:^(void) {
+                self.replayButton.transform = CGAffineTransformScale(self.replayButton.transform, 3.0, 3.0);
+            }completion:^(BOOL isFinished) {
+                [self getNextRandomIndex];
+            }];
             self.shouldGetNextRandom = YES;
         }
     }
@@ -239,9 +297,5 @@
 - (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error {
 }
 
-
-- (void)toggleRandomDegree {
-    self.shouldRandomDegree = ! self.shouldRandomDegree;
-}
 
 @end

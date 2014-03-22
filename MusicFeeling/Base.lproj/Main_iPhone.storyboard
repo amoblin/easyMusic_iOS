@@ -98,13 +98,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fk-zZ-hGe">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fk-zZ-hGe">
                                 <rect key="frame" x="130" y="244" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="UDt-Gr-kkI"/>
-                                    <constraint firstAttribute="height" constant="60" id="ZTB-Nq-oHQ"/>
-                                </constraints>
                                 <state key="normal" title="聆听">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -119,41 +115,76 @@
                                     <action selector="showTip:" destination="ncx-hV-yFt" eventType="touchUpInside" id="3EG-AN-yzr"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-hB-rqB">
-                                <rect key="frame" x="251" y="93" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="随机度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tde-lg-eMb">
-                                <rect key="frame" x="177" y="98" width="51" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1fk-zZ-hGe" firstAttribute="leading" secondItem="CxT-7p-g1M" secondAttribute="leading" constant="130" id="CL6-9z-krL"/>
-                            <constraint firstItem="1fk-zZ-hGe" firstAttribute="top" secondItem="Jtp-BC-OvV" secondAttribute="bottom" constant="180" id="H3D-ln-WqX"/>
                             <constraint firstItem="H1H-YX-hAm" firstAttribute="top" secondItem="4Xx-f4-jRC" secondAttribute="bottom" constant="20" id="S98-kJ-4xA"/>
                             <constraint firstAttribute="trailing" secondItem="4Xx-f4-jRC" secondAttribute="trailing" constant="20" id="dGn-bs-U3m"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2bO-wY-bXY">
-                        <barButtonItem key="rightBarButtonItem" title="下一个" id="0aS-oW-VZP">
+                        <barButtonItem key="rightBarButtonItem" title="设置" id="0aS-oW-VZP">
                             <connections>
                                 <action selector="getNextRandomIndex" destination="ncx-hV-yFt" id="Cpe-K3-vfy"/>
+                                <segue destination="WGh-tj-1aE" kind="push" id="6Ga-36-BCF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="replayButton" destination="1fk-zZ-hGe" id="iHo-QM-Xp4"/>
-                        <outlet property="toggleRandomSwitch" destination="bk7-hB-rqB" id="792-Kj-luI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbf-Ze-KxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1127" y="90"/>
+            <point key="canvasLocation" x="1139" y="90"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="28c-Xr-a2o">
+            <objects>
+                <viewController id="WGh-tj-1aE" customClass="MFSettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a2s-F0-duy"/>
+                        <viewControllerLayoutGuide type="bottom" id="A66-XL-Tba"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ndY-7W-nyN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-hB-rqB">
+                                <rect key="frame" x="251" y="91" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="随机度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tde-lg-eMb">
+                                <rect key="frame" x="20" y="96" width="51" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q75-Bt-M61">
+                                <rect key="frame" x="69" y="149" width="238" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="WGh-tj-1aE" eventType="valueChanged" id="nbR-60-K13"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-JQ-4vc">
+                                <rect key="frame" x="16" y="153" width="34" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="slider" destination="q75-Bt-M61" id="xVG-mo-7qq"/>
+                        <outlet property="toggleRandomSwitch" destination="bk7-hB-rqB" id="hvm-r8-BrZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MBq-1E-xj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1634" y="90"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6b5-Uq-N7i">

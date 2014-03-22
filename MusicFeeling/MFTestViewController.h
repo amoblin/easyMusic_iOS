@@ -10,11 +10,13 @@
 #import "IDZAQAudioPlayer.h"
 #import "IDZTrace.h"
 
-@interface MFTestViewController : UIViewController <UITextFieldDelegate, IDZAudioPlayerDelegate>
+@interface MFTestViewController : UIViewController <UITextFieldDelegate, IDZAudioPlayerDelegate, UICollisionBehaviorDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *baseToneButton;
 @property (weak, nonatomic) IBOutlet UIButton *replayButton;
-@property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;
+
+@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (strong, nonatomic) UIButton *toneButton;
 
 @property (nonatomic, strong) NSMutableArray *tonesArray;
 @end

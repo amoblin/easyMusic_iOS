@@ -115,6 +115,7 @@
 		DA527D8A18D3E6E0009A825E /* g7m.ogg in Resources */ = {isa = PBXBuildFile; fileRef = DA527D3218D3E6E0009A825E /* g7m.ogg */; };
 		DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */; };
 		DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */; };
+		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,8 @@
 		DA527D9518D3EFEF009A825E /* IDZTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDZTrace.h; sourceTree = "<group>"; };
 		DA527D9618D3F013009A825E /* IDZAQAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZAQAudioPlayer.h; sourceTree = "<group>"; };
 		DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDZAQAudioPlayer.m; sourceTree = "<group>"; };
+		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
+		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +326,8 @@
 				DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */,
 				DA35C8D818D405770021BD55 /* MFTestViewController.h */,
 				DA35C8D918D405770021BD55 /* MFTestViewController.m */,
+				DA865C3218DD168D00B520FF /* MFSettingViewController.h */,
+				DA865C3318DD168D00B520FF /* MFSettingViewController.m */,
 				DA527CBC18D3E623009A825E /* Images.xcassets */,
 				DA527CA818D3E623009A825E /* Supporting Files */,
 			);
@@ -715,6 +720,7 @@
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
 				DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */,
 				DA527CBB18D3E623009A825E /* MFViewController.m in Sources */,
+				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
 				DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */,
