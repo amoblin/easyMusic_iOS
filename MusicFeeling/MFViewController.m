@@ -171,8 +171,9 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
         toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
     } else {
-        NSDictionary *mapper = @{@"a": @"c", @"s": @"d", @"d": @"e", @"f": @"f", @"j": @"g", @"k": @"a", @"l": @"b"};
-        toneName = [NSString stringWithFormat:@"%@%@", [mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
+        NSDictionary *mapper = @{@"a": @"c%@", @"s": @"d%@", @"d": @"e%@", @"f": @"f%@", @"j": @"g%@", @"k": @"a%@", @"l": @"b%@",
+                                 @"w": @"c%@m", @"e": @"d%@m", @"i": @"f%@m", @"o": @"g%@m", @"p": @"a%@m"};
+        toneName = [NSString stringWithFormat:[mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
     }
 
     [self playTone:toneName];

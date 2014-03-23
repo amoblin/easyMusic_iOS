@@ -309,7 +309,12 @@
 
 - (NSArray *)keyCommands {
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:26];
-    NSArray *keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b", @" "];
+    NSArray *keys;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
+        keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b", @" "];
+    } else {
+        keys = @[@"a", @"s", @"d", @"f", @"j", @"k", @"l", @"w", @"e", @"i", @"o", @"p", @" "];
+    }
     for (NSString *key in keys) {
         UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
         [array addObject:keyCommand];
@@ -322,7 +327,14 @@
     if ([keyCommand.input isEqualToString:@" "]) {
         [self replayTone:nil];
     } else {
-        NSString *toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:self.randomDegree]];
+        NSString *toneName;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
+            toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
+        } else {
+            NSDictionary *mapper = @{@"a": @"c%@", @"s": @"d%@", @"d": @"e%@", @"f": @"f%@", @"j": @"g%@", @"k": @"a%@", @"l": @"b%@",
+                                     @"w": @"c%@m", @"e": @"d%@m", @"i": @"f%@m", @"o": @"g%@m", @"p": @"a%@m"};
+            toneName = [NSString stringWithFormat:[mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
+        }
 
         [self playTone:toneName];
         [self test:toneName];
