@@ -15,7 +15,7 @@
 
 @interface MFViewController ()
 
-@property (nonatomic, strong) id<IDZAudioPlayer> player;
+@property (nonatomic, strong) NSMutableArray *playerCache;
 @property (nonatomic, strong) NSMutableArray *tonesArray;
 @property (nonatomic) NSIndexPath *currentIndexPath;
 @end
@@ -50,19 +50,48 @@
 }
 
 - (IBAction)play:(id)sender {
-    IDZTrace();
-    [self.player stop];
-    NSError *error;
     NSString *name = [self.tonesArray[self.currentIndexPath.section][self.currentIndexPath.item] stringByDeletingPathExtension];
+    [self playTone:name];
+}
+
+- (void)playTone:(NSString *)name {
+    IDZTrace();
+
+    NSError *error;
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
     NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
-    self.player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-    self.player.delegate = self;
-    [self.player prepareToPlay];
 
-    //[self startTimer];
-    [self.player play];
+    BOOL flag = NO;
+    for (IDZAQAudioPlayer *player in self.playerCache) {
+        if ( ! player.isPlaying) {
+            flag = YES;
+            IDZAQAudioPlayer *newPlayer = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
+            [self.playerCache replaceObjectAtIndex:[self.playerCache indexOfObject:player] withObject:newPlayer];
+            newPlayer.delegate = self;
+            [newPlayer prepareToPlay];
+
+            //[self startTimer];
+            [newPlayer play];
+            break;
+        }
+    }
+    if (flag == NO) {
+        IDZAQAudioPlayer *player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
+        player.delegate = self;
+        [player prepareToPlay];
+
+        //[self startTimer];
+        [player play];
+        [self.playerCache addObject:player];
+    }
+}
+
+- (NSMutableArray *)playerCache {
+    if (_playerCache == nil) {
+        _playerCache = [[NSMutableArray alloc] initWithCapacity:10];
+    }
+    return _playerCache;
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,5 +144,26 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MFTestViewController *vc = segue.destinationViewController;
     vc.tonesArray = self.tonesArray;
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (NSArray *)keyCommands {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:26];
+    NSArray *keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b"];
+    for (NSString *key in keys) {
+        UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
+        [array addObject:keyCommand];
+    }
+    return array;
+}
+
+- (void)keyPressed:(UIKeyCommand *)keyCommand {
+    NSLog(@"%@", keyCommand.input);
+    NSString *toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
+
+    [self playTone:toneName];
 }
 @end
