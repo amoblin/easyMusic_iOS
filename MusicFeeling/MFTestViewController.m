@@ -25,7 +25,6 @@
 @property (nonatomic) NSInteger randomIndex;
 @property (nonatomic) NSInteger randomDegree;
 @property (nonatomic) NSString *toneName;
-@property (nonatomic) NSString *baseToneName;
 @property (nonatomic) BOOL isDone;
 @property (nonatomic) BOOL shouldGetNextRandom;
 @property (nonatomic) BOOL shouldRandomDegree;
@@ -51,6 +50,9 @@
     [self.view addGestureRecognizer:tap];
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255 green:238.0f/255 blue:238.0f/255 alpha:1.0];
     //self.view.backgroundColor = [UIColor blueColor];
+    [self.replayButton setImage:[UIImage imageNamed:@"music"] forState:UIControlStateNormal];
+    [self.replayButton setImage:nil forState:UIControlStateSelected];
+    [self.replayButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
     // test button
     /*
@@ -214,7 +216,7 @@
     button.frame = frame;
     [self addDynamicEffect];
 
-    [self.replayButton setTitle:@"聆听" forState:UIControlStateNormal];
+    [self.replayButton setSelected:NO];
     [self.toneButton setTitle:@"聆听" forState:UIControlStateNormal];
     self.shouldGetNextRandom = NO;
     if (self.shouldRandomDegree) {
@@ -223,12 +225,17 @@
         self.randomDegree = 4;
     }
 
+    /*
     do {
+        self.randomIndex = arc4random() % [self.tonesArray[self.randomDegree] count];
         self.randomIndex = arc4random() % [self.tonesArray[self.randomDegree] count];
         self.toneName = [self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension];
     } while( [self.toneName hasSuffix:@"m"]);
+    */
+    NSArray *tonesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"exerciseTones"];
+    self.randomIndex = arc4random() % [tonesArray count];
+    self.toneName = [NSString stringWithFormat:tonesArray[self.randomIndex], [NSNumber numberWithInteger:self.randomDegree]];
 
-    self.baseToneName = [NSString stringWithFormat:@"c%@", [self.toneName substringWithRange:NSMakeRange(1, 1)]];
     [self replayTone:nil];
 }
 
@@ -248,22 +255,21 @@
 }
 
 - (void) test:(NSString *)text {
-    NSString *currentTone = [self.tonesArray[self.randomDegree][self.randomIndex] stringByDeletingPathExtension];
+    NSString *currentTone = self.toneName;
     NSLog(@"current tone: %@", currentTone);
     NSLog(@"text: %@", text);
-    if ([currentTone hasPrefix:text]) {
-        [self.replayButton setTitle:currentTone forState:UIControlStateNormal];
+    if ([text isEqualToString:currentTone]) {
+        [self.replayButton setTitle:currentTone forState:UIControlStateSelected];
+        [self.replayButton setSelected:YES];
         [self.toneButton setTitle:currentTone forState:UIControlStateNormal];
-        if ([text isEqualToString:currentTone]) {
-            //NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
-            //[SVProgressHUD showSuccessWithStatus:msg];
-            [UIView animateWithDuration:0.5 animations:^(void) {
-                self.replayButton.transform = CGAffineTransformScale(self.replayButton.transform, 3.0, 3.0);
-            }completion:^(BOOL isFinished) {
-                [self getNextRandomIndex];
-            }];
-            self.shouldGetNextRandom = YES;
-        }
+        //NSString *msg = [NSString stringWithFormat:@"Bingo! %@", currentTone];
+        //[SVProgressHUD showSuccessWithStatus:msg];
+        [UIView animateWithDuration:0.5 animations:^(void) {
+            self.replayButton.transform = CGAffineTransformScale(self.replayButton.transform, 3.0, 3.0);
+        }completion:^(BOOL isFinished) {
+            [self getNextRandomIndex];
+        }];
+        self.shouldGetNextRandom = YES;
     }
 }
 
@@ -316,7 +322,10 @@
     if ([keyCommand.input isEqualToString:@" "]) {
         [self replayTone:nil];
     } else {
-        [self test:keyCommand.input];
+        NSString *toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:self.randomDegree]];
+
+        [self playTone:toneName];
+        [self test:toneName];
     }
 }
 
