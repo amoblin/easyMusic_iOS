@@ -37,6 +37,10 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255 green:238.0f/255 blue:238.0f/255 alpha:1.0];
 
+    [self.toggleRandomSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"randomDegree"]];
+    [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree:) forControlEvents:UIControlEventTouchUpInside];
+    [self.toggleMapperSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]];
+
     NSInteger leading = 8;
     NSArray *titleArray = @[@"C", @"D", @"E", @"F", @"G", @"A", @"B"];
     NSArray *tonesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"exerciseTones"];
@@ -95,7 +99,6 @@
             leading += 45;
         }
     }
-    [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,6 +124,10 @@
 
 - (IBAction) toggleRandomDegree:(UISwitch *)toggleSwitch {
     [[NSUserDefaults standardUserDefaults] setBool:toggleSwitch.isOn forKey:@"randomDegree"];
+}
+
+- (IBAction)toggleMapper:(UISwitch *)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:@"mapper"];
 }
 
 - (void)toneButtonPressed:(UIButton *)sender {

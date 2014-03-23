@@ -152,7 +152,12 @@
 
 - (NSArray *)keyCommands {
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:26];
-    NSArray *keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b"];
+    NSArray *keys;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
+        keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b"];
+    } else {
+        keys = @[@"a", @"s", @"d", @"f", @"j", @"k", @"l", @"w", @"e", @"i", @"o", @"p"];
+    }
     for (NSString *key in keys) {
         UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
         [array addObject:keyCommand];
@@ -162,7 +167,13 @@
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
     NSLog(@"%@", keyCommand.input);
-    NSString *toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
+    NSString *toneName;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
+        toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
+    } else {
+        NSDictionary *mapper = @{@"a": @"c", @"s": @"d", @"d": @"e", @"f": @"f", @"j": @"g", @"k": @"a", @"l": @"b"};
+        toneName = [NSString stringWithFormat:@"%@%@", [mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
+    }
 
     [self playTone:toneName];
 }

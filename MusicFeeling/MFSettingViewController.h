@@ -11,6 +11,7 @@
 @interface MFSettingViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *toggleMapperSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 
 - (IBAction)sliderValueChanged:(id)sender;
