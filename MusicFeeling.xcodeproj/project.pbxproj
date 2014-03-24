@@ -17,7 +17,6 @@
 		DA527CAE18D3E623009A825E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CAD18D3E623009A825E /* main.m */; };
 		DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CB118D3E623009A825E /* MFAppDelegate.m */; };
 		DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA527CB318D3E623009A825E /* Main_iPhone.storyboard */; };
-		DA527CB818D3E623009A825E /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA527CB618D3E623009A825E /* Main_iPad.storyboard */; };
 		DA527CBB18D3E623009A825E /* MFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CBA18D3E623009A825E /* MFViewController.m */; };
 		DA527CBD18D3E623009A825E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA527CBC18D3E623009A825E /* Images.xcassets */; };
 		DA527CC418D3E623009A825E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CC318D3E623009A825E /* XCTest.framework */; };
@@ -147,7 +146,6 @@
 		DA527CB018D3E623009A825E /* MFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFAppDelegate.h; sourceTree = "<group>"; };
 		DA527CB118D3E623009A825E /* MFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFAppDelegate.m; sourceTree = "<group>"; };
 		DA527CB418D3E623009A825E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		DA527CB718D3E623009A825E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		DA527CB918D3E623009A825E /* MFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFViewController.h; sourceTree = "<group>"; };
 		DA527CBA18D3E623009A825E /* MFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFViewController.m; sourceTree = "<group>"; };
 		DA527CBC18D3E623009A825E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 				DA527CB018D3E623009A825E /* MFAppDelegate.h */,
 				DA527CB118D3E623009A825E /* MFAppDelegate.m */,
 				DA527CB318D3E623009A825E /* Main_iPhone.storyboard */,
-				DA527CB618D3E623009A825E /* Main_iPad.storyboard */,
 				DA527CB918D3E623009A825E /* MFViewController.h */,
 				DA527CBA18D3E623009A825E /* MFViewController.m */,
 				DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */,
@@ -534,6 +531,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = amoblin;
 				TargetAttributes = {
+					DA527C9D18D3E623009A825E = {
+						DevelopmentTeam = 5ELCMRHSMM;
+					};
 					DA527CC118D3E623009A825E = {
 						TestTargetID = DA527C9D18D3E623009A825E;
 					};
@@ -645,7 +645,6 @@
 				DA527D4018D3E6E0009A825E /* a6m.ogg in Resources */,
 				DA527D4918D3E6E0009A825E /* b6.ogg in Resources */,
 				DA527D4D18D3E6E0009A825E /* c2.ogg in Resources */,
-				DA527CB818D3E623009A825E /* Main_iPad.storyboard in Resources */,
 				DA527D6318D3E6E0009A825E /* d5m.ogg in Resources */,
 				DA527D6418D3E6E0009A825E /* d6.ogg in Resources */,
 				DA527CBD18D3E623009A825E /* Images.xcassets in Resources */,
@@ -766,14 +765,6 @@
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
-		DA527CB618D3E623009A825E /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA527CB718D3E623009A825E /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 		DA527CCC18D3E623009A825E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -801,8 +792,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -820,7 +811,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "AC7DBDC3-E9A5-4AAB-8E82-6DD974F5839A";
+				PROVISIONING_PROFILE = "AD6811CA-D306-4942-A28E-7D5DB56E87BA";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -842,8 +833,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -854,7 +845,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "AC7DBDC3-E9A5-4AAB-8E82-6DD974F5839A";
+				PROVISIONING_PROFILE = "AD6811CA-D306-4942-A28E-7D5DB56E87BA";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -867,7 +858,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -876,7 +868,7 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "AD6811CA-D306-4942-A28E-7D5DB56E87BA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -887,7 +879,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -896,7 +889,7 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "AD6811CA-D306-4942-A28E-7D5DB56E87BA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
