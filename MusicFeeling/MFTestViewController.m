@@ -233,6 +233,9 @@
     } while( [self.toneName hasSuffix:@"m"]);
     */
     NSArray *tonesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"exerciseTones"];
+    if (tonesArray == nil) {
+        tonesArray = @[@"c%@", @"d%@", @"e%@", @"f%@", @"g%@", @"a%@", @"b%@"];
+    }
     self.randomIndex = arc4random() % [tonesArray count];
     self.toneName = [NSString stringWithFormat:tonesArray[self.randomIndex], [NSNumber numberWithInteger:self.randomDegree]];
 
@@ -313,7 +316,11 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
         keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b", @" "];
     } else {
-        keys = @[@"a", @"s", @"d", @"f", @"j", @"k", @"l", @"w", @"e", @"i", @"o", @"p", @" "];
+        keys = @[@"a", @"s", @"d", @"f", @"j", @"k", @"l", @";",
+                 @"q", @"w", @"e", @"r", @"u", @"i", @"o", @"p",
+                 @"z", @"x", @"c", @"v", @"m", @",", @".", @"/",
+                 @"g", @"h", @"t", @"y", @"b", @"n"];
+                 //@"w", @"e", @"i", @"o", @"p", @" "];
     }
     for (NSString *key in keys) {
         UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
@@ -331,8 +338,14 @@
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
             toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
         } else {
-            NSDictionary *mapper = @{@"a": @"c%@", @"s": @"d%@", @"d": @"e%@", @"f": @"f%@", @"j": @"g%@", @"k": @"a%@", @"l": @"b%@",
-                                     @"w": @"c%@m", @"e": @"d%@m", @"i": @"f%@m", @"o": @"g%@m", @"p": @"a%@m"};
+            NSDictionary *mapper = @{@"a": @"c%@", @"s": @"d%@", @"d": @"e%@", @"f": @"f%@", @"j": @"g%@", @"k": @"a%@", @"l": @"b%@", @";": @"c5",
+                                     @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3", @"/": @"c4",
+                                     @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5", @"p": @"c6",
+                                 @"g": @"d4m", @"h": @"f4m",
+                                 @"t": @"d5m", @"y": @"f5m",
+                                 @"b": @"d3m", @"n": @"f3m"
+                                     };
+                                     //@"w": @"c%@m", @"e": @"d%@m", @"i": @"f%@m", @"o": @"g%@m", @"p": @"a%@m"};
             toneName = [NSString stringWithFormat:[mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
         }
 
