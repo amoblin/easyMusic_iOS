@@ -10,12 +10,8 @@
 #import "MFCollectionViewCell.h"
 #import "MFTestViewController.h"
 
-#import "IDZTrace.h"
-#import "IDZOggVorbisFileDecoder.h"
-
 @interface MFViewController ()
 
-@property (nonatomic, strong) NSMutableArray *playerCache;
 @property (nonatomic, strong) NSMutableArray *tonesArray;
 @property (nonatomic) NSIndexPath *currentIndexPath;
 @end
@@ -54,65 +50,10 @@
     [self playTone:name];
 }
 
-- (void)playTone:(NSString *)name {
-    IDZTrace();
-
-    NSError *error;
-    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
-    IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
-    NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
-
-    BOOL flag = NO;
-    for (IDZAQAudioPlayer *player in self.playerCache) {
-        if ( ! player.isPlaying) {
-            flag = YES;
-            IDZAQAudioPlayer *newPlayer = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-            [self.playerCache replaceObjectAtIndex:[self.playerCache indexOfObject:player] withObject:newPlayer];
-            newPlayer.delegate = self;
-            [newPlayer prepareToPlay];
-
-            //[self startTimer];
-            [newPlayer play];
-            break;
-        }
-    }
-    if (flag == NO) {
-        IDZAQAudioPlayer *player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-        player.delegate = self;
-        [player prepareToPlay];
-
-        //[self startTimer];
-        [player play];
-        [self.playerCache addObject:player];
-    }
-}
-
-- (NSMutableArray *)playerCache {
-    if (_playerCache == nil) {
-        _playerCache = [[NSMutableArray alloc] initWithCapacity:10];
-    }
-    return _playerCache;
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - IDZAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(id<IDZAudioPlayer>)player successfully:(BOOL)flag
-{
-    NSLog(@"%s successfully=%@", __PRETTY_FUNCTION__, flag ? @"YES"  : @"NO");
-    //[self stopTimer];
-    //[self updateDisplay];
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error
-{
-    NSLog(@"%s error=%@", __PRETTY_FUNCTION__, error);
-    //[self stopTimer];
-    //[self updateDisplay];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -142,50 +83,10 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MFTestViewController *vc = segue.destinationViewController;
-    vc.tonesArray = self.tonesArray;
-}
-
-- (BOOL)canBecomeFirstResponder {
-    return YES;
-}
-
-- (NSArray *)keyCommands {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:26];
-    NSArray *keys;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
-        keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b"];
-    } else {
-        keys = @[@"a", @"s", @"d", @"f", @"j", @"k", @"l", @";",
-                 @"q", @"w", @"e", @"r", @"u", @"i", @"o", @"p",
-                 @"z", @"x", @"c", @"v", @"m", @",", @".", @"/",
-                 @"g", @"h", @"t", @"y", @"b", @"n"
-                 ];
+    if ([segue.identifier isEqualToString:@"quizSegue"]) {
+        MFTestViewController *vc = segue.destinationViewController;
+        vc.tonesArray = self.tonesArray;
     }
-    for (NSString *key in keys) {
-        UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
-        [array addObject:keyCommand];
-    }
-    return array;
 }
 
-- (void)keyPressed:(UIKeyCommand *)keyCommand {
-    NSLog(@"%@", keyCommand.input);
-    NSString *toneName;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
-        toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
-    } else {
-        NSDictionary *mapper = @{@"a": @"c%@", @"s": @"d%@", @"d": @"e%@", @"f": @"f%@", @"j": @"g%@", @"k": @"a%@", @"l": @"b%@", @";": @"c5",
-                                 @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3", @"/": @"c4",
-                                 @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5", @"p": @"c6"
-                                 ,
-                                 @"g": @"d4m", @"h": @"f4m",
-                                 @"t": @"d5m", @"y": @"f5m",
-                                 @"b": @"d3m", @"n": @"f3m"
-                                 };
-        toneName = [NSString stringWithFormat:[mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
-    }
-
-    [self playTone:toneName];
-}
 @end

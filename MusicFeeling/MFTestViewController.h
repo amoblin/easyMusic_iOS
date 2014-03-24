@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IDZAQAudioPlayer.h"
-#import "IDZTrace.h"
+#import "MFBaseViewController.h"
 
-@interface MFTestViewController : UIViewController <UITextFieldDelegate, IDZAudioPlayerDelegate, UICollisionBehaviorDelegate>
+@interface MFTestViewController : MFBaseViewController <UITextFieldDelegate, IDZAudioPlayerDelegate, UICollisionBehaviorDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *baseToneButton;
 @property (weak, nonatomic) IBOutlet UIButton *replayButton;

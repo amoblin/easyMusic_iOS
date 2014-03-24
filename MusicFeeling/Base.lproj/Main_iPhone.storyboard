@@ -5,6 +5,47 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Play View Controller-->
+        <scene sceneID="Mxf-9P-JPr">
+            <objects>
+                <viewController id="4kP-cz-XUr" customClass="MFPlayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4gH-oS-dLn"/>
+                        <viewControllerLayoutGuide type="bottom" id="j1v-0D-LYF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hbk-sw-KWF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-9F-em1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">s s d s j h 
+
+s s d s k j
+
+s s w l j h d
+
+; ; l j k j 
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ebD-9F-em1" firstAttribute="top" secondItem="hbk-sw-KWF" secondAttribute="top" id="2Up-5w-E3W"/>
+                            <constraint firstItem="ebD-9F-em1" firstAttribute="leading" secondItem="hbk-sw-KWF" secondAttribute="leading" id="YUF-Li-AaN"/>
+                            <constraint firstAttribute="trailing" secondItem="ebD-9F-em1" secondAttribute="trailing" id="f7C-eU-7EX"/>
+                            <constraint firstItem="j1v-0D-LYF" firstAttribute="top" secondItem="ebD-9F-em1" secondAttribute="bottom" id="mTA-Ye-zys"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dum-kP-fmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688" y="-601"/>
+        </scene>
         <!--View Controller - 钢琴物语-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -72,9 +113,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="钢琴物语" id="qM5-9E-ZSJ">
+                        <barButtonItem key="leftBarButtonItem" title="Play" id="nMv-bZ-dNg">
+                            <connections>
+                                <segue destination="4kP-cz-XUr" kind="push" id="lhy-c9-KlA"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="测试" style="plain" id="0rw-KU-xKb">
                             <connections>
-                                <segue destination="ncx-hV-yFt" kind="push" id="GBF-FV-4MW"/>
+                                <segue destination="ncx-hV-yFt" kind="push" identifier="quizSegue" id="GBF-FV-4MW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

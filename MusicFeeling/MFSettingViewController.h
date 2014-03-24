@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MFBaseViewController.h"
 
-@interface MFSettingViewController : UIViewController
+@interface MFSettingViewController : MFBaseViewController
 
 @property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleMapperSwitch;
