@@ -17,16 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-9F-em1">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-9F-em1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">s s d s j h 
-
 s s d s k j
-
 s s w l j h d
-
 ; ; l j k j 
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -41,10 +38,57 @@ s s w l j h d
                             <constraint firstItem="j1v-0D-LYF" firstAttribute="top" secondItem="ebD-9F-em1" secondAttribute="bottom" id="mTA-Ye-zys"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4Hg-g2-bYq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dum-kP-fmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="-601"/>
+            <point key="canvasLocation" x="1148" y="-557"/>
+        </scene>
+        <!--Song List View Controller-->
+        <scene sceneID="0cQ-0T-w5V">
+            <objects>
+                <viewController id="4Tg-Dc-xQM" customClass="MFSongListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vwi-sr-wTL"/>
+                        <viewControllerLayoutGuide type="bottom" id="ay1-Ub-Ejf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Om-dw-WOf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w62-62-MrI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellId" id="ddn-kd-arL">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ddn-kd-arL" id="Qvo-jS-Z01">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4kP-cz-XUr" kind="push" id="zNj-ic-e2A"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4Tg-Dc-xQM" id="gBQ-2D-YHt"/>
+                                    <outlet property="delegate" destination="4Tg-Dc-xQM" id="MSa-S5-511"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q1a-0N-2yT"/>
+                    <connections>
+                        <outlet property="tableView" destination="w62-62-MrI" id="tLg-Gz-EpD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mvu-gs-Ydp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="667" y="-557"/>
         </scene>
         <!--View Controller - 钢琴物语-->
         <scene sceneID="ufC-wZ-h7g">
@@ -115,7 +159,7 @@ s s w l j h d
                     <navigationItem key="navigationItem" title="钢琴物语" id="qM5-9E-ZSJ">
                         <barButtonItem key="leftBarButtonItem" title="Play" id="nMv-bZ-dNg">
                             <connections>
-                                <segue destination="4kP-cz-XUr" kind="push" id="lhy-c9-KlA"/>
+                                <segue destination="4Tg-Dc-xQM" kind="push" id="MRv-DG-0Kw"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="测试" style="plain" id="0rw-KU-xKb">
