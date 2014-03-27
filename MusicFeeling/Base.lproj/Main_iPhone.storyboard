@@ -39,6 +39,9 @@ s s w l j h d
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4Hg-g2-bYq"/>
+                    <connections>
+                        <outlet property="textView" destination="ebD-9F-em1" id="H2x-5x-Fse"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dum-kP-fmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -69,7 +72,7 @@ s s w l j h d
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="4kP-cz-XUr" kind="push" id="zNj-ic-e2A"/>
+                                            <segue destination="4kP-cz-XUr" kind="push" identifier="songDetailSegue" id="zNj-ic-e2A"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

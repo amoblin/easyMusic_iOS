@@ -11,4 +11,6 @@
 
 @interface MFPlayViewController : MFBaseViewController
 
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) NSDictionary *songInfo;
 @end

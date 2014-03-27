@@ -7,6 +7,7 @@
 //
 
 #import "MFSongListViewController.h"
+#import "MFPlayViewController.h"
 #import <AFNetworking.h>
 
 @interface MFSongListViewController ()
@@ -70,6 +71,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.textLabel.text = self.songsInfo[@"songs"][indexPath.row][@"name"];
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MFPlayViewController *vc = segue.destinationViewController;
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    vc.songInfo = self.songsInfo[@"songs"][indexPath.row];
 }
 
 @end
