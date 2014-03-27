@@ -29,22 +29,32 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *url = @"http://192.168.0.120:50874/MyNotes.localized/%E6%96%87%E8%89%BA/k2k.json";
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-        self.songsInfo = responseObject;
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-        NSLog(@"%@", operation.responseObject);
-    }];
+    [self getContents];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)getContents {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:100];
+        for (NSDictionary *item in responseObject) {
+            if ([[[item[@"name"] stringByDeletingPathExtension] pathExtension] isEqualToString:@"k2k"]) {
+                [array addObject:item];
+            }
+        }
+        self.songsInfo = [NSArray arrayWithArray:array];
+        [self.tableView reloadData];
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        NSLog(@"%@", operation.responseObject);
+    }];
 }
 
 /*
@@ -63,20 +73,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.songsInfo[@"songs"] count];
+    return [self.songsInfo count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cellId";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    cell.textLabel.text = self.songsInfo[@"songs"][indexPath.row][@"name"];
+    cell.textLabel.text = self.songsInfo[indexPath.row][@"name"];
     return cell;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MFPlayViewController *vc = segue.destinationViewController;
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    vc.songInfo = self.songsInfo[@"songs"][indexPath.row];
+    vc.songInfo = self.songsInfo[indexPath.row];
 }
 
 @end

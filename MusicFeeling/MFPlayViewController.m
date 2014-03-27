@@ -7,6 +7,8 @@
 //
 
 #import "MFPlayViewController.h"
+#import <AFNetworking.h>
+#import <NSData+Base64.h>
 
 @interface MFPlayViewController ()
 
@@ -27,8 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.textView.text = [self stringByReplacingStringsFromDictionary:self.router];
+    //self.textView.text = [self stringByReplacingStringsFromDictionary:self.router];
     //self.songInfo[@"content"];
+    [self getContent];
 }
 
 - (NSString *)stringByReplacingStringsFromDictionary:(NSDictionary *)dict {
@@ -38,6 +41,19 @@
                                    options:0 range:NSMakeRange(0, [string length])];
     }
     return string;
+}
+
+- (void)getContent {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *url = self.songInfo[@"git_url"];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
+        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        self.textView.text = content;
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        NSLog(@"%@", operation.responseObject);
+    }];
 }
 
 - (void)didReceiveMemoryWarning

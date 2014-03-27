@@ -11,5 +11,5 @@
 @interface MFSongListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSDictionary *songsInfo;
+@property (strong, nonatomic) NSArray *songsInfo;
 @end
