@@ -27,7 +27,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.textView.text = self.songInfo[@"content"];
+    self.textView.text = [self stringByReplacingStringsFromDictionary:self.router];
+    //self.songInfo[@"content"];
+}
+
+- (NSString *)stringByReplacingStringsFromDictionary:(NSDictionary *)dict {
+    NSMutableString *string = [NSMutableString stringWithString:self.songInfo[@"content"]];
+    for (NSString *target in dict) {
+        [string replaceOccurrencesOfString:target withString:[dict objectForKey:target]
+                                   options:0 range:NSMakeRange(0, [string length])];
+    }
+    return string;
 }
 
 - (void)didReceiveMemoryWarning

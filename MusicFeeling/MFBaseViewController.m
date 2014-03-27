@@ -28,6 +28,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.mapper = @{@";": @"c5", @"/": @"c4",  @"p": @"c6",
+                    @"a": @"c4", @"s": @"d4", @"d": @"e4", @"f": @"f4", @"j": @"g4", @"k": @"a4", @"l": @"b4",
+                    @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3",
+                    @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5",
+                    @"g": @"d4m", @"h": @"f4m",
+                    @"t": @"d5m", @"y": @"f5m",
+                    @"b": @"d3m", @"n": @"f3m"
+                    };
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +54,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSDictionary *)router {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
+    for (NSString *key in self.mapper.allKeys) {
+        dic[self.mapper[key]] = key;
+    }
+    return [NSDictionary dictionaryWithDictionary:dic];
+}
 
 - (void)playTone:(NSString *)name {
     IDZTrace();
@@ -98,11 +114,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
         keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b"];
     } else {
-        keys = @[@"a", @"s", @"d", @"f", @"j", @"k", @"l", @";",
-                 @"q", @"w", @"e", @"r", @"u", @"i", @"o", @"p",
-                 @"z", @"x", @"c", @"v", @"m", @",", @".", @"/",
-                 @"g", @"h", @"t", @"y", @"b", @"n"
-                 ];
+        keys = [self.mapper allKeys];
     }
     for (NSString *key in keys) {
         UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
@@ -117,15 +129,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
         toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
     } else {
-        NSDictionary *mapper = @{@"a": @"c%@", @"s": @"d%@", @"d": @"e%@", @"f": @"f%@", @"j": @"g%@", @"k": @"a%@", @"l": @"b%@", @";": @"c5",
-                                 @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3", @"/": @"c4",
-                                 @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5", @"p": @"c6"
-                                 ,
-                                 @"g": @"d4m", @"h": @"f4m",
-                                 @"t": @"d5m", @"y": @"f5m",
-                                 @"b": @"d3m", @"n": @"f3m"
-                                 };
-        toneName = [NSString stringWithFormat:[mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
+        toneName = [NSString stringWithFormat:[self.mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
     }
 
     [self playTone:toneName];

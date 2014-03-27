@@ -13,5 +13,7 @@
 
 @interface MFBaseViewController : UIViewController <IDZAudioPlayerDelegate>
 
+@property (strong, nonatomic) NSDictionary *mapper;
+@property (strong, nonatomic) NSDictionary *router;
 - (void)playTone:(NSString *)name;
 @end
