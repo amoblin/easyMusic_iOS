@@ -42,7 +42,6 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:100];
         for (NSDictionary *item in responseObject) {
             if ([[[item[@"name"] stringByDeletingPathExtension] pathExtension] isEqualToString:@"k2k"]) {
@@ -53,7 +52,6 @@
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
-        NSLog(@"%@", operation.responseObject);
     }];
 }
 

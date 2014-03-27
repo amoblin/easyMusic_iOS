@@ -29,16 +29,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.textView.text = [self stringByReplacingStringsFromDictionary:self.router];
-    //self.songInfo[@"content"];
+    //self.textView.text = [self stringByReplacingString:self.songInfo[@"content"]];
     [self getContent];
 }
 
-- (NSString *)stringByReplacingStringsFromDictionary:(NSDictionary *)dict {
-    NSMutableString *string = [NSMutableString stringWithString:self.songInfo[@"content"]];
-    for (NSString *target in dict) {
-        [string replaceOccurrencesOfString:target withString:[dict objectForKey:target]
-                                   options:0 range:NSMakeRange(0, [string length])];
+- (NSString *)stringByReplacingString:(NSString *)str {
+    NSMutableString *string = [NSMutableString stringWithString:str];
+    for (NSString *target in self.router) {
+        NSString *t = [NSString stringWithFormat:@"%@ ", target];
+        [string replaceOccurrencesOfString:t
+                                withString:[NSString stringWithFormat:@"%@ ",[self.router objectForKey:target]]
+                                   options:NSCaseInsensitiveSearch
+                                     range:NSMakeRange(0, [string length])];
+
+        t = [NSString stringWithFormat:@"%@\n", target];
+        [string replaceOccurrencesOfString:t
+                                withString:[NSString stringWithFormat:@"%@\n",[self.router objectForKey:target]]
+                                   options:NSCaseInsensitiveSearch
+                                     range:NSMakeRange(0, [string length])];
     }
     return string;
 }
@@ -49,10 +57,9 @@
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        self.textView.text = content;
+        self.textView.text = [self stringByReplacingString:content];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
-        NSLog(@"%@", operation.responseObject);
     }];
 }
 
