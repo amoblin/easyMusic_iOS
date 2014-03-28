@@ -7,6 +7,7 @@
 //
 
 #import "MFBaseViewController.h"
+#import "MFAppDelegate.h"
 
 @interface MFBaseViewController ()
 
@@ -28,14 +29,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.mapper = @{@";": @"c5", @"/": @"c4",  @"p": @"c6",
-                    @"a": @"c4", @"s": @"d4", @"d": @"e4", @"f": @"f4", @"j": @"g4", @"k": @"a4", @"l": @"b4",
-                    @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3",
-                    @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5",
-                    @"g": @"d4m", @"h": @"f4m",
-                    @"t": @"d5m", @"y": @"f5m",
-                    @"b": @"d3m", @"n": @"f3m"
-                    };
+    self.mapper = [(MFAppDelegate *)[[UIApplication sharedApplication] delegate] mapper];
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,5 +11,6 @@
 @interface MFAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSDictionary *mapper;
 
 @end

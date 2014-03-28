@@ -47,6 +47,12 @@
                                 withString:[NSString stringWithFormat:@"%@\n",[self.router objectForKey:target]]
                                    options:NSCaseInsensitiveSearch
                                      range:NSMakeRange(0, [string length])];
+
+        t = [NSString stringWithFormat:@"%@-", target];
+        [string replaceOccurrencesOfString:t
+                                withString:[NSString stringWithFormat:@"%@-",[self.router objectForKey:target]]
+                                   options:NSCaseInsensitiveSearch
+                                     range:NSMakeRange(0, [string length])];
     }
     return string;
 }
