@@ -15,5 +15,7 @@
 
 @property (strong, nonatomic) NSDictionary *mapper;
 @property (strong, nonatomic) NSDictionary *router;
+@property (strong, nonatomic) NSArray *keyCommandArray;
+
 - (void)playTone:(NSString *)name;
 @end

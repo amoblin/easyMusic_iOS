@@ -29,25 +29,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.mapper = @{@";": @"c5", @"/": @"c4",  @"p": @"c6",
-                    @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5",
-                    @"a": @"c4", @"s": @"d4", @"d": @"e4", @"f": @"f4", @"j": @"g4", @"k": @"a4", @"l": @"b4",
-                    @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3",
-                    @"g": @"d4m", @"h": @"f4m",
-                    @"t": @"d5m", @"y": @"f5m",
-                    @"b": @"d3m", @"n": @"f3m",
-
-                    // b
-                    @"∑": @"c5m", @"´": @"d5m", @"¨": @"f5m", @"ˆ": @"g5m", @"ø": @"a5m",
-                    @"ß": @"c4m", @"∂": @"d4m", @"∆": @"f4m", @"˚": @"g4m", @"¬": @"a4m",
-                    @"≈": @"c3m", @"ç": @"d3m", @"µ": @"f3m", @"≤": @"g3m", @"≥": @"a3m",
-
-                    // #
-                    @"Q": @"c5m", @"W": @"d5m", @"R": @"f5m", @"U": @"g5m", @"I": @"a5m",
-                    @"A": @"c4m", @"S": @"d4m", @"F": @"f4m", @"J": @"g4m", @"K": @"a4m",
-                    @"Z": @"c3m", @"X": @"d3m", @"V": @"f3m", @"M": @"g3m", @"<": @"a3m"
-                    };
-    //self.mapper = [(MFAppDelegate *)[[UIApplication sharedApplication] delegate] mapper];
+    self.mapper = [(MFAppDelegate *)[[UIApplication sharedApplication] delegate] mapper];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,19 +51,32 @@
 
 - (NSDictionary *)router {
     if (_router == nil) {
-        NSString *setStr = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789,.";
-        NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:setStr] invertedSet];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
-        for (NSString *key in self.mapper.allKeys) {
-            if ([key rangeOfCharacterFromSet:set].location != NSNotFound) {
-                //NSLog(@"This string contains illegal characters");
-                continue;
-            }
-            dic[self.mapper[key]] = key;
-        }
-        _router = [NSDictionary dictionaryWithDictionary:dic];
+        NSString *filter = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789,.-=";
+        NSDictionary *dic = [self getFilteredDict:self.mapper withFilter:filter];
+        _router = [self reverseDict:dic];
     }
     return _router;
+}
+
+- (NSDictionary *)getFilteredDict:(NSDictionary *)dict withFilter:(NSString *)filter {
+    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:filter] invertedSet];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:dict];
+    for (NSString *key in dict.allKeys) {
+        if ([key rangeOfCharacterFromSet:set].location != NSNotFound) {
+            //NSLog(@"This string contains illegal characters");
+            [dic removeObjectForKey:key];
+            continue;
+        }
+    }
+    return dic;
+}
+
+- (NSDictionary *)reverseDict:(NSDictionary *)dict {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
+    for (NSString *key in dict.allKeys) {
+        dic[dict[key]] = key;
+    }
+    return dic;
 }
 
 - (void)playTone:(NSString *)name {
@@ -90,6 +85,10 @@
     NSLog(@"%@", name);
     NSError *error;
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
+    if (oggUrl == nil) {
+        NSLog(@"%@ is not exist.", name);
+        return;
+    }
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
     NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
 
@@ -131,22 +130,23 @@
 }
 
 - (NSArray *)keyCommands {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:26];
-    NSArray *keys;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
-        keys = @[@"c", @"d", @"e", @"f", @"g", @"a", @"b"];
-    } else {
-        keys = [self.mapper allKeys];
+    if (_keyCommandArray == nil) {
+        NSString *filter = @"abcdefghijklmnopqrstuvwxyz0123456789-=[]\\;',./";
+        NSDictionary *dic = [self getFilteredDict:self.mapper withFilter:filter];
+
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:50];
+        NSArray *keys = [dic allKeys];
+        for (NSString *key in keys) {
+            UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
+            [array addObject:keyCommand];
+            keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierShift action:@selector(keyPressed:)];
+            [array addObject:keyCommand];
+            keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierAlternate action:@selector(keyPressed:)];
+            [array addObject:keyCommand];
+        }
+        _keyCommandArray = [NSArray arrayWithArray:array];
     }
-    for (NSString *key in keys) {
-        UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
-        [array addObject:keyCommand];
-        keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierShift action:@selector(keyPressed:)];
-        [array addObject:keyCommand];
-        keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierAlternate action:@selector(keyPressed:)];
-        [array addObject:keyCommand];
-    }
-    return array;
+    return _keyCommandArray;
 }
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
