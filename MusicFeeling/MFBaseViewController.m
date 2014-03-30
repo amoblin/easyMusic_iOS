@@ -29,7 +29,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.mapper = [(MFAppDelegate *)[[UIApplication sharedApplication] delegate] mapper];
+    self.mapper = @{@";": @"c5", @"/": @"c4",  @"p": @"c6",
+                    @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5",
+                    @"a": @"c4", @"s": @"d4", @"d": @"e4", @"f": @"f4", @"j": @"g4", @"k": @"a4", @"l": @"b4",
+                    @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3",
+                    @"g": @"d4m", @"h": @"f4m",
+                    @"t": @"d5m", @"y": @"f5m",
+                    @"b": @"d3m", @"n": @"f3m",
+
+                    // b
+                    @"∑": @"c5m", @"´": @"d5m", @"¨": @"f5m", @"ˆ": @"g5m", @"ø": @"a5m",
+                    @"ß": @"c4m", @"∂": @"d4m", @"∆": @"f4m", @"˚": @"g4m", @"¬": @"a4m",
+                    @"≈": @"c3m", @"ç": @"d3m", @"µ": @"f3m", @"≤": @"g3m", @"≥": @"a3m",
+
+                    // #
+                    @"Q": @"c5m", @"W": @"d5m", @"R": @"f5m", @"U": @"g5m", @"I": @"a5m",
+                    @"A": @"c4m", @"S": @"d4m", @"F": @"f4m", @"J": @"g4m", @"K": @"a4m",
+                    @"Z": @"c3m", @"X": @"d3m", @"V": @"f3m", @"M": @"g3m", @"<": @"a3m"
+                    };
+    //self.mapper = [(MFAppDelegate *)[[UIApplication sharedApplication] delegate] mapper];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,8 +68,13 @@
 */
 
 - (NSDictionary *)router {
+    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
     for (NSString *key in self.mapper.allKeys) {
+        if ([key rangeOfCharacterFromSet:set].location != NSNotFound) {
+            NSLog(@"This string contains illegal characters");
+            continue;
+        }
         dic[self.mapper[key]] = key;
     }
     return [NSDictionary dictionaryWithDictionary:dic];
@@ -60,6 +83,7 @@
 - (void)playTone:(NSString *)name {
     IDZTrace();
 
+    NSLog(@"%@", name);
     NSError *error;
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
     IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
@@ -113,20 +137,46 @@
     for (NSString *key in keys) {
         UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
         [array addObject:keyCommand];
+        keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierShift action:@selector(keyPressed:)];
+        [array addObject:keyCommand];
+        keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierAlternate action:@selector(keyPressed:)];
+        [array addObject:keyCommand];
     }
     return array;
 }
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
-    NSLog(@"%@", keyCommand.input);
-    NSString *toneName;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]) {
-        toneName = [NSString stringWithFormat:@"%@%@", keyCommand.input, [NSNumber numberWithInteger:4]];
-    } else {
-        toneName = [NSString stringWithFormat:[self.mapper objectForKey:keyCommand.input], [NSNumber numberWithInteger:4]];
+    NSString *toneName = [self.mapper objectForKey:keyCommand.input];
+    switch (keyCommand.modifierFlags) {
+        case UIKeyModifierAlternate:
+            // b
+            toneName = [self getPreviousHalfTone:toneName];
+            break;
+        case UIKeyModifierShift:
+            // #
+            toneName = [NSString stringWithFormat:@"%@m", toneName];
+            break;
+        default:
+            break;
     }
-
     [self playTone:toneName];
+}
+
+- (NSString *)getPreviousHalfTone:(NSString *)tone {
+    // 99: 0,1,2,3,4, -2, -1
+    // 2 3 4 5 6 0 1
+    // 97 + (num + 7 - 98) % 7
+    // (97+x) + (num + 7 - (97+x+1)) % 7
+    // (97+x) + (num - (91 + x)) % 7
+    //NSLog(@"%@", tone);
+    unichar t = [tone characterAtIndex:0];
+    unichar n = [tone characterAtIndex:1];
+    //NSLog(@"%d", t);
+    unichar pt = 97 + (t - 91) % 7;
+    //NSLog(@"%d", pt);
+    NSString *previousHalfTone = [NSString stringWithFormat:@"%c%cm", pt, n];
+    NSLog(@"%@", previousHalfTone);
+    return previousHalfTone;
 }
 
 #pragma mark - IDZAudioPlayerDelegate
