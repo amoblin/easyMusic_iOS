@@ -85,6 +85,7 @@
     MFPlayViewController *vc = segue.destinationViewController;
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     vc.songInfo = self.songsInfo[indexPath.row];
+    vc.navigationItem.title = [[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
 }
 
 @end

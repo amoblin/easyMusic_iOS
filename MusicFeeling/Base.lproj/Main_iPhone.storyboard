@@ -59,7 +59,7 @@ s s w l j h d
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w62-62-MrI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w62-62-MrI">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,6 +83,12 @@ s s w l j h d
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="w62-62-MrI" firstAttribute="top" secondItem="3Om-dw-WOf" secondAttribute="top" id="ILb-m2-bqF"/>
+                            <constraint firstItem="w62-62-MrI" firstAttribute="leading" secondItem="3Om-dw-WOf" secondAttribute="leading" id="NNB-lb-z66"/>
+                            <constraint firstAttribute="trailing" secondItem="w62-62-MrI" secondAttribute="trailing" id="jjk-qt-bdV"/>
+                            <constraint firstItem="ay1-Ub-Ejf" firstAttribute="top" secondItem="w62-62-MrI" secondAttribute="bottom" id="zvE-tZ-stm"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Q1a-0N-2yT"/>
                     <connections>

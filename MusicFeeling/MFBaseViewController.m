@@ -68,16 +68,20 @@
 */
 
 - (NSDictionary *)router {
-    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
-    for (NSString *key in self.mapper.allKeys) {
-        if ([key rangeOfCharacterFromSet:set].location != NSNotFound) {
-            NSLog(@"This string contains illegal characters");
-            continue;
+    if (_router == nil) {
+        NSString *setStr = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789,.";
+        NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:setStr] invertedSet];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
+        for (NSString *key in self.mapper.allKeys) {
+            if ([key rangeOfCharacterFromSet:set].location != NSNotFound) {
+                //NSLog(@"This string contains illegal characters");
+                continue;
+            }
+            dic[self.mapper[key]] = key;
         }
-        dic[self.mapper[key]] = key;
+        _router = [NSDictionary dictionaryWithDictionary:dic];
     }
-    return [NSDictionary dictionaryWithDictionary:dic];
+    return _router;
 }
 
 - (void)playTone:(NSString *)name {
