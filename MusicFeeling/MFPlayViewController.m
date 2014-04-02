@@ -7,6 +7,7 @@
 //
 
 #import "MFPlayViewController.h"
+#import "MFAppDelegate.h"
 #import <AFNetworking.h>
 #import <NSData+Base64.h>
 
@@ -58,16 +59,26 @@
 }
 
 - (void)getContent {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *url = self.songInfo[@"git_url"];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
-        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        [self save:content];
+    MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSString *path = [delegate.songsDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+    NSError *error;
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    if (content != nil) {
         self.textView.text = [self stringByReplacingString:content];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-    }];
+    }
+
+    if (self.songInfo[@"git_url"] != nil) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *url = self.songInfo[@"git_url"];
+        [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
+            NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [self save:content];
+            self.textView.text = [self stringByReplacingString:content];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error);
+        }];
+    }
 }
 
 - (void)save:(NSString *)content {
