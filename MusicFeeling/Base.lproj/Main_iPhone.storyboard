@@ -45,7 +45,7 @@ s s w l j h d
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dum-kP-fmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1148" y="-557"/>
+            <point key="canvasLocation" x="1828" y="90"/>
         </scene>
         <!--Song List View Controller-->
         <scene sceneID="0cQ-0T-w5V">
@@ -97,7 +97,7 @@ s s w l j h d
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mvu-gs-Ydp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="667" y="-557"/>
+            <point key="canvasLocation" x="1303" y="90"/>
         </scene>
         <!--View Controller - 钢琴物语-->
         <scene sceneID="ufC-wZ-h7g">
@@ -166,14 +166,14 @@ s s w l j h d
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="钢琴物语" id="qM5-9E-ZSJ">
-                        <barButtonItem key="leftBarButtonItem" title="Play" id="nMv-bZ-dNg">
+                        <barButtonItem key="leftBarButtonItem" title="测试" id="nMv-bZ-dNg">
                             <connections>
-                                <segue destination="4Tg-Dc-xQM" kind="push" id="MRv-DG-0Kw"/>
+                                <segue destination="ncx-hV-yFt" kind="push" identifier="quizSegue" id="DSf-c0-IcY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="测试" style="plain" id="0rw-KU-xKb">
+                        <barButtonItem key="rightBarButtonItem" title="Play" style="plain" id="0rw-KU-xKb">
                             <connections>
-                                <segue destination="ncx-hV-yFt" kind="push" identifier="quizSegue" id="GBF-FV-4MW"/>
+                                <segue destination="4Tg-Dc-xQM" kind="push" id="uxV-OP-RXr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -235,7 +235,7 @@ s s w l j h d
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbf-Ze-KxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1139" y="90"/>
+            <point key="canvasLocation" x="1291" y="898"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="28c-Xr-a2o">
@@ -290,6 +290,7 @@ s s w l j h d
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="t41-mk-Oyw"/>
                     <connections>
                         <outlet property="slider" destination="q75-Bt-M61" id="xVG-mo-7qq"/>
                         <outlet property="toggleMapperSwitch" destination="FLX-Qi-kf2" id="iww-lr-L6y"/>
@@ -298,7 +299,7 @@ s s w l j h d
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBq-1E-xj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634" y="90"/>
+            <point key="canvasLocation" x="1814" y="898"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6b5-Uq-N7i">

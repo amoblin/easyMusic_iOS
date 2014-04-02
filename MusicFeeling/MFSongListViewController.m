@@ -8,6 +8,7 @@
 
 #import "MFSongListViewController.h"
 #import "MFPlayViewController.h"
+#import "MFAppDelegate.h"
 #import <AFNetworking.h>
 
 @interface MFSongListViewController ()
@@ -29,6 +30,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:100];
+    NSError *error = nil;
+    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.songsDir error:&error]) {
+        [array addObject:@{@"name": file}];
+    }
+    self.songsInfo = [NSArray arrayWithArray:array];
     [self getContents];
 }
 

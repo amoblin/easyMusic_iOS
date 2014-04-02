@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSDictionary *mapper;
+@property (strong, nonatomic) NSString *songsDir;
 
 @end

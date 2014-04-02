@@ -63,10 +63,21 @@
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        [self save:content];
         self.textView.text = [self stringByReplacingString:content];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (void)save:(NSString *)content {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths[0] stringByAppendingPathComponent:self.songInfo[@"name"]];
+    NSError *error = nil;
+    [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (error != nil) {
+        NSLog(@"%@", error);
+    }
 }
 
 - (void)didReceiveMemoryWarning
