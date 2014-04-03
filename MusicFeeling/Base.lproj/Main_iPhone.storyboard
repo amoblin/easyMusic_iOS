@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-9F-em1">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-9F-em1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -33,7 +33,13 @@
                             <constraint firstItem="j1v-0D-LYF" firstAttribute="top" secondItem="ebD-9F-em1" secondAttribute="bottom" id="mTA-Ye-zys"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4Hg-g2-bYq"/>
+                    <navigationItem key="navigationItem" id="4Hg-g2-bYq">
+                        <barButtonItem key="rightBarButtonItem" title="k2k" id="1Om-Ea-rHE">
+                            <connections>
+                                <action selector="k2kButtonPressed:" destination="4kP-cz-XUr" id="YBQ-V7-Scd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="textView" destination="ebD-9F-em1" id="H2x-5x-Fse"/>
                     </connections>

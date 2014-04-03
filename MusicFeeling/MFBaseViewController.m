@@ -83,6 +83,7 @@
     IDZTrace();
 
     NSLog(@"%@", name);
+    name = [name lowercaseString];
     NSError *error;
     NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
     if (oggUrl == nil) {

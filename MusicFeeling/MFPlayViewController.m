@@ -13,6 +13,8 @@
 
 @interface MFPlayViewController ()
 
+@property (strong, nonatomic) NSString *content;
+@property (nonatomic) BOOL isToneShow;
 @end
 
 @implementation MFPlayViewController
@@ -29,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
     // Do any additional setup after loading the view.
     //self.textView.text = [self stringByReplacingString:self.songInfo[@"content"]];
     [self getContent];
@@ -62,9 +65,10 @@
     MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     NSString *path = [delegate.songsDir stringByAppendingPathComponent:self.songInfo[@"name"]];
     NSError *error;
-    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-    if (content != nil) {
-        self.textView.text = [self stringByReplacingString:content];
+    self.content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    if (self.content != nil) {
+        self.isToneShow = NO;
+        self.textView.text = [self stringByReplacingString:self.content];
     }
 
     if (self.songInfo[@"git_url"] != nil) {
@@ -137,13 +141,41 @@
         default:
             break;
     }
-    self.textView.text = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
+    self.content = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
+    self.textView.text = self.content;
     [self playTone:toneName];
 }
 
 - (void)deleteLastTone {
     NSString *str = self.textView.text;
     NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
-    self.textView.text = [str substringToIndex:range.location];
+    if (range.location != NSNotFound) {
+        self.textView.text = [str substringToIndex:range.location];
+    }
+}
+
+- (void)tapToPlay:(UITapGestureRecognizer *)tap {
+    if ( ! [tap.view isKindOfClass:[UITextView class]]) {
+        return;
+    }
+    UITextView *subtitleView = (UITextView *)tap.view;
+    subtitleView.selectedTextRange = 0;
+
+    UITextPosition *tapPos = [subtitleView closestPositionToPoint:[tap locationInView:subtitleView]];
+    UITextRange * wr = [subtitleView.tokenizer rangeEnclosingPosition:tapPos withGranularity:UITextGranularityWord inDirection:UITextLayoutDirectionRight];
+    NSString *toneName = [subtitleView textInRange:wr];
+    NSLog(@"%@", toneName);
+    if (toneName.length > 0) {
+        [self playTone:toneName];
+    }
+}
+
+- (IBAction)k2kButtonPressed:(UIButton *)sender {
+    self.isToneShow = ! self.isToneShow;
+    if (self.isToneShow) {
+        self.textView.text = self.content;
+    } else {
+        self.textView.text = [self stringByReplacingString:self.content];
+    }
 }
 @end
