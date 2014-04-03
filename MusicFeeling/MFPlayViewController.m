@@ -8,6 +8,7 @@
 
 #import "MFPlayViewController.h"
 #import "MFAppDelegate.h"
+#import "SLNavigationItem.h"
 #import <AFNetworking.h>
 #import <NSData+Base64.h>
 
@@ -35,6 +36,18 @@
     // Do any additional setup after loading the view.
     //self.textView.text = [self stringByReplacingString:self.songInfo[@"content"]];
     [self getContent];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    if (self.isNew) {
+        SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
+        NSString *fileName = item.textField.text;
+        if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+            // back button was pressed.  We know this is true because self is no longer
+            // in the navigation stack.
+            [self saveContent:self.textView.text atPath:fileName];
+        }
+    }
 }
 
 - (NSString *)stringByReplacingString:(NSString *)str {
@@ -77,7 +90,7 @@
         [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [self save:content];
+            [self saveContent:content atPath:self.songInfo[@"name"]];
             self.textView.text = [self stringByReplacingString:content];
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@", error);
@@ -85,9 +98,9 @@
     }
 }
 
-- (void)save:(NSString *)content {
+- (void)saveContent:(NSString *)content atPath:(NSString *)path {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths[0] stringByAppendingPathComponent:self.songInfo[@"name"]];
+    path = [paths[0] stringByAppendingPathComponent:path];
     NSError *error = nil;
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (error != nil) {
@@ -113,19 +126,23 @@
 */
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
-    if ( ! self.isNew) {
-        return;
-    }
-    NSLog(@"keyCommand input is: %@", keyCommand.input);
-    if ([keyCommand.input isEqualToString:@"\r"]) {
-        self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
-        return;
-    } else if ([keyCommand.input isEqualToString:@"\b"]) {
-        [self deleteLastTone];
-        return;
+    if ( self.isNew) {
+        NSLog(@"keyCommand input is: %@", keyCommand.input);
+        if ([keyCommand.input isEqualToString:@"\r"]) {
+            self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
+            return;
+        } else if ([keyCommand.input isEqualToString:@"\b"]) {
+            [self deleteLastTone];
+            return;
+        }
     }
 
     NSString *toneName = [self.mapper objectForKey:keyCommand.input];
+
+    if (self.isNew) {
+        self.content = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
+        self.textView.text = self.content;
+    }
     if (toneName == nil) {
         return;
     }
@@ -141,8 +158,6 @@
         default:
             break;
     }
-    self.content = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
-    self.textView.text = self.content;
     [self playTone:toneName];
 }
 

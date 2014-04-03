@@ -33,7 +33,7 @@
                             <constraint firstItem="j1v-0D-LYF" firstAttribute="top" secondItem="ebD-9F-em1" secondAttribute="bottom" id="mTA-Ye-zys"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4Hg-g2-bYq">
+                    <navigationItem key="navigationItem" id="4Hg-g2-bYq" customClass="SLNavigationItem">
                         <barButtonItem key="rightBarButtonItem" title="k2k" id="1Om-Ea-rHE">
                             <connections>
                                 <action selector="k2kButtonPressed:" destination="4kP-cz-XUr" id="YBQ-V7-Scd"/>
