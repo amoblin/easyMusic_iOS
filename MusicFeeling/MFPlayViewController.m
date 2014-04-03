@@ -32,9 +32,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    for (UIGestureRecognizer *recognizer in self.textView.gestureRecognizers) {
+        //[self.textView removeGestureRecognizer:recognizer];
+        if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]){
+            recognizer.enabled = NO;
+        } else if ([recognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+            [(UITapGestureRecognizer *)recognizer setNumberOfTapsRequired:1];
+        }
+    }
     [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
-    // Do any additional setup after loading the view.
-    //self.textView.text = [self stringByReplacingString:self.songInfo[@"content"]];
     [self getContent];
 }
 
