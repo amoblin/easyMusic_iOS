@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MFBaseViewController.h"
+#import "SLEditableTitleViewController.h"
 
-@interface MFPlayViewController : MFBaseViewController
-
+@interface MFPlayViewController : SLEditableTitleViewController
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) NSDictionary *songInfo;
+@property (nonatomic) BOOL isNew;
 @end

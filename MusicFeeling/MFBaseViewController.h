@@ -17,5 +17,8 @@
 @property (strong, nonatomic) NSDictionary *router;
 @property (strong, nonatomic) NSArray *keyCommandArray;
 
+- (void)keyPressed:(UIKeyCommand *)keyCommand;
+
 - (void)playTone:(NSString *)name;
+- (NSString *)getPreviousHalfTone:(NSString *)tone;
 @end

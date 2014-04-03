@@ -91,9 +91,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MFPlayViewController *vc = segue.destinationViewController;
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    vc.songInfo = self.songsInfo[indexPath.row];
-    vc.navigationItem.title = [[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
+    if ([segue.identifier isEqualToString:@"songDetailSegue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        vc.songInfo = self.songsInfo[indexPath.row];
+        vc.navigationItem.title = [[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
+    } else {
+        vc.isNew = YES;
+    }
 }
 
 @end

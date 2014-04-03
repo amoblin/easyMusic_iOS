@@ -144,6 +144,12 @@
             keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:UIKeyModifierAlternate action:@selector(keyPressed:)];
             [array addObject:keyCommand];
         }
+
+        // return key, delete key
+        for (NSString *key in @[@"\r", @"\b"]) {
+            UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
+            [array addObject:keyCommand];
+        }
         _keyCommandArray = [NSArray arrayWithArray:array];
     }
     return _keyCommandArray;
@@ -151,6 +157,9 @@
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
     NSString *toneName = [self.mapper objectForKey:keyCommand.input];
+    if (toneName == nil) {
+        return;
+    }
     switch (keyCommand.modifierFlags) {
         case UIKeyModifierAlternate:
             // b

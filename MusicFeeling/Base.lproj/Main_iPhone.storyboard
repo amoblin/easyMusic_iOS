@@ -85,7 +85,13 @@
                             <constraint firstItem="ay1-Ub-Ejf" firstAttribute="top" secondItem="w62-62-MrI" secondAttribute="bottom" id="zvE-tZ-stm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Q1a-0N-2yT"/>
+                    <navigationItem key="navigationItem" id="Q1a-0N-2yT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ISe-gN-m5m">
+                            <connections>
+                                <segue destination="4kP-cz-XUr" kind="push" id="h5Z-Tb-8m9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="w62-62-MrI" id="tLg-Gz-EpD"/>
                     </connections>
@@ -323,4 +329,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="zNj-ic-e2A"/>
+    </inferredMetricsTieBreakers>
 </document>

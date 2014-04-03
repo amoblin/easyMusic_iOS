@@ -108,4 +108,42 @@
 }
 */
 
+- (void)keyPressed:(UIKeyCommand *)keyCommand {
+    if ( ! self.isNew) {
+        return;
+    }
+    NSLog(@"keyCommand input is: %@", keyCommand.input);
+    if ([keyCommand.input isEqualToString:@"\r"]) {
+        self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
+        return;
+    } else if ([keyCommand.input isEqualToString:@"\b"]) {
+        [self deleteLastTone];
+        return;
+    }
+
+    NSString *toneName = [self.mapper objectForKey:keyCommand.input];
+    if (toneName == nil) {
+        return;
+    }
+    switch (keyCommand.modifierFlags) {
+        case UIKeyModifierAlternate:
+            // b
+            toneName = [self getPreviousHalfTone:toneName];
+            break;
+        case UIKeyModifierShift:
+            // #
+            toneName = [NSString stringWithFormat:@"%@m", toneName];
+            break;
+        default:
+            break;
+    }
+    self.textView.text = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
+    [self playTone:toneName];
+}
+
+- (void)deleteLastTone {
+    NSString *str = self.textView.text;
+    NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
+    self.textView.text = [str substringToIndex:range.location];
+}
 @end

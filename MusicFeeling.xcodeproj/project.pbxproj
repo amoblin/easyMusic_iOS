@@ -10,6 +10,8 @@
 		ADA1062402CB48B79EE619A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C19C32FB76D74988964FFD1F /* libPods.a */; };
 		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
 		DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D918D405770021BD55 /* MFTestViewController.m */; };
+		DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */; };
+		DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA41D40118ECD4E900ED4BD7 /* SLNavigationItem.m */; };
 		DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA45477618E2476E0018874F /* MFSongListViewController.m */; };
 		DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA118D3E623009A825E /* Foundation.framework */; };
 		DA527CA418D3E623009A825E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA318D3E623009A825E /* CoreGraphics.framework */; };
@@ -138,6 +140,10 @@
 		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
 		DA35C8D818D405770021BD55 /* MFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTestViewController.h; sourceTree = "<group>"; };
 		DA35C8D918D405770021BD55 /* MFTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTestViewController.m; sourceTree = "<group>"; };
+		DA41D3FD18ECD43800ED4BD7 /* SLEditableTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLEditableTitleViewController.h; sourceTree = "<group>"; };
+		DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLEditableTitleViewController.m; sourceTree = "<group>"; };
+		DA41D40018ECD4E900ED4BD7 /* SLNavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLNavigationItem.h; sourceTree = "<group>"; };
+		DA41D40118ECD4E900ED4BD7 /* SLNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLNavigationItem.m; sourceTree = "<group>"; };
 		DA45477518E2476E0018874F /* MFSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSongListViewController.h; sourceTree = "<group>"; };
 		DA45477618E2476E0018874F /* MFSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSongListViewController.m; sourceTree = "<group>"; };
 		DA527C9E18D3E623009A825E /* MusicFeeling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicFeeling.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +348,10 @@
 				DA45477618E2476E0018874F /* MFSongListViewController.m */,
 				DADCEE9018E003FE0044455D /* MFPlayViewController.h */,
 				DADCEE9118E003FE0044455D /* MFPlayViewController.m */,
+				DA41D40018ECD4E900ED4BD7 /* SLNavigationItem.h */,
+				DA41D40118ECD4E900ED4BD7 /* SLNavigationItem.m */,
+				DA41D3FD18ECD43800ED4BD7 /* SLEditableTitleViewController.h */,
+				DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */,
 				DA527CBC18D3E623009A825E /* Images.xcassets */,
 				DA527CA818D3E623009A825E /* Supporting Files */,
 			);
@@ -738,9 +748,11 @@
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
 				DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */,
+				DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */,
 				DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */,
 				DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */,
 				DA527CBB18D3E623009A825E /* MFViewController.m in Sources */,
+				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
