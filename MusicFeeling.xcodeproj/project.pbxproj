@@ -898,7 +898,7 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1A1324A8-F3E5-491F-AEAF-405D4914516F";
+				PROVISIONING_PROFILE = "DF2E64B3-D944-45DF-B38B-628ED2E4E101";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

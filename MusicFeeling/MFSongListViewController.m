@@ -31,9 +31,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:100];
     NSError *error = nil;
-    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.songsDir error:&error]) {
+    self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
+    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
+        [self.composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
+    }
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
+    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
         [array addObject:@{@"name": file}];
     }
     self.songsInfo = [NSArray arrayWithArray:array];
@@ -50,7 +54,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:100];
+        NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
         for (NSDictionary *item in responseObject) {
             if ([[[item[@"name"] stringByDeletingPathExtension] pathExtension] isEqualToString:@"k2k"]) {
                 [array addObject:item];

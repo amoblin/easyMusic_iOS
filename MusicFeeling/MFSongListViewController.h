@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MFBaseViewController.h"
 
-@interface MFSongListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface MFSongListViewController : MFBaseViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *songsInfo;
+@property (strong, nonatomic) NSMutableArray *composedSongs;
 @end

@@ -47,7 +47,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.isNew) {
         SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-        NSString *fileName = item.textField.text;
+        NSString *fileName = [NSString stringWithFormat:@"composed/%@", item.textField.text];
         if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
             // back button was pressed.  We know this is true because self is no longer
             // in the navigation stack.
@@ -82,7 +82,12 @@
 
 - (void)getContent {
     MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSString *path = [delegate.songsDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+    NSString *path;
+    if ([self.songInfo[@"isComposed"] boolValue]) {
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+    } else {
+        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+    }
     NSError *error;
     self.content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (self.content != nil) {
@@ -132,8 +137,22 @@
 */
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
+    if ([keyCommand.input isEqualToString:UIKeyInputEscape]) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    NSLog(@"keyCommand input is: %@", keyCommand.input);
+    if ([keyCommand.input isEqualToString:@" "]) {
+        CGRect frame = self.textView.frame;
+        frame.origin.x = 0;
+        if (keyCommand.modifierFlags == UIKeyModifierShift) {
+            frame.origin.y -= frame.size.height;
+        } else {
+            frame.origin.y += frame.size.height;
+        }
+        [self.textView scrollRectToVisible:frame animated:YES];
+    }
     if ( self.isNew) {
-        NSLog(@"keyCommand input is: %@", keyCommand.input);
         if ([keyCommand.input isEqualToString:@"\r"]) {
             self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
             return;

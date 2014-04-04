@@ -13,7 +13,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    self.songsDir = paths[0];
+    self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
+    self.composedDir = [paths[0] stringByAppendingPathComponent:@"composed"];
+    if ( ! [[NSFileManager defaultManager] fileExistsAtPath:self.localDir]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:self.localDir withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    if ( ! [[NSFileManager defaultManager] fileExistsAtPath:self.composedDir]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:self.composedDir withIntermediateDirectories:NO attributes:nil error:nil];
+    }
     // Override point for customization after application launch.
     self.mapper = @{@"1": @"c6", @"2": @"d6", @"3": @"e6", @"4": @"f6", @"7": @"g6", @"8": @"a6", @"9": @"b6",
                     @"0": @"c7", @"-": @"d7", @"=": @"e7",

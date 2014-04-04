@@ -147,16 +147,21 @@
         }
 
         // return key, delete key
-        for (NSString *key in @[@"\r", @"\b"]) {
+        for (NSString *key in @[@"\r", @"\b", @" ", UIKeyInputEscape]) {
             UIKeyCommand *keyCommand = [UIKeyCommand keyCommandWithInput:key modifierFlags:kNilOptions action:@selector(keyPressed:)];
             [array addObject:keyCommand];
         }
+        [array addObject:[UIKeyCommand keyCommandWithInput:@" " modifierFlags:UIKeyModifierShift action:@selector(keyPressed:)]];
         _keyCommandArray = [NSArray arrayWithArray:array];
     }
     return _keyCommandArray;
 }
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
+    if ([keyCommand.input isEqualToString:UIKeyInputEscape]) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     NSString *toneName = [self.mapper objectForKey:keyCommand.input];
     if (toneName == nil) {
         return;
