@@ -8,6 +8,10 @@
 
 #import "MFAppDelegate.h"
 
+@interface MFAppDelegate()
+@property (nonatomic, strong) NSMutableArray *playerCache;
+@end
+
 @implementation MFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -22,32 +26,6 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:self.composedDir withIntermediateDirectories:NO attributes:nil error:nil];
     }
     // Override point for customization after application launch.
-    self.mapper = @{@"1": @"c6", @"2": @"d6", @"3": @"e6", @"4": @"f6", @"7": @"g6", @"8": @"a6", @"9": @"b6",
-                    @"0": @"c7", @"-": @"d7", @"=": @"e7",
-
-                    @"q": @"c5", @"w": @"d5", @"e": @"e5", @"r": @"f5", @"u": @"g5", @"i": @"a5", @"o": @"b5",
-                    @"p": @"c6", @"[": @"d6", @"]": @"e6", @"\\": @"f6",
-
-                    @"a": @"c4", @"s": @"d4", @"d": @"e4", @"f": @"f4", @"j": @"g4", @"k": @"a4", @"l": @"b4",
-                    @";": @"c5", @"'": @"d5",
-
-                    @"z": @"c3", @"x": @"d3", @"c": @"e3", @"v": @"f3", @"m": @"g3", @",": @"a3", @".": @"b3",
-                    @"/": @"c4",
-
-                    @"g": @"d4m", @"h": @"f4m",
-                    @"t": @"d5m", @"y": @"f5m",
-                    @"b": @"d3m", @"n": @"f3m",
-
-                    // b
-                    @"∑": @"c5m", @"´": @"d5m", @"¨": @"f5m", @"ˆ": @"g5m", @"ø": @"a5m",
-                    @"ß": @"c4m", @"∂": @"d4m", @"∆": @"f4m", @"˚": @"g4m", @"¬": @"a4m",
-                    @"≈": @"c3m", @"ç": @"d3m", @"µ": @"f3m", @"≤": @"g3m", @"≥": @"a3m",
-
-                    // #
-                    @"Q": @"c5m", @"W": @"d5m", @"R": @"f5m", @"U": @"g5m", @"I": @"a5m",
-                    @"A": @"c4m", @"S": @"d4m", @"F": @"f4m", @"J": @"g4m", @"K": @"a4m",
-                    @"Z": @"c3m", @"X": @"d3m", @"V": @"f3m", @"M": @"g3m", @"<": @"a3m"
-                    };
     return YES;
 }
 							
@@ -78,4 +56,65 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+// for MFBaseViewControll using
+- (void)playTone:(NSString *)name {
+    IDZTrace();
+
+    NSLog(@"%@", name);
+    name = [name lowercaseString];
+    NSError *error;
+    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
+    if (oggUrl == nil) {
+        NSLog(@"%@ is not exist.", name);
+        return;
+    }
+    IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
+    NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
+
+    BOOL flag = NO;
+    for (IDZAQAudioPlayer *player in self.playerCache) {
+        if ( ! player.isPlaying) {
+            flag = YES;
+            IDZAQAudioPlayer *newPlayer = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
+            [self.playerCache replaceObjectAtIndex:[self.playerCache indexOfObject:player] withObject:newPlayer];
+            newPlayer.delegate = self;
+            [newPlayer prepareToPlay];
+
+            //[self startTimer];
+            [newPlayer play];
+            break;
+        }
+    }
+    if (flag == NO) {
+        IDZAQAudioPlayer *player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
+        player.delegate = self;
+        [player prepareToPlay];
+
+        //[self startTimer];
+        [player play];
+        [self.playerCache addObject:player];
+    }
+}
+
+- (NSMutableArray *)playerCache {
+    if (_playerCache == nil) {
+        _playerCache = [[NSMutableArray alloc] initWithCapacity:10];
+    }
+    return _playerCache;
+}
+
+#pragma mark - IDZAudioPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(id<IDZAudioPlayer>)player successfully:(BOOL)flag
+{
+    NSLog(@"%s successfully=%@", __PRETTY_FUNCTION__, flag ? @"YES"  : @"NO");
+    //[self stopTimer];
+    //[self updateDisplay];
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error
+{
+    NSLog(@"%s error=%@", __PRETTY_FUNCTION__, error);
+    //[self stopTimer];
+    //[self updateDisplay];
+}
 @end

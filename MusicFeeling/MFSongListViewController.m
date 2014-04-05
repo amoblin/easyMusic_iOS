@@ -9,7 +9,9 @@
 #import "MFSongListViewController.h"
 #import "MFPlayViewController.h"
 #import "MFAppDelegate.h"
+
 #import <AFNetworking.h>
+#import <SVProgressHUD.h>
 
 @interface MFSongListViewController ()
 
@@ -41,6 +43,7 @@
         [array addObject:@{@"name": file}];
     }
     self.songsInfo = [NSArray arrayWithArray:array];
+    [self.tableView reloadData];
     [self getContents];
 }
 
@@ -51,10 +54,12 @@
 }
 
 - (void)getContents {
+    [SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
+        [SVProgressHUD dismiss];
         for (NSDictionary *item in responseObject) {
             if ([[[item[@"name"] stringByDeletingPathExtension] pathExtension] isEqualToString:@"k2k"]) {
                 [array addObject:item];
@@ -63,6 +68,7 @@
         self.songsInfo = [NSArray arrayWithArray:array];
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
         NSLog(@"%@", error);
     }];
 }

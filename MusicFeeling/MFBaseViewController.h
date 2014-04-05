@@ -11,7 +11,7 @@
 #import "IDZOggVorbisFileDecoder.h"
 #import "IDZAQAudioPlayer.h"
 
-@interface MFBaseViewController : UIViewController <IDZAudioPlayerDelegate>
+@interface MFBaseViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *mapper;
 @property (strong, nonatomic) NSDictionary *router;

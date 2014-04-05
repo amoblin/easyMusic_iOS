@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IDZTrace.h"
+#import "IDZOggVorbisFileDecoder.h"
+#import "IDZAQAudioPlayer.h"
 
-@interface MFAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MFAppDelegate : UIResponder <UIApplicationDelegate, IDZAudioPlayerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) NSDictionary *mapper;
+
 @property (strong, nonatomic) NSString *localDir;
 @property (strong, nonatomic) NSString *composedDir;
 
+- (void)playTone:(NSString *)name;
 @end

@@ -9,6 +9,8 @@
 #import "MFPlayViewController.h"
 #import "MFAppDelegate.h"
 #import "SLNavigationItem.h"
+
+#import <SVProgressHUD.h>
 #import <AFNetworking.h>
 #import <NSData+Base64.h>
 
@@ -45,14 +47,20 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSString *path;
     if (self.isNew) {
         SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-        NSString *fileName = [NSString stringWithFormat:@"composed/%@", item.textField.text];
-        if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
-            // back button was pressed.  We know this is true because self is no longer
-            // in the navigation stack.
-            [self saveContent:self.textView.text atPath:fileName];
-        }
+        path = [delegate.composedDir stringByAppendingPathComponent:item.textField.text];
+    } else if ([self.songInfo[@"isComposed"] boolValue]) {
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+    } else {
+        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+    }
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self saveContent:self.textView.text atPath:path];
     }
 }
 
@@ -96,22 +104,29 @@
     }
 
     if (self.songInfo[@"git_url"] != nil) {
+        [SVProgressHUD show];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *url = self.songInfo[@"git_url"];
         [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [SVProgressHUD dismiss];
             NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [self saveContent:content atPath:self.songInfo[@"name"]];
+            MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            NSString *path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+            [self saveContent:content atPath:path];
             self.textView.text = [self stringByReplacingString:content];
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD dismiss];
             NSLog(@"%@", error);
         }];
     }
 }
 
 - (void)saveContent:(NSString *)content atPath:(NSString *)path {
+    /*
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths[0] stringByAppendingPathComponent:path];
+     */
     NSError *error = nil;
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (error != nil) {
@@ -146,9 +161,12 @@
         CGRect frame = self.textView.frame;
         frame.origin.x = 0;
         if (keyCommand.modifierFlags == UIKeyModifierShift) {
-            frame.origin.y -= frame.size.height;
+            frame.origin.y -= frame.size.height * 0.9;
+            if (frame.origin.y < 0) {
+                frame.origin.y = 0;
+            }
         } else {
-            frame.origin.y += frame.size.height;
+            frame.origin.y += frame.size.height * 0.9;
         }
         [self.textView scrollRectToVisible:frame animated:YES];
     }
