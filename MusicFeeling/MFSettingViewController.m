@@ -143,4 +143,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:tones forKey:@"exerciseTones"];
 }
 
+- (IBAction)segmentedValueChanged:(UISegmentedControl *)sender {
+    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"toneType"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

@@ -256,25 +256,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-hB-rqB">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-hB-rqB">
                                 <rect key="frame" x="251" y="91" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="随机度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tde-lg-eMb">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随机度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tde-lg-eMb">
                                 <rect key="frame" x="20" y="96" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q75-Bt-M61">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q75-Bt-M61">
                                 <rect key="frame" x="69" y="149" width="238" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="234" id="vUl-Wg-DFZ"/>
+                                </constraints>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="WGh-tj-1aE" eventType="valueChanged" id="nbR-60-K13"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-JQ-4vc">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-JQ-4vc">
                                 <rect key="frame" x="16" y="153" width="34" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -287,15 +290,40 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FLX-Qi-kf2">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FLX-Qi-kf2">
                                 <rect key="frame" x="251" y="209" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="toggleMapper:" destination="WGh-tj-1aE" eventType="valueChanged" id="Sxs-Oa-jkq"/>
                                 </connections>
                             </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WTP-ch-fE2">
+                                <rect key="frame" x="120" y="270" width="81" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="钢琴"/>
+                                    <segment title="吉他"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedValueChanged:" destination="WGh-tj-1aE" eventType="valueChanged" id="PNX-uw-hqK"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FLX-Qi-kf2" firstAttribute="top" secondItem="q75-Bt-M61" secondAttribute="bottom" constant="30" id="75W-wB-5O1"/>
+                            <constraint firstAttribute="trailing" secondItem="q75-Bt-M61" secondAttribute="trailing" constant="15" id="GCW-om-Z7c"/>
+                            <constraint firstItem="WTP-ch-fE2" firstAttribute="top" secondItem="q75-Bt-M61" secondAttribute="bottom" constant="91" id="Hl2-xI-QQR"/>
+                            <constraint firstAttribute="centerX" secondItem="WTP-ch-fE2" secondAttribute="centerX" id="Mba-ld-sSb"/>
+                            <constraint firstItem="bk7-hB-rqB" firstAttribute="leading" secondItem="FLX-Qi-kf2" secondAttribute="leading" id="Mpq-3J-fKs"/>
+                            <constraint firstItem="tde-lg-eMb" firstAttribute="leading" secondItem="ndY-7W-nyN" secondAttribute="leading" constant="20" symbolic="YES" id="Qu8-sa-E4z"/>
+                            <constraint firstItem="q75-Bt-M61" firstAttribute="top" secondItem="bk7-hB-rqB" secondAttribute="bottom" constant="27" id="UAO-Pr-FYH"/>
+                            <constraint firstItem="bk7-hB-rqB" firstAttribute="centerY" secondItem="tde-lg-eMb" secondAttribute="centerY" id="aOR-S3-naS"/>
+                            <constraint firstAttribute="trailing" secondItem="bk7-hB-rqB" secondAttribute="trailing" constant="20" symbolic="YES" id="auU-or-xne"/>
+                            <constraint firstItem="7u7-JQ-4vc" firstAttribute="top" secondItem="tde-lg-eMb" secondAttribute="bottom" constant="36" id="kZO-5W-EQ0"/>
+                            <constraint firstItem="q75-Bt-M61" firstAttribute="leading" secondItem="7u7-JQ-4vc" secondAttribute="trailing" constant="21" id="qOy-3W-CV3"/>
+                            <constraint firstItem="WTP-ch-fE2" firstAttribute="centerY" secondItem="ndY-7W-nyN" secondAttribute="centerY" id="sfg-r7-tuw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="t41-mk-Oyw"/>
                     <connections>

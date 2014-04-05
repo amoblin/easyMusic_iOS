@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 
 - (IBAction)sliderValueChanged:(id)sender;
+- (IBAction)segmentedValueChanged:(id)sender;
 @end

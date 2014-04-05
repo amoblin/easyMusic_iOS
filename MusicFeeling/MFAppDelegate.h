@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IDZTrace.h"
-#import "IDZOggVorbisFileDecoder.h"
-#import "IDZAQAudioPlayer.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface MFAppDelegate : UIResponder <UIApplicationDelegate, IDZAudioPlayerDelegate>
+@interface MFAppDelegate : UIResponder <UIApplicationDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

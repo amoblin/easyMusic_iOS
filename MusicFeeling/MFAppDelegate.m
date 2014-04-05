@@ -8,6 +8,9 @@
 
 #import "MFAppDelegate.h"
 
+#import <SVProgressHUD.h>
+#import <AVFoundation/AVFoundation.h>
+
 @interface MFAppDelegate()
 @property (nonatomic, strong) NSMutableArray *playerCache;
 @end
@@ -58,40 +61,46 @@
 
 // for MFBaseViewControll using
 - (void)playTone:(NSString *)name {
-    IDZTrace();
-
     NSLog(@"%@", name);
-    name = [name lowercaseString];
-    NSError *error;
-    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
-    if (oggUrl == nil) {
+    NSURL *resourceURL;
+    switch ([[NSUserDefaults standardUserDefaults] integerForKey:@"toneType"]) {
+        case 0:
+            name = [name lowercaseString];
+            resourceURL = [[NSBundle mainBundle] URLForResource:name withExtension:@".mp3"];
+            break;
+        case 1:
+            name = [name uppercaseString];
+            resourceURL = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"ramirez%@", name] withExtension:@".mp3"];
+            break;
+        default:
+            name = [name lowercaseString];
+            resourceURL = [[NSBundle mainBundle] URLForResource:name withExtension:@".ogg"];
+            break;
+    }
+    if (resourceURL == nil) {
         NSLog(@"%@ is not exist.", name);
+        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@ is not exist.", name]];
         return;
     }
-    IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
-    NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
 
     BOOL flag = NO;
-    for (IDZAQAudioPlayer *player in self.playerCache) {
+    for (AVAudioPlayer *player in self.playerCache) {
         if ( ! player.isPlaying) {
             flag = YES;
-            IDZAQAudioPlayer *newPlayer = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-            [self.playerCache replaceObjectAtIndex:[self.playerCache indexOfObject:player] withObject:newPlayer];
-            newPlayer.delegate = self;
-            [newPlayer prepareToPlay];
-
-            //[self startTimer];
+            AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:resourceURL error:nil];
             [newPlayer play];
+            [newPlayer setDelegate:self];
+            [newPlayer prepareToPlay];
+            [self.playerCache replaceObjectAtIndex:[self.playerCache indexOfObject:player] withObject:newPlayer];
             break;
         }
     }
-    if (flag == NO) {
-        IDZAQAudioPlayer *player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-        player.delegate = self;
-        [player prepareToPlay];
 
-        //[self startTimer];
+    if (flag == NO) {
+        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:resourceURL error:nil];
         [player play];
+        [player setDelegate:self];
+        [player prepareToPlay];
         [self.playerCache addObject:player];
     }
 }
@@ -103,18 +112,4 @@
     return _playerCache;
 }
 
-#pragma mark - IDZAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(id<IDZAudioPlayer>)player successfully:(BOOL)flag
-{
-    NSLog(@"%s successfully=%@", __PRETTY_FUNCTION__, flag ? @"YES"  : @"NO");
-    //[self stopTimer];
-    //[self updateDisplay];
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error
-{
-    NSLog(@"%s error=%@", __PRETTY_FUNCTION__, error);
-    //[self stopTimer];
-    //[self updateDisplay];
-}
 @end
