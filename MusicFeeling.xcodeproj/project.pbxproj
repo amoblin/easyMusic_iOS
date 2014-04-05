@@ -494,8 +494,6 @@
 		DA527CC618D3E623009A825E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA518D3E623009A825E /* UIKit.framework */; };
 		DA527CCE18D3E623009A825E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA527CCC18D3E623009A825E /* InfoPlist.strings */; };
 		DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CCF18D3E623009A825E /* MusicFeelingTests.m */; };
-		DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */; };
-		DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */; };
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
@@ -1011,13 +1009,6 @@
 		DA527CCB18D3E623009A825E /* MusicFeelingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicFeelingTests-Info.plist"; sourceTree = "<group>"; };
 		DA527CCD18D3E623009A825E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA527CCF18D3E623009A825E /* MusicFeelingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicFeelingTests.m; sourceTree = "<group>"; };
-		DA527D9018D3EF0D009A825E /* IDZAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZAudioDecoder.h; sourceTree = "<group>"; };
-		DA527D9118D3EF0D009A825E /* IDZOggVorbisFileDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZOggVorbisFileDecoder.h; sourceTree = "<group>"; };
-		DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDZOggVorbisFileDecoder.mm; sourceTree = "<group>"; };
-		DA527D9418D3EF5E009A825E /* IDZAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDZAudioPlayer.h; sourceTree = "<group>"; };
-		DA527D9518D3EFEF009A825E /* IDZTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDZTrace.h; sourceTree = "<group>"; };
-		DA527D9618D3F013009A825E /* IDZAQAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDZAQAudioPlayer.h; sourceTree = "<group>"; };
-		DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDZAQAudioPlayer.m; sourceTree = "<group>"; };
 		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
 		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
@@ -1536,7 +1527,6 @@
 		DA527C9518D3E623009A825E = {
 			isa = PBXGroup;
 			children = (
-				DA527D8F18D3EF0D009A825E /* vendor */,
 				DA527CD918D3E6E0009A825E /* resources */,
 				DA527CA718D3E623009A825E /* MusicFeeling */,
 				DA527CC918D3E623009A825E /* MusicFeelingTests */,
@@ -1635,20 +1625,6 @@
 				DA2EEE6618EFB30D00DC1617 /* Guitar */,
 			);
 			path = resources;
-			sourceTree = "<group>";
-		};
-		DA527D8F18D3EF0D009A825E /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				DA527D9518D3EFEF009A825E /* IDZTrace.h */,
-				DA527D9418D3EF5E009A825E /* IDZAudioPlayer.h */,
-				DA527D9618D3F013009A825E /* IDZAQAudioPlayer.h */,
-				DA527D9718D3F013009A825E /* IDZAQAudioPlayer.m */,
-				DA527D9018D3EF0D009A825E /* IDZAudioDecoder.h */,
-				DA527D9118D3EF0D009A825E /* IDZOggVorbisFileDecoder.h */,
-				DA527D9218D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm */,
-			);
-			path = vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2274,13 +2250,11 @@
 				DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */,
 				DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */,
 				DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */,
-				DA527D9318D3EF0D009A825E /* IDZOggVorbisFileDecoder.mm in Sources */,
 				DA527CBB18D3E623009A825E /* MFViewController.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
-				DA527D9818D3F013009A825E /* IDZAQAudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

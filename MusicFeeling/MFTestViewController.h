@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MFBaseViewController.h"
 
-@interface MFTestViewController : MFBaseViewController <UITextFieldDelegate, IDZAudioPlayerDelegate, UICollisionBehaviorDelegate>
+@interface MFTestViewController : MFBaseViewController <UITextFieldDelegate, UICollisionBehaviorDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *baseToneButton;
 @property (weak, nonatomic) IBOutlet UIButton *replayButton;

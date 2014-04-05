@@ -7,7 +7,7 @@
 //
 
 #import "MFTestViewController.h"
-#import "IDZOggVorbisFileDecoder.h"
+#import "MFAppDelegate.h"
 #import <SVProgressHUD.h>
 #import <PXAlertView.h>
 
@@ -21,7 +21,6 @@
 
 @interface MFTestViewController ()
 
-@property (nonatomic, strong) id<IDZAudioPlayer> player;
 @property (nonatomic) NSInteger randomIndex;
 @property (nonatomic) NSInteger randomDegree;
 @property (nonatomic) NSString *toneName;
@@ -145,7 +144,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.player stop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -188,25 +186,8 @@
 }
 
 - (void) playTone:(NSString *)toneName {
-    IDZTrace();
-    if (self.shouldGetNextRandom) {
-        [self getNextRandomIndex];
-    }
-    [self.player stop];
-    NSError *error;
-    NSURL* oggUrl = [[NSBundle mainBundle] URLForResource:toneName withExtension:@".ogg"];
-    IDZOggVorbisFileDecoder* decoder = [[IDZOggVorbisFileDecoder alloc] initWithContentsOfURL:oggUrl error:&error];
-    if (error != nil) {
-        NSLog(@"%@", error);
-        return;
-    }
-    NSLog(@"Ogg Vorbis file duration is %g", decoder.duration);
-    self.player = [[IDZAQAudioPlayer alloc] initWithDecoder:decoder error:nil];
-    self.player.delegate = self;
-    [self.player prepareToPlay];
-
-    //[self startTimer];
-    [self.player play];
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate playTone:toneName];
 }
 
 - (IBAction)getNextRandomIndex {
@@ -293,17 +274,6 @@
 }
 
 - (void)tapViewAction {
-}
-
-#pragma mark - IDZAQPlayerDelegate
-
-- (void)audioPlayerDidFinishPlaying:(id<IDZAudioPlayer>)player successfully:(BOOL)flag {
-    if (self.shouldGetNextRandom) {
-        [self getNextRandomIndex];
-    }
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(id<IDZAudioPlayer>)player error:(NSError *)error {
 }
 
 @end
