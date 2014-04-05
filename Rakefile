@@ -23,3 +23,6 @@ task :dmg => :xcode do |t|
   sh "cp ~/Downloads/%s /tmp" % filename
 end
 
+task :tag do |t|
+  defaults write #{infoFile} CFBundleShortVersionString 0.1
+end
