@@ -9,6 +9,7 @@
 #import "MFSongListViewController.h"
 #import "MFPlayViewController.h"
 #import "MFAppDelegate.h"
+#import "MFSettingViewController.h"
 
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
@@ -32,7 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSError *error = nil;
     self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
@@ -44,6 +45,7 @@
     }
     self.songsInfo = [NSArray arrayWithArray:array];
     [self.tableView reloadData];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
     [self getContents];
 }
 
@@ -108,6 +110,12 @@
     } else {
         vc.isNew = YES;
     }
+}
+
+- (void)leftBarButtonPressed:(id)sender {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    MFSettingViewController *vc = [sb instantiateViewControllerWithIdentifier:@"settingsVC"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

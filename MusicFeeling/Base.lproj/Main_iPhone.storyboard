@@ -48,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="1828" y="90"/>
         </scene>
-        <!--Song List View Controller-->
+        <!--Song List View Controller - 清单-->
         <scene sceneID="0cQ-0T-w5V">
             <objects>
-                <viewController id="4Tg-Dc-xQM" customClass="MFSongListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="songListVC" id="4Tg-Dc-xQM" customClass="MFSongListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vwi-sr-wTL"/>
                         <viewControllerLayoutGuide type="bottom" id="ay1-Ub-Ejf"/>
@@ -91,7 +91,7 @@
                             <constraint firstItem="ay1-Ub-Ejf" firstAttribute="top" secondItem="w62-62-MrI" secondAttribute="bottom" id="zvE-tZ-stm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Q1a-0N-2yT">
+                    <navigationItem key="navigationItem" title="清单" id="Q1a-0N-2yT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ISe-gN-m5m">
                             <connections>
                                 <segue destination="4kP-cz-XUr" kind="push" id="h5Z-Tb-8m9"/>
@@ -232,7 +232,6 @@
                         <barButtonItem key="rightBarButtonItem" title="设置" id="0aS-oW-VZP">
                             <connections>
                                 <action selector="getNextRandomIndex" destination="ncx-hV-yFt" id="Cpe-K3-vfy"/>
-                                <segue destination="WGh-tj-1aE" kind="push" id="6Ga-36-BCF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -244,10 +243,10 @@
             </objects>
             <point key="canvasLocation" x="1291" y="898"/>
         </scene>
-        <!--Setting View Controller-->
+        <!--Setting View Controller - Settings-->
         <scene sceneID="28c-Xr-a2o">
             <objects>
-                <viewController id="WGh-tj-1aE" customClass="MFSettingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settingsVC" id="WGh-tj-1aE" customClass="MFSettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a2s-F0-duy"/>
                         <viewControllerLayoutGuide type="bottom" id="A66-XL-Tba"/>
@@ -256,18 +255,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-hB-rqB">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-hB-rqB">
                                 <rect key="frame" x="251" y="91" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随机度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tde-lg-eMb">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随机度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tde-lg-eMb">
                                 <rect key="frame" x="20" y="96" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q75-Bt-M61">
+                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q75-Bt-M61">
                                 <rect key="frame" x="69" y="149" width="238" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -277,20 +276,20 @@
                                     <action selector="sliderValueChanged:" destination="WGh-tj-1aE" eventType="valueChanged" id="nbR-60-K13"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-JQ-4vc">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u7-JQ-4vc">
                                 <rect key="frame" x="16" y="153" width="34" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="字母映射" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndw-aP-veq">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="字母映射" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndw-aP-veq">
                                 <rect key="frame" x="12" y="219" width="75" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FLX-Qi-kf2">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FLX-Qi-kf2">
                                 <rect key="frame" x="251" y="209" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -308,11 +307,28 @@
                                     <action selector="segmentedValueChanged:" destination="WGh-tj-1aE" eventType="valueChanged" id="PNX-uw-hqK"/>
                                 </connections>
                             </segmentedControl>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVl-lm-Cyl">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mYE-Jw-FPH"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Settings" id="896-wJ-Rue">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Ic7-C8-PzP">
+                                            <connections>
+                                                <action selector="close:" destination="WGh-tj-1aE" id="Y4F-q8-32x"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FLX-Qi-kf2" firstAttribute="top" secondItem="q75-Bt-M61" secondAttribute="bottom" constant="30" id="75W-wB-5O1"/>
                             <constraint firstAttribute="trailing" secondItem="q75-Bt-M61" secondAttribute="trailing" constant="15" id="GCW-om-Z7c"/>
+                            <constraint firstItem="aVl-lm-Cyl" firstAttribute="leading" secondItem="ndY-7W-nyN" secondAttribute="leading" id="HD3-kO-Aqf"/>
                             <constraint firstItem="WTP-ch-fE2" firstAttribute="top" secondItem="q75-Bt-M61" secondAttribute="bottom" constant="91" id="Hl2-xI-QQR"/>
                             <constraint firstAttribute="centerX" secondItem="WTP-ch-fE2" secondAttribute="centerX" id="Mba-ld-sSb"/>
                             <constraint firstItem="bk7-hB-rqB" firstAttribute="leading" secondItem="FLX-Qi-kf2" secondAttribute="leading" id="Mpq-3J-fKs"/>
@@ -320,12 +336,16 @@
                             <constraint firstItem="q75-Bt-M61" firstAttribute="top" secondItem="bk7-hB-rqB" secondAttribute="bottom" constant="27" id="UAO-Pr-FYH"/>
                             <constraint firstItem="bk7-hB-rqB" firstAttribute="centerY" secondItem="tde-lg-eMb" secondAttribute="centerY" id="aOR-S3-naS"/>
                             <constraint firstAttribute="trailing" secondItem="bk7-hB-rqB" secondAttribute="trailing" constant="20" symbolic="YES" id="auU-or-xne"/>
+                            <constraint firstAttribute="trailing" secondItem="aVl-lm-Cyl" secondAttribute="trailing" id="hcE-ak-Df5"/>
                             <constraint firstItem="7u7-JQ-4vc" firstAttribute="top" secondItem="tde-lg-eMb" secondAttribute="bottom" constant="36" id="kZO-5W-EQ0"/>
+                            <constraint firstItem="aVl-lm-Cyl" firstAttribute="top" secondItem="a2s-F0-duy" secondAttribute="bottom" id="n1h-Q8-ex1"/>
                             <constraint firstItem="q75-Bt-M61" firstAttribute="leading" secondItem="7u7-JQ-4vc" secondAttribute="trailing" constant="21" id="qOy-3W-CV3"/>
                             <constraint firstItem="WTP-ch-fE2" firstAttribute="centerY" secondItem="ndY-7W-nyN" secondAttribute="centerY" id="sfg-r7-tuw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="t41-mk-Oyw"/>
+                    <navigationItem key="navigationItem" title="Settings" id="t41-mk-Oyw">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="dLO-fQ-0iw"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="slider" destination="q75-Bt-M61" id="xVG-mo-7qq"/>
                         <outlet property="toggleMapperSwitch" destination="FLX-Qi-kf2" id="iww-lr-L6y"/>

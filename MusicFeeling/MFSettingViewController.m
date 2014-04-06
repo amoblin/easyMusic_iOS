@@ -41,6 +41,10 @@
     [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree:) forControlEvents:UIControlEventTouchUpInside];
     [self.toggleMapperSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]];
 
+    //[self initPianoKeyboard];
+}
+
+- (void)initPianoKeyboard {
     NSInteger leading = 8;
     NSArray *titleArray = @[@"C", @"D", @"E", @"F", @"G", @"A", @"B"];
     NSArray *tonesArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"exerciseTones"];
@@ -146,6 +150,10 @@
 - (IBAction)segmentedValueChanged:(UISegmentedControl *)sender {
     [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"toneType"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)close:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
