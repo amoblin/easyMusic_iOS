@@ -47,8 +47,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
+    [SVProgressHUD dismiss];
     if (self.isNew) {
         SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
         path = [delegate.composedDir stringByAppendingPathComponent:item.textField.text];
@@ -89,7 +90,7 @@
 }
 
 - (void)getContent {
-    MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"name"]];
@@ -99,8 +100,11 @@
     NSError *error;
     self.content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (self.content != nil) {
-        self.isToneShow = NO;
-        self.textView.text = [self stringByReplacingString:self.content];
+        if (self.isToneShow) {
+            self.textView.text = self.content;
+        } else {
+            self.textView.text = [self stringByReplacingString:self.content];
+        }
     }
 
     if (self.songInfo[@"git_url"] != nil) {
@@ -111,10 +115,15 @@
             [SVProgressHUD dismiss];
             NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            MFAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
             NSString *path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
             [self saveContent:content atPath:path];
-            self.textView.text = [self stringByReplacingString:content];
+            self.content = content;
+            if (self.isToneShow) {
+                self.textView.text = content;
+            } else {
+                self.textView.text = [self stringByReplacingString:content];
+            }
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
             NSLog(@"%@", error);
