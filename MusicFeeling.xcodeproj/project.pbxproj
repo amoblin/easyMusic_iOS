@@ -475,6 +475,7 @@
 		DA2EF20B18EFB89800DC1617 /* g6m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B318EFB89800DC1617 /* g6m.mp3 */; };
 		DA2EF20C18EFB89800DC1617 /* g7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B418EFB89800DC1617 /* g7.mp3 */; };
 		DA2EF20D18EFB89800DC1617 /* g7m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B518EFB89800DC1617 /* g7m.mp3 */; };
+		DA2EF21218F2472E00DC1617 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF21018F244C800DC1617 /* PushConfig.plist */; };
 		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
 		DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D918D405770021BD55 /* MFTestViewController.m */; };
 		DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */; };
@@ -980,6 +981,7 @@
 		DA2EF1B318EFB89800DC1617 /* g6m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g6m.mp3; sourceTree = "<group>"; };
 		DA2EF1B418EFB89800DC1617 /* g7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g7.mp3; sourceTree = "<group>"; };
 		DA2EF1B518EFB89800DC1617 /* g7m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g7m.mp3; sourceTree = "<group>"; };
+		DA2EF21018F244C800DC1617 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = MusicFeelingTests/PushConfig.plist; sourceTree = SOURCE_ROOT; };
 		DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCollectionViewCell.h; sourceTree = "<group>"; };
 		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
 		DA35C8D818D405770021BD55 /* MFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTestViewController.h; sourceTree = "<group>"; };
@@ -1594,6 +1596,7 @@
 				DA527CA918D3E623009A825E /* MusicFeeling-Info.plist */,
 				DA527CAA18D3E623009A825E /* InfoPlist.strings */,
 				DA527CAD18D3E623009A825E /* main.m */,
+				DA2EF21018F244C800DC1617 /* PushConfig.plist */,
 				DA527CAF18D3E623009A825E /* MusicFeeling-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -1680,6 +1683,14 @@
 				TargetAttributes = {
 					DA527C9D18D3E623009A825E = {
 						DevelopmentTeam = 5ELCMRHSMM;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					DA527CC118D3E623009A825E = {
 						TestTargetID = DA527C9D18D3E623009A825E;
@@ -1888,6 +1899,7 @@
 				DA2EF12418EFB31000DC1617 /* taylorG1.mp3 in Resources */,
 				DA2EF05618EFB31000DC1617 /* prsD3.mp3 in Resources */,
 				DA2EF1D918EFB89800DC1617 /* c6m.mp3 in Resources */,
+				DA2EF21218F2472E00DC1617 /* PushConfig.plist in Resources */,
 				DA2EF06518EFB31000DC1617 /* prsFS2.mp3 in Resources */,
 				DA2EF0AC18EFB31000DC1617 /* stratoC3.mp3 in Resources */,
 				DA2EF06E18EFB31000DC1617 /* prsGS3.mp3 in Resources */,
@@ -2339,7 +2351,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "DF2E64B3-D944-45DF-B38B-628ED2E4E101";
+				PROVISIONING_PROFILE = "4AF3F0C2-B340-4D74-9D4B-E8F38544CB6A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2361,8 +2373,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2395,8 +2407,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DF2E64B3-D944-45DF-B38B-628ED2E4E101";
+				PROVISIONING_PROFILE = "4AF3F0C2-B340-4D74-9D4B-E8F38544CB6A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2407,7 +2420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2416,8 +2429,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "414E92CB-9D16-4948-B5A5-C24D0505CF03";
+				PROVISIONING_PROFILE = "9505CBD3-2581-4756-8E6C-D23EF7F322D0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

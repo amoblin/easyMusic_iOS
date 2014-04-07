@@ -10,7 +10,10 @@
 
 #import <SVProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
+
 #import <UMengAnalytics/MobClick.h>
+#import <TalkingData.h>
+#import <JPush/APService.h>
 
 @interface MFAppDelegate()
 @property (nonatomic, strong) NSMutableArray *playerCache;
@@ -20,7 +23,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // track analytics
     [MobClick startWithAppkey:@"5341f04c56240b5a2219a06a"];
+    [TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
     [self getDeviceInfo];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
@@ -34,6 +39,11 @@
     // Override point for customization after application launch.
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[sb instantiateViewControllerWithIdentifier:@"songListVC"]];
+
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)];
+    [APService setupWithOption:launchOptions];
     return YES;
 }
 
@@ -62,6 +72,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+# pragma mark - remote notification
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [APService handleRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [APService registerDeviceToken:deviceToken];
 }
 
 // for MFBaseViewControll using
