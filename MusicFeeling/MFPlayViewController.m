@@ -10,6 +10,7 @@
 #import "MFAppDelegate.h"
 #import "SLNavigationItem.h"
 
+#import "PXAlertView.h"
 #import <SVProgressHUD.h>
 #import <AFNetworking.h>
 #import <NSData+Base64.h>
@@ -34,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isToneShow = YES;
     for (UIGestureRecognizer *recognizer in self.textView.gestureRecognizers) {
         //[self.textView removeGestureRecognizer:recognizer];
         if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]){
@@ -225,6 +227,10 @@
     if ( ! [tap.view isKindOfClass:[UITextView class]]) {
         return;
     }
+    if ( ! self.isToneShow) {
+        [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
+    }
+
     UITextView *subtitleView = (UITextView *)tap.view;
     subtitleView.selectedTextRange = 0;
 

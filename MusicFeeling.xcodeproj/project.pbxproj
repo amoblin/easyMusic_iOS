@@ -476,6 +476,7 @@
 		DA2EF20C18EFB89800DC1617 /* g7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B418EFB89800DC1617 /* g7.mp3 */; };
 		DA2EF20D18EFB89800DC1617 /* g7m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B518EFB89800DC1617 /* g7m.mp3 */; };
 		DA2EF21218F2472E00DC1617 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF21018F244C800DC1617 /* PushConfig.plist */; };
+		DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2EF21518F24C8B00DC1617 /* PXAlertView.m */; };
 		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
 		DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D918D405770021BD55 /* MFTestViewController.m */; };
 		DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */; };
@@ -982,6 +983,8 @@
 		DA2EF1B418EFB89800DC1617 /* g7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g7.mp3; sourceTree = "<group>"; };
 		DA2EF1B518EFB89800DC1617 /* g7m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g7m.mp3; sourceTree = "<group>"; };
 		DA2EF21018F244C800DC1617 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = MusicFeelingTests/PushConfig.plist; sourceTree = SOURCE_ROOT; };
+		DA2EF21418F24C8B00DC1617 /* PXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAlertView.h; sourceTree = "<group>"; };
+		DA2EF21518F24C8B00DC1617 /* PXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAlertView.m; sourceTree = "<group>"; };
 		DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCollectionViewCell.h; sourceTree = "<group>"; };
 		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
 		DA35C8D818D405770021BD55 /* MFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTestViewController.h; sourceTree = "<group>"; };
@@ -1526,9 +1529,19 @@
 			path = Piano;
 			sourceTree = "<group>";
 		};
+		DA2EF21318F24C8B00DC1617 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				DA2EF21418F24C8B00DC1617 /* PXAlertView.h */,
+				DA2EF21518F24C8B00DC1617 /* PXAlertView.m */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
 		DA527C9518D3E623009A825E = {
 			isa = PBXGroup;
 			children = (
+				DA2EF21318F24C8B00DC1617 /* vendor */,
 				DA527CD918D3E6E0009A825E /* resources */,
 				DA527CA718D3E623009A825E /* MusicFeeling */,
 				DA527CC918D3E623009A825E /* MusicFeelingTests */,
@@ -2259,6 +2272,7 @@
 				DA527CAE18D3E623009A825E /* main.m in Sources */,
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
+				DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */,
 				DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */,
 				DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */,
 				DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */,
