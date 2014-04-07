@@ -12,7 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import <UMengAnalytics/MobClick.h>
-#import <TalkingData.h>
+//#import <TalkingData.h>
 #import <JPush/APService.h>
 
 @interface MFAppDelegate()
@@ -25,7 +25,7 @@
 {
     // track analytics
     [MobClick startWithAppkey:@"5341f04c56240b5a2219a06a"];
-    [TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
+    //[TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
     [self getDeviceInfo];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
