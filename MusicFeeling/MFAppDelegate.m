@@ -26,7 +26,9 @@
     // track analytics
     [MobClick startWithAppkey:@"5341f04c56240b5a2219a06a"];
     //[TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
+#if DEBUG
     [self getDeviceInfo];
+#endif
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
     self.composedDir = [paths[0] stringByAppendingPathComponent:@"composed"];
@@ -51,6 +53,7 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
