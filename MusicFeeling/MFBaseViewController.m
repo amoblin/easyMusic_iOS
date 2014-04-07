@@ -9,6 +9,8 @@
 #import "MFBaseViewController.h"
 #import "MFAppDelegate.h"
 
+#import <UMengAnalytics/MobClick.h>
+
 @implementation MFBaseViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -24,6 +26,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:self.navigationItem.title];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:self.navigationItem.title];
 }
 
 - (void)didReceiveMemoryWarning

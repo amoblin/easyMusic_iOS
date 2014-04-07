@@ -10,6 +10,7 @@
 
 #import <SVProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
+#import <UMengAnalytics/MobClick.h>
 
 @interface MFAppDelegate()
 @property (nonatomic, strong) NSMutableArray *playerCache;
@@ -19,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MobClick startWithAppkey:@"5341f04c56240b5a2219a06a"];
+    [self getDeviceInfo];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
     self.composedDir = [paths[0] stringByAppendingPathComponent:@"composed"];
@@ -112,6 +115,16 @@
         _playerCache = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return _playerCache;
+}
+
+- (void)getDeviceInfo {
+    Class cls = NSClassFromString(@"UMANUtil");
+    SEL deviceIDSelector = @selector(openUDIDString);
+    NSString *deviceID = nil;
+    if(cls && [cls respondsToSelector:deviceIDSelector]){
+        deviceID = [cls performSelector:deviceIDSelector];
+    }
+    NSLog(@"{\"oid\": \"%@\"}", deviceID);
 }
 
 @end
