@@ -33,20 +33,31 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSError *error = nil;
-    self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
-    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
-        [self.composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
-    }
-    NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
-    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
-        [array addObject:@{@"name": file}];
-    }
-    self.songsInfo = [NSArray arrayWithArray:array];
     [self.tableView reloadData];
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
     [self getContents];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.songsInfo = nil;
+    [self.tableView reloadData];
+}
+
+- (NSArray *)songsInfo {
+    NSError *error = nil;
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (_songsInfo == nil) {
+        self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
+        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
+            [self.composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
+        }
+        NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
+        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
+            [array addObject:@{@"name": file}];
+        }
+        _songsInfo = [NSArray arrayWithArray:array];
+    }
+    return _songsInfo;
 }
 
 - (void)didReceiveMemoryWarning

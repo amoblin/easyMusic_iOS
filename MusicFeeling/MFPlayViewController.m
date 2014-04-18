@@ -46,6 +46,7 @@
     }
     [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
     [self getContent];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -63,7 +64,8 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
-        [self saveContent:self.textView.text atPath:path];
+        self.content = [NSString stringWithFormat:@"%@\n", self.textView.text];
+        [self saveContent:self.content atPath:path];
     }
 }
 
@@ -180,8 +182,9 @@
             frame.origin.y += frame.size.height * 0.9;
         }
         [self.textView scrollRectToVisible:frame animated:YES];
+        return;
     }
-    if ( self.isNew) {
+    if ( self.isNew ) {
         if ([keyCommand.input isEqualToString:@"\r"]) {
             self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
             return;
@@ -224,6 +227,7 @@
 }
 
 - (void)tapToPlay:(UITapGestureRecognizer *)tap {
+    [self becomeFirstResponder];
     if ( ! [tap.view isKindOfClass:[UITextView class]]) {
         return;
     }
@@ -248,7 +252,7 @@
     if (self.isToneShow) {
         self.textView.text = self.content;
     } else {
-        self.textView.text = [self stringByReplacingString:self.content];
+        self.textView.text = [self stringByReplacingString:[self.content stringByAppendingString:@"\n"]];
     }
 }
 @end

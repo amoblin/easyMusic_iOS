@@ -1,6 +1,9 @@
 name="MusicFeeling"
 infoFile = "\`pwd\`/#{name}/#{name}-Info"
 
+task :icon do |t|
+
+end
 task :xcode do |t|
   sh "xcodebuild -xcworkspace #{name}.xcworkspace -scheme #{name} -configuration Release -sdk iphoneos7.0 -derivedDataPath . clean"
   sh "xcodebuild -xcworkspace #{name}.xcworkspace -scheme #{name} -configuration Release -sdk iphoneos7.0 -derivedDataPath ."

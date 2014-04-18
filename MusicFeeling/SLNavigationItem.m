@@ -31,6 +31,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.title = textField.text;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"textFieldDidEndEditingNotification" object:nil];
 }
 
 @end
