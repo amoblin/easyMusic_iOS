@@ -16,6 +16,7 @@
 
 @interface MFSongListViewController ()
 
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation MFSongListViewController
@@ -32,15 +33,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+    //refreshControl.tintColor = [UIColor blueColor];
+    [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+
     // Do any additional setup after loading the view.
     [self.tableView reloadData];
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
+    if (self.songsInfo.count == 0) {
+        [SVProgressHUD show];
+    }
     [self getContents];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.songsInfo = nil;
-    [self.tableView reloadData];
+    [self pullToRefresh];
+}
+
+- (void)pullToRefresh {
+    [self getContents];
 }
 
 - (NSArray *)songsInfo {
@@ -67,7 +81,7 @@
 }
 
 - (void)getContents {
-    [SVProgressHUD show];
+    //[SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -78,6 +92,7 @@
                 [array addObject:item];
             }
         }
+        [self.refreshControl endRefreshing];
         self.songsInfo = [NSArray arrayWithArray:array];
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {

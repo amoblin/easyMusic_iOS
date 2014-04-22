@@ -2412,8 +2412,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cui Guilin (CF3AN73YM2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cui Guilin (CF3AN73YM2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2423,7 +2423,7 @@
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9529CA29-B9A2-45E5-9B0C-CDD34E2F61F6";
+				PROVISIONING_PROFILE = "4AF3F0C2-B340-4D74-9D4B-E8F38544CB6A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2434,8 +2434,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cui Guilin (CF3AN73YM2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cui Guilin (CF3AN73YM2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
