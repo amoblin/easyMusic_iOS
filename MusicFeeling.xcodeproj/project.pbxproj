@@ -497,6 +497,7 @@
 		DA527CCE18D3E623009A825E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA527CCC18D3E623009A825E /* InfoPlist.strings */; };
 		DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CCF18D3E623009A825E /* MusicFeelingTests.m */; };
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
+		DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
@@ -995,7 +996,7 @@
 		DA41D40118ECD4E900ED4BD7 /* SLNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLNavigationItem.m; sourceTree = "<group>"; };
 		DA45477518E2476E0018874F /* MFSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSongListViewController.h; sourceTree = "<group>"; };
 		DA45477618E2476E0018874F /* MFSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSongListViewController.m; sourceTree = "<group>"; };
-		DA527C9E18D3E623009A825E /* MusicFeeling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicFeeling.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA527C9E18D3E623009A825E /* k2k.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = k2k.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA527CA118D3E623009A825E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA527CA318D3E623009A825E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DA527CA518D3E623009A825E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1016,6 +1017,8 @@
 		DA527CCF18D3E623009A825E /* MusicFeelingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicFeelingTests.m; sourceTree = "<group>"; };
 		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
 		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
+		DAA1CACF190B24F20046AA42 /* MFArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFArrayDataSource.h; sourceTree = "<group>"; };
+		DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFArrayDataSource.m; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 		DADCEE9018E003FE0044455D /* MFPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPlayViewController.h; sourceTree = "<group>"; };
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
@@ -1554,7 +1557,7 @@
 		DA527C9F18D3E623009A825E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA527C9E18D3E623009A825E /* MusicFeeling.app */,
+				DA527C9E18D3E623009A825E /* k2k.app */,
 				DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */,
 			);
 			name = Products;
@@ -1576,6 +1579,8 @@
 		DA527CA718D3E623009A825E /* MusicFeeling */ = {
 			isa = PBXGroup;
 			children = (
+				DAA1CACF190B24F20046AA42 /* MFArrayDataSource.h */,
+				DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */,
 				DA527CB018D3E623009A825E /* MFAppDelegate.h */,
 				DA527CB118D3E623009A825E /* MFAppDelegate.m */,
 				DA527CB318D3E623009A825E /* Main_iPhone.storyboard */,
@@ -1646,9 +1651,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA527C9D18D3E623009A825E /* MusicFeeling */ = {
+		DA527C9D18D3E623009A825E /* k2k */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeeling" */;
+			buildConfigurationList = DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "k2k" */;
 			buildPhases = (
 				7484A8F2F5F2420C81C98148 /* Check Pods Manifest.lock */,
 				DA527C9A18D3E623009A825E /* Sources */,
@@ -1661,9 +1666,9 @@
 			);
 			dependencies = (
 			);
-			name = MusicFeeling;
+			name = k2k;
 			productName = MusicFeeling;
-			productReference = DA527C9E18D3E623009A825E /* MusicFeeling.app */;
+			productReference = DA527C9E18D3E623009A825E /* k2k.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA527CC118D3E623009A825E /* MusicFeelingTests */ = {
@@ -1723,7 +1728,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA527C9D18D3E623009A825E /* MusicFeeling */,
+				DA527C9D18D3E623009A825E /* k2k */,
 				DA527CC118D3E623009A825E /* MusicFeelingTests */,
 			);
 		};
@@ -2281,6 +2286,7 @@
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
+				DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2297,7 +2303,7 @@
 /* Begin PBXTargetDependency section */
 		DA527CC818D3E623009A825E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DA527C9D18D3E623009A825E /* MusicFeeling */;
+			target = DA527C9D18D3E623009A825E /* k2k */;
 			targetProxy = DA527CC718D3E623009A825E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2502,7 +2508,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeeling" */ = {
+		DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "k2k" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA527CD418D3E623009A825E /* Debug */,

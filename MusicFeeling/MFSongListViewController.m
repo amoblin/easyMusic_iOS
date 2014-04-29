@@ -21,28 +21,61 @@
 
 @implementation MFSongListViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (MFArrayDataSource *)arrayDataSource {
+    if (_arrayDataSource == nil) {
+        NSArray *dataArray;
+        static NSString *cellId;
+        void (^block)(id, id, NSIndexPath*);
+
+        dataArray = @[self.songsInfo];
+        cellId = @"cellId";
+        block = ^(UITableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
+            cell.textLabel.text = [[item[@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
+        };
+        _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
     }
-    return self;
+    return _arrayDataSource;
+}
+
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_tableView];
+
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableView]-0-|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
+    }
+    return _tableView;
+}
+
+- (UIRefreshControl *)refreshControl {
+    if (_refreshControl == nil) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+        //refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+        //refreshControl.tintColor = [UIColor blueColor];
+        [_refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+        [self.tableView addSubview:self.refreshControl];
+    }
+    return _refreshControl;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    //refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
-    //refreshControl.tintColor = [UIColor blueColor];
-    [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
+    self.navigationItem.title = @"曲目";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
-    // Do any additional setup after loading the view.
-    [self.tableView reloadData];
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
+    self.tableView.dataSource = self.arrayDataSource;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
     if (self.songsInfo.count == 0) {
         [SVProgressHUD show];
     }
@@ -112,19 +145,8 @@
 }
 */
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.songsInfo count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellId = @"cellId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    cell.textLabel.text = [[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
-    return cell;
+- (void)addButtonPressed:(id)sender {
+//        vc.isNew = YES;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

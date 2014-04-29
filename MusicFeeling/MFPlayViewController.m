@@ -248,6 +248,10 @@
 }
 
 - (IBAction)k2kButtonPressed:(UIButton *)sender {
+    if (self.content == nil) {
+        [PXAlertView showAlertWithTitle:@"获取内容失败" message:@"请联网，重试一次"];
+        return;
+    }
     self.isToneShow = ! self.isToneShow;
     if (self.isToneShow) {
         self.textView.text = self.content;

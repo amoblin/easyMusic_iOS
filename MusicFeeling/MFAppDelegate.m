@@ -7,6 +7,7 @@
 //
 
 #import "MFAppDelegate.h"
+#import "MFSongListViewController.h"
 
 #import <SVProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
@@ -41,8 +42,9 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:self.composedDir withIntermediateDirectories:NO attributes:nil error:nil];
     }
     // Override point for customization after application launch.
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[sb instantiateViewControllerWithIdentifier:@"songListVC"]];
+    MFSongListViewController *controller = [[MFSongListViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    self.window.rootViewController = navigationController;
 
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
