@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MFBaseViewController.h"
 
-@interface SLEditableTitleViewController : MFBaseViewController
+@interface SLEditableTitleViewController : MFBaseViewController <UITextFieldDelegate>
+
+@property (strong, nonatomic) UITextField *textField;
 
 - (void)setPlaceHolder:(NSString *)placeholder;
 - (void)setEditableTitle:(NSString *)title;

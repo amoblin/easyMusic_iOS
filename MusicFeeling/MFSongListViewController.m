@@ -21,6 +21,23 @@
 
 @implementation MFSongListViewController
 
+- (NSArray *)songsInfo {
+    NSError *error = nil;
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (_songsInfo == nil) {
+        self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
+        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
+            [self.composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
+        }
+        NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
+        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
+            [array addObject:@{@"name": file}];
+        }
+        _songsInfo = [NSArray arrayWithArray:array];
+    }
+    return _songsInfo;
+}
+
 - (MFArrayDataSource *)arrayDataSource {
     if (_arrayDataSource == nil) {
         NSArray *dataArray;
@@ -30,6 +47,7 @@
         dataArray = @[self.songsInfo];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = [[item[@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
@@ -51,6 +69,7 @@
                                                                           options:0
                                                                           metrics:nil
                                                                             views:NSDictionaryOfVariableBindings(_tableView)]];
+        [_tableView addSubview:self.refreshControl];
     }
     return _tableView;
 }
@@ -58,59 +77,18 @@
 - (UIRefreshControl *)refreshControl {
     if (_refreshControl == nil) {
         _refreshControl = [[UIRefreshControl alloc] init];
-        //refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
-        //refreshControl.tintColor = [UIColor blueColor];
+        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+//        _refreshControl.tintColor = [UIColor blueColor];
         [_refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
-        [self.tableView addSubview:self.refreshControl];
     }
     return _refreshControl;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    self.navigationItem.title = @"曲目";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
-
-    self.tableView.dataSource = self.arrayDataSource;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
-    if (self.songsInfo.count == 0) {
-        [SVProgressHUD show];
-    }
-    [self getContents];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [self pullToRefresh];
-}
-
-- (void)pullToRefresh {
-    [self getContents];
-}
-
-- (NSArray *)songsInfo {
-    NSError *error = nil;
-    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (_songsInfo == nil) {
-        self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
-        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
-            [self.composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
-        }
-        NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
-        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
-            [array addObject:@{@"name": file}];
-        }
-        _songsInfo = [NSArray arrayWithArray:array];
-    }
-    return _songsInfo;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFPlayViewController *vc = [[MFPlayViewController alloc] init];
+    vc.songInfo = self.songsInfo[indexPath.row];
+    [vc setEditableTitle:[[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)getContents {
@@ -134,16 +112,9 @@
     }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)pullToRefresh {
+    [self getContents];
 }
-*/
 
 - (void)addButtonPressed:(id)sender {
 //        vc.isNew = YES;
@@ -164,6 +135,33 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     MFSettingViewController *vc = [sb instantiateViewControllerWithIdentifier:@"settingsVC"];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.navigationItem.title = @"曲目";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
+
+    self.tableView.dataSource = self.arrayDataSource;
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
+    if (self.songsInfo.count == 0) {
+        [SVProgressHUD show];
+    }
+    [self getContents];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self pullToRefresh];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

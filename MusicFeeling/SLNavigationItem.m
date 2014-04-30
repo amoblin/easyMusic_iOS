@@ -10,14 +10,18 @@
 
 @implementation SLNavigationItem
 
-- (void)awakeFromNib {
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 22)];
-    textField.font = [UIFont boldSystemFontOfSize:19];
-    textField.textAlignment = NSTextAlignmentCenter;
-    textField.delegate = self;
-    self.textField = textField;
-    self.titleView = textField;
-    self.title = textField.text;
+- (id)initWithTitle:(NSString *)title {
+    if((self = [super initWithTitle:title])){
+        //initializer code
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 22)];
+        textField.font = [UIFont boldSystemFontOfSize:19];
+        textField.textAlignment = NSTextAlignmentCenter;
+        textField.delegate = self;
+        self.textField = textField;
+        self.titleView = textField;
+        self.title = textField.text;
+    }
+    return self;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

@@ -31,17 +31,25 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapViewAction)];
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
+
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 22)];
+    textField.font = [UIFont boldSystemFontOfSize:19];
+    textField.textAlignment = NSTextAlignmentCenter;
+    textField.delegate = self;
+    self.textField = textField;
+    self.navigationItem.titleView = textField;
+    self.navigationItem.title = textField.text;
 }
 
 - (void)setPlaceHolder:(NSString *)placeholder {
-    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-    item.textField.placeholder = placeholder;
+//    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
+    self.textField.placeholder = placeholder;
 }
 
 - (void)setEditableTitle:(NSString *)title {
-    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-    item.textField.text = title;
-    item.title = title;
+//    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
+    self.textField.text = title;
+    self.navigationItem.title = title;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,4 +73,21 @@
         [content writeToFile:file atomically:YES encoding:NSUTF8StringEncoding error:nil];
     }
 }
+
+#pragma mark - UITextField Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.navigationItem.title = textField.text;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"textFieldDidEndEditingNotification" object:nil];
+}
+
 @end

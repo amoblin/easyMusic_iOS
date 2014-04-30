@@ -36,6 +36,7 @@
 {
     [super viewDidLoad];
     self.isToneShow = YES;
+    /*
     for (UIGestureRecognizer *recognizer in self.textView.gestureRecognizers) {
         //[self.textView removeGestureRecognizer:recognizer];
         if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]){
@@ -44,7 +45,8 @@
             [(UITapGestureRecognizer *)recognizer setNumberOfTapsRequired:1];
         }
     }
-    [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
+     */
+//    [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
     [self getContent];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
 }
@@ -64,8 +66,36 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
-        self.content = [NSString stringWithFormat:@"%@\n", self.textView.text];
+//        self.content = [NSString stringWithFormat:@"%@\n", self.textView.text];
         [self saveContent:self.content atPath:path];
+    }
+}
+
+- (void)layoutButtonsWithContent:(NSString *)content {
+    unsigned length = [content length];
+    unsigned paraStart = 0, paraEnd = 0, contentsEnd = 0;
+//    NSMutableArray *array = [NSMutableArray array];
+    NSRange currentRange;
+    while (paraEnd < length)
+    {
+        [content getParagraphStart:&paraStart end:&paraEnd
+                      contentsEnd:&contentsEnd forRange:NSMakeRange(paraEnd, 0)];
+        currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
+        NSString *line = [content substringWithRange:currentRange];
+        NSLog(@"%@", line);
+        NSArray *items = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]];
+        NSLog(@"%@", items);
+        for (NSString *item in items) {
+            UIButton *button = [UIButton new];
+            [button setTitle:item forState:UIControlStateNormal];
+            button.translatesAutoresizingMaskIntoConstraints = NO;
+            [self.view addSubview:button];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(>=20)-[button(==44)]-(>=20)-|"
+                                                                             options:NSLayoutFormatAlignAllCenterX | NSLayoutAttributeCenterY
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(button)]];
+            break;
+        }
     }
 }
 
@@ -105,9 +135,10 @@
     self.content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (self.content != nil) {
         if (self.isToneShow) {
-            self.textView.text = self.content;
+            [self layoutButtonsWithContent:self.content];
+//            self.textView.text = self.content;
         } else {
-            self.textView.text = [self stringByReplacingString:self.content];
+//            self.textView.text = [self stringByReplacingString:self.content];
         }
     }
 
@@ -124,9 +155,10 @@
             [self saveContent:content atPath:path];
             self.content = content;
             if (self.isToneShow) {
-                self.textView.text = content;
+                [self layoutButtonsWithContent:self.content];
+//                self.textView.text = content;
             } else {
-                self.textView.text = [self stringByReplacingString:content];
+//                self.textView.text = [self stringByReplacingString:content];
             }
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
@@ -171,6 +203,7 @@
     }
     NSLog(@"keyCommand input is: %@", keyCommand.input);
     if ([keyCommand.input isEqualToString:@" "]) {
+        /*
         CGRect frame = self.textView.frame;
         frame.origin.x = 0;
         if (keyCommand.modifierFlags == UIKeyModifierShift) {
@@ -182,11 +215,12 @@
             frame.origin.y += frame.size.height * 0.9;
         }
         [self.textView scrollRectToVisible:frame animated:YES];
+         */
         return;
     }
     if ( self.isNew ) {
         if ([keyCommand.input isEqualToString:@"\r"]) {
-            self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
+//            self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
             return;
         } else if ([keyCommand.input isEqualToString:@"\b"]) {
             [self deleteLastTone];
@@ -197,8 +231,8 @@
     NSString *toneName = [self.mapper objectForKey:keyCommand.input];
 
     if (self.isNew) {
-        self.content = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
-        self.textView.text = self.content;
+//        self.content = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
+//        self.textView.text = self.content;
     }
     if (toneName == nil) {
         return;
@@ -219,11 +253,11 @@
 }
 
 - (void)deleteLastTone {
-    NSString *str = self.textView.text;
-    NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
-    if (range.location != NSNotFound) {
-        self.textView.text = [str substringToIndex:range.location];
-    }
+//    NSString *str = self.textView.text;
+//    NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
+//    if (range.location != NSNotFound) {
+//        self.textView.text = [str substringToIndex:range.location];
+//    }
 }
 
 - (void)tapToPlay:(UITapGestureRecognizer *)tap {
@@ -254,9 +288,9 @@
     }
     self.isToneShow = ! self.isToneShow;
     if (self.isToneShow) {
-        self.textView.text = self.content;
+//        self.textView.text = self.content;
     } else {
-        self.textView.text = [self stringByReplacingString:[self.content stringByAppendingString:@"\n"]];
+//        self.textView.text = [self stringByReplacingString:[self.content stringByAppendingString:@"\n"]];
     }
 }
 @end
