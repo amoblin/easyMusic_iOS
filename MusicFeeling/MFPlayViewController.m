@@ -14,6 +14,7 @@
 #import <SVProgressHUD.h>
 #import <AFNetworking.h>
 #import <NSData+Base64.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface MFPlayViewController ()
 
@@ -48,6 +49,7 @@
      */
 //    [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
     [self getContent];
+    self.view.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
 }
 
@@ -87,13 +89,29 @@
         NSLog(@"%@", items);
         for (NSString *item in items) {
             UIButton *button = [UIButton new];
+            [button.layer setBorderColor:[[UIColor blueColor] CGColor]];
+            [button.layer setBorderWidth:1.0f];
+            button.layer.cornerRadius = 22;
+            button.layer.masksToBounds = YES;
+            [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
             [button setTitle:item forState:UIControlStateNormal];
+//            button.backgroundColor = [UIColor blueColor];
             button.translatesAutoresizingMaskIntoConstraints = NO;
             [self.view addSubview:button];
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(>=20)-[button(==44)]-(>=20)-|"
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[button(==44)]"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(button)]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-80-[button(==44)]"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(button)]];
+            /*
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[button(==44)]-(>=20)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX | NSLayoutAttributeCenterY
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(button)]];
+             */
             break;
         }
     }
