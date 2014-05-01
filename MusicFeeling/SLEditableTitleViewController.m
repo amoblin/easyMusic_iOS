@@ -31,14 +31,17 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapViewAction)];
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
+}
 
+- (UITextField *)textField {
+    if (_textField == nil) {
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 22)];
     textField.font = [UIFont boldSystemFontOfSize:19];
     textField.textAlignment = NSTextAlignmentCenter;
     textField.delegate = self;
-    self.textField = textField;
-    self.navigationItem.titleView = textField;
-    self.navigationItem.title = textField.text;
+        _textField = textField;
+    }
+    return _textField;
 }
 
 - (void)setPlaceHolder:(NSString *)placeholder {
@@ -49,7 +52,8 @@
 - (void)setEditableTitle:(NSString *)title {
 //    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
     self.textField.text = title;
-    self.navigationItem.title = title;
+    [self.navigationItem setTitleView:self.textField];
+    self.title = title;
 }
 
 - (void)didReceiveMemoryWarning

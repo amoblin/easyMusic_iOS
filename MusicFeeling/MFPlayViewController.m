@@ -23,6 +23,7 @@
 #define BUTTON_SIZE 65
 #define BUTTON_PADDING_H -7
 #define BUTTON_PADDING_V 10
+#define BUTTON_WRAP_LINE_V 2
 
 #define UIColorFromRGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define UIColorFromHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -31,6 +32,8 @@
 @interface MFPlayViewController ()
 
 @property (strong, nonatomic) NSString *content;
+@property (strong, nonatomic) NSArray *tonesArray;
+@property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic) BOOL isToneShow;
 @end
@@ -44,6 +47,37 @@
         // Custom initialization
     }
     return self;
+}
+
+- (NSMutableArray *)buttonPool {
+    if (_buttonPool == nil) {
+        _buttonPool = [[NSMutableArray alloc] init];
+    }
+    return _buttonPool;
+}
+
+- (NSArray *)tonesArray {
+    if (_tonesArray == nil) {
+        NSString *content = self.content;
+        NSRange currentRange;
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        unsigned length = [content length];
+        unsigned paraStart = 0, paraEnd = 0, contentsEnd = 0;
+        //    NSMutableArray *array = [NSMutableArray array];
+        while (paraEnd < length)
+        {
+            [content getParagraphStart:&paraStart end:&paraEnd
+                           contentsEnd:&contentsEnd forRange:NSMakeRange(paraEnd, 0)];
+            currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
+            NSString *line = [content substringWithRange:currentRange];
+            NSLog(@"%@", line);
+            NSArray *items = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]];
+            NSLog(@"%@", items);
+            [array addObject:items];
+        }
+        _tonesArray = [NSArray arrayWithArray:array];
+    }
+    return _tonesArray;
 }
 
 - (void)viewDidLoad
@@ -98,59 +132,77 @@
     }
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title {
-    UIButton *button = [UIButton new];
-    [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-    [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
-    [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
-    [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-    [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
-    [button.layer setBorderWidth:1.0f];
-    button.layer.cornerRadius = BUTTON_SIZE/2;
-    button.layer.masksToBounds = YES;
-    [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
-    [button setTitle:title forState:UIControlStateNormal];
-    //            button.backgroundColor = [UIColor blueColor];
-    button.translatesAutoresizingMaskIntoConstraints = NO;
+- (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
+    if (self.buttonPool.count > 0) {
+        UIButton *button = self.buttonPool[0];
+        [self.buttonPool removeObjectAtIndex:0];
+        return button;
+    } else {
+        UIButton *button = [UIButton new];
+        [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+        [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+        [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
+        [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+        [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
 
-    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
-    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
-    return button;
+        if (type) {
+            button.titleLabel.font = [UIFont systemFontOfSize:14];
+            [button setTitle:title forState:UIControlStateNormal];
+            button.layer.borderWidth = 1.0f;
+            button.layer.cornerRadius = BUTTON_SIZE/2;
+        } else {
+            button.titleLabel.font = [UIFont systemFontOfSize:50];
+            [button setTitle:self.router[title.lowercaseString] forState:UIControlStateNormal];
+            button.layer.borderWidth = 0;
+            button.layer.cornerRadius = 4;
+        }
+
+        button.layer.masksToBounds = YES;
+        [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
+
+        //            button.backgroundColor = [UIColor blueColor];
+        button.translatesAutoresizingMaskIntoConstraints = NO;
+
+        [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
+        [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
+        return button;
+    }
 }
 
 - (void)layoutButtonsWithContent:(NSString *)content {
-    unsigned length = [content length];
-    unsigned paraStart = 0, paraEnd = 0, contentsEnd = 0;
-//    NSMutableArray *array = [NSMutableArray array];
-    NSRange currentRange;
+    NSInteger index = 0;
+    for (UIView *view in self.scrollView.subviews) {
+        if ([[view class] isSubclassOfClass:[UIButton class]]) {
+            break;
+            //[view removeFromSuperview];
+            //[self.buttonPool addObject:view];
+        }
+        index++;
+    }
+
     CGFloat x, y;
     y = YOFFSET;
-    while (paraEnd < length)
-    {
-        [content getParagraphStart:&paraStart end:&paraEnd
-                      contentsEnd:&contentsEnd forRange:NSMakeRange(paraEnd, 0)];
-        currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
-        NSString *line = [content substringWithRange:currentRange];
-        NSLog(@"%@", line);
-        NSArray *items = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]];
-        NSLog(@"%@", items);
+    for (NSArray *items in self.tonesArray) {
         x = XOFFSET;
         BOOL isFirst = YES;
-        UIButton *preButton;
+        UIButton *preButton, *button;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
             }
-            UIButton *button = [self createButtonWithTitle:item];
-            [self.scrollView addSubview:button];
+            if (index < self.scrollView.subviews.count) {
+                button = self.scrollView.subviews[index];
+            } else {
+                button = [self createButtonWithTitle:item andType:self.isToneShow];
+                [self.scrollView addSubview:button];
+            }
+            [button removeConstraints:button.constraints];
 
-//            if (x+50 > self.scrollView.frame.size.width) {
-            if (x+50 > [[UIScreen mainScreen] bounds].size.width) {
+            if (x+50 > self.scrollView.frame.size.width) {
                 x = XOFFSET;
-                y += BUTTON_SIZE + BUTTON_PADDING_V;
+                y += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
                 isFirst = YES;
             }
 
@@ -177,7 +229,9 @@
             }
             preButton = button;
             x += BUTTON_SIZE + BUTTON_PADDING_H;
+            index++;
         }
+        index++;
         y += BUTTON_SIZE + BUTTON_PADDING_V;
     }
     self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, y + 20);
@@ -223,6 +277,7 @@
         } else {
             // show computer keyboard
         }
+        return;
     }
 
     if (self.songInfo[@"git_url"] != nil) {
@@ -406,7 +461,7 @@
         if ([[item class] isSubclassOfClass:[UIButton class]]) {
             UIButton *button = item;
             NSString *toneName = button.titleLabel.text;
-            button.titleLabel.font = [UIFont systemFontOfSize:22];
+            button.titleLabel.font = [UIFont systemFontOfSize:50];
             [button setTitle:self.router[toneName.lowercaseString] forState:UIControlStateNormal];
             button.layer.borderWidth = 0;
             button.layer.cornerRadius = 4;
@@ -424,7 +479,7 @@
             button.titleLabel.font = [UIFont systemFontOfSize:14];
             [button setTitle:self.mapper[computerKey] forState:UIControlStateNormal];
             button.layer.borderWidth = 1;
-            button.layer.cornerRadius = 22;
+            button.layer.cornerRadius = BUTTON_SIZE / 2;
         }
         //
     }
@@ -443,5 +498,9 @@
         [self tone2computer];
 //        self.textView.text = [self stringByReplacingString:[self.content stringByAppendingString:@"\n"]];
     }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self layoutButtonsWithContent:self.content];
 }
 @end

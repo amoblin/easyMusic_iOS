@@ -77,8 +77,7 @@
 - (UIRefreshControl *)refreshControl {
     if (_refreshControl == nil) {
         _refreshControl = [[UIRefreshControl alloc] init];
-        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
-//        _refreshControl.tintColor = [UIColor blueColor];
+//        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
         [_refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
