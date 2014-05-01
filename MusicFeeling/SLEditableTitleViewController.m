@@ -59,8 +59,8 @@
 }
 
 - (void)tapViewAction {
-    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-    [item.textField endEditing:YES];
+//    SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
+    [self.textField endEditing:YES];
 }
 
 - (void)saveContent:(NSArray *)array atPath:(NSString *)path {

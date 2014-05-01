@@ -16,9 +16,15 @@
 #import <NSData+Base64.h>
 #import <QuartzCore/QuartzCore.h>
 
+#define XOFFSET 15
+#define YOFFSET 20
+#define BUTTON_SIZE 44
+#define BUTTON_PADDING 6
+
 @interface MFPlayViewController ()
 
 @property (strong, nonatomic) NSString *content;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic) BOOL isToneShow;
 @end
 
@@ -37,20 +43,31 @@
 {
     [super viewDidLoad];
     self.isToneShow = YES;
-    /*
-    for (UIGestureRecognizer *recognizer in self.textView.gestureRecognizers) {
-        //[self.textView removeGestureRecognizer:recognizer];
-        if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]){
-            recognizer.enabled = NO;
-        } else if ([recognizer isKindOfClass:[UITapGestureRecognizer class]]) {
-            [(UITapGestureRecognizer *)recognizer setNumberOfTapsRequired:1];
-        }
-    }
-     */
-//    [self.textView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToPlay:)]];
-    [self getContent];
     self.view.backgroundColor = [UIColor whiteColor];
+
+    self.scrollView = [[UIScrollView alloc] init];
+//    self.scrollView.backgroundColor = [UIColor grayColor];
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.showsVerticalScrollIndicator = YES;
+    self.scrollView.showsHorizontalScrollIndicator = YES;
+//    self.scrollView.contentSize = CGSizeMake(320, 480);
+    self.scrollView.bounces = YES;
+    self.scrollView.alwaysBounceVertical = YES;
+    self.scrollView.autoresizesSubviews = YES;
+    [self.view addSubview:self.scrollView];
+
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-|" options:0 metrics: 0 views:viewsDictionary]];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"k2k" style:UIBarButtonItemStylePlain target:self action:@selector(k2kButtonPressed:)];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self getContent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -78,6 +95,8 @@
     unsigned paraStart = 0, paraEnd = 0, contentsEnd = 0;
 //    NSMutableArray *array = [NSMutableArray array];
     NSRange currentRange;
+    CGFloat x, y;
+    y = YOFFSET;
     while (paraEnd < length)
     {
         [content getParagraphStart:&paraStart end:&paraEnd
@@ -87,34 +106,55 @@
         NSLog(@"%@", line);
         NSArray *items = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]];
         NSLog(@"%@", items);
+        x = XOFFSET;
         for (NSString *item in items) {
+            if ([item isEqualToString:@""]) {
+                continue;
+            }
             UIButton *button = [UIButton new];
-            [button.layer setBorderColor:[[UIColor blueColor] CGColor]];
+            [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+            [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+            [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+            [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
+            [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+            [button.layer setBorderColor:[[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] CGColor]];
             [button.layer setBorderWidth:1.0f];
             button.layer.cornerRadius = 22;
             button.layer.masksToBounds = YES;
-            [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:12];
             [button setTitle:item forState:UIControlStateNormal];
 //            button.backgroundColor = [UIColor blueColor];
             button.translatesAutoresizingMaskIntoConstraints = NO;
-            [self.view addSubview:button];
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[button(==44)]"
+            [self.scrollView addSubview:button];
+
+//            if (x+50 > self.scrollView.frame.size.width) {
+            if (x+50 > [[UIScreen mainScreen] bounds].size.width) {
+                x = XOFFSET;
+                y += BUTTON_SIZE + BUTTON_PADDING;
+            }
+            NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:x], @"y": [NSNumber numberWithFloat:y]};
+            NSLog(@"%@", matrics);
+            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==44)]"
                                                                              options:0
-                                                                             metrics:nil
+                                                                             metrics:matrics
                                                                                views:NSDictionaryOfVariableBindings(button)]];
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-80-[button(==44)]"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:NSDictionaryOfVariableBindings(button)]];
+            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==44)]"
+                                                                                    options:0
+                                                                                    metrics:matrics
+                                                                                      views:NSDictionaryOfVariableBindings(button)]];
             /*
             [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[button(==44)]-(>=20)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX | NSLayoutAttributeCenterY
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(button)]];
              */
-            break;
+            x += BUTTON_SIZE + BUTTON_PADDING;
         }
+        y += BUTTON_SIZE + BUTTON_PADDING;
     }
+    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, y + 20);
 }
 
 - (NSString *)stringByReplacingString:(NSString *)str {
@@ -154,9 +194,8 @@
     if (self.content != nil) {
         if (self.isToneShow) {
             [self layoutButtonsWithContent:self.content];
-//            self.textView.text = self.content;
         } else {
-//            self.textView.text = [self stringByReplacingString:self.content];
+            // show computer keyboard
         }
     }
 
@@ -278,24 +317,88 @@
 //    }
 }
 
-- (void)tapToPlay:(UITapGestureRecognizer *)tap {
-    [self becomeFirstResponder];
-    if ( ! [tap.view isKindOfClass:[UITextView class]]) {
-        return;
-    }
+- (void)toneButtonTouchDragEnter:(UIButton *)sender {
+    NSLog(@"%@", sender);
+    NSLog(@"%s", __func__);
+}
+- (void)toneButtonTouchDragExit:(UIButton *)sender {
+    NSLog(@"%@", sender);
+    NSLog(@"%s", __func__);
+}
+- (void)toneButtonTouchDragInside:(UIButton *)sender {
+    NSLog(@"%@", sender);
+    NSLog(@"%s", __func__);
+}
+- (void)toneButtonTouchDragOutside:(UIButton *)sender {
+    NSLog(@"%@", sender);
+    NSLog(@"%s", __func__);
+}
+
+- (void)toneButtonPressed:(UIButton *)sender {
+//    [self becomeFirstResponder];
     if ( ! self.isToneShow) {
         [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
+        return;
     }
 
+    NSString *toneName = sender.titleLabel.text;
+    NSLog(@"%@", toneName);
+    if (toneName.length > 0) {
+        [self playTone:toneName];
+    }
+}
+
+- (void)toneButtonTouchDown:(UIButton *)sender {
+//    [self becomeFirstResponder];
+    if ( ! self.isToneShow) {
+        return;
+    }
+
+    NSString *toneName = sender.titleLabel.text;
+    NSLog(@"%@", toneName);
+    if (toneName.length > 0) {
+        [self playTone:toneName];
+    }
+}
+
+/*
+- (NSString *)getTappedContent:(UITextView *)textView {
     UITextView *subtitleView = (UITextView *)tap.view;
     subtitleView.selectedTextRange = 0;
 
     UITextPosition *tapPos = [subtitleView closestPositionToPoint:[tap locationInView:subtitleView]];
     UITextRange * wr = [subtitleView.tokenizer rangeEnclosingPosition:tapPos withGranularity:UITextGranularityWord inDirection:UITextLayoutDirectionRight];
     NSString *toneName = [subtitleView textInRange:wr];
-    NSLog(@"%@", toneName);
-    if (toneName.length > 0) {
-        [self playTone:toneName];
+}
+ */
+
+- (void)tone2computer {
+    NSLog(@"%@", self.scrollView.subviews);
+    for (id item in self.scrollView.subviews) {
+        if ([[item class] isSubclassOfClass:[UIButton class]]) {
+            UIButton *button = item;
+            NSString *toneName = button.titleLabel.text;
+            button.titleLabel.font = [UIFont systemFontOfSize:22];
+            [button setTitle:self.router[toneName.lowercaseString] forState:UIControlStateNormal];
+            button.layer.borderWidth = 0;
+            button.layer.cornerRadius = 4;
+        }
+        //
+    }
+}
+
+- (void)computer2tone {
+    NSLog(@"%@", self.scrollView.subviews);
+    for (id item in self.scrollView.subviews) {
+        if ([[item class] isSubclassOfClass:[UIButton class]]) {
+            UIButton *button = item;
+            NSString *computerKey = button.titleLabel.text;
+            button.titleLabel.font = [UIFont systemFontOfSize:12];
+            [button setTitle:self.mapper[computerKey] forState:UIControlStateNormal];
+            button.layer.borderWidth = 1;
+            button.layer.cornerRadius = 22;
+        }
+        //
     }
 }
 
@@ -307,7 +410,9 @@
     self.isToneShow = ! self.isToneShow;
     if (self.isToneShow) {
 //        self.textView.text = self.content;
+        [self computer2tone];
     } else {
+        [self tone2computer];
 //        self.textView.text = [self stringByReplacingString:[self.content stringByAppendingString:@"\n"]];
     }
 }

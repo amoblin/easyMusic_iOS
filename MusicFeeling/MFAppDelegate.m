@@ -44,6 +44,7 @@
     // Override point for customization after application launch.
     MFSongListViewController *controller = [[MFSongListViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navigationController.navigationBar.translucent = YES;
     self.window.rootViewController = navigationController;
 
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
