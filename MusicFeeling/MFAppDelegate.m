@@ -118,6 +118,11 @@
 
     BOOL flag = NO;
     for (AVAudioPlayer *player in self.playerCache) {
+        /*
+        if (player.isPlaying) {
+            [player stop];
+        }
+         */
         if ( ! player.isPlaying) {
             flag = YES;
             AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:resourceURL error:nil];

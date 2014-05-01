@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "MFBaseViewController.h"
 
-@interface MFSettingViewController : MFBaseViewController
+@class MFArrayDataSource;
+@interface MFSettingViewController : MFBaseViewController <UITableViewDelegate>
 
+@property (strong, nonatomic) UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleMapperSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (strong, nonatomic) MFArrayDataSource *arrayDataSource;
 
 - (IBAction)sliderValueChanged:(id)sender;
 - (IBAction)segmentedValueChanged:(id)sender;

@@ -7,6 +7,7 @@
 //
 
 #import "MFSettingViewController.h"
+#import "MFArrayDataSource.h"
 
 #define TOP @350
 #define WHITE_WIDTH @44
@@ -31,11 +32,49 @@
     return self;
 }
 
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_tableView];
+
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_tableView]-0-|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
+    }
+    return _tableView;
+}
+
+- (MFArrayDataSource *)arrayDataSource {
+    if (_arrayDataSource == nil) {
+        NSArray *dataArray;
+        static NSString *cellId;
+        void (^block)(id, id, NSIndexPath*);
+
+        dataArray = @[@[@"去评分", @"帮助", @"反馈", @"关于",]];
+        cellId = @"cellId";
+        block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = item;
+        };
+        _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
+    }
+    return _arrayDataSource;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:238.0f/255 green:238.0f/255 blue:238.0f/255 alpha:1.0];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self.arrayDataSource;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
 
     [self.toggleRandomSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"randomDegree"]];
     [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree:) forControlEvents:UIControlEventTouchUpInside];

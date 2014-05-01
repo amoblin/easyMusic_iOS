@@ -10,6 +10,8 @@
 #import "MFAppDelegate.h"
 #import "SLNavigationItem.h"
 
+#import "UIImage+Color.h"
+
 #import "PXAlertView.h"
 #import <SVProgressHUD.h>
 #import <AFNetworking.h>
@@ -18,9 +20,14 @@
 
 #define XOFFSET 15
 #define YOFFSET 20
-#define BUTTON_SIZE 44
-#define BUTTON_PADDING 6
+#define BUTTON_SIZE 65
+#define BUTTON_PADDING_H -7
+#define BUTTON_PADDING_V 10
 
+#define UIColorFromRGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define UIColorFromHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+// (0,122,1)
 @interface MFPlayViewController ()
 
 @property (strong, nonatomic) NSString *content;
@@ -55,6 +62,7 @@
     self.scrollView.bounces = YES;
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.autoresizesSubviews = YES;
+    self.scrollView.delaysContentTouches = NO;
     [self.view addSubview:self.scrollView];
 
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
@@ -118,29 +126,35 @@
             [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
             [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
             [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-            [button.layer setBorderColor:[[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] CGColor]];
+            [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
             [button.layer setBorderWidth:1.0f];
-            button.layer.cornerRadius = 22;
+            button.layer.cornerRadius = BUTTON_SIZE/2;
             button.layer.masksToBounds = YES;
-            [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:12];
+            [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:14];
             [button setTitle:item forState:UIControlStateNormal];
 //            button.backgroundColor = [UIColor blueColor];
             button.translatesAutoresizingMaskIntoConstraints = NO;
+
+            [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
+            [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
+
             [self.scrollView addSubview:button];
 
 //            if (x+50 > self.scrollView.frame.size.width) {
             if (x+50 > [[UIScreen mainScreen] bounds].size.width) {
                 x = XOFFSET;
-                y += BUTTON_SIZE + BUTTON_PADDING;
+                y += BUTTON_SIZE + BUTTON_PADDING_V;
             }
-            NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:x], @"y": [NSNumber numberWithFloat:y]};
+            NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:x],
+                                      @"y": [NSNumber numberWithFloat:y],
+                                      @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
             NSLog(@"%@", matrics);
-            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==44)]"
+            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
                                                                              options:0
                                                                              metrics:matrics
                                                                                views:NSDictionaryOfVariableBindings(button)]];
-            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==44)]"
+            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==size)]"
                                                                                     options:0
                                                                                     metrics:matrics
                                                                                       views:NSDictionaryOfVariableBindings(button)]];
@@ -150,9 +164,9 @@
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(button)]];
              */
-            x += BUTTON_SIZE + BUTTON_PADDING;
+            x += BUTTON_SIZE + BUTTON_PADDING_H;
         }
-        y += BUTTON_SIZE + BUTTON_PADDING;
+        y += BUTTON_SIZE + BUTTON_PADDING_V;
     }
     self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, y + 20);
 }
@@ -341,11 +355,13 @@
         return;
     }
 
+    /*
     NSString *toneName = sender.titleLabel.text;
     NSLog(@"%@", toneName);
     if (toneName.length > 0) {
         [self playTone:toneName];
     }
+     */
 }
 
 - (void)toneButtonTouchDown:(UIButton *)sender {
@@ -393,7 +409,7 @@
         if ([[item class] isSubclassOfClass:[UIButton class]]) {
             UIButton *button = item;
             NSString *computerKey = button.titleLabel.text;
-            button.titleLabel.font = [UIFont systemFontOfSize:12];
+            button.titleLabel.font = [UIFont systemFontOfSize:14];
             [button setTitle:self.mapper[computerKey] forState:UIControlStateNormal];
             button.layer.borderWidth = 1;
             button.layer.cornerRadius = 22;
