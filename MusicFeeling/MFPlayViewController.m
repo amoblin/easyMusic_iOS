@@ -98,6 +98,29 @@
     }
 }
 
+- (UIButton *)createButtonWithTitle:(NSString *)title {
+    UIButton *button = [UIButton new];
+    [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+    [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+    [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
+    [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+    [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
+    [button.layer setBorderWidth:1.0f];
+    button.layer.cornerRadius = BUTTON_SIZE/2;
+    button.layer.masksToBounds = YES;
+    [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setTitle:title forState:UIControlStateNormal];
+    //            button.backgroundColor = [UIColor blueColor];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
+    return button;
+}
+
 - (void)layoutButtonsWithContent:(NSString *)content {
     unsigned length = [content length];
     unsigned paraStart = 0, paraEnd = 0, contentsEnd = 0;
@@ -115,37 +138,24 @@
         NSArray *items = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]];
         NSLog(@"%@", items);
         x = XOFFSET;
+        BOOL isFirst = YES;
+        UIButton *preButton;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
             }
-            UIButton *button = [UIButton new];
-            [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-            [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-            [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
-            [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
-            [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-            [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
-            [button.layer setBorderWidth:1.0f];
-            button.layer.cornerRadius = BUTTON_SIZE/2;
-            button.layer.masksToBounds = YES;
-            [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
-            [button setTitle:item forState:UIControlStateNormal];
-//            button.backgroundColor = [UIColor blueColor];
-            button.translatesAutoresizingMaskIntoConstraints = NO;
-
-            [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
-            [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
-
+            UIButton *button = [self createButtonWithTitle:item];
             [self.scrollView addSubview:button];
 
 //            if (x+50 > self.scrollView.frame.size.width) {
             if (x+50 > [[UIScreen mainScreen] bounds].size.width) {
                 x = XOFFSET;
                 y += BUTTON_SIZE + BUTTON_PADDING_V;
+                isFirst = YES;
             }
+
+            if (isFirst) {
+                isFirst = NO;
             NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:x],
                                       @"y": [NSNumber numberWithFloat:y],
                                       @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
@@ -158,12 +168,14 @@
                                                                                     options:0
                                                                                     metrics:matrics
                                                                                       views:NSDictionaryOfVariableBindings(button)]];
-            /*
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[button(==44)]-(>=20)-|"
-                                                                             options:NSLayoutFormatAlignAllCenterX | NSLayoutAttributeCenterY
-                                                                             metrics:nil
-                                                                               views:NSDictionaryOfVariableBindings(button)]];
-             */
+            } else {
+            NSDictionary *matrics = @{@"padding_h":[NSNumber numberWithFloat:BUTTON_PADDING_H],
+                                      @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
+                [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preButton]-padding_h-[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(preButton, button)]];
+                [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
+                [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:preButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
+            }
+            preButton = button;
             x += BUTTON_SIZE + BUTTON_PADDING_H;
         }
         y += BUTTON_SIZE + BUTTON_PADDING_V;
