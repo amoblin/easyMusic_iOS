@@ -4,6 +4,7 @@ platform :ios, '7.0'
 #pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.3'
 pod 'UMengAnalytics', '~> 2.2.1'
 pod 'TalkingData-Analytics', '~> 1.0.14'
+pod 'UMengFeedback', '~> 1.4.1'
 
 # remote notification
 pod 'JPush', '~> 1.6.3'

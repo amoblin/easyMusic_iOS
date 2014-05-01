@@ -27,7 +27,7 @@
     // disable auto lock screen.
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     // track analytics
-    [MobClick startWithAppkey:@"5341f04c56240b5a2219a06a"];
+    [MobClick startWithAppkey:UMENG_KEY];
     //[TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
 #if DEBUG
     [self getDeviceInfo];

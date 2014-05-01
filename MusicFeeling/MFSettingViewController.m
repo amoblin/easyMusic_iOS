@@ -9,6 +9,9 @@
 #import "MFSettingViewController.h"
 #import "MFArrayDataSource.h"
 
+#import <QuartzCore/QuartzCore.h>
+#import <UMFeedback.h>
+
 #define TOP @350
 #define WHITE_WIDTH @44
 #define WHITE_BUTTON_WIDTH @43
@@ -34,7 +37,7 @@
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] init];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:_tableView];
 
@@ -56,11 +59,14 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"去评分", @"帮助", @"反馈", @"关于",]];
+        dataArray = @[@[@"帮助", @"反馈", @"去评分", @"版本更新", @"关于",]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = item;
+            if (indexPath.row == 3) {
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+            }
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
     }
@@ -71,7 +77,34 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithRed:238.0f/255 green:238.0f/255 blue:238.0f/255 alpha:1.0];
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    UIView *view = [[UIView alloc] init];
+    CGRect frame = [view frame];
+    frame.size.height = 150;
+    view.frame = frame;
+
+    UILabel *titleLabel = [UILabel new];
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"傻瓜演奏家";
+    [view addSubview:titleLabel];
+
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"treble_clef"]];
+    logoImageView.layer.cornerRadius = 10.0;
+    logoImageView.layer.masksToBounds = YES;
+    logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    logoImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:logoImageView];
+
+    [view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:logoImageView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[logoImageView(==60)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView)]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(titleLabel)]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[logoImageView(==60)]-10-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView, titleLabel)]];
+    self.tableView.tableHeaderView = view;
+    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];
+    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view(==100)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self.arrayDataSource;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
@@ -195,4 +228,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void) goAppStore
+{
+    NSString *url = @"https://itunes.apple.com/us/app/sha-gua-yan-zou-jia/id848880040?ls=1&mt=8";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+            break;
+        case 1:
+            [UMFeedback showFeedback:self withAppkey:UMENG_KEY];
+            break;
+        case 2:
+            [self goAppStore];
+            break;
+        default:
+            break;
+    }
+}
 @end
