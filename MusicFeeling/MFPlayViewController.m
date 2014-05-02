@@ -22,8 +22,8 @@
 #define YOFFSET 20
 #define BUTTON_SIZE 65
 #define BUTTON_PADDING_H -7
-#define BUTTON_PADDING_V 10
-#define BUTTON_WRAP_LINE_V 2
+#define BUTTON_PADDING_V 15
+#define BUTTON_WRAP_LINE_V -7
 
 #define UIColorFromRGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define UIColorFromHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -39,6 +39,15 @@
 @property (strong, nonatomic) NSArray *hConstraints;
 @property (nonatomic) CGFloat vHeight;
 @property (nonatomic) CGFloat hHeight;
+
+
+@property (nonatomic) CGFloat currentX;
+@property (nonatomic) CGFloat currentY;
+@property (strong, nonatomic) NSMutableArray *toneButtonsArray;
+@property (strong, nonatomic) UIButton *prevButton;
+@property (nonatomic) NSInteger currentIndex;
+@property (nonatomic) BOOL isFirst;
+
 @property (nonatomic) BOOL isToneShow;
 @end
 
@@ -51,6 +60,13 @@
         // Custom initialization
     }
     return self;
+}
+
+- (NSMutableArray *)toneButtonsArray {
+    if (_toneButtonsArray == nil) {
+        _toneButtonsArray = [[NSMutableArray alloc] init];
+    }
+    return _toneButtonsArray;
 }
 
 - (NSMutableArray *)buttonPool {
@@ -87,6 +103,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.isFirst = YES;
+    self.currentIndex = 0;
+    self.currentY = YOFFSET;
+    self.currentX = XOFFSET;
+
     self.isToneShow = YES;
     self.view.backgroundColor = [UIColor whiteColor];
 
@@ -116,13 +138,19 @@
     [self getContent];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.textField.delegate = self;
+    self.scrollView.delegate = self;
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     [SVProgressHUD dismiss];
     if (self.isNew) {
-        SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-        path = [delegate.composedDir stringByAppendingPathComponent:item.textField.text];
+//        SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
+        path = [delegate.composedDir stringByAppendingPathComponent:self.textField.text];
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"name"]];
     } else {
@@ -134,23 +162,31 @@
 //        self.content = [NSString stringWithFormat:@"%@\n", self.textView.text];
         [self saveContent:self.content atPath:path];
     }
+    self.textField.delegate = nil;
+    self.scrollView.delegate = nil;
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title andIndex:(NSInteger)index andType:(NSInteger)type {
+- (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
+    self.currentIndex++;
     if (self.buttonPool.count > 0) {
         UIButton *button = self.buttonPool[0];
         [self.buttonPool removeObjectAtIndex:0];
         return button;
     } else {
         UIButton *button = [UIButton new];
-        button.tag = index;
+        button.tag = self.currentIndex;
         [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
         [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+
+        // repeat method
         [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
         [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-        [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
+//        [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
+//        [button.layer setBorderColor:[UIColorFromRGB(194, 194, 194) CGColor]];
+        [button.layer setBorderColor:[UIColorFromRGB(171, 211, 255) CGColor]];
+//        [button.layer setBorderColor:[UIColorFromRGB(117, 192, 255) CGColor]];
 
         if (type) {
             button.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -166,6 +202,7 @@
 
         button.layer.masksToBounds = YES;
         [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
+//        [button setTitleColor:UIColorFromRGB(41, 140, 255) forState:UIControlStateNormal];
 
         //            button.backgroundColor = [UIColor blueColor];
         button.translatesAutoresizingMaskIntoConstraints = NO;
@@ -176,23 +213,69 @@
     }
 }
 
+- (NSArray *)layoutButton:(UIButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    CGFloat width;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            width = [UIScreen mainScreen].bounds.size.width;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            width = [UIScreen mainScreen].bounds.size.height;
+            break;
+        default:
+            break;
+    }
+    if (self.currentX + 50 > width) {
+        self.currentX = XOFFSET;
+        self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+        self.isFirst = YES;
+    }
+
+    if (self.isFirst) {
+        self.isFirst = NO;
+        NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:self.currentX],
+                                  @"y": [NSNumber numberWithFloat:self.currentY],
+                                  @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
+        NSLog(@"%@", matrics);
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
+                                                                           options:0
+                                                                           metrics:matrics
+                                                                             views:NSDictionaryOfVariableBindings(button)]];
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==size)]"
+                                                                           options:0
+                                                                           metrics:matrics
+                                                                             views:NSDictionaryOfVariableBindings(button)]];
+    } else {
+        NSDictionary *matrics = @{@"padding_h":[NSNumber numberWithFloat:BUTTON_PADDING_H],
+                                  @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_prevButton]-padding_h-[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(_prevButton, button)]];
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
+        [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
+    }
+    self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
+    self.prevButton = button;
+    return array;
+}
+
 - (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSInteger index = 1;
-    CGFloat x, y;
-    y = YOFFSET;
+    self.currentY = YOFFSET;
+    self.currentIndex = 0;
     for (NSArray *items in self.tonesArray) {
-        x = XOFFSET;
-        BOOL isFirst = YES;
-        UIButton *preButton, *button;
+        self.currentX = XOFFSET;
+        self.isFirst = YES;
+        UIButton *button;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
             }
             NSLog(@"layout item: %@", item);
-            button = (UIButton *)[self.scrollView viewWithTag:index];
-            if (button == nil) {
-                button = [self createButtonWithTitle:item andIndex:index andType:self.isToneShow];
+            button = (UIButton *)[self.scrollView viewWithTag:self.currentIndex+1];
+            if (self.currentIndex == 0 || button == nil) {
+                button = [self createButtonWithTitle:item andType:self.isToneShow];
                 [self.scrollView addSubview:button];
             }
             NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
@@ -201,62 +284,18 @@
                 NSLog(@"but the button is: %@", button.titleLabel.text);
                 break;
             }
-
-            CGFloat width;
-            switch (interfaceOrientation) {
-                case UIInterfaceOrientationPortrait:
-                case UIInterfaceOrientationPortraitUpsideDown:
-                    width = [UIScreen mainScreen].bounds.size.width;
-                    break;
-                case UIInterfaceOrientationLandscapeLeft:
-                case UIInterfaceOrientationLandscapeRight:
-                    width = [UIScreen mainScreen].bounds.size.height;
-                    break;
-                default:
-                    break;
-            }
-            if (x+50 > width) {
-                x = XOFFSET;
-                y += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
-                isFirst = YES;
-            }
-
-            if (isFirst) {
-                isFirst = NO;
-            NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:x],
-                                      @"y": [NSNumber numberWithFloat:y],
-                                      @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
-            NSLog(@"%@", matrics);
-            [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
-                                                                             options:0
-                                                                             metrics:matrics
-                                                                               views:NSDictionaryOfVariableBindings(button)]];
-            [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==size)]"
-                                                                                    options:0
-                                                                                    metrics:matrics
-                                                                                      views:NSDictionaryOfVariableBindings(button)]];
-            } else {
-            NSDictionary *matrics = @{@"padding_h":[NSNumber numberWithFloat:BUTTON_PADDING_H],
-                                      @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
-                [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preButton]-padding_h-[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(preButton, button)]];
-                [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
-                [array addObject:[NSLayoutConstraint constraintWithItem:preButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
-            }
-            preButton = button;
-            x += BUTTON_SIZE + BUTTON_PADDING_H;
-            index++;
+            [array addObjectsFromArray:[self layoutButton:button forInterfaceOrientation:interfaceOrientation]];
         }
-        index++;
-        y += BUTTON_SIZE + BUTTON_PADDING_V;
+        self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
     }
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            self.vHeight = y;
+            self.vHeight = self.currentY;
             break;
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
-            self.hHeight = y;
+            self.hHeight = self.currentY;
         default:
             break;
     }
@@ -381,16 +420,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)addTone:(NSString *)toneName {
+    self.content = [NSString stringWithFormat:@"%@ %@", self.content, toneName];
+    UIButton *button = [self createButtonWithTitle:toneName andType:self.isToneShow];
+    [self.scrollView addSubview:button];
+    [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 }
-*/
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
     if ([keyCommand.input isEqualToString:UIKeyInputEscape]) {
@@ -416,7 +451,11 @@
     }
     if ( self.isNew ) {
         if ([keyCommand.input isEqualToString:@"\r"]) {
-//            self.textView.text = [NSString stringWithFormat:@"%@\n", self.textView.text];
+            self.content = [NSString stringWithFormat:@"%@\n", self.content];
+            self.isFirst = YES;
+            self.currentX = XOFFSET;
+            self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
+
             return;
         } else if ([keyCommand.input isEqualToString:@"\b"]) {
             [self deleteLastTone];
@@ -427,8 +466,7 @@
     NSString *toneName = [self.mapper objectForKey:keyCommand.input];
 
     if (self.isNew) {
-//        self.content = [NSString stringWithFormat:@"%@ %@", self.textView.text, toneName];
-//        self.textView.text = self.content;
+        [self addTone:toneName];
     }
     if (toneName == nil) {
         return;
@@ -449,11 +487,17 @@
 }
 
 - (void)deleteLastTone {
-//    NSString *str = self.textView.text;
-//    NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
-//    if (range.location != NSNotFound) {
-//        self.textView.text = [str substringToIndex:range.location];
-//    }
+//    [self.buttonPool addObject:self.prevButton];
+    [self.prevButton removeFromSuperview];
+    if (self.currentIndex <= 1) {
+        self.currentIndex = 0;
+        self.isFirst = YES;
+        self.currentY = YOFFSET;
+        self.currentX = XOFFSET;
+        return;
+    }
+    self.currentIndex--;
+    self.prevButton = (UIButton *)[self.scrollView viewWithTag:self.currentIndex];
 }
 
 - (void)toneButtonTouchDragEnter:(UIButton *)sender {
@@ -479,6 +523,10 @@
         [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
         return;
     }
+    sender.backgroundColor =  UIColorFromRGB(117, 192, 255);
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        sender.backgroundColor = [UIColor clearColor];
+    }];
 
     /*
     NSString *toneName = sender.titleLabel.text;

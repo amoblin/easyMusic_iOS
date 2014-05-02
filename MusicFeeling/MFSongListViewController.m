@@ -92,7 +92,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
     vc.songInfo = self.songsInfo[indexPath.row];
-    [vc setEditableTitle:[[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
+    vc.title = [[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
+//    [vc setEditableTitle:[[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -122,7 +123,10 @@
 }
 
 - (void)addButtonPressed:(id)sender {
-//        vc.isNew = YES;
+    MFPlayViewController *vc = [[MFPlayViewController alloc] init];
+    vc.isNew = YES;
+    [vc setEditableTitle:@""];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
