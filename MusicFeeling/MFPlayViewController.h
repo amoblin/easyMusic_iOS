@@ -10,7 +10,7 @@
 #import "MFBaseViewController.h"
 #import "SLEditableTitleViewController.h"
 
-@interface MFPlayViewController : SLEditableTitleViewController
+@interface MFPlayViewController : SLEditableTitleViewController<UIScrollViewDelegate>
 
 //@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) NSDictionary *songInfo;

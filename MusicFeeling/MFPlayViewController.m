@@ -35,6 +35,10 @@
 @property (strong, nonatomic) NSArray *tonesArray;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) NSArray *vConstraints;
+@property (strong, nonatomic) NSArray *hConstraints;
+@property (nonatomic) CGFloat vHeight;
+@property (nonatomic) CGFloat hHeight;
 @property (nonatomic) BOOL isToneShow;
 @end
 
@@ -92,11 +96,11 @@
     self.scrollView.scrollEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = YES;
     self.scrollView.showsHorizontalScrollIndicator = YES;
-//    self.scrollView.contentSize = CGSizeMake(320, 480);
     self.scrollView.bounces = YES;
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.autoresizesSubviews = YES;
     self.scrollView.delaysContentTouches = NO;
+    self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
 
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
@@ -132,13 +136,14 @@
     }
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
+- (UIButton *)createButtonWithTitle:(NSString *)title andIndex:(NSInteger)index andType:(NSInteger)type {
     if (self.buttonPool.count > 0) {
         UIButton *button = self.buttonPool[0];
         [self.buttonPool removeObjectAtIndex:0];
         return button;
     } else {
         UIButton *button = [UIButton new];
+        button.tag = index;
         [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -171,17 +176,9 @@
     }
 }
 
-- (void)layoutButtonsWithContent:(NSString *)content {
-    NSInteger index = 0;
-    for (UIView *view in self.scrollView.subviews) {
-        if ([[view class] isSubclassOfClass:[UIButton class]]) {
-            break;
-            //[view removeFromSuperview];
-            //[self.buttonPool addObject:view];
-        }
-        index++;
-    }
-
+- (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSInteger index = 1;
     CGFloat x, y;
     y = YOFFSET;
     for (NSArray *items in self.tonesArray) {
@@ -192,15 +189,33 @@
             if ([item isEqualToString:@""]) {
                 continue;
             }
-            if (index < self.scrollView.subviews.count) {
-                button = self.scrollView.subviews[index];
-            } else {
-                button = [self createButtonWithTitle:item andType:self.isToneShow];
+            NSLog(@"layout item: %@", item);
+            button = (UIButton *)[self.scrollView viewWithTag:index];
+            if (button == nil) {
+                button = [self createButtonWithTitle:item andIndex:index andType:self.isToneShow];
                 [self.scrollView addSubview:button];
             }
-            [button removeConstraints:button.constraints];
+            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
+            if ( ! [button.titleLabel.text isEqualToString:item]) {
+                NSLog(@"current item is: %@", item);
+                NSLog(@"but the button is: %@", button.titleLabel.text);
+                break;
+            }
 
-            if (x+50 > self.scrollView.frame.size.width) {
+            CGFloat width;
+            switch (interfaceOrientation) {
+                case UIInterfaceOrientationPortrait:
+                case UIInterfaceOrientationPortraitUpsideDown:
+                    width = [UIScreen mainScreen].bounds.size.width;
+                    break;
+                case UIInterfaceOrientationLandscapeLeft:
+                case UIInterfaceOrientationLandscapeRight:
+                    width = [UIScreen mainScreen].bounds.size.height;
+                    break;
+                default:
+                    break;
+            }
+            if (x+50 > width) {
                 x = XOFFSET;
                 y += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
                 isFirst = YES;
@@ -212,20 +227,20 @@
                                       @"y": [NSNumber numberWithFloat:y],
                                       @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
             NSLog(@"%@", matrics);
-            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
+            [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
                                                                              options:0
                                                                              metrics:matrics
                                                                                views:NSDictionaryOfVariableBindings(button)]];
-            [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==size)]"
+            [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==size)]"
                                                                                     options:0
                                                                                     metrics:matrics
                                                                                       views:NSDictionaryOfVariableBindings(button)]];
             } else {
             NSDictionary *matrics = @{@"padding_h":[NSNumber numberWithFloat:BUTTON_PADDING_H],
                                       @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
-                [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preButton]-padding_h-[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(preButton, button)]];
-                [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
-                [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:preButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
+                [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[preButton]-padding_h-[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(preButton, button)]];
+                [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
+                [array addObject:[NSLayoutConstraint constraintWithItem:preButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
             }
             preButton = button;
             x += BUTTON_SIZE + BUTTON_PADDING_H;
@@ -234,7 +249,50 @@
         index++;
         y += BUTTON_SIZE + BUTTON_PADDING_V;
     }
-    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, y + 20);
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            self.vHeight = y;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            self.hHeight = y;
+        default:
+            break;
+    }
+    return array;
+}
+
+- (NSArray *)vConstraints {
+    if (_vConstraints == nil) {
+        _vConstraints = [self getConstraintsForInterfaceOrientation:UIInterfaceOrientationPortrait];
+    }
+    return _vConstraints;
+}
+
+- (NSArray *)hConstraints {
+    if (_hConstraints == nil) {
+        _hConstraints = [self getConstraintsForInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
+        return _hConstraints;
+    }
+    return _hConstraints;
+}
+
+- (void)layoutButtonsWithContent:(NSString *)content {
+    switch (self.interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            [self.scrollView addConstraints:self.vConstraints];
+            self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,  self.vHeight + 20);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            [self.scrollView addConstraints:self.hConstraints];
+            self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.height,  self.hHeight + 20);
+            break;
+        default:
+            break;
+    }
 }
 
 - (NSString *)stringByReplacingString:(NSString *)str {
@@ -277,7 +335,7 @@
         } else {
             // show computer keyboard
         }
-        return;
+//        return;
     }
 
     if (self.songInfo[@"git_url"] != nil) {
@@ -500,7 +558,42 @@
     }
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [self layoutButtonsWithContent:self.content];
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    switch (toInterfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            [self.scrollView removeConstraints:self.hConstraints];
+            [self.scrollView addConstraints:self.vConstraints];
+            self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,  self.vHeight + 20);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            [self.scrollView removeConstraints:self.vConstraints];
+            [self.scrollView addConstraints:self.hConstraints];
+            self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.height,  self.hHeight + 20);
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"%lf", scrollView.contentSize.height);
+    if (scrollView.contentSize.height != 0) {
+        return;
+    }
+    switch (self.interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width,  self.vHeight + 20);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.height,  self.hHeight + 20);
+            break;
+        default:
+            break;
+    }
+    NSLog(@"%lf", scrollView.contentSize.height);
 }
 @end
