@@ -432,12 +432,12 @@
     if ([keyCommand.input isEqualToString:@" "]) {
         CGFloat offset;
         if (keyCommand.modifierFlags == UIKeyModifierShift) {
-            offset = self.scrollView.contentOffset.y - self.scrollView.frame.size.height * 0.9;
+            offset = self.scrollView.contentOffset.y - self.scrollView.frame.size.height * 0.8;
             if ( offset <= -64) {
                 offset = -64;
             }
         } else {
-            CGFloat offset = self.scrollView.contentOffset.y + self.scrollView.frame.size.height * 0.9;
+            offset = self.scrollView.contentOffset.y + self.scrollView.frame.size.height * 0.8;
             if (offset + self.scrollView.bounds.size.height > self.scrollView.contentSize.height) {
                 offset = self.scrollView.contentSize.height - self.scrollView.bounds.size.height;
             }

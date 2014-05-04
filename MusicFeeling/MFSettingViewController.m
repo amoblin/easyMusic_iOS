@@ -61,7 +61,7 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"反馈", @"去评分", @"版本更新"]];
+        dataArray = @[@[@"反馈", @"去评分", @"版本信息"]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -235,18 +235,18 @@
     //set the bundle ID. normally you wouldn't need to do this
     //as it is picked up automatically from your Info.plist file
     //but we want to test with an app that's actually on the store
-    [iVersion sharedInstance].applicationBundleID = @"biz.marboo.k2k";
+//    [iVersion sharedInstance].applicationBundleID = @"biz.marboo.k2k";
 
     //configure iVersion. These paths are optional - if you don't set
     //them, iVersion will just get the release notes from iTunes directly (if your app is on the store)
 
-    [[iVersion sharedInstance] setDelegate:self];
-    [[iVersion sharedInstance] checkForNewVersion];
+//    [[iVersion sharedInstance] setDelegate:self];
+//    [[iVersion sharedInstance] checkForNewVersion];
 }
 
 #pragma mark - iVersion Delegate
 - (void)iVersionDidNotDetectNewVersion {
-    [[iVersion sharedInstance] setDelegate:nil];
+//    [[iVersion sharedInstance] setDelegate:nil];
     [SVProgressHUD showSuccessWithStatus:@"目前已是最新版本"];
 }
 
