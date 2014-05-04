@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MFBaseViewController.h"
+#import <iVersion.h>
 
 @class MFArrayDataSource;
-@interface MFSettingViewController : MFBaseViewController <UITableViewDelegate>
+@interface MFSettingViewController : MFBaseViewController <UITableViewDelegate, iVersionDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;

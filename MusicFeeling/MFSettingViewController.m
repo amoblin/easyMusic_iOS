@@ -8,9 +8,11 @@
 
 #import "MFSettingViewController.h"
 #import "MFArrayDataSource.h"
+#import "MFSettingsTableViewCell.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <UMFeedback.h>
+#import <SVProgressHUD.h>
 
 #define TOP @350
 #define WHITE_WIDTH @44
@@ -59,12 +61,12 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"帮助", @"反馈", @"去评分", @"版本更新", @"关于",]];
+        dataArray = @[@[@"反馈", @"去评分", @"版本更新"]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = item;
-            if (indexPath.row == 3) {
+            if (indexPath.row == 2) {
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
             }
         };
@@ -107,7 +109,7 @@
     [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view(==100)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self.arrayDataSource;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
+    [self.tableView registerClass:[MFSettingsTableViewCell class] forCellReuseIdentifier:@"cellId"];
 
     [self.toggleRandomSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"randomDegree"]];
     [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree:) forControlEvents:UIControlEventTouchUpInside];
@@ -228,6 +230,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)checkNewVersion
+{
+    //set the bundle ID. normally you wouldn't need to do this
+    //as it is picked up automatically from your Info.plist file
+    //but we want to test with an app that's actually on the store
+    [iVersion sharedInstance].applicationBundleID = @"biz.marboo.k2k";
+
+    //configure iVersion. These paths are optional - if you don't set
+    //them, iVersion will just get the release notes from iTunes directly (if your app is on the store)
+
+    [[iVersion sharedInstance] setDelegate:self];
+    [[iVersion sharedInstance] checkForNewVersion];
+}
+
+#pragma mark - iVersion Delegate
+- (void)iVersionDidNotDetectNewVersion {
+    [[iVersion sharedInstance] setDelegate:nil];
+    [SVProgressHUD showSuccessWithStatus:@"目前已是最新版本"];
+}
+
 - (void) goAppStore
 {
     NSString *url = @"https://itunes.apple.com/us/app/sha-gua-yan-zou-jia/id848880040?ls=1&mt=8";
@@ -239,12 +261,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            break;
-        case 1:
             [UMFeedback showFeedback:self withAppkey:UMENG_KEY];
             break;
-        case 2:
+        case 1:
             [self goAppStore];
+            break;
+        case 2:
+            [self checkNewVersion];
             break;
         default:
             break;
