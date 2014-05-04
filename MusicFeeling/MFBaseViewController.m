@@ -154,6 +154,10 @@
 }
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"keyboardConnected"] == nil) {
+        [MobClick event:@"keyboardConnected"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"keyboardConnected"];
+    }
     if ([keyCommand.input isEqualToString:UIKeyInputEscape]) {
         [self.navigationController popViewControllerAnimated:YES];
         return;
