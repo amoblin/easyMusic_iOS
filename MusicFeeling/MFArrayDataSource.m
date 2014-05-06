@@ -63,16 +63,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"我创作的";
-            break;
-        case 1:
-            return @"大家创作的";
-            break;
-        default:
-            return @"大家创作的";
-            break;
+    if (section < self.sectionHeaderArray.count) {
+        return self.sectionHeaderArray[section];
+    } else {
+        return nil;
     }
 }
 

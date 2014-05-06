@@ -54,6 +54,7 @@
             cell.textLabel.text = [[item[@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
+	    _arrayDataSource.sectionHeaderArray = @[@"我创作的", @"大家创作的"];
         _arrayDataSource.editCellBlock = ^(NSDictionary *item, NSIndexPath *indexPath) {
             MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
             [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"name"]] error:nil];
@@ -109,7 +110,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
+        NSMutableArray *array = [[NSMutableArray alloc] init];
         [SVProgressHUD dismiss];
         for (NSDictionary *item in responseObject) {
             if ([[[item[@"name"] stringByDeletingPathExtension] pathExtension] isEqualToString:@"k2k"]) {
