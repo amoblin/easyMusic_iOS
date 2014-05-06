@@ -40,6 +40,8 @@
     }
     if ( ! [[NSFileManager defaultManager] fileExistsAtPath:self.composedDir]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:self.composedDir withIntermediateDirectories:NO attributes:nil error:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Do Re Mi.k2k" ofType:@".txt"];
+        [[NSFileManager defaultManager] copyItemAtPath:path toPath:[self.composedDir stringByAppendingPathComponent:@"Do Re Mi.k2k.txt"] error:nil];
     }
     // Override point for customization after application launch.
     MFSongListViewController *controller = [[MFSongListViewController alloc] init];

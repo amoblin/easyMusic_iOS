@@ -13,7 +13,6 @@
 @interface MFSongListViewController : MFBaseViewController<UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSArray *songsInfo;
 @property (strong, nonatomic) NSMutableArray *composedSongs;
 @property (strong, nonatomic) MFArrayDataSource *arrayDataSource;
 @end

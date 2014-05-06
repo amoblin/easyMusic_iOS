@@ -9,13 +9,12 @@
 #import "MFArrayDataSource.h"
 
 @interface MFArrayDataSource()
-@property (strong, nonatomic) NSArray *items;
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, copy) TableViewCellConfigureBlock configureCellBlock;
 @end
 
 @implementation MFArrayDataSource
-- (id)initWithItems:(NSArray *)items cellIdentifier:(NSString *)cellId configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock {
+- (id)initWithItems:(NSMutableArray *)items cellIdentifier:(NSString *)cellId configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock {
     self = [super init];
     if (self) {
         self.items = items;
@@ -23,6 +22,14 @@
         self.configureCellBlock = [configureCellBlock copy];
     }
     return self;
+}
+
+- (void)setEditCellBlock:(TableViewCellEditBlock)editCellBlock {
+    _editCellBlock = [editCellBlock copy];
+}
+
+- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.items[indexPath.section] removeObjectAtIndex:indexPath.row];
 }
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
@@ -47,6 +54,39 @@
     }
     return cell;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"我创作的";
+            break;
+        case 1:
+            return @"大家创作的";
+            break;
+        default:
+            return @"大家创作的";
+            break;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.editCellBlock != nil) {
+        id item = [self itemAtIndexPath:indexPath];
+        self.editCellBlock(item, indexPath);
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [self removeItemAtIndexPath:indexPath];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
+}
+
 
 #pragma mark UICollectionViewDataSource
 

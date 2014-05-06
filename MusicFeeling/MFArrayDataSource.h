@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^TableViewCellConfigureBlock)(id cell, id item, NSIndexPath *indexPath);
-
+typedef void (^TableViewCellEditBlock)(id item, NSIndexPath *indexPath);
 
 @interface MFArrayDataSource: NSObject <UITableViewDataSource, UICollectionViewDataSource>
 
+@property (nonatomic, copy) TableViewCellEditBlock editCellBlock;
+@property (strong, nonatomic) NSArray *items;
+
 - (id)initWithItems:(NSArray *)items cellIdentifier:(NSString *)cellId configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 @end

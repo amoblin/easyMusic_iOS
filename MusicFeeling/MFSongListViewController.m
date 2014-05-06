@@ -13,6 +13,7 @@
 
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
+#import <UMengAnalytics/MobClick.h>
 
 @interface MFSongListViewController ()
 
@@ -31,32 +32,32 @@
     return _composedSongs;
 }
 
-- (NSArray *)songsInfo {
-    if (_songsInfo == nil) {
-        NSError *error = nil;
-        MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
-        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
-            [array addObject:@{@"name": file}];
-        }
-        _songsInfo = [NSArray arrayWithArray:array];
-    }
-    return _songsInfo;
-}
-
 - (MFArrayDataSource *)arrayDataSource {
     if (_arrayDataSource == nil) {
         NSArray *dataArray;
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[self.songsInfo];
+        NSError *error = nil;
+        MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
+            [array addObject:@{@"name": file}];
+        }
+        if (self.composedSongs.count == 0) {
+            dataArray = @[array];
+        }
+        dataArray = @[self.composedSongs, array];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = [[item[@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
+        _arrayDataSource.editCellBlock = ^(NSDictionary *item, NSIndexPath *indexPath) {
+            MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"name"]] error:nil];
+        };
     }
     return _arrayDataSource;
 }
@@ -97,8 +98,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
-    vc.songInfo = self.songsInfo[indexPath.row];
-    vc.title = [[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
+    vc.songInfo = [self.arrayDataSource itemAtIndexPath:indexPath];
+    vc.title = [[[self.arrayDataSource itemAtIndexPath:indexPath][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
 //    [vc setEditableTitle:[[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -116,9 +117,7 @@
             }
         }
         [self.refreshControl endRefreshing];
-        self.songsInfo = [NSArray arrayWithArray:array];
-        self.arrayDataSource = nil;
-        self.tableView.dataSource = self.arrayDataSource;
+        self.arrayDataSource.items = @[self.composedSongs, array];
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
@@ -131,6 +130,7 @@
 }
 
 - (void)addButtonPressed:(id)sender {
+    [MobClick event:@"创作曲目"];
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
     vc.isNew = YES;
     [vc setEditableTitle:@""];
@@ -141,8 +141,8 @@
     MFPlayViewController *vc = segue.destinationViewController;
     if ([segue.identifier isEqualToString:@"songDetailSegue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        vc.songInfo = self.songsInfo[indexPath.row];
-        [vc setEditableTitle:[[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
+        vc.songInfo = [self.arrayDataSource itemAtIndexPath:indexPath];
+        [vc setEditableTitle:[[[self.arrayDataSource itemAtIndexPath:indexPath][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
     } else {
         vc.isNew = YES;
     }
@@ -165,14 +165,12 @@
     self.tableView.dataSource = self.arrayDataSource;
     self.tableView.delegate = self;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
-    if (self.songsInfo.count == 0) {
-        [SVProgressHUD show];
-    }
     [self getContents];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self pullToRefresh];
+    self.arrayDataSource.items = @[self.composedSongs, self.arrayDataSource.items[1]];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
