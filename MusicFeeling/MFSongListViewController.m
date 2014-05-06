@@ -111,6 +111,8 @@
         }
         [self.refreshControl endRefreshing];
         self.songsInfo = [NSArray arrayWithArray:array];
+        self.arrayDataSource = nil;
+        self.tableView.dataSource = self.arrayDataSource;
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
