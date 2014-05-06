@@ -21,14 +21,20 @@
 
 @implementation MFSongListViewController
 
-- (NSArray *)songsInfo {
+- (NSMutableArray *)composedSongs {
     NSError *error = nil;
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    _composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
+    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
+        [_composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
+    }
+    return _composedSongs;
+}
+
+- (NSArray *)songsInfo {
     if (_songsInfo == nil) {
-        self.composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
-        for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
-            [self.composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
-        }
+        NSError *error = nil;
+        MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
         NSMutableArray *array = [NSMutableArray arrayWithArray:self.composedSongs];
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
             [array addObject:@{@"name": file}];

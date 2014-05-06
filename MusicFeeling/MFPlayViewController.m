@@ -143,6 +143,9 @@
     [super viewWillAppear:animated];
     self.textField.delegate = self;
     self.scrollView.delegate = self;
+    if (self.isNew) {
+        [self.textField becomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
