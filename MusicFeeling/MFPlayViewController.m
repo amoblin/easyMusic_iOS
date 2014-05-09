@@ -372,10 +372,12 @@
 //        return;
     }
 
-    if (self.songInfo[@"git_url"] != nil) {
+    if (self.songInfo[@"path"] != nil) {
         [SVProgressHUD show];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *url = self.songInfo[@"git_url"];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+        NSString *url = [NSString stringWithFormat:@"http://apion.github.io/k2k/%@", self.songInfo[@"path"]];
+        url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
             NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
@@ -386,13 +388,18 @@
             self.content = content;
             if (self.isToneShow) {
                 [self layoutButtonsWithContent:self.content];
-//                self.textView.text = content;
             } else {
-//                self.textView.text = [self stringByReplacingString:content];
             }
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
-            NSLog(@"%@", error);
+            self.content = operation.responseString;
+            if (self.content != nil) {
+                if (self.isToneShow) {
+                    [self layoutButtonsWithContent:self.content];
+                } else {
+                }
+            }
+//            NSLog(@"%@", error);
         }];
     }
 }
@@ -402,6 +409,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths[0] stringByAppendingPathComponent:path];
      */
+    path = [path stringByAppendingPathExtension:@".k2k.txt"];
     NSError *error = nil;
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (error != nil) {

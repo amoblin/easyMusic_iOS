@@ -44,9 +44,6 @@
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
             [array addObject:@{@"name": file}];
         }
-        if (self.composedSongs.count == 0) {
-            dataArray = @[array];
-        }
         dataArray = @[self.composedSongs, array];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
@@ -108,17 +105,11 @@
 - (void)getContents {
     //[SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *url = @"https://api.github.com/repos/amoblin/k2k/contents/";
+    NSString *url = @"http://apion.github.io/k2k/songs.json";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSMutableArray *array = [[NSMutableArray alloc] init];
         [SVProgressHUD dismiss];
-        for (NSDictionary *item in responseObject) {
-            if ([[[item[@"name"] stringByDeletingPathExtension] pathExtension] isEqualToString:@"k2k"]) {
-                [array addObject:item];
-            }
-        }
         [self.refreshControl endRefreshing];
-        self.arrayDataSource.items = @[self.composedSongs, array];
+        self.arrayDataSource.items = @[self.composedSongs, responseObject];
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
