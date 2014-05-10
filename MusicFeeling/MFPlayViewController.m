@@ -409,7 +409,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     path = [paths[0] stringByAppendingPathComponent:path];
      */
-    path = [path stringByAppendingPathExtension:@".k2k.txt"];
+    path = [path stringByAppendingPathExtension:@"k2k.txt"];
     NSError *error = nil;
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (error != nil) {

@@ -64,21 +64,21 @@ static const CGFloat AlertViewButtonHeight = 44;
     if (self) {
         _mainWindow = [self windowWithLevel:UIWindowLevelNormal];
         _alertWindow = [self windowWithLevel:UIWindowLevelAlert];
-        
+
         if (!_alertWindow) {
             _alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
             _alertWindow.windowLevel = UIWindowLevelAlert;
         }
         _alertWindow.rootViewController = self;
-        
+
         CGRect frame = [self frameForOrientation:self.interfaceOrientation];
         self.view.frame = frame;
-        
+
         _backgroundView = [[UIView alloc] initWithFrame:frame];
         _backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.25];
         _backgroundView.alpha = 0;
         [self.view addSubview:_backgroundView];
-        
+
         _alertView = [[UIView alloc] init];
 //        _alertView.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
         _alertView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
@@ -87,7 +87,7 @@ static const CGFloat AlertViewButtonHeight = 44;
         _alertView.layer.opacity = 1;
         _alertView.clipsToBounds = YES;
         [self.view addSubview:_alertView];
-        
+
         // Title
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(AlertViewContentMargin,
                                                                 AlertViewVerticalElementSpace,
@@ -103,9 +103,9 @@ static const CGFloat AlertViewButtonHeight = 44;
         _titleLabel.numberOfLines = 0;
         _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel];
         [_alertView addSubview:_titleLabel];
-        
+
         CGFloat messageLabelY = _titleLabel.frame.origin.y + _titleLabel.frame.size.height + AlertViewVerticalElementSpace;
-        
+
         // Optional Content View
         if (contentView) {
             _contentView = contentView;
@@ -117,7 +117,7 @@ static const CGFloat AlertViewButtonHeight = 44;
             [_alertView addSubview:_contentView];
             messageLabelY += contentView.frame.size.height + AlertViewVerticalElementSpace;
         }
-        
+
         // Message
         _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(AlertViewContentMargin,
                                                                   messageLabelY,
@@ -133,14 +133,14 @@ static const CGFloat AlertViewButtonHeight = 44;
         _messageLabel.numberOfLines = 0;
         _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel];
         [_alertView addSubview:_messageLabel];
-        
+
         // Line
         CALayer *lineLayer = [CALayer layer];
 //        lineLayer.backgroundColor = [[UIColor colorWithWhite:0.90 alpha:0.3] CGColor];
         lineLayer.backgroundColor = [[UIColor colorWithWhite:0.20 alpha:0.3] CGColor];
         lineLayer.frame = CGRectMake(0, _messageLabel.frame.origin.y + _messageLabel.frame.size.height + AlertViewVerticalElementSpace, AlertViewWidth, 0.5);
         [_alertView.layer addSublayer:lineLayer];
-        
+
         // Buttons
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         if (cancelTitle) {
@@ -149,7 +149,7 @@ static const CGFloat AlertViewButtonHeight = 44;
             [_cancelButton setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
         }
         _cancelButton.backgroundColor = [UIColor clearColor];
-        
+
 //        [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[UIColor colorWithRed:34/255.0 green:120/255.0 blue:219/255.0 alpha:1] forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[UIColor colorWithWhite:0.25 alpha:1] forState:UIControlStateHighlighted];
@@ -161,7 +161,7 @@ static const CGFloat AlertViewButtonHeight = 44;
         if (otherTitle) {
             _cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
             _cancelButton.frame = CGRectMake(0, buttonsY, AlertViewWidth/2, AlertViewButtonHeight);
-            
+
             _otherButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [_otherButton setTitle:otherTitle forState:UIControlStateNormal];
             _otherButton.backgroundColor = [UIColor clearColor];
@@ -174,30 +174,30 @@ static const CGFloat AlertViewButtonHeight = 44;
             [_otherButton addTarget:self action:@selector(clearBackgroundColorForButton:) forControlEvents:UIControlEventTouchDragExit];
             _otherButton.frame = CGRectMake(_cancelButton.frame.size.width, buttonsY, AlertViewWidth/2, 44);
             [self.alertView addSubview:_otherButton];
-            
+
             CALayer *lineLayer = [CALayer layer];
 //            lineLayer.backgroundColor = [[UIColor colorWithWhite:0.90 alpha:0.3] CGColor];
             lineLayer.backgroundColor = [[UIColor colorWithWhite:0.20 alpha:0.3] CGColor];
             lineLayer.frame = CGRectMake(_otherButton.frame.origin.x, _otherButton.frame.origin.y, 0.5, AlertViewButtonHeight);
             [_alertView.layer addSublayer:lineLayer];
-            
+
         } else {
             _cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:17];
             _cancelButton.frame = CGRectMake(0, buttonsY, AlertViewWidth, AlertViewButtonHeight);
         }
-        
+
         [_alertView addSubview:_cancelButton];
-        
+
         _alertView.bounds = CGRectMake(0, 0, AlertViewWidth, 150);
-        
+
         if (completion) {
             _completion = completion;
         }
-        
+
         [self resizeViews];
-        
+
         _alertView.center = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
-        
+
         [self setupGestures];
     }
     return self;
@@ -218,7 +218,7 @@ static const CGFloat AlertViewButtonHeight = 44;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
+
     CGRect frame = [self frameForOrientation:toInterfaceOrientation];
     self.view.frame = frame;
     self.backgroundView.frame = frame;
@@ -259,7 +259,7 @@ static const CGFloat AlertViewButtonHeight = 44;
 - (void)dismiss:(id)sender
 {
     self.visible = NO;
-    
+
     if ([[[PXAlertViewQueue sharedInstance] alertViews] count] == 1) {
         [self dismissAlertAnimation];
         if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
@@ -273,14 +273,14 @@ static const CGFloat AlertViewButtonHeight = 44;
             [self.mainWindow makeKeyAndVisible];
         }];
     }
-    
+
     [UIView animateWithDuration:0.2 animations:^{
         self.alertView.alpha = 0;
     } completion:^(BOOL finished) {
         [[PXAlertViewQueue sharedInstance] remove:self];
         [self.view removeFromSuperview];
     }];
-    
+
     BOOL cancelled;
     if (sender == self.cancelButton || sender == self.tap) {
         cancelled = YES;
@@ -387,14 +387,14 @@ static const CGFloat AlertViewButtonHeight = 44;
 - (CGRect)adjustLabelFrameHeight:(UILabel *)label
 {
     CGFloat height;
-    
+
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         CGSize size = [label.text sizeWithFont:label.font
                              constrainedToSize:CGSizeMake(label.frame.size.width, FLT_MAX)
                                  lineBreakMode:NSLineBreakByWordWrapping];
-        
+
         height = size.height;
         #pragma clang diagnostic pop
     } else {
@@ -406,7 +406,7 @@ static const CGFloat AlertViewButtonHeight = 44;
                                         context:context];
         height = bounds.size.height;
     }
-    
+
     return CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, height);
 }
 
@@ -420,7 +420,7 @@ static const CGFloat AlertViewButtonHeight = 44;
     }
     totalHeight += AlertViewButtonHeight;
     totalHeight += AlertViewVerticalElementSpace;
-    
+
     self.alertView.frame = CGRectMake(self.alertView.frame.origin.x,
                                       self.alertView.frame.origin.y,
                                       self.alertView.frame.size.width,
@@ -430,7 +430,7 @@ static const CGFloat AlertViewButtonHeight = 44;
 - (void)showAlertAnimation
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    
+
     animation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1)],
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.05, 1.05, 1)],
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1)]];
@@ -438,21 +438,21 @@ static const CGFloat AlertViewButtonHeight = 44;
     animation.fillMode = kCAFillModeForwards;
     animation.removedOnCompletion = NO;
     animation.duration = .3;
-    
+
     [self.alertView.layer addAnimation:animation forKey:@"showAlert"];
 }
 
 - (void)dismissAlertAnimation
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    
+
     animation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1)],
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.95, 0.95, 1)],
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1)]];
     animation.keyTimes = @[ @0, @0.5, @1 ];
     animation.fillMode = kCAFillModeRemoved;
     animation.duration = .2;
-    
+
     [self.alertView.layer addAnimation:animation forKey:@"dismissAlert"];
 }
 
@@ -468,7 +468,7 @@ static const CGFloat AlertViewButtonHeight = 44;
         _sharedInstance = [[PXAlertViewQueue alloc] init];
         _sharedInstance.alertViews = [NSMutableArray array];
     });
-    
+
     return _sharedInstance;
 }
 

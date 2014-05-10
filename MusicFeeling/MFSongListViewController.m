@@ -10,6 +10,7 @@
 #import "MFPlayViewController.h"
 #import "MFAppDelegate.h"
 #import "MFSettingViewController.h"
+#import "MFSettingsTableViewCell.h"
 
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
@@ -21,6 +22,44 @@
 @end
 
 @implementation MFSongListViewController
+
+- (NSString *)humanableInfoFromDate: (NSString *) theDate {
+//    theDate = @"2014-04-15 17:20:59";
+    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    [date setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+    NSDate *d=[date dateFromString:theDate];
+    NSString *info;
+
+    NSTimeInterval delta = -[d timeIntervalSinceNow];
+    if (delta < 60) {
+        // 1分钟之内
+        info = @"Just Now";
+    } else {
+        delta = delta / 60;
+        if (delta < 60) {
+            // n分钟前
+            info = [NSString stringWithFormat:@"%d分钟前", (NSUInteger)delta];
+        } else {
+            delta = delta / 60;
+            if (delta < 24) {
+                // n小时前
+                info = [NSString stringWithFormat:@"%d小时前", (NSUInteger)delta];
+            } else {
+                delta = delta / 24;
+                if (delta == 1) {
+                    //昨天
+                    info = @"昨天";
+                } else if (delta == 2) {
+                    info = @"前天";
+                } else {
+                    info = [NSString stringWithFormat:@"%d天前", (NSUInteger)delta];
+                }
+            }
+        }
+    }
+    NSLog(@"%@", info);
+    return info;
+}
 
 - (NSMutableArray *)composedSongs {
     NSError *error = nil;
@@ -42,13 +81,16 @@
         MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
         NSMutableArray *array = [[NSMutableArray alloc] init];
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
-            [array addObject:@{@"name": file}];
+            [array addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension]}];
         }
         dataArray = @[self.composedSongs, array];
         cellId = @"cellId";
-        block = ^(UITableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
+        block = ^(MFSettingsTableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = [[item[@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
+            cell.textLabel.text = item[@"name"];
+            if (item[@"mtime"] != nil) {
+                cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
+            }
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
 	    _arrayDataSource.sectionHeaderArray = @[@"我创作的", @"大家创作的"];
@@ -156,7 +198,7 @@
 
     self.tableView.dataSource = self.arrayDataSource;
     self.tableView.delegate = self;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellId"];
+    [self.tableView registerClass:[MFSettingsTableViewCell class] forCellReuseIdentifier:@"cellId"];
     [self getContents];
 }
 
