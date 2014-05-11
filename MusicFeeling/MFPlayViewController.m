@@ -102,6 +102,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.isNew) {
+        self.UMPageName = @"创作曲目";
+    } else {
+        self.UMPageName = @"曲目详情";
+    }
 
     self.isFirst = YES;
     self.currentIndex = 0;

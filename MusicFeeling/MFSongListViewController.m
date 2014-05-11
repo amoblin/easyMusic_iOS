@@ -69,6 +69,9 @@
                                     @"isComposed": @YES,
                            @"mtime": [attributes fileModificationDate],
                            @"dateType": @1}];
+        [_composedSongs sortUsingComparator:^NSComparisonResult(id a, id b) {
+            return [b[@"mtime"] compare:a[@"mtime"]];
+        }];
     }
     return _composedSongs;
 }
@@ -89,7 +92,7 @@
                                @"dateType": @1}];
         }
         [array sortUsingComparator:^NSComparisonResult(id a, id b) {
-            return [a[@"mtime"] compare:b[@"mtime"]];
+            return [b[@"mtime"] compare:a[@"mtime"]];
         }];
 
         dataArray = @[self.composedSongs, array];
@@ -214,6 +217,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.UMPageName = @"曲目";
 
     self.navigationItem.title = @"曲目";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];

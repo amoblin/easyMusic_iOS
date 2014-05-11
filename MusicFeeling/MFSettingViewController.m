@@ -79,6 +79,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.UMPageName = @"设置";
     self.view.backgroundColor = [UIColor whiteColor];
 
     UIView *view = [[UIView alloc] init];

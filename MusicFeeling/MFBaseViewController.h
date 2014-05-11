@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSDictionary *mapper;
 @property (strong, nonatomic) NSDictionary *router;
 @property (strong, nonatomic) NSArray *keyCommandArray;
+@property (strong, nonatomic) NSString *UMPageName;
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand;
 
