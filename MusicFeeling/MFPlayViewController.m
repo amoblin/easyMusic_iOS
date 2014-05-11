@@ -11,6 +11,7 @@
 #import "SLNavigationItem.h"
 
 #import "UIImage+Color.h"
+#import "UIView+AutoLayout.h"
 
 #import "PXAlertView.h"
 #import <SVProgressHUD.h>
@@ -35,6 +36,7 @@
 @property (strong, nonatomic) NSArray *tonesArray;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UILabel *infoLabel;
 @property (strong, nonatomic) NSArray *vConstraints;
 @property (strong, nonatomic) NSArray *hConstraints;
 
@@ -121,6 +123,21 @@
     self.scrollView.autoresizesSubviews = YES;
     self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
+    if (self.isNew) {
+        self.infoLabel = [UILabel autolayoutView];
+        self.infoLabel.text = @"连接蓝牙键盘后，按键来谱曲";
+        self.infoLabel.textAlignment = NSTextAlignmentCenter;
+        [self.scrollView addSubview:self.infoLabel];
+        [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.infoLabel attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_infoLabel(==300)]"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_infoLabel)]];
+        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[_infoLabel(==30)]"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(_infoLabel)]];
+    }
     [self.view addSubview:self.scrollView];
 
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
@@ -357,9 +374,9 @@
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     if ([self.songInfo[@"isComposed"] boolValue]) {
-        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     } else {
-        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     }
     NSError *error;
     self.content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
@@ -369,11 +386,12 @@
         } else {
             // show computer keyboard
         }
-//        return;
     }
 
     if (self.songInfo[@"path"] != nil) {
-        [SVProgressHUD show];
+        if (self.content == nil) {
+            [SVProgressHUD show];
+        }
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
         NSString *url = [NSString stringWithFormat:@"http://apion.github.io/k2k/%@", self.songInfo[@"path"]];
@@ -385,21 +403,23 @@
             MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
             NSString *path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
             [self saveContent:content atPath:path];
-            self.content = content;
-            if (self.isToneShow) {
-                [self layoutButtonsWithContent:self.content];
-            } else {
-            }
-        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [SVProgressHUD dismiss];
-            self.content = operation.responseString;
-            if (self.content != nil) {
+            if (self.content == nil) {
+                self.content = content;
                 if (self.isToneShow) {
                     [self layoutButtonsWithContent:self.content];
                 } else {
                 }
             }
-//            NSLog(@"%@", error);
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD dismiss];
+            [self saveContent:operation.responseString atPath:path];
+            if (self.content == nil) {
+                self.content = operation.responseString;
+                if (self.isToneShow) {
+                    [self layoutButtonsWithContent:self.content];
+                } else {
+                }
+            }
         }];
     }
 }
@@ -457,6 +477,7 @@
         return;
     }
     if ( self.isNew ) {
+        [self.infoLabel setHidden:YES];
         if ([keyCommand.input isEqualToString:@"\r"]) {
             self.content = [NSString stringWithFormat:@"%@\n", self.content];
             self.isFirst = YES;

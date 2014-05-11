@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+$name = "MusicFeeling"
+$infoFile = "\`pwd\`/#{$name}/#{$name}-Info"
+$revision = `defaults read #{$infoFile} CFBundleVersion`.rstrip
+
 task :default do |t|
   puts `defaults read #{$infoFile} CFBundleShortVersionString`
   puts $revision
@@ -17,7 +21,7 @@ task :dmg => :xcode do |t|
 end
 
 task :tag do |t|
-  puts `defaults write #{$infoFile} CFBundleShortVersionString 2.1.1`
+  puts `defaults write #{$infoFile} CFBundleShortVersionString 0.4.1`
 end
 
 task :tr do |t|

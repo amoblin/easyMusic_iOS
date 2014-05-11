@@ -23,14 +23,10 @@
 
 @implementation MFSongListViewController
 
-- (NSString *)humanableInfoFromDate: (NSString *) theDate {
-//    theDate = @"2014-04-15 17:20:59";
-    NSDateFormatter *date=[[NSDateFormatter alloc] init];
-    [date setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-    NSDate *d=[date dateFromString:theDate];
+- (NSString *)humanableInfoFromDate: (NSDate *) theDate {
     NSString *info;
 
-    NSTimeInterval delta = -[d timeIntervalSinceNow];
+    NSTimeInterval delta = - [theDate timeIntervalSinceNow];
     if (delta < 60) {
         // 1分钟之内
         info = @"Just Now";
@@ -46,18 +42,20 @@
                 info = [NSString stringWithFormat:@"%d小时前", (NSUInteger)delta];
             } else {
                 delta = delta / 24;
-                if (delta == 1) {
+                if ((NSInteger)delta == 1) {
                     //昨天
                     info = @"昨天";
-                } else if (delta == 2) {
+                } else if ((NSInteger)delta == 2) {
                     info = @"前天";
                 } else {
-                    info = [NSString stringWithFormat:@"%d天前", (NSUInteger)delta];
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:@"MM-dd"];
+                    info = [dateFormatter stringFromDate:theDate];
+//                    info = [NSString stringWithFormat:@"%d天前", (NSUInteger)delta];
                 }
             }
         }
     }
-    NSLog(@"%@", info);
     return info;
 }
 
@@ -66,7 +64,11 @@
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     _composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
-        [_composedSongs addObject:@{@"name": file, @"isComposed": @YES}];
+        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.composedDir stringByAppendingPathComponent:file] error:nil];
+        [_composedSongs addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+                                    @"isComposed": @YES,
+                           @"mtime": [attributes fileModificationDate],
+                           @"dateType": @1}];
     }
     return _composedSongs;
 }
@@ -81,15 +83,35 @@
         MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
         NSMutableArray *array = [[NSMutableArray alloc] init];
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
-            [array addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension]}];
+            NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.localDir stringByAppendingPathComponent:file] error:nil];
+            [array addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+                               @"mtime": [attributes fileModificationDate],
+                               @"dateType": @1}];
         }
+        [array sortUsingComparator:^NSComparisonResult(id a, id b) {
+            return [a[@"mtime"] compare:b[@"mtime"]];
+        }];
+
         dataArray = @[self.composedSongs, array];
         cellId = @"cellId";
         block = ^(MFSettingsTableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             cell.textLabel.text = item[@"name"];
             if (item[@"mtime"] != nil) {
-                cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
+                if ([[item[@"mtime"] class] isSubclassOfClass:[NSDate class]]) {
+                    /*
+                    NSDateFormatter *gmtFormatter=[[NSDateFormatter alloc] init];
+                    [gmtFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss VVVV"];
+                    NSDate *d = [gmtFormatter dateFromString:item[@"mtime"]];
+                     */
+                    cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
+                } else {
+                    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+                    [date setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+                    NSDate *d = [date dateFromString:item[@"mtime"]];
+                    cell.detailTextLabel.text = [self humanableInfoFromDate:d];
+                }
             }
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
@@ -147,6 +169,7 @@
 - (void)getContents {
     //[SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    NSString *url = @"http://k2k.marboo.biz/api/songs";
     NSString *url = @"http://apion.github.io/k2k/songs.json";
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];

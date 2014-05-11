@@ -14,7 +14,7 @@ typedef void (^TableViewCellEditBlock)(id item, NSIndexPath *indexPath);
 @interface MFArrayDataSource: NSObject <UITableViewDataSource, UICollectionViewDataSource>
 
 @property (nonatomic, copy) TableViewCellEditBlock editCellBlock;
-@property (strong, nonatomic) NSArray *items;
+@property (copy, nonatomic) NSArray *items;
 @property (strong, nonatomic) NSArray *sectionHeaderArray;
 
 - (id)initWithItems:(NSArray *)items cellIdentifier:(NSString *)cellId configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
