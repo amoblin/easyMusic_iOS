@@ -66,6 +66,7 @@
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.composedDir stringByAppendingPathComponent:file] error:nil];
         [_composedSongs addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+                                    @"path": file,
                                     @"isComposed": @YES,
                            @"mtime": [attributes fileModificationDate],
                            @"dateType": @1}];
@@ -88,6 +89,7 @@
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
             NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.localDir stringByAppendingPathComponent:file] error:nil];
             [array addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+                               @"path": file,
                                @"mtime": [attributes fileModificationDate],
                                @"dateType": @1}];
         }
@@ -121,7 +123,7 @@
 	    _arrayDataSource.sectionHeaderArray = @[@"我创作的", @"大家创作的"];
         _arrayDataSource.editCellBlock = ^(NSDictionary *item, NSIndexPath *indexPath) {
             MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"name"]] error:nil];
+            [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"path"]] error:nil];
         };
     }
     return _arrayDataSource;
