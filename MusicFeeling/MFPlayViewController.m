@@ -177,10 +177,11 @@
     if (self.isNew) {
 //        SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
         path = [delegate.composedDir stringByAppendingPathComponent:self.textField.text];
+        path = [path stringByAppendingPathExtension:@"k2k.txt"];
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
-        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     } else {
-        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
+        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     }
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
@@ -405,8 +406,6 @@
             [SVProgressHUD dismiss];
             NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-            NSString *path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"name"]];
             [self saveContent:content atPath:path];
             if (self.content == nil) {
                 self.content = content;
@@ -430,11 +429,6 @@
 }
 
 - (void)saveContent:(NSString *)content atPath:(NSString *)path {
-    /*
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    path = [paths[0] stringByAppendingPathComponent:path];
-     */
-    path = [path stringByAppendingPathExtension:@"k2k.txt"];
     NSError *error = nil;
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (error != nil) {
