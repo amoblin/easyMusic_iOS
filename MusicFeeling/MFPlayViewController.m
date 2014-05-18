@@ -174,20 +174,23 @@
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     [SVProgressHUD dismiss];
+    BOOL shouldSave = NO;
     if (self.isNew) {
 //        SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
         path = [delegate.composedDir stringByAppendingPathComponent:self.textField.text];
         path = [path stringByAppendingPathExtension:@"k2k.txt"];
+        shouldSave = YES;
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
-    } else {
-        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+        shouldSave = YES;
     }
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
 //        self.content = [NSString stringWithFormat:@"%@\n", self.textView.text];
-        [self saveContent:self.content atPath:path];
+        if (shouldSave) {
+            [self saveContent:self.content atPath:path];
+        }
     }
     self.textField.delegate = nil;
     self.scrollView.delegate = nil;
@@ -403,6 +406,7 @@
         NSString *url = [NSString stringWithFormat:@"http://apion.github.io/k2k/%@", self.songInfo[@"path"]];
         url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            /*
             [SVProgressHUD dismiss];
             NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -414,6 +418,7 @@
                 } else {
                 }
             }
+             */
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
             [self saveContent:operation.responseString atPath:path];
