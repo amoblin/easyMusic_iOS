@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSDictionary *router;
 @property (strong, nonatomic) NSArray *keyCommandArray;
 @property (strong, nonatomic) NSString *UMPageName;
+@property (nonatomic) NSUInteger playCount;
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand;
 

@@ -85,6 +85,16 @@
     return _router;
 }
 
+- (NSUInteger)playCount {
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.playCount;
+}
+
+- (void)setPlayCount:(NSUInteger)playCount {
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.playCount = playCount;
+}
+
 - (NSDictionary *)getFilteredDict:(NSDictionary *)dict withFilter:(NSString *)filter {
     NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:filter] invertedSet];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:dict];

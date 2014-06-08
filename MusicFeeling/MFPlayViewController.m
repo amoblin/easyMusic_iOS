@@ -34,6 +34,7 @@
 
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSArray *tonesArray;
+@property (strong, nonatomic) NSNumber *toneCount;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UILabel *infoLabel;
@@ -80,8 +81,8 @@
         NSString *content = self.content;
         NSRange currentRange;
         NSMutableArray *array = [[NSMutableArray alloc] init];
-        unsigned length = [content length];
-        unsigned paraStart = 0, paraEnd = 0, contentsEnd = 0;
+        NSInteger length = [content length];
+        NSUInteger paraStart = 0, paraEnd = 0, contentsEnd = 0;
         //    NSMutableArray *array = [NSMutableArray array];
         while (paraEnd < length)
         {
@@ -90,13 +91,31 @@
             currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
             NSString *line = [content substringWithRange:currentRange];
             NSLog(@"%@", line);
-            NSArray *items = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]];
+            NSMutableArray *items = [[NSMutableArray alloc] init];
+            for (NSString *item in [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]]) {
+                if ([item isEqualToString:@""]) {
+                    continue;
+                }
+                [items addObject:item];
+            }
+
             NSLog(@"%@", items);
             [array addObject:items];
         }
         _tonesArray = [NSArray arrayWithArray:array];
     }
     return _tonesArray;
+}
+
+- (NSNumber *)toneCount {
+    if (_toneCount == nil) {
+        NSUInteger count = 0;
+        for (NSArray *item in self.tonesArray) {
+            count += item.count;
+        }
+        _toneCount = [NSNumber numberWithInteger:count];
+    }
+    return _toneCount;
 }
 
 - (void)viewDidLoad
@@ -116,9 +135,8 @@
     self.isToneShow = YES;
     self.view.backgroundColor = [UIColor whiteColor];
 
-    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView = [UIScrollView autolayoutView];
 //    self.scrollView.backgroundColor = [UIColor grayColor];
-    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
 
     self.scrollView.scrollEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = YES;
@@ -145,12 +163,21 @@
     }
     [self.view addSubview:self.scrollView];
 
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollView]|" options:0 metrics: 0 views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-|" options:0 metrics: 0 views:viewsDictionary]];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"k2k" style:UIBarButtonItemStylePlain target:self action:@selector(k2kButtonPressed:)];
+}
+
+- (void)viewWillLayoutSubviews {
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollView]|"
+                                                                      options:0
+                                                                      metrics:0
+                                                                        views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-|"
+                                                                      options:0
+                                                                      metrics:0
+                                                                        views:viewsDictionary]];
+    [super viewWillLayoutSubviews];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -570,9 +597,13 @@
     }
 
     NSString *toneName = sender.titleLabel.text;
-    NSLog(@"%@", toneName);
+    NSLog(@"%@, tag: %d", toneName, sender.tag);
     if (toneName.length > 0) {
         [self playTone:toneName];
+        if (sender.tag >= self.toneCount.integerValue && self.playCount >= self.toneCount.integerValue) {
+            [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
+            self.playCount = 0;
+        }
     }
 }
 

@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSString *localDir;
 @property (strong, nonatomic) NSString *composedDir;
+@property (nonatomic) NSUInteger playCount;
 
 - (void)playTone:(NSString *)name;
 @end
