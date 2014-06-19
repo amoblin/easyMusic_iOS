@@ -502,6 +502,7 @@
 		DA6A8673191875890087E640 /* Do Re Mi.k2k.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */; };
 		DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */; };
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
+		DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9C809519526A0C0029EF68 /* MFKeyboardView.m */; };
 		DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
@@ -1031,6 +1032,8 @@
 		DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
 		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
+		DA9C809419526A0C0029EF68 /* MFKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFKeyboardView.h; sourceTree = "<group>"; };
+		DA9C809519526A0C0029EF68 /* MFKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyboardView.m; sourceTree = "<group>"; };
 		DAA1CACF190B24F20046AA42 /* MFArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFArrayDataSource.h; sourceTree = "<group>"; };
 		DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFArrayDataSource.m; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
@@ -1618,6 +1621,8 @@
 				DA45477618E2476E0018874F /* MFSongListViewController.m */,
 				DADCEE9018E003FE0044455D /* MFPlayViewController.h */,
 				DADCEE9118E003FE0044455D /* MFPlayViewController.m */,
+				DA9C809419526A0C0029EF68 /* MFKeyboardView.h */,
+				DA9C809519526A0C0029EF68 /* MFKeyboardView.m */,
 				DA41D40018ECD4E900ED4BD7 /* SLNavigationItem.h */,
 				DA41D40118ECD4E900ED4BD7 /* SLNavigationItem.m */,
 				DA41D3FD18ECD43800ED4BD7 /* SLEditableTitleViewController.h */,
@@ -2309,6 +2314,7 @@
 			files = (
 				DA527CAE18D3E623009A825E /* main.m in Sources */,
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
+				DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
 				DA4020FC19126557003D593C /* MFSettingsTableViewCell.m in Sources */,
 				DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */,
@@ -2465,7 +2471,7 @@
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6EAEC56A-3A24-47B3-96EE-AF18CFFF8CE1";
+				PROVISIONING_PROFILE = "F5B1BED6-DF8D-4F18-9CC1-DDF79A713603";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

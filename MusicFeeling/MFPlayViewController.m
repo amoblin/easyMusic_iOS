@@ -9,6 +9,7 @@
 #import "MFPlayViewController.h"
 #import "MFAppDelegate.h"
 #import "SLNavigationItem.h"
+#import "MFKeyboardView.h"
 
 #import "UIImage+Color.h"
 #import "UIView+AutoLayout.h"
@@ -30,23 +31,24 @@
 #define UIColorFromHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 // (0,122,255)
-@interface MFPlayViewController ()
+@interface MFPlayViewController () <MFKeyboardDelegate>
 
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSArray *tonesArray;
 @property (strong, nonatomic) NSNumber *toneCount;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) MFKeyboardView *keyboardView;
 @property (strong, nonatomic) UILabel *infoLabel;
 @property (strong, nonatomic) NSArray *vConstraints;
 @property (strong, nonatomic) NSArray *hConstraints;
 
-@property (nonatomic) CGFloat currentX;
-@property (nonatomic) CGFloat currentY;
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
 @property (strong, nonatomic) UIButton *prevButton;
 @property (nonatomic) NSInteger currentIndex;
 @property (nonatomic) BOOL isFirst;
+@property (nonatomic) CGFloat currentX;
+@property (nonatomic) CGFloat currentY;
 
 @property (nonatomic) BOOL isToneShow;
 @end
@@ -146,6 +148,13 @@
     self.scrollView.autoresizesSubviews = YES;
     self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
+    [self.view addSubview:self.scrollView];
+
+    self.keyboardView = [MFKeyboardView autolayoutView];
+    self.keyboardView.interfaceOrientation = self.interfaceOrientation;
+    self.keyboardView.delegate = self;
+    [self.view addSubview:self.keyboardView];
+
     if (self.isNew) {
         self.infoLabel = [UILabel autolayoutView];
         self.infoLabel.text = @"连接蓝牙键盘后，按键来谱曲";
@@ -161,19 +170,22 @@
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
     }
-    [self.view addSubview:self.scrollView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"k2k" style:UIBarButtonItemStylePlain target:self action:@selector(k2kButtonPressed:)];
 }
 
 - (void)viewWillLayoutSubviews {
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollView]|"
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView, _keyboardView);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_scrollView]-0-|"
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_keyboardView]-0-|"
+                                                                      options:0
+                                                                      metrics:0
+                                                                        views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==80)]-0-|"
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
@@ -553,6 +565,8 @@
     }
 }
 
+#pragma mark - Tone Button Press Action
+
 - (void)toneButtonTouchDragEnter:(UIButton *)sender {
     NSLog(@"%@", sender);
     NSLog(@"%s", __func__);
@@ -688,6 +702,14 @@
     if (scrollView.contentSize.height == 0) {
         CGFloat height = MAX(self.view.frame.size.height - 64, self.currentY + BUTTON_PADDING_V);
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+    }
+}
+
+- (void)tonePressed:(NSString *)toneName {
+    [self playTone:toneName];
+    if (self.isNew) {
+        [self.infoLabel setHidden:YES];
+        [self addTone:toneName];
     }
 }
 
