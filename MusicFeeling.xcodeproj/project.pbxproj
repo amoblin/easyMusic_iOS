@@ -1000,7 +1000,6 @@
 		DA35C8D918D405770021BD55 /* MFTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTestViewController.m; sourceTree = "<group>"; };
 		DA4020F41911FF95003D593C /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		DA4020F51911FF95003D593C /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
-		DA4020F719125846003D593C /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		DA4020F819126015003D593C /* treble_clef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "treble_clef@2x.png"; sourceTree = "<group>"; };
 		DA4020FA19126557003D593C /* MFSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingsTableViewCell.h; sourceTree = "<group>"; };
 		DA4020FB19126557003D593C /* MFSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingsTableViewCell.m; sourceTree = "<group>"; };
@@ -1042,6 +1041,8 @@
 		DAA262A81953A88F002B66CA /* NSString+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+K2K.m"; sourceTree = "<group>"; };
 		DAA262AA1953A8E9002B66CA /* NSArray+K2K.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+K2K.h"; sourceTree = "<group>"; };
 		DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+K2K.m"; sourceTree = "<group>"; };
+		DAA262AE1953ACDC002B66CA /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
+		DAA262AF1953AD2C002B66CA /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 		DADCEE9018E003FE0044455D /* MFPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPlayViewController.h; sourceTree = "<group>"; };
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
@@ -1567,9 +1568,9 @@
 		DA527C9518D3E623009A825E = {
 			isa = PBXGroup;
 			children = (
-				DA4020F719125846003D593C /* AppMacro.h */,
 				DA4020F41911FF95003D593C /* UIImage+Color.h */,
 				DA4020F51911FF95003D593C /* UIImage+Color.m */,
+				DAA262AD1953AC8C002B66CA /* Macros */,
 				DA2EF21318F24C8B00DC1617 /* vendor */,
 				DA6A87EE191F011C0087E640 /* Categories */,
 				DA527CD918D3E6E0009A825E /* resources */,
@@ -1692,6 +1693,15 @@
 				DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		DAA262AD1953AC8C002B66CA /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				DAA262AE1953ACDC002B66CA /* UtilsMacro.h */,
+				DAA262AF1953AD2C002B66CA /* AppMacro.h */,
+			);
+			path = Macros;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

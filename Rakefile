@@ -6,9 +6,10 @@ $revision = `defaults read #{$infoFile} CFBundleVersion`.rstrip
 
 task :default do |t|
   puts `defaults read #{$infoFile} CFBundleShortVersionString`
-  puts $revision
-  puts `git log --pretty=oneline|wc -l`
+  puts "info plist revision: %s" % $revision
+  puts "git log revision: %s" % `git log --pretty=oneline|wc -l`
 end
+
 
 # for OS X App
 task :dmg => :xcode do |t|
@@ -21,12 +22,19 @@ task :dmg => :xcode do |t|
 end
 
 task :tag do |t|
-  puts `defaults write #{$infoFile} CFBundleShortVersionString 0.4.2`
+  puts `defaults write #{$infoFile} CFBundleShortVersionString 0.6`
 end
 
 task :tr do |t|
+  `git diff --cached --name-only | grep .[hm]$ | xargs sed -Ee 's/ +$$//g' -i ""`
+  `git diff --cached --name-only | grep .[hm]$ | xargs sed -i .bak "s/^[ ]*$//g"`
+  `git add -u`
+  `find . -name "*.bak" | xargs rm -f`
+end
+
+task :trall do |t|
   `find . -name "*.[hm]" | xargs sed -Ee 's/ +$$//g' -i ""`
   `find . -name "*.[hm]" | xargs sed -i .bak "s/^[ ]*$//g"`
-  puts `find . -name "*.bak"| xargs rm -f`
+  `find . -name *.bak | xargs rm -f`
 end
 
