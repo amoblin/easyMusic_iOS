@@ -7,6 +7,9 @@
 //
 
 #import "MFKeyboardView.h"
+#import "NSArray+K2K.h"
+
+
 #import "UIImage+Color.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -14,7 +17,7 @@
 #define YOFFSET 20
 #define BUTTON_SIZE 44
 #define BUTTON_PADDING_H -7
-#define BUTTON_PADDING_V 15
+#define BUTTON_PADDING_V 0
 #define BUTTON_WRAP_LINE_V -7
 
 #define UIColorFromRGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
@@ -47,8 +50,7 @@
         self.currentIndex = 0;
         self.currentY = YOFFSET;
         self.currentX = XOFFSET;
-        self.tonesArray = @[[@"C4 D4 E4 F4 G4 A4 B4" componentsSeparatedByString:@" "]];
-        //        self.backgroundColor = [UIColor grayColor];
+        self.tonesArray = [NSArray arrayWithK2KString:@"C5 D5 E5 F5 G5 A5 B5\n C4 D4 E4 F4 G4 A4 B4\n C3 D3 E3 F3 G3 A3 B3"];
     }
     return self;
 }

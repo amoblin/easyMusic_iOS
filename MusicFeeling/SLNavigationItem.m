@@ -16,6 +16,7 @@
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 22)];
         textField.font = [UIFont boldSystemFontOfSize:19];
         textField.textAlignment = NSTextAlignmentCenter;
+        textField.placeholder = @"请输入曲目名字";
         textField.delegate = self;
         self.textField = textField;
         self.titleView = textField;

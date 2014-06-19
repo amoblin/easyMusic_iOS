@@ -10,9 +10,11 @@
 #import "MFAppDelegate.h"
 #import "SLNavigationItem.h"
 #import "MFKeyboardView.h"
+#import "NSArray+K2K.h"
 
 #import "UIImage+Color.h"
 #import "UIView+AutoLayout.h"
+
 
 #import "PXAlertView.h"
 #import <SVProgressHUD.h>
@@ -78,33 +80,16 @@
     return _buttonPool;
 }
 
+- (NSString *)content {
+    if (_content == nil) {
+        _content = @"";
+    }
+    return _content;
+}
+
 - (NSArray *)tonesArray {
     if (_tonesArray == nil) {
-        NSString *content = self.content;
-        NSRange currentRange;
-        NSMutableArray *array = [[NSMutableArray alloc] init];
-        NSInteger length = [content length];
-        NSUInteger paraStart = 0, paraEnd = 0, contentsEnd = 0;
-        //    NSMutableArray *array = [NSMutableArray array];
-        while (paraEnd < length)
-        {
-            [content getParagraphStart:&paraStart end:&paraEnd
-                           contentsEnd:&contentsEnd forRange:NSMakeRange(paraEnd, 0)];
-            currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
-            NSString *line = [content substringWithRange:currentRange];
-            NSLog(@"%@", line);
-            NSMutableArray *items = [[NSMutableArray alloc] init];
-            for (NSString *item in [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]]) {
-                if ([item isEqualToString:@""]) {
-                    continue;
-                }
-                [items addObject:item];
-            }
-
-            NSLog(@"%@", items);
-            [array addObject:items];
-        }
-        _tonesArray = [NSArray arrayWithArray:array];
+        _tonesArray = [NSArray arrayWithK2KString:self.content];
     }
     return _tonesArray;
 }
@@ -136,6 +121,10 @@
 
     self.isToneShow = YES;
     self.view.backgroundColor = [UIColor whiteColor];
+
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars=NO;
+    self.automaticallyAdjustsScrollViewInsets=NO;
 
     self.scrollView = [UIScrollView autolayoutView];
 //    self.scrollView.backgroundColor = [UIColor grayColor];
@@ -185,7 +174,7 @@
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==80)]-0-|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==200)]-0-|"
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
@@ -196,17 +185,24 @@
     [super viewDidAppear:animated];
     [self getContent];
 
-    CGFloat height = MAX(self.view.frame.size.height - 64, self.currentY + BUTTON_PADDING_V);
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.textField.delegate = self;
     self.scrollView.delegate = self;
-    if (self.isNew) {
-        [self.textField becomeFirstResponder];
+}
+
+- (NSString *)findFinalPath:(NSString *)path {
+    NSInteger i = 2;
+    NSString *temp = [path stringByAppendingPathExtension:@"k2k.txt"];
+    while ([[NSFileManager defaultManager] fileExistsAtPath:temp]) {
+        temp = [NSString stringWithFormat:@"%@-%d.k2k.txt", path, i];
+        i++;
     }
+    return temp;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -215,9 +211,12 @@
     [SVProgressHUD dismiss];
     BOOL shouldSave = NO;
     if (self.isNew) {
-//        SLNavigationItem *item = (SLNavigationItem *)self.navigationItem;
-        path = [delegate.composedDir stringByAppendingPathComponent:self.textField.text];
-        path = [path stringByAppendingPathExtension:@"k2k.txt"];
+        NSString *name = self.textField.text;
+        if ([name isEqualToString:@""]) {
+            name = @"新曲目";
+        }
+        path = [delegate.composedDir stringByAppendingPathComponent:name];
+        path = [self findFinalPath:path];
         shouldSave = YES;
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
@@ -226,7 +225,6 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
-//        self.content = [NSString stringWithFormat:@"%@\n", self.textView.text];
         if (shouldSave) {
             [self saveContent:self.content atPath:path];
         }
@@ -390,8 +388,8 @@
         default:
             break;
     }
-    CGFloat height = MAX(self.view.frame.size.height - 64, self.currentY + BUTTON_PADDING_V);
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
 }
 
 - (NSString *)stringByReplacingString:(NSString *)str {
@@ -492,10 +490,13 @@
     [self.scrollView addSubview:button];
     [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 
-    CGFloat height = MAX(self.view.frame.size.height - 64, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    NSLog(@"content height: %f", self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
+    NSLog(@"content size height is %f", self.scrollView.contentSize.height);
 
-    CGFloat offset = MAX(-64, height - self.scrollView.bounds.size.height);
+    CGFloat offset = height - self.scrollView.bounds.size.height;
+    NSLog(@"offset is %f", offset);
     CGPoint bottomOffset = CGPointMake(0, offset);
     [self.scrollView setContentOffset:bottomOffset animated:YES];
 }
@@ -507,8 +508,8 @@
         CGFloat offset;
         if (keyCommand.modifierFlags == UIKeyModifierShift) {
             offset = self.scrollView.contentOffset.y - self.scrollView.frame.size.height * 0.8;
-            if ( offset <= -64) {
-                offset = -64;
+            if ( offset <= 0) {
+                offset = 0;
             }
         } else {
             offset = self.scrollView.contentOffset.y + self.scrollView.frame.size.height * 0.8;
@@ -692,7 +693,7 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    CGFloat height = MAX(self.view.frame.size.height - 64, self.currentY + BUTTON_PADDING_V);
+    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
 }
 
@@ -700,7 +701,7 @@
     NSLog(@"offset is: %f", scrollView.contentOffset.y);
     NSLog(@"content size is: %f", scrollView.contentSize.height);
     if (scrollView.contentSize.height == 0) {
-        CGFloat height = MAX(self.view.frame.size.height - 64, self.currentY + BUTTON_PADDING_V);
+        CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
     }
 }

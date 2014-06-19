@@ -504,6 +504,8 @@
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
 		DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9C809519526A0C0029EF68 /* MFKeyboardView.m */; };
 		DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */; };
+		DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262A81953A88F002B66CA /* NSString+K2K.m */; };
+		DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
@@ -1036,6 +1038,10 @@
 		DA9C809519526A0C0029EF68 /* MFKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyboardView.m; sourceTree = "<group>"; };
 		DAA1CACF190B24F20046AA42 /* MFArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFArrayDataSource.h; sourceTree = "<group>"; };
 		DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFArrayDataSource.m; sourceTree = "<group>"; };
+		DAA262A71953A88F002B66CA /* NSString+K2K.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+K2K.h"; sourceTree = "<group>"; };
+		DAA262A81953A88F002B66CA /* NSString+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+K2K.m"; sourceTree = "<group>"; };
+		DAA262AA1953A8E9002B66CA /* NSArray+K2K.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+K2K.h"; sourceTree = "<group>"; };
+		DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+K2K.m"; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 		DADCEE9018E003FE0044455D /* MFPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPlayViewController.h; sourceTree = "<group>"; };
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
@@ -1680,6 +1686,10 @@
 			children = (
 				DA6A87EF191F011C0087E640 /* UIView+AutoLayout.h */,
 				DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */,
+				DAA262A71953A88F002B66CA /* NSString+K2K.h */,
+				DAA262A81953A88F002B66CA /* NSString+K2K.m */,
+				DAA262AA1953A8E9002B66CA /* NSArray+K2K.h */,
+				DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2316,6 +2326,7 @@
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
 				DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
+				DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */,
 				DA4020FC19126557003D593C /* MFSettingsTableViewCell.m in Sources */,
 				DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */,
 				DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */,
@@ -2323,6 +2334,7 @@
 				DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */,
 				DA527CBB18D3E623009A825E /* MFViewController.m in Sources */,
 				DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */,
+				DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
 				DA4020F61911FF95003D593C /* UIImage+Color.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
