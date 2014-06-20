@@ -8,6 +8,7 @@
 
 #import "MFKeyboardView.h"
 #import "NSArray+K2K.h"
+#import "MFButton.h"
 
 
 #import "UIImage+Color.h"
@@ -121,7 +122,7 @@
 
 - (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
-    UIButton *button = [UIButton new];
+    MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE andType:type];
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -130,32 +131,6 @@
     // repeat method
     [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
     [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-    //        [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
-    //        [button.layer setBorderColor:[UIColorFromRGB(194, 194, 194) CGColor]];
-    [button.layer setBorderColor:[UIColorFromRGB(171, 211, 255) CGColor]];
-    //        [button.layer setBorderColor:[UIColorFromRGB(117, 192, 255) CGColor]];
-
-    if (type) {
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
-        [button setTitle:title forState:UIControlStateNormal];
-        button.layer.borderWidth = 1.0f;
-        button.layer.cornerRadius = BUTTON_SIZE/2;
-    } else {
-        button.titleLabel.font = [UIFont systemFontOfSize:20];
-        [button setTitle:title.lowercaseString forState:UIControlStateNormal];
-        button.layer.borderWidth = 0;
-        button.layer.cornerRadius = 4;
-    }
-
-    button.layer.masksToBounds = YES;
-    [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
-    //        [button setTitleColor:UIColorFromRGB(41, 140, 255) forState:UIControlStateNormal];
-
-    //            button.backgroundColor = [UIColor blueColor];
-    button.translatesAutoresizingMaskIntoConstraints = NO;
-
-    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
-    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
     return button;
 }
 

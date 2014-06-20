@@ -10,6 +10,8 @@
 #import "MFAppDelegate.h"
 #import "SLNavigationItem.h"
 #import "MFKeyboardView.h"
+#import "MFButton.h"
+
 #import "NSArray+K2K.h"
 
 #import "UIImage+Color.h"
@@ -33,7 +35,7 @@
 @interface MFPlayViewController () <MFKeyboardDelegate>
 
 @property (strong, nonatomic) NSString *content;
-@property (strong, nonatomic) NSArray *tonesArray;
+@property (strong, nonatomic) NSMutableArray *tonesArray;
 @property (strong, nonatomic) NSNumber *toneCount;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -45,6 +47,7 @@
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
 @property (strong, nonatomic) UIButton *prevButton;
 @property (nonatomic) NSInteger currentIndex;
+@property (nonatomic) NSIndexPath *indexPath;
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) CGFloat currentX;
 @property (nonatomic) CGFloat currentY;
@@ -84,9 +87,9 @@
     return _content;
 }
 
-- (NSArray *)tonesArray {
+- (NSMutableArray *)tonesArray {
     if (_tonesArray == nil) {
-        _tonesArray = [NSArray arrayWithK2KString:self.content];
+        _tonesArray = [NSMutableArray arrayWithArray:[NSArray arrayWithK2KString:self.content]];
     }
     return _tonesArray;
 }
@@ -237,8 +240,7 @@
         [self.buttonPool removeObjectAtIndex:0];
         return button;
     } else {
-        UIButton *button = [UIButton new];
-        button.tag = self.currentIndex;
+        MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE andType:type];
         [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -247,32 +249,6 @@
         // repeat method
         [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
         [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
-//        [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
-//        [button.layer setBorderColor:[UIColorFromRGB(194, 194, 194) CGColor]];
-        [button.layer setBorderColor:[UIColorFromRGB(171, 211, 255) CGColor]];
-//        [button.layer setBorderColor:[UIColorFromRGB(117, 192, 255) CGColor]];
-
-        if (type) {
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
-            [button setTitle:title forState:UIControlStateNormal];
-            button.layer.borderWidth = 1.0f;
-            button.layer.cornerRadius = BUTTON_SIZE/2;
-        } else {
-            button.titleLabel.font = [UIFont systemFontOfSize:50];
-            [button setTitle:self.router[title.lowercaseString] forState:UIControlStateNormal];
-            button.layer.borderWidth = 0;
-            button.layer.cornerRadius = 4;
-        }
-
-        button.layer.masksToBounds = YES;
-        [button setTitleColor:UIColorFromRGB(1, 1, 1) forState:UIControlStateNormal];
-//        [button setTitleColor:UIColorFromRGB(41, 140, 255) forState:UIControlStateNormal];
-
-        //            button.backgroundColor = [UIColor blueColor];
-        button.translatesAutoresizingMaskIntoConstraints = NO;
-
-        [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateHighlighted];
-        [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
         return button;
     }
 }
@@ -481,19 +457,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)addTone:(NSString *)toneName {
+- (void)addToContent:(NSString *)toneName {
     self.content = [NSString stringWithFormat:@"%@ %@", self.content, toneName];
+//    self.tonesArray[self.currentIndex]
+}
+
+- (void)addTone:(NSString *)toneName {
+    [self addToContent:toneName];
     UIButton *button = [self createButtonWithTitle:toneName andType:self.isToneShow];
     [self.scrollView addSubview:button];
     [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 
     CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
-    NSLog(@"content height: %f", self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
-    NSLog(@"content size height is %f", self.scrollView.contentSize.height);
 
     CGFloat offset = height - self.scrollView.bounds.size.height;
-    NSLog(@"offset is %f", offset);
     CGPoint bottomOffset = CGPointMake(0, offset);
     [self.scrollView setContentOffset:bottomOffset animated:YES];
 }
@@ -695,8 +673,6 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"offset is: %f", scrollView.contentOffset.y);
-    NSLog(@"content size is: %f", scrollView.contentSize.height);
     if (scrollView.contentSize.height == 0) {
         CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);

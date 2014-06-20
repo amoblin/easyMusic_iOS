@@ -479,7 +479,6 @@
 		DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2EF21518F24C8B00DC1617 /* PXAlertView.m */; };
 		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
 		DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D918D405770021BD55 /* MFTestViewController.m */; };
-		DA4020F61911FF95003D593C /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4020F51911FF95003D593C /* UIImage+Color.m */; };
 		DA4020F919126015003D593C /* treble_clef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4020F819126015003D593C /* treble_clef@2x.png */; };
 		DA4020FC19126557003D593C /* MFSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4020FB19126557003D593C /* MFSettingsTableViewCell.m */; };
 		DA41D3FF18ECD43800ED4BD7 /* SLEditableTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */; };
@@ -506,6 +505,8 @@
 		DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */; };
 		DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262A81953A88F002B66CA /* NSString+K2K.m */; };
 		DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */; };
+		DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B21953AFF6002B66CA /* UIImage+Color.m */; };
+		DAA262B61953B017002B66CA /* MFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B51953B017002B66CA /* MFButton.m */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
@@ -998,8 +999,6 @@
 		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
 		DA35C8D818D405770021BD55 /* MFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTestViewController.h; sourceTree = "<group>"; };
 		DA35C8D918D405770021BD55 /* MFTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTestViewController.m; sourceTree = "<group>"; };
-		DA4020F41911FF95003D593C /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
-		DA4020F51911FF95003D593C /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		DA4020F819126015003D593C /* treble_clef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "treble_clef@2x.png"; sourceTree = "<group>"; };
 		DA4020FA19126557003D593C /* MFSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingsTableViewCell.h; sourceTree = "<group>"; };
 		DA4020FB19126557003D593C /* MFSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingsTableViewCell.m; sourceTree = "<group>"; };
@@ -1043,6 +1042,10 @@
 		DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+K2K.m"; sourceTree = "<group>"; };
 		DAA262AE1953ACDC002B66CA /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		DAA262AF1953AD2C002B66CA /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
+		DAA262B11953AFF6002B66CA /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		DAA262B21953AFF6002B66CA /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		DAA262B41953B017002B66CA /* MFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFButton.h; sourceTree = "<group>"; };
+		DAA262B51953B017002B66CA /* MFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFButton.m; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 		DADCEE9018E003FE0044455D /* MFPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPlayViewController.h; sourceTree = "<group>"; };
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
@@ -1568,8 +1571,7 @@
 		DA527C9518D3E623009A825E = {
 			isa = PBXGroup;
 			children = (
-				DA4020F41911FF95003D593C /* UIImage+Color.h */,
-				DA4020F51911FF95003D593C /* UIImage+Color.m */,
+				DAA262B01953AFDB002B66CA /* View */,
 				DAA262AD1953AC8C002B66CA /* Macros */,
 				DA2EF21318F24C8B00DC1617 /* vendor */,
 				DA6A87EE191F011C0087E640 /* Categories */,
@@ -1685,6 +1687,8 @@
 		DA6A87EE191F011C0087E640 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				DAA262B11953AFF6002B66CA /* UIImage+Color.h */,
+				DAA262B21953AFF6002B66CA /* UIImage+Color.m */,
 				DA6A87EF191F011C0087E640 /* UIView+AutoLayout.h */,
 				DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */,
 				DAA262A71953A88F002B66CA /* NSString+K2K.h */,
@@ -1702,6 +1706,15 @@
 				DAA262AF1953AD2C002B66CA /* AppMacro.h */,
 			);
 			path = Macros;
+			sourceTree = "<group>";
+		};
+		DAA262B01953AFDB002B66CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DAA262B41953B017002B66CA /* MFButton.h */,
+				DAA262B51953B017002B66CA /* MFButton.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2336,6 +2349,7 @@
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
 				DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
+				DAA262B61953B017002B66CA /* MFButton.m in Sources */,
 				DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */,
 				DA4020FC19126557003D593C /* MFSettingsTableViewCell.m in Sources */,
 				DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */,
@@ -2346,9 +2360,9 @@
 				DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */,
 				DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
-				DA4020F61911FF95003D593C /* UIImage+Color.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
+				DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
 				DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */,
 			);
