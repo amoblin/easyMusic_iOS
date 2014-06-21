@@ -47,7 +47,7 @@
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
 @property (strong, nonatomic) UIButton *prevButton;
 @property (nonatomic) NSInteger currentIndex;
-@property (nonatomic) NSIndexPath *indexPath;
+@property (nonatomic) NSInteger currentLine;
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) CGFloat currentX;
 @property (nonatomic) CGFloat currentY;
@@ -82,7 +82,9 @@
 
 - (NSString *)content {
     if (_content == nil) {
-        _content = @"";
+        if (self.isNew) {
+            _content = @"";
+        }
     }
     return _content;
 }
@@ -110,6 +112,8 @@
     [super viewDidLoad];
     if (self.isNew) {
         self.UMPageName = @"创作曲目";
+    } else if ([self.songInfo[@"isComposed"] boolValue]) {
+        self.UMPageName = @"修改详情";
     } else {
         self.UMPageName = @"曲目详情";
     }
@@ -183,7 +187,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self getContent];
+    if ( ! self.isNew) {
+        [self getContent];
+    }
 
     CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
@@ -219,7 +225,13 @@
         path = [self findFinalPath:path];
         shouldSave = YES;
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
-        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+        NSString *name = self.textField.text;
+        if ([name isEqualToString:@""] || [name isEqualToString:self.songInfo[@"name"]]) {
+            path = self.songInfo[@"path"];
+        } else {
+            path = [delegate.composedDir stringByAppendingPathComponent:name];
+            path = [self findFinalPath:path];
+        }
         shouldSave = YES;
     }
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
@@ -398,8 +410,9 @@
         path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     }
     NSError *error;
-    self.content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-    if (self.content != nil) {
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    if (error == nil) {
+        self.content = content;
         if (self.isToneShow) {
             [self layoutButtonsWithContent:self.content];
         } else {
@@ -407,7 +420,7 @@
         }
     }
 
-    if (self.songInfo[@"path"] != nil) {
+    if ( ! [self.songInfo[@"isComposed"] boolValue]) {
         if (self.content == nil) {
             [SVProgressHUD show];
         }
@@ -459,7 +472,7 @@
 
 - (void)addToContent:(NSString *)toneName {
     self.content = [NSString stringWithFormat:@"%@ %@", self.content, toneName];
-//    self.tonesArray[self.currentIndex]
+//    self.tonesArray[self.currentLine]
 }
 
 - (void)addTone:(NSString *)toneName {
@@ -681,7 +694,7 @@
 
 - (void)tonePressed:(NSString *)toneName {
     [self playTone:toneName];
-    if (self.isNew) {
+    if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         [self.infoLabel setHidden:YES];
         [self addTone:toneName];
     }
