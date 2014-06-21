@@ -10,5 +10,5 @@
 
 @interface MFButton : UIButton
 
-- (id)initWithTitle:(NSString *)title size:(NSInteger)size andType:(NSInteger) type;
+- (id)initWithTitle:(NSString *)title size:(NSInteger)size tag:(NSInteger)tag andType:(NSInteger) type;
 @end

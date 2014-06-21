@@ -252,7 +252,7 @@
         [self.buttonPool removeObjectAtIndex:0];
         return button;
     } else {
-        MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE andType:type];
+        MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:self.currentIndex andType:type];
         [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -508,14 +508,10 @@
         self.scrollView.contentOffset = CGPointMake(0, offset);
         return;
     }
-    if ( self.isNew ) {
+    if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         [self.infoLabel setHidden:YES];
         if ([keyCommand.input isEqualToString:@"\r"]) {
-            self.content = [NSString stringWithFormat:@"%@\n", self.content];
-            self.isFirst = YES;
-            self.currentX = XOFFSET;
-            self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
-
+            [self returnTone];
             return;
         } else if ([keyCommand.input isEqualToString:@"\b"]) {
             [self deleteLastTone];
@@ -524,9 +520,16 @@
     }
 
     NSString *toneName = [self.mapper objectForKey:keyCommand.input];
-    if (self.isNew) {
+    if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         [self addTone:toneName];
     }
+}
+
+- (void)returnTone {
+    self.content = [NSString stringWithFormat:@"%@\n", self.content];
+    self.isFirst = YES;
+    self.currentX = XOFFSET;
+    self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
 }
 
 - (void)deleteLastTone {
@@ -692,6 +695,8 @@
     }
 }
 
+#pragma mark - MFKeyboard View Delegate
+
 - (void)tonePressed:(NSString *)toneName {
     [self playTone:toneName];
     if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
@@ -699,5 +704,14 @@
         [self addTone:toneName];
     }
 }
+
+- (void)deleteButtonPressed {
+    [self deleteLastTone];
+}
+
+- (void)returnButtonPressed {
+    [self returnTone];
+}
+
 
 @end

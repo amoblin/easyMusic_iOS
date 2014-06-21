@@ -13,6 +13,8 @@
 
 @optional
 - (void)tonePressed:(NSString *)tone;
+- (void)deleteButtonPressed;
+- (void)returnButtonPressed;
 @end
 
 @interface MFKeyboardView : UIView

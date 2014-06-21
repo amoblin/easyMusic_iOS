@@ -11,13 +11,13 @@
 
 @implementation MFButton
 
-- (id)initWithTitle:(NSString *)title size:(NSInteger)size andType:(NSInteger) type
+- (id)initWithTitle:(NSString *)title size:(NSInteger)size tag:(NSInteger)tagIndex andType:(NSInteger) type
 {
     self = [super init];
     if (self) {
         // Initialization code
         UIButton *button = self;
-//        button.tag = self.currentIndex;
+        button.tag = tagIndex;
         //        [button.layer setBorderColor:[UIColorFromRGB(180, 180, 180) CGColor]];
         //        [button.layer setBorderColor:[UIColorFromRGB(194, 194, 194) CGColor]];
         [button.layer setBorderColor:[UIColorFromRGB(171, 211, 255) CGColor]];

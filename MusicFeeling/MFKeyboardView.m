@@ -35,6 +35,9 @@
 @property (strong, nonatomic) NSArray *hConstraints;
 @property (strong, nonatomic) UIButton *prevButton;
 
+@property (strong, nonatomic) UIButton *delButton;
+@property (strong, nonatomic) UIButton *returnButton;
+
 @end
 
 @implementation MFKeyboardView
@@ -49,6 +52,19 @@
         self.currentY = YOFFSET;
         self.currentX = XOFFSET;
         self.tonesArray = [NSArray arrayWithK2KString:@"C5 D5 E5 F5 G5 A5 B5\n C4 D4 E4 F4 G4 A4 B4\n C3 D3 E3 F3 G3 A3 B3"];
+
+        self.returnButton = [UIButton new];
+        [self.returnButton setTitle:@"换行" forState:UIControlStateNormal];
+        [self.returnButton addTarget:self action:@selector(returnButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.returnButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.returnButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.returnButton];
+        self.delButton = [UIButton new];
+        [self.delButton setTitle:@"删除" forState:UIControlStateNormal];
+        [self.delButton addTarget:self action:@selector(delButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.delButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.delButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.delButton];
     }
     return self;
 }
@@ -73,6 +89,24 @@
         default:
             break;
     }
+    /*
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_delButton(==44)]"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:NSDictionaryOfVariableBindings(_delButton)]];
+     */
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_delButton(==44)]-2-|"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:NSDictionaryOfVariableBindings(_delButton)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_returnButton(==44)]-2-|"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:NSDictionaryOfVariableBindings(_returnButton)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_delButton(==44)]-[_returnButton(==44)]-5-|"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:NSDictionaryOfVariableBindings(_delButton, _returnButton)]];
     [super layoutSubviews];
 }
 
@@ -122,7 +156,7 @@
 
 - (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
-    MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE andType:type];
+    MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -222,6 +256,18 @@
     NSLog(@"%@, tag: %d", toneName, sender.tag);
     if ([self.delegate respondsToSelector:@selector(tonePressed:)]) {
         [self.delegate tonePressed:toneName];
+    }
+}
+
+- (void)delButtonPressed:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(deleteButtonPressed)]) {
+        [self.delegate deleteButtonPressed];
+    }
+}
+
+- (void)returnButtonPressed:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(returnButtonPressed)]) {
+        [self.delegate returnButtonPressed];
     }
 }
 
