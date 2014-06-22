@@ -14,10 +14,10 @@
 #import "UIImage+Color.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define XOFFSET 10
+#define XOFFSET 12
 #define YOFFSET 10
 #define BUTTON_SIZE 44
-#define BUTTON_PADDING_H -7
+#define BUTTON_PADDING_H -5
 #define BUTTON_PADDING_V 0
 #define BUTTON_WRAP_LINE_V -7
 
@@ -103,11 +103,11 @@
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_delButton)]];
      */
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_delButton(==44)]-2-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_delButton(==44)]-0-|"
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_delButton)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_returnButton(==44)]-2-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_returnButton(==44)]-0-|"
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_returnButton)]];
@@ -165,6 +165,7 @@
 - (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
+    button.layer.borderWidth = 0;
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];

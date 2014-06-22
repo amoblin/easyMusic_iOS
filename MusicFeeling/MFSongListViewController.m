@@ -166,8 +166,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
     vc.songInfo = [self.arrayDataSource itemAtIndexPath:indexPath];
-    vc.title = [[[self.arrayDataSource itemAtIndexPath:indexPath][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension];
-//    [vc setEditableTitle:[[self.songsInfo[indexPath.row][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
+    vc.title = vc.songInfo[@"name"];
+    if ([vc.songInfo[@"isComposed"] boolValue]) {
+        [vc setEditableTitle:vc.songInfo[@"name"]];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

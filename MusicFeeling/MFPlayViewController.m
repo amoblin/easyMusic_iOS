@@ -224,12 +224,14 @@
         }
         path = [delegate.composedDir stringByAppendingPathComponent:name];
         path = [self findFinalPath:path];
-        shouldSave = YES;
+        if ( ! [self.content isEqualToString:@""]) {
+            shouldSave = YES;
+        }
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
         NSString *name = self.textField.text;
-        if ([name isEqualToString:@""] || [name isEqualToString:self.songInfo[@"name"]]) {
-            path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
-        } else {
+        if ( ! [name isEqualToString:@""] &&  ! [name isEqualToString:self.songInfo[@"name"]]) {
             path = [delegate.composedDir stringByAppendingPathComponent:name];
             path = [self findFinalPath:path];
         }
@@ -718,7 +720,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"offset: %f", scrollView.contentOffset.y);
+//    NSLog(@"offset: %f", scrollView.contentOffset.y);
     if (scrollView.contentSize.height == 0) {
         CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
