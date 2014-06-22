@@ -50,6 +50,7 @@
 @property (nonatomic) NSInteger currentLine;
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) CGFloat currentX;
+@property (nonatomic) CGFloat lastX;
 @property (nonatomic) CGFloat currentY;
 
 @property (nonatomic) BOOL isToneShow;
@@ -191,8 +192,8 @@
         [self getContent];
     }
 
-    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
+//    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY  + BUTTON_SIZE + BUTTON_PADDING_V);
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -227,7 +228,7 @@
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         NSString *name = self.textField.text;
         if ([name isEqualToString:@""] || [name isEqualToString:self.songInfo[@"name"]]) {
-            path = self.songInfo[@"path"];
+            path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
         } else {
             path = [delegate.composedDir stringByAppendingPathComponent:name];
             path = [self findFinalPath:path];
@@ -245,10 +246,10 @@
     self.scrollView.delegate = nil;
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
+- (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
     if (self.buttonPool.count > 0) {
-        UIButton *button = self.buttonPool[0];
+        MFButton *button = self.buttonPool[0];
         [self.buttonPool removeObjectAtIndex:0];
         return button;
     } else {
@@ -280,7 +281,9 @@
         default:
             break;
     }
-    if (self.currentX + 50 > width) {
+    // 测试添加后是否越界
+    if (self.currentX + BUTTON_SIZE + BUTTON_PADDING_H > width) {
+        self.lastX = self.currentX;
         self.currentX = XOFFSET;
         self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
         self.isFirst = YES;
@@ -307,6 +310,7 @@
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
         [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
     }
+    // 为添加下一个做准备
     self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
     self.prevButton = button;
     return array;
@@ -314,10 +318,14 @@
 
 - (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    self.currentY = YOFFSET;
     self.currentIndex = 0;
+    self.currentY = YOFFSET;
+    if (self.tonesArray.count > 0) {
+        self.currentY -= BUTTON_SIZE + BUTTON_PADDING_V;
+    }
     for (NSArray *items in self.tonesArray) {
         self.currentX = XOFFSET;
+        self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
         self.isFirst = YES;
         UIButton *button;
         for (NSString *item in items) {
@@ -341,7 +349,6 @@
             }
             [array addObjectsFromArray:[self layoutButton:button forInterfaceOrientation:interfaceOrientation]];
         }
-        self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
     }
     return array;
 }
@@ -373,8 +380,8 @@
         default:
             break;
     }
-    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
+//    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
 }
 
 - (NSString *)stringByReplacingString:(NSString *)str {
@@ -475,18 +482,24 @@
 //    self.tonesArray[self.currentLine]
 }
 
+- (void) adjustOffsetWithFlag:(BOOL)flag {
+    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    if (flag) {
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
+    }
+
+    CGFloat offset = height - self.scrollView.bounds.size.height;
+    CGPoint bottomOffset = CGPointMake(0, offset);
+    [self.scrollView setContentOffset:bottomOffset animated:YES];
+}
+
 - (void)addTone:(NSString *)toneName {
     [self addToContent:toneName];
     UIButton *button = [self createButtonWithTitle:toneName andType:self.isToneShow];
     [self.scrollView addSubview:button];
     [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 
-    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
-
-    CGFloat offset = height - self.scrollView.bounds.size.height;
-    CGPoint bottomOffset = CGPointMake(0, offset);
-    [self.scrollView setContentOffset:bottomOffset animated:YES];
+    [self adjustOffsetWithFlag:YES];
 }
 
 - (void)keyPressed:(UIKeyCommand *)keyCommand {
@@ -511,7 +524,7 @@
     if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         [self.infoLabel setHidden:YES];
         if ([keyCommand.input isEqualToString:@"\r"]) {
-            [self returnTone];
+            [self addReturnTone];
             return;
         } else if ([keyCommand.input isEqualToString:@"\b"]) {
             [self deleteLastTone];
@@ -525,20 +538,35 @@
     }
 }
 
-- (void)returnTone {
+- (void)addReturnTone {
     self.content = [NSString stringWithFormat:@"%@\n", self.content];
     self.isFirst = YES;
+    self.lastX = self.currentX;
     self.currentX = XOFFSET;
     self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
+
+    [self adjustOffsetWithFlag:YES];
 }
 
 - (void)deleteLastTone {
     NSString *str = self.content;
     if ([self.content hasSuffix:@"\n"]) {
+//        [SVProgressHUD show]
         self.content = [str substringToIndex:[str length]-1];
         self.isFirst = NO;
-        self.currentY -= YOFFSET;
+        self.currentX = self.prevButton.frame.origin.x + BUTTON_SIZE + BUTTON_PADDING_H;
+        self.currentY -= BUTTON_SIZE + BUTTON_PADDING_V;
     } else {
+        self.currentX -= BUTTON_SIZE + BUTTON_PADDING_H;
+        if (self.currentX == XOFFSET) {
+            self.isFirst = YES;
+        } else if (self.currentX < XOFFSET) {
+            self.currentX = self.lastX - BUTTON_SIZE - BUTTON_PADDING_H;
+            self.currentY -= BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+            self.isFirst = NO;
+        } else {
+
+        }
         NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
         if (range.location != NSNotFound) {
             self.content = [str substringToIndex:range.location];
@@ -555,6 +583,7 @@
         self.currentIndex--;
         self.prevButton = (UIButton *)[self.scrollView viewWithTag:self.currentIndex];
     }
+    [self adjustOffsetWithFlag:NO];
 }
 
 #pragma mark - Tone Button Press Action
@@ -603,7 +632,7 @@
     }
 
     NSString *toneName = sender.titleLabel.text;
-    NSLog(@"%@, tag: %d", toneName, sender.tag);
+//    NSLog(@"%@, tag: %ll", toneName, sender.tag);
     if (toneName.length > 0) {
         [self playTone:toneName];
         if (sender.tag >= self.toneCount.integerValue && self.playCount >= self.toneCount.integerValue) {
@@ -684,13 +713,14 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
+    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"offset: %f", scrollView.contentOffset.y);
     if (scrollView.contentSize.height == 0) {
-        CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_PADDING_V);
+        CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
     }
 }
@@ -710,7 +740,7 @@
 }
 
 - (void)returnButtonPressed {
-    [self returnTone];
+    [self addReturnTone];
 }
 
 
