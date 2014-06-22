@@ -14,8 +14,8 @@
 #import "UIImage+Color.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define XOFFSET 15
-#define YOFFSET 20
+#define XOFFSET 10
+#define YOFFSET 10
 #define BUTTON_SIZE 44
 #define BUTTON_PADDING_H -7
 #define BUTTON_PADDING_V 0
@@ -53,18 +53,26 @@
         self.currentX = XOFFSET;
         self.tonesArray = [NSArray arrayWithK2KString:@"C5 D5 E5 F5 G5 A5 B5\n C4 D4 E4 F4 G4 A4 B4\n C3 D3 E3 F3 G3 A3 B3"];
 
-        self.returnButton = [UIButton new];
-        [self.returnButton setTitle:@"换行" forState:UIControlStateNormal];
-        [self.returnButton addTarget:self action:@selector(returnButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.returnButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        self.returnButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:self.returnButton];
         self.delButton = [UIButton new];
-        [self.delButton setTitle:@"删除" forState:UIControlStateNormal];
+        [self.delButton setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [self.delButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
         [self.delButton addTarget:self action:@selector(delButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.delButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//        [self.delButton setBackgroundColor:[UIColor grayColor]];
         self.delButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.delButton];
+
+        self.returnButton = [UIButton new];
+        [self.returnButton setTitle:@"换行" forState:UIControlStateNormal];
+        [self.returnButton setImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
+        [self.returnButton setImageEdgeInsets:UIEdgeInsetsMake(15, 10, 10, 15)];
+        [self.returnButton addTarget:self action:@selector(returnButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.returnButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//        [self.returnButton setBackgroundColor:[UIColor grayColor]];
+        self.returnButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.returnButton];
+        self.layer.borderWidth = 1;
+        self.layer.borderColor = [[UIColor grayColor] CGColor];
     }
     return self;
 }

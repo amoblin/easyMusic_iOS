@@ -510,6 +510,8 @@
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
+		DADD01291956671E0073C8B7 /* return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD01281956671E0073C8B7 /* return@2x.png */; };
+		DADD012B1956672F0073C8B7 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD012A1956672F0073C8B7 /* delete@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1051,6 +1053,8 @@
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
 		DADCEE9318E004350044455D /* MFBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBaseViewController.h; sourceTree = "<group>"; };
 		DADCEE9418E004350044455D /* MFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBaseViewController.m; sourceTree = "<group>"; };
+		DADD01281956671E0073C8B7 /* return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "return@2x.png"; sourceTree = "<group>"; };
+		DADD012A1956672F0073C8B7 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1675,6 +1679,8 @@
 		DA527CD918D3E6E0009A825E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DADD012A1956672F0073C8B7 /* delete@2x.png */,
+				DADD01281956671E0073C8B7 /* return@2x.png */,
 				DA4020F819126015003D593C /* treble_clef@2x.png */,
 				DADCEE8E18DD23730044455D /* music@2x.png */,
 				DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */,
@@ -2072,6 +2078,7 @@
 				DA2EF06018EFB31000DC1617 /* prsF1.mp3 in Resources */,
 				DA2EF1BF18EFB89800DC1617 /* a4m.mp3 in Resources */,
 				DA2EF1B818EFB89800DC1617 /* a1.mp3 in Resources */,
+				DADD01291956671E0073C8B7 /* return@2x.png in Resources */,
 				DA2EF13A18EFB31000DC1617 /* teleC4.mp3 in Resources */,
 				DA2EF10318EFB31000DC1617 /* taylorAS3.mp3 in Resources */,
 				DA2EF06A18EFB31000DC1617 /* prsG3.mp3 in Resources */,
@@ -2158,6 +2165,7 @@
 				DA2EF20C18EFB89800DC1617 /* g7.mp3 in Resources */,
 				DA2EF1B918EFB89800DC1617 /* a1m.mp3 in Resources */,
 				DA2EF09118EFB31000DC1617 /* ramirezF3.mp3 in Resources */,
+				DADD012B1956672F0073C8B7 /* delete@2x.png in Resources */,
 				DA2EF11918EFB31000DC1617 /* taylorE2.mp3 in Resources */,
 				DA2EEFE718EFB30F00DC1617 /* jazzAS3.mp3 in Resources */,
 				DA2EF10718EFB31000DC1617 /* taylorB3.mp3 in Resources */,

@@ -24,7 +24,7 @@
 #import <NSData+Base64.h>
 #import <QuartzCore/QuartzCore.h>
 
-#define XOFFSET 15
+#define XOFFSET 10
 #define YOFFSET 20
 #define BUTTON_SIZE 65
 #define BUTTON_PADDING_H -7
@@ -179,7 +179,7 @@
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==200)]-0-|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==152)]-0-|"
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
