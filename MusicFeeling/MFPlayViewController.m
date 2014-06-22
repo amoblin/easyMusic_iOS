@@ -40,6 +40,7 @@
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) MFKeyboardView *keyboardView;
+@property (strong, nonatomic) NSNumber *keyboardViewHeight;
 @property (strong, nonatomic) UILabel *infoLabel;
 @property (strong, nonatomic) NSArray *vConstraints;
 @property (strong, nonatomic) NSArray *hConstraints;
@@ -113,10 +114,13 @@
     [super viewDidLoad];
     if (self.isNew) {
         self.UMPageName = @"创作曲目";
+        self.keyboardViewHeight = @152;
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         self.UMPageName = @"修改详情";
+        self.keyboardViewHeight = @152;
     } else {
         self.UMPageName = @"曲目详情";
+        self.keyboardViewHeight = @0;
     }
 
     self.isFirst = YES;
@@ -151,7 +155,7 @@
 
     if (self.isNew) {
         self.infoLabel = [UILabel autolayoutView];
-        self.infoLabel.text = @"连接蓝牙键盘后，按键来谱曲";
+        self.infoLabel.text = @"连接蓝牙键盘或使用底部的键盘，按键来谱曲";
         self.infoLabel.textAlignment = NSTextAlignmentCenter;
         [self.scrollView addSubview:self.infoLabel];
         [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.infoLabel attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
@@ -179,9 +183,9 @@
                                                                       options:0
                                                                       metrics:0
                                                                         views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==152)]-0-|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==height)]-0-|"
                                                                       options:0
-                                                                      metrics:0
+                                                                      metrics:@{@"height": self.keyboardViewHeight}
                                                                         views:viewsDictionary]];
     [super viewWillLayoutSubviews];
 }

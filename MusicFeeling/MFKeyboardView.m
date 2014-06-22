@@ -111,7 +111,7 @@
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_returnButton)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_delButton(==44)]-[_returnButton(==44)]-5-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_delButton(==44)]-(40)-[_returnButton(==44)]"
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_delButton, _returnButton)]];
