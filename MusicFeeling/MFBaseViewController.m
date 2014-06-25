@@ -178,6 +178,7 @@
             break;
     }
     [self playTone:toneName];
+    self.playCount++;
 }
 
 - (NSString *)getPreviousHalfTone:(NSString *)tone {

@@ -155,7 +155,8 @@
 
     if (self.isNew) {
         self.infoLabel = [UILabel autolayoutView];
-        self.infoLabel.text = @"连接蓝牙键盘或使用底部的键盘，按键来谱曲";
+        self.infoLabel.numberOfLines = 0;
+        self.infoLabel.text = @"连接蓝牙键盘或使用底部的键盘，\n按键来谱曲";
         self.infoLabel.textAlignment = NSTextAlignmentCenter;
         [self.scrollView addSubview:self.infoLabel];
         [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.infoLabel attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
@@ -163,7 +164,7 @@
                                                                                options:0
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
-        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[_infoLabel(==30)]"
+        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[_infoLabel(==50)]"
                                                                                options:0
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
@@ -261,6 +262,7 @@
     } else {
         MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:self.currentIndex andType:type];
         [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+        /*
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
         [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
@@ -268,6 +270,7 @@
         // repeat method
         [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
         [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+         */
         return button;
     }
 }
@@ -621,14 +624,6 @@
     [UIView animateWithDuration:0.3 animations:^(void) {
         sender.backgroundColor = [UIColor clearColor];
     }];
-
-    /*
-    NSString *toneName = sender.titleLabel.text;
-    NSLog(@"%@", toneName);
-    if (toneName.length > 0) {
-        [self playTone:toneName];
-    }
-     */
 }
 
 - (void)toneButtonTouchDown:(UIButton *)sender {
@@ -641,6 +636,7 @@
 //    NSLog(@"%@, tag: %ll", toneName, sender.tag);
     if (toneName.length > 0) {
         [self playTone:toneName];
+        self.playCount++;
         if (sender.tag >= self.toneCount.integerValue && self.playCount >= self.toneCount.integerValue) {
             [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
             self.playCount = 0;

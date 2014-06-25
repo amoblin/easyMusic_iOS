@@ -117,7 +117,6 @@
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@ is not exist.", name]];
         return;
     }
-    self.playCount++;
 
     BOOL flag = NO;
     for (AVAudioPlayer *player in self.playerCache) {

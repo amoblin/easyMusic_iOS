@@ -14,7 +14,7 @@
 #import "UIImage+Color.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define XOFFSET 12
+#define XOFFSET 15
 #define YOFFSET 10
 #define BUTTON_SIZE 44
 #define BUTTON_PADDING_H -5
@@ -167,13 +167,16 @@
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
     button.layer.borderWidth = 0;
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    /*
     [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
     [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+    [button addTarget:self action:@selector(toneEvent:) forControlEvents:UIControlEventAllEvents];
 
     // repeat method
     [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
     [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+     */
     return button;
 }
 
@@ -227,23 +230,24 @@
 #pragma mark - Tone Button Press Action
 
 - (void)toneButtonTouchDragEnter:(UIButton *)sender {
-    NSLog(@"%@", sender);
     NSLog(@"%s", __func__);
 }
 - (void)toneButtonTouchDragExit:(UIButton *)sender {
-    NSLog(@"%@", sender);
     NSLog(@"%s", __func__);
 }
 - (void)toneButtonTouchDragInside:(UIButton *)sender {
-    NSLog(@"%@", sender);
     NSLog(@"%s", __func__);
 }
 - (void)toneButtonTouchDragOutside:(UIButton *)sender {
-    NSLog(@"%@", sender);
+    NSLog(@"%s", __func__);
+}
+
+- (void)toneEvent:(UIButton *)sender {
     NSLog(@"%s", __func__);
 }
 
 - (void)toneButtonPressed:(UIButton *)sender {
+    NSLog(@"%s", __func__);
 //    [self becomeFirstResponder];
     sender.backgroundColor =  UIColorFromRGB(117, 192, 255);
     [UIView animateWithDuration:0.3 animations:^(void) {
@@ -260,7 +264,9 @@
 }
 
 - (void)toneButtonTouchDown:(UIButton *)sender {
+    NSLog(@"%s", __func__);
 //    [self becomeFirstResponder];
+    [sender setHighlighted:YES];
     NSString *toneName = sender.titleLabel.text;
     NSLog(@"%@, tag: %d", toneName, sender.tag);
     if ([self.delegate respondsToSelector:@selector(tonePressed:)]) {
