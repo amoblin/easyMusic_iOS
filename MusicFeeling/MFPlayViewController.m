@@ -48,11 +48,18 @@
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
 @property (strong, nonatomic) UIButton *prevButton;
 @property (nonatomic) NSInteger currentIndex;
+
 @property (nonatomic) NSInteger currentLine;
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) CGFloat currentX;
 @property (nonatomic) CGFloat lastX;
 @property (nonatomic) CGFloat currentY;
+
+@property (nonatomic) NSInteger currentLine_H;
+@property (nonatomic) BOOL isFirst_H;
+@property (nonatomic) CGFloat currentX_H;
+@property (nonatomic) CGFloat lastX_H;
+@property (nonatomic) CGFloat currentY_H;
 
 @property (nonatomic) BOOL isToneShow;
 @end
@@ -149,6 +156,7 @@
     [self.view addSubview:self.scrollView];
 
     self.keyboardView = [MFKeyboardView autolayoutView];
+    self.keyboardView.tag = 1;
     self.keyboardView.interfaceOrientation = self.interfaceOrientation;
     self.keyboardView.delegate = self;
     [self.view addSubview:self.keyboardView];
@@ -277,31 +285,53 @@
 
 - (NSArray *)layoutButton:(UIButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    CGFloat width;
+    CGFloat width, currentX, currentY;
+    BOOL isFirst;
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
-        case UIInterfaceOrientationPortraitUpsideDown:
+        case UIInterfaceOrientationPortraitUpsideDown: {
             width = [UIScreen mainScreen].bounds.size.width;
+            // 测试添加后是否越界
+            if (self.currentX + BUTTON_SIZE + BUTTON_PADDING_H > width) {
+                self.lastX = self.currentX;
+                self.currentX = XOFFSET;
+                self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+                self.isFirst = YES;
+            }
+            currentX = self.currentX;
+            currentY = self.currentY;
+            isFirst = self.isFirst;
+
+            // 为添加下一个做准备
+            self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
             break;
+        }
         case UIInterfaceOrientationLandscapeLeft:
-        case UIInterfaceOrientationLandscapeRight:
+        case UIInterfaceOrientationLandscapeRight: {
             width = [UIScreen mainScreen].bounds.size.height;
+            // 测试添加后是否越界
+            if (self.currentX_H + BUTTON_SIZE + BUTTON_PADDING_H > width) {
+                self.lastX_H = self.currentX_H;
+                self.currentX_H = XOFFSET;
+                self.currentY_H += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+                self.isFirst_H = YES;
+            }
+            currentX = self.currentX_H;
+            currentY = self.currentY_H;
+            isFirst = self.isFirst_H;
+
+            // 为添加下一个做准备
+            self.currentX_H += BUTTON_SIZE + BUTTON_PADDING_H;
             break;
+        }
         default:
             break;
     }
-    // 测试添加后是否越界
-    if (self.currentX + BUTTON_SIZE + BUTTON_PADDING_H > width) {
-        self.lastX = self.currentX;
-        self.currentX = XOFFSET;
-        self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
-        self.isFirst = YES;
-    }
-
-    if (self.isFirst) {
+    if (isFirst) {
         self.isFirst = NO;
-        NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:self.currentX],
-                                  @"y": [NSNumber numberWithFloat:self.currentY],
+        self.isFirst_H = NO;
+        NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:currentX],
+                                  @"y": [NSNumber numberWithFloat:currentY],
                                   @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
         NSLog(@"%@", matrics);
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
@@ -319,8 +349,6 @@
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
         [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
     }
-    // 为添加下一个做准备
-    self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
     self.prevButton = button;
     return array;
 }
@@ -328,14 +356,27 @@
 - (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     self.currentIndex = 0;
-    self.currentY = YOFFSET;
-    if (self.tonesArray.count > 0) {
-        self.currentY -= BUTTON_SIZE + BUTTON_PADDING_V;
+    if (interfaceOrientation == UIInterfaceOrientationPortrait) {
+        self.currentY = YOFFSET;
+        if (self.tonesArray.count > 0) {
+            self.currentY -= BUTTON_SIZE + BUTTON_PADDING_V;
+        }
+    } else {
+        self.currentY_H = YOFFSET;
+        if (self.tonesArray.count > 0) {
+            self.currentY_H -= BUTTON_SIZE + BUTTON_PADDING_V;
+        }
     }
     for (NSArray *items in self.tonesArray) {
-        self.currentX = XOFFSET;
-        self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
-        self.isFirst = YES;
+        if (interfaceOrientation == UIInterfaceOrientationPortrait) {
+            self.currentX = XOFFSET;
+            self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
+            self.isFirst = YES;
+        } else {
+            self.currentX_H = XOFFSET;
+            self.currentY_H += BUTTON_SIZE + BUTTON_PADDING_V;
+            self.isFirst_H = YES;
+        }
         UIButton *button;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
@@ -492,7 +533,12 @@
 }
 
 - (void) adjustOffsetWithFlag:(BOOL)flag {
-    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    CGFloat height;
+    if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+        height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    } else {
+        height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+    }
     if (flag) {
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
     }
@@ -549,10 +595,16 @@
 
 - (void)addReturnTone {
     self.content = [NSString stringWithFormat:@"%@\n", self.content];
+
     self.isFirst = YES;
     self.lastX = self.currentX;
     self.currentX = XOFFSET;
     self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
+
+    self.isFirst_H = YES;
+    self.lastX_H = self.currentX_H;
+    self.currentX_H = XOFFSET;
+    self.currentY_H += BUTTON_SIZE + BUTTON_PADDING_V;
 
     [self adjustOffsetWithFlag:YES];
 }
@@ -565,6 +617,10 @@
         self.isFirst = NO;
         self.currentX = self.prevButton.frame.origin.x + BUTTON_SIZE + BUTTON_PADDING_H;
         self.currentY -= BUTTON_SIZE + BUTTON_PADDING_V;
+
+        self.isFirst_H = NO;
+        self.currentX_H = self.prevButton.frame.origin.x + BUTTON_SIZE + BUTTON_PADDING_H;
+        self.currentY_H -= BUTTON_SIZE + BUTTON_PADDING_V;
     } else {
         self.currentX -= BUTTON_SIZE + BUTTON_PADDING_H;
         if (self.currentX == XOFFSET) {
@@ -573,9 +629,17 @@
             self.currentX = self.lastX - BUTTON_SIZE - BUTTON_PADDING_H;
             self.currentY -= BUTTON_SIZE + BUTTON_WRAP_LINE_V;
             self.isFirst = NO;
-        } else {
-
         }
+
+        self.currentX_H -= BUTTON_SIZE + BUTTON_PADDING_H;
+        if (self.currentX_H == XOFFSET) {
+            self.isFirst_H = YES;
+        } else if (self.currentX_H < XOFFSET) {
+            self.currentX_H = self.lastX_H - BUTTON_SIZE - BUTTON_PADDING_H;
+            self.currentY_H -= BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+            self.isFirst_H = NO;
+        }
+
         NSRange range = [str rangeOfString:@" " options:NSBackwardsSearch];
         if (range.location != NSNotFound) {
             self.content = [str substringToIndex:range.location];
@@ -584,9 +648,14 @@
         [self.prevButton removeFromSuperview];
         if (self.currentIndex <= 1) {
             self.currentIndex = 0;
+
             self.isFirst = YES;
             self.currentY = YOFFSET;
             self.currentX = XOFFSET;
+
+            self.isFirst_H = YES;
+            self.currentX_H = XOFFSET;
+            self.currentY_H = YOFFSET;
             return;
         }
         self.currentIndex--;
@@ -697,16 +766,18 @@
     }
 }
 
+#pragma mark - Rotate Deleagate
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     switch (toInterfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            [self.scrollView removeConstraints:self.hConstraints];
+            [self.scrollView removeConstraints:self.scrollView.constraints];
             [self.scrollView addConstraints:self.vConstraints];
             break;
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
-            [self.scrollView removeConstraints:self.vConstraints];
+            [self.scrollView removeConstraints:self.scrollView.constraints];
             [self.scrollView addConstraints:self.hConstraints];
             break;
         default:
@@ -715,14 +786,24 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    CGFloat height;
+    if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+        height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+    } else {
+        height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+    }
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    NSLog(@"offset: %f", scrollView.contentOffset.y);
+    NSLog(@"contentsize: %f, offset: %f", scrollView.contentSize.height, scrollView.contentOffset.y);
     if (scrollView.contentSize.height == 0) {
-        CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+        CGFloat height;
+        if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+            height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+        } else {
+            height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+        }
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
     }
 }
