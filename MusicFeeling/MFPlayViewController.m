@@ -796,7 +796,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"contentsize: %f, offset: %f", scrollView.contentSize.height, scrollView.contentOffset.y);
+//    NSLog(@"contentsize: %f, offset: %f", scrollView.contentSize.height, scrollView.contentOffset.y);
     if (scrollView.contentSize.height == 0) {
         CGFloat height;
         if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
