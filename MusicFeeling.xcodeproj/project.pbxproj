@@ -513,6 +513,7 @@
 		DADD01291956671E0073C8B7 /* return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD01281956671E0073C8B7 /* return@2x.png */; };
 		DADD012B1956672F0073C8B7 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD012A1956672F0073C8B7 /* delete@2x.png */; };
 		DAEB1100196EBBF300ADC956 /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB10FF196EBBF300ADC956 /* circle@2x.png */; };
+		DAEB1102196F497100ADC956 /* circle_hit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB1101196F497100ADC956 /* circle_hit@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1057,6 +1058,7 @@
 		DADD01281956671E0073C8B7 /* return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "return@2x.png"; sourceTree = "<group>"; };
 		DADD012A1956672F0073C8B7 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		DAEB10FF196EBBF300ADC956 /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
+		DAEB1101196F497100ADC956 /* circle_hit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_hit@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1682,6 +1684,7 @@
 			isa = PBXGroup;
 			children = (
 				DAEB10FF196EBBF300ADC956 /* circle@2x.png */,
+				DAEB1101196F497100ADC956 /* circle_hit@2x.png */,
 				DADD012A1956672F0073C8B7 /* delete@2x.png */,
 				DADD01281956671E0073C8B7 /* return@2x.png */,
 				DA4020F819126015003D593C /* treble_clef@2x.png */,
@@ -1857,6 +1860,7 @@
 				DA2EF0F218EFB31000DC1617 /* taylor12FS2.mp3 in Resources */,
 				DA2EF12D18EFB31000DC1617 /* teleA2.mp3 in Resources */,
 				DA2EF0FD18EFB31000DC1617 /* taylorA1.mp3 in Resources */,
+				DAEB1102196F497100ADC956 /* circle_hit@2x.png in Resources */,
 				DA2EF14018EFB31000DC1617 /* teleD2.mp3 in Resources */,
 				DA2EF02418EFB30F00DC1617 /* lesPaulCS5.mp3 in Resources */,
 				DA2EF1FB18EFB89800DC1617 /* f5m.mp3 in Resources */,

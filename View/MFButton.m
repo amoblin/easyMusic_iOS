@@ -40,8 +40,8 @@
         //            button.backgroundColor = [UIColor blueColor];
         button.translatesAutoresizingMaskIntoConstraints = NO;
 
-//        [button setBackgroundImage:[UIImage  forState:UIControlStateHighlighted];
-        [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(117, 192, 255)] forState:UIControlStateSelected];
+        [button setBackgroundImage:[UIImage imageNamed:@"circle_hit"] forState:UIControlStateHighlighted];
+        [button setBackgroundImage:[UIImage imageNamed:@"circle_hit"] forState:UIControlStateSelected];
     }
     return self;
 }
