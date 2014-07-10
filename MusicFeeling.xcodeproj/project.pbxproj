@@ -512,6 +512,7 @@
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
 		DADD01291956671E0073C8B7 /* return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD01281956671E0073C8B7 /* return@2x.png */; };
 		DADD012B1956672F0073C8B7 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD012A1956672F0073C8B7 /* delete@2x.png */; };
+		DAEB1100196EBBF300ADC956 /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB10FF196EBBF300ADC956 /* circle@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1055,6 +1056,7 @@
 		DADCEE9418E004350044455D /* MFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBaseViewController.m; sourceTree = "<group>"; };
 		DADD01281956671E0073C8B7 /* return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "return@2x.png"; sourceTree = "<group>"; };
 		DADD012A1956672F0073C8B7 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		DAEB10FF196EBBF300ADC956 /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1679,6 +1681,7 @@
 		DA527CD918D3E6E0009A825E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAEB10FF196EBBF300ADC956 /* circle@2x.png */,
 				DADD012A1956672F0073C8B7 /* delete@2x.png */,
 				DADD01281956671E0073C8B7 /* return@2x.png */,
 				DA4020F819126015003D593C /* treble_clef@2x.png */,
@@ -1890,6 +1893,7 @@
 				DA2EF0D018EFB31000DC1617 /* taylor12A3.mp3 in Resources */,
 				DA2EF0C718EFB31000DC1617 /* stratoG2.mp3 in Resources */,
 				DA2EF20818EFB89800DC1617 /* g5.mp3 in Resources */,
+				DAEB1100196EBBF300ADC956 /* circle@2x.png in Resources */,
 				DA2EF02A18EFB30F00DC1617 /* lesPaulDS3.mp3 in Resources */,
 				DA2EF08C18EFB31000DC1617 /* ramirezE2.mp3 in Resources */,
 				DA2EF1F718EFB89800DC1617 /* f3m.mp3 in Resources */,
@@ -2513,7 +2517,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "11BC76E1-B4AC-4676-AA74-DF18FB44569E";
 				WRAPPER_EXTENSION = app;
@@ -2535,7 +2539,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9505CBD3-2581-4756-8E6C-D23EF7F322D0";
 				WRAPPER_EXTENSION = app;

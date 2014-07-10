@@ -223,7 +223,7 @@
     [super viewDidLoad];
     self.UMPageName = @"曲目";
 
-    self.navigationItem.title = @"曲目";
+    self.title = @"曲目";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
