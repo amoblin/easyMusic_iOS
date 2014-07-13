@@ -3,6 +3,12 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
+      "filename" : "treble_clef-29.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
       "filename" : "treble_clef-29@2x.png",
       "scale" : "2x"
     },
@@ -10,6 +16,18 @@
       "size" : "40x40",
       "idiom" : "iphone",
       "filename" : "treble_clef-40@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "treble_clef-57.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "treble_clef-57@2x.png",
       "scale" : "2x"
     },
     {
@@ -43,6 +61,30 @@
       "scale" : "2x"
     },
     {
+      "size" : "50x50",
+      "idiom" : "ipad",
+      "filename" : "treble_clef-50.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "50x50",
+      "idiom" : "ipad",
+      "filename" : "treble_clef-50@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "treble_clef-72.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "treble_clef-72@2x.png",
+      "scale" : "2x"
+    },
+    {
       "size" : "76x76",
       "idiom" : "ipad",
       "filename" : "treble_clef-76.png",
@@ -52,6 +94,13 @@
       "size" : "76x76",
       "idiom" : "ipad",
       "filename" : "treble_clef-76@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "ipad",
+      "filename" : "treble_clef-57@2x.png",
+      "unassigned" : true,
       "scale" : "2x"
     }
   ],
