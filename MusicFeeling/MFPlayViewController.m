@@ -708,6 +708,7 @@
         self.playCount++;
         if (sender.tag >= self.toneCount.integerValue && self.playCount >= self.toneCount.integerValue) {
             [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
+//            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
             self.playCount = 0;
         }
     }
@@ -732,8 +733,7 @@
             NSString *toneName = button.titleLabel.text;
             button.titleLabel.font = [UIFont systemFontOfSize:50];
             [button setTitle:self.router[toneName.lowercaseString] forState:UIControlStateNormal];
-            button.layer.borderWidth = 0;
-            button.layer.cornerRadius = 4;
+            [button setBackgroundImage:nil forState:UIControlStateNormal];
         }
         //
     }
@@ -747,8 +747,7 @@
             NSString *computerKey = button.titleLabel.text;
             button.titleLabel.font = [UIFont systemFontOfSize:14];
             [button setTitle:self.mapper[computerKey] forState:UIControlStateNormal];
-            button.layer.borderWidth = 1;
-            button.layer.cornerRadius = BUTTON_SIZE / 2;
+            [button setBackgroundImage:[UIImage imageNamed:@"circle"] forState:UIControlStateNormal];
         }
     }
 }

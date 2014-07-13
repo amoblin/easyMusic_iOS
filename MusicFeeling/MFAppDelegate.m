@@ -32,6 +32,8 @@
 #if DEBUG
     [self getDeviceInfo];
 #endif
+    [self.window setTintColor:UIColorFromRGB(57, 170, 255)];
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
     self.composedDir = [paths[0] stringByAppendingPathComponent:@"composed"];
