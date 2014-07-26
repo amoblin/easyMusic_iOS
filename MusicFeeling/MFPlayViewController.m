@@ -127,12 +127,24 @@
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         self.UMPageName = @"修改详情";
         self.keyboardViewHeight = @152;
+
+        AVQuery *query = [AVQuery queryWithClassName:@"Song"];
+        [query whereKey:@"author" equalTo:[AVUser currentUser].username];
+        [query whereKey:@"name" equalTo:self.songInfo[@"name"]];
+        [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+            if (error == nil) {
+                self.navigationItem.rightBarButtonItem.title = @"更新";
+                self.songInfo = object;
+                self.songInfo[@"isComposed"] = @YES;
+            }
+        }];
     } else {
         self.UMPageName = @"曲目详情";
         self.keyboardViewHeight = @0;
+
+        [self.songInfo incrementKey:@"viewCount"];
+        [self.songInfo saveInBackground];
     }
-    [self.songInfo incrementKey:@"viewCount"];
-    [self.songInfo saveInBackground];
 
     self.isFirst = YES;
     self.currentIndex = 0;
@@ -202,6 +214,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
     if ([self.songInfo[@"isComposed"] boolValue]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(releaseButtonPressed:)];
+        /*
+    } else if ([self.songInfo[@"author"] isEqualToString:[AVUser currentUser].username]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed:)];
+         */
     }
 }
 
@@ -821,6 +837,15 @@
     }
 }
 
+- (void)editButtonPressed:(UIButton *)sender {
+    MFPlayViewController *vc = [[MFPlayViewController alloc] init];
+    vc.songInfo = self.songInfo;
+    vc.songInfo[@"isComposed"] = @YES;
+    vc.title = vc.songInfo[@"name"];
+    [vc setEditableTitle:vc.songInfo[@"name"]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (IBAction)releaseButtonPressed:(UIButton *)sender {
     if (self.content == nil) {
         [PXAlertView showAlertWithTitle:@"获取内容失败" message:@"请联网，重试一次"];
@@ -845,17 +870,26 @@
         if (error != nil) {
             NSLog(@"%@", error);
         } else {
+            NSString *msg = @"更新成功！";
             AVQuery *query = [AVQuery queryWithClassName:@"Config"];
             AVObject *config = [query getFirstObject];
 
+            AVFile *oldFile = self.songInfo[@"contentFile"];
+            [oldFile deleteInBackground];
+
             [(AVObject *)self.songInfo setObject:@NO forKey:@"isComposed"];
+            [(AVObject *)self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
             [(AVObject *)self.songInfo setObject:file forKey:@"contentFile"];
-            [(AVObject *)self.songInfo setObject:@1 forKey:@"finishCount"];
+            if ([self.songInfo objectForKey:@"finishCount"] == nil) {
+                msg = @"发布成功！";
+                [(AVObject *)self.songInfo setObject:@1 forKey:@"finishCount"];
+            }
             [(AVObject *)self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
             [(AVObject *)self.songInfo setObject:[AVUser currentUser] forKey:@"userid"];
             [(AVObject *)self.songInfo setObject:[AVUser currentUser].username forKey:@"author"];
             [(AVObject *)self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [PXAlertView showAlertWithTitle:@"发布成功！" message:@"返回刷新即可看到"];
+                [PXAlertView showAlertWithTitle:msg message:@"返回刷新即可看到"];
+                self.songInfo[@"isComposed"] = @YES;
             }];
         }
     }];
