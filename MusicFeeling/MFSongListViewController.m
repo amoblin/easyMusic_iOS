@@ -11,6 +11,7 @@
 #import "MFAppDelegate.h"
 #import "MFSettingViewController.h"
 #import "MFSettingsTableViewCell.h"
+#import "MFSongListTableViewCell.h"
 
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
@@ -24,42 +25,6 @@
 @end
 
 @implementation MFSongListViewController
-
-- (NSString *)humanableInfoFromDate: (NSDate *) theDate {
-    NSString *info;
-
-    NSTimeInterval delta = - [theDate timeIntervalSinceNow];
-    if (delta < 60) {
-        // 1分钟之内
-        info = @"Just Now";
-    } else {
-        delta = delta / 60;
-        if (delta < 60) {
-            // n分钟前
-            info = [NSString stringWithFormat:@"%d分钟前", (NSUInteger)delta];
-        } else {
-            delta = delta / 60;
-            if (delta < 24) {
-                // n小时前
-                info = [NSString stringWithFormat:@"%d小时前", (NSUInteger)delta];
-            } else {
-                delta = delta / 24;
-                if ((NSInteger)delta == 1) {
-                    //昨天
-                    info = @"昨天";
-                } else if ((NSInteger)delta == 2) {
-                    info = @"前天";
-                } else {
-                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    [dateFormatter setDateFormat:@"MM-dd"];
-                    info = [dateFormatter stringFromDate:theDate];
-//                    info = [NSString stringWithFormat:@"%d天前", (NSUInteger)delta];
-                }
-            }
-        }
-    }
-    return info;
-}
 
 - (NSMutableArray *)composedSongs {
     NSError *error = nil;
@@ -118,12 +83,14 @@
 
         dataArray = @[self.composedSongs, array];
         cellId = @"cellId";
-        block = ^(MFSettingsTableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
+        block = ^(MFSongListTableViewCell *cell, AVObject *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.textLabel.text = item[@"name"];
-
-            cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
-            cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"createdAt"]];
+            if (indexPath.section == 0) {
+                [cell showCount:NO];
+            } else {
+                [cell showCount:YES];
+            }
+            [cell configWithItem:item];
             /*
             if (item[@"mtime"] != nil) {
                 cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
@@ -143,9 +110,13 @@
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
 	    _arrayDataSource.sectionHeaderArray = @[@"我创作的", @"大家创作的"];
-        _arrayDataSource.editCellBlock = ^(NSDictionary *item, NSIndexPath *indexPath) {
+        _arrayDataSource.editCellBlock = ^(AVObject *item, NSIndexPath *indexPath) {
             MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"path"]] error:nil];
+            if (indexPath.section == 0) {
+                [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"path"]] error:nil];
+            } else {
+                [item deleteInBackground];
+            }
         };
     }
     return _arrayDataSource;
@@ -155,6 +126,7 @@
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] init];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+
         [self.view addSubview:_tableView];
 
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
@@ -182,7 +154,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 55;
+    return 70;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -278,7 +250,7 @@
 
     self.tableView.dataSource = self.arrayDataSource;
     self.tableView.delegate = self;
-    [self.tableView registerClass:[MFSettingsTableViewCell class] forCellReuseIdentifier:@"cellId"];
+    [self.tableView registerClass:[MFSongListTableViewCell class] forCellReuseIdentifier:@"cellId"];
     [self getContents];
 }
 

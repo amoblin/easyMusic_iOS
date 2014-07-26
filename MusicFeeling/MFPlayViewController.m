@@ -131,6 +131,8 @@
         self.UMPageName = @"曲目详情";
         self.keyboardViewHeight = @0;
     }
+    [self.songInfo incrementKey:@"viewCount"];
+    [self.songInfo saveInBackground];
 
     self.isFirst = YES;
     self.currentIndex = 0;
@@ -775,6 +777,8 @@
             [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
 //            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
             self.playCount = 0;
+            [self.songInfo incrementKey:@"finishCount"];
+            [self.songInfo saveInBackground];
         }
     }
 }
@@ -822,7 +826,16 @@
         [PXAlertView showAlertWithTitle:@"获取内容失败" message:@"请联网，重试一次"];
         return;
     }
+    if ([AVUser currentUser] == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"欢迎" message:@"输入你的名字吧" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    } else {
+        [self postSong];
+    }
+}
 
+- (void)postSong {
     NSString *path = [self fetchPath];
     [self saveContent:self.content atPath:path];
 
@@ -834,17 +847,30 @@
         } else {
             AVQuery *query = [AVQuery queryWithClassName:@"Config"];
             AVObject *config = [query getFirstObject];
-//            [song setObject:@"amoblin" forKey:@"author"];
-//            [song setObject:@"0" forKey:@"isPublic"];
-//            [song setObject:[NSDate date] forKey:@"createdAt"];
-//            [song setObject:@"123" forKey:@"mtime"];
+
             [(AVObject *)self.songInfo setObject:@NO forKey:@"isComposed"];
             [(AVObject *)self.songInfo setObject:file forKey:@"contentFile"];
+            [(AVObject *)self.songInfo setObject:@1 forKey:@"finishCount"];
             [(AVObject *)self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
-            [(AVObject *)self.songInfo setObject:self.uuid forKey:@"userUUID"];
+            [(AVObject *)self.songInfo setObject:[AVUser currentUser] forKey:@"userid"];
+            [(AVObject *)self.songInfo setObject:[AVUser currentUser].username forKey:@"author"];
             [(AVObject *)self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [PXAlertView showAlertWithTitle:@"发布成功！" message:@"返回刷新即可看到"];
             }];
+        }
+    }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSString *name = [[alertView textFieldAtIndex:0] text];
+    AVUser * user = [AVUser user];
+    user.username = name;
+    user.password =  self.uuid;
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [self postSong];
+        } else {
+            [PXAlertView showAlertWithTitle:@"出错了" message:@"出了点状况，请再试一次吧"];
         }
     }];
 }

@@ -7,17 +7,16 @@
 //
 
 #import "MFArrayDataSource.h"
+#import <AVOSCloud/AVOSCloud.h>
 
 @interface MFArrayDataSource()
 @property (nonatomic, copy) NSString *cellIdentifier;
-@property (nonatomic, copy) NSString *uuid;
 @property (nonatomic, copy) TableViewCellConfigureBlock configureCellBlock;
 @end
 
 @implementation MFArrayDataSource
 - (id)initWithItems:(NSMutableArray *)items cellIdentifier:(NSString *)cellId configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock {
     self = [super init];
-    self.uuid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uuid"];
     if (self) {
         self.items = items;
         self.cellIdentifier = cellId;
@@ -61,7 +60,8 @@
     if (indexPath.section == 0) {
         return YES;
     }
-    if ([[[self itemAtIndexPath:indexPath] objectForKey:@"userUUID"] isEqualToString:self.uuid]) {
+    NSString *author = [AVUser currentUser].username;
+    if ([[[self itemAtIndexPath:indexPath] objectForKey:@"author"] isEqualToString:author]) {
         return YES;
     } else {
         return NO;

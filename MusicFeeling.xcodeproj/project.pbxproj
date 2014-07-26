@@ -130,6 +130,9 @@
 		DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */; };
 		DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B21953AFF6002B66CA /* UIImage+Color.m */; };
 		DAA262B61953B017002B66CA /* MFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B51953B017002B66CA /* MFButton.m */; };
+		DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DABB801019839B7200F09368 /* MFSongListTableViewCell.m */; };
+		DABB801319839E6400F09368 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB801219839E6400F09368 /* green@2x.png */; };
+		DABB801519839E6A00F09368 /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB801419839E6A00F09368 /* blue@2x.png */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
@@ -296,6 +299,10 @@
 		DAA262B21953AFF6002B66CA /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		DAA262B41953B017002B66CA /* MFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFButton.h; sourceTree = "<group>"; };
 		DAA262B51953B017002B66CA /* MFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFButton.m; sourceTree = "<group>"; };
+		DABB800F19839B7200F09368 /* MFSongListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSongListTableViewCell.h; sourceTree = "<group>"; };
+		DABB801019839B7200F09368 /* MFSongListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSongListTableViewCell.m; sourceTree = "<group>"; };
+		DABB801219839E6400F09368 /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
+		DABB801419839E6A00F09368 /* blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue@2x.png"; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 		DADCEE9018E003FE0044455D /* MFPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPlayViewController.h; sourceTree = "<group>"; };
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
@@ -497,6 +504,8 @@
 				DA4020FB19126557003D593C /* MFSettingsTableViewCell.m */,
 				DA45477518E2476E0018874F /* MFSongListViewController.h */,
 				DA45477618E2476E0018874F /* MFSongListViewController.m */,
+				DABB800F19839B7200F09368 /* MFSongListTableViewCell.h */,
+				DABB801019839B7200F09368 /* MFSongListTableViewCell.m */,
 				DADCEE9018E003FE0044455D /* MFPlayViewController.h */,
 				DADCEE9118E003FE0044455D /* MFPlayViewController.m */,
 				DA9C809419526A0C0029EF68 /* MFKeyboardView.h */,
@@ -544,6 +553,8 @@
 		DA527CD918D3E6E0009A825E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DABB801419839E6A00F09368 /* blue@2x.png */,
+				DABB801219839E6400F09368 /* green@2x.png */,
 				DAEB10FF196EBBF300ADC956 /* circle@2x.png */,
 				DAEB1101196F497100ADC956 /* circle_hit@2x.png */,
 				DA3E783F197258D30040403F /* star@2x.png */,
@@ -701,6 +712,7 @@
 				DA2EF1C418EFB89800DC1617 /* a7.mp3 in Resources */,
 				DA2EF1DA18EFB89800DC1617 /* c7.mp3 in Resources */,
 				DA2EF1E618EFB89800DC1617 /* d5m.mp3 in Resources */,
+				DABB801319839E6400F09368 /* green@2x.png in Resources */,
 				DA2EF1BC18EFB89800DC1617 /* a3.mp3 in Resources */,
 				DA2EF1D818EFB89800DC1617 /* c6.mp3 in Resources */,
 				DA2EF1C918EFB89800DC1617 /* b3.mp3 in Resources */,
@@ -770,6 +782,7 @@
 				DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */,
 				DA2EF1FD18EFB89800DC1617 /* f6m.mp3 in Resources */,
 				DA2EF20018EFB89800DC1617 /* g1.mp3 in Resources */,
+				DABB801519839E6A00F09368 /* blue@2x.png in Resources */,
 				DA2EF1E118EFB89800DC1617 /* d3.mp3 in Resources */,
 				DA2EF1FA18EFB89800DC1617 /* f5.mp3 in Resources */,
 				DA2EF1EB18EFB89800DC1617 /* e1.mp3 in Resources */,
@@ -860,6 +873,7 @@
 				DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */,
 				DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
+				DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */,

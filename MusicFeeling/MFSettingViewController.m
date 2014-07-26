@@ -51,7 +51,7 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"与我联系", @"去评分", @"版本信息"]];
+        dataArray = @[@[@"和我沟通", @"去评分", @"版本信息"]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
