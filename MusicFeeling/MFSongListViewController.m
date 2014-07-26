@@ -16,6 +16,8 @@
 #import <SVProgressHUD.h>
 #import <UMengAnalytics/MobClick.h>
 
+#import <AVOSCloud/AVOSCloud.h>
+
 @interface MFSongListViewController ()
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -65,11 +67,20 @@
     _composedSongs = [[NSMutableArray alloc] initWithCapacity:100];
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.composedDir stringByAppendingPathComponent:file] error:nil];
-        [_composedSongs addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+
+        AVObject *song = [AVObject objectWithClassName:@"Song"];
+        [song setObject:[[file stringByDeletingPathExtension] stringByDeletingPathExtension] forKey:@"name"];
+        [song setObject:file forKey:@"path"];
+        [song setObject:@YES forKey:@"isComposed"];
+        [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
+        [_composedSongs addObject:song];
+        /*
+  @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
                                     @"path": file,
                                     @"isComposed": @YES,
                            @"mtime": [attributes fileModificationDate],
                            @"dateType": @1}];
+         */
         [_composedSongs sortUsingComparator:^NSComparisonResult(id a, id b) {
             return [b[@"mtime"] compare:a[@"mtime"]];
         }];
@@ -88,10 +99,18 @@
         NSMutableArray *array = [[NSMutableArray alloc] init];
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
             NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.localDir stringByAppendingPathComponent:file] error:nil];
-            [array addObject:@{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+
+            AVObject *song = [AVObject objectWithClassName:@"Song"];
+            [song setObject:[[file stringByDeletingPathExtension] stringByDeletingPathExtension] forKey:@"name"];
+            [song setObject:file forKey:@"path"];
+            [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
+            [array addObject:song];
+             /*
+  @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
                                @"path": file,
                                @"mtime": [attributes fileModificationDate],
                                @"dateType": @1}];
+              */
         }
         [array sortUsingComparator:^NSComparisonResult(id a, id b) {
             return [b[@"mtime"] compare:a[@"mtime"]];
@@ -102,14 +121,16 @@
         block = ^(MFSettingsTableViewCell *cell, NSDictionary *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.textLabel.text = item[@"name"];
+
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
+            cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"createdAt"]];
+            /*
             if (item[@"mtime"] != nil) {
                 cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
                 if ([[item[@"mtime"] class] isSubclassOfClass:[NSDate class]]) {
-                    /*
-                    NSDateFormatter *gmtFormatter=[[NSDateFormatter alloc] init];
-                    [gmtFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss VVVV"];
-                    NSDate *d = [gmtFormatter dateFromString:item[@"mtime"]];
-                     */
+//                    NSDateFormatter *gmtFormatter=[[NSDateFormatter alloc] init];
+//                    [gmtFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss VVVV"];
+//                    NSDate *d = [gmtFormatter dateFromString:item[@"mtime"]];
                     cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
                 } else {
                     NSDateFormatter *date=[[NSDateFormatter alloc] init];
@@ -118,6 +139,7 @@
                     cell.detailTextLabel.text = [self humanableInfoFromDate:d];
                 }
             }
+             */
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
 	    _arrayDataSource.sectionHeaderArray = @[@"我创作的", @"大家创作的"];
@@ -174,6 +196,7 @@
 }
 
 - (void)getContents {
+    /*
     //[SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    NSString *url = @"http://k2k.marboo.biz/api/songs";
@@ -186,6 +209,28 @@
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
         NSLog(@"%@", error);
+    }];
+     */
+
+    /*
+     */
+
+    AVQuery *query = [AVQuery queryWithClassName:@"Song"];
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        /*
+        NSArray *array = [[[objects rac_sequence] map:^id(id value) {
+            return @{@"name": [value objectForKey:@"name"],
+                     @"path": [value objectForKey:@"name"],
+                     @"mtime": [value objectForKey:@"createdAt"],
+                     @"contentFile": [value objectForKey:@"contentFile"],
+                     @"dateType": @1};
+        }] array];
+         */
+        [SVProgressHUD dismiss];
+        [self.refreshControl endRefreshing];
+        self.arrayDataSource.items = @[self.composedSongs, objects];
+        [self.tableView reloadData];
     }];
 }
 
@@ -213,8 +258,11 @@
 }
 
 - (void)leftBarButtonPressed:(id)sender {
+    /*
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     MFSettingViewController *vc = [sb instantiateViewControllerWithIdentifier:@"settingsVC"];
+     */
+    MFSettingViewController *vc = [MFSettingViewController new];
     [self presentViewController:vc animated:YES completion:nil];
 }
 

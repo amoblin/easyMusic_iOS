@@ -15,3 +15,5 @@ pod 'SVProgressHUD', '~> 1.0'
 #pod 'PXAlertView', '~> 0.1.0'
 pod 'AFNetworking'
 pod 'NSData+Base64', '~> 1.0.0'
+
+pod 'AVOSCloud'

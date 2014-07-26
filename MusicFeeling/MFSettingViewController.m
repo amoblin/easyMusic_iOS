@@ -37,22 +37,12 @@
     return self;
 }
 
-- (UITableView *)tableView {
-    if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:_tableView];
-
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_tableView]-0-|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
+- (id)init {
+    self = [super init];
+    if (self) {
+        // Custom initialization
     }
-    return _tableView;
+    return self;
 }
 
 - (MFArrayDataSource *)arrayDataSource {
@@ -61,7 +51,7 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"反馈", @"去评分", @"版本信息"]];
+        dataArray = @[@[@"与我联系", @"去评分", @"版本信息"]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -79,8 +69,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"设置";
     self.UMPageName = @"设置";
     self.view.backgroundColor = [UIColor whiteColor];
+
+    UINavigationBar *bar = [[UINavigationBar alloc] init];
+    bar.translatesAutoresizingMaskIntoConstraints = NO;
+    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"设置"];
+    [bar setItems:@[item]];
+    item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStyleDone target:self action:@selector(close:)];
+    self.bar = bar;
+    [self.view addSubview:bar];
+
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.tableView];
 
     UIView *view = [[UIView alloc] init];
     CGRect frame = [view frame];
@@ -117,6 +120,23 @@
     [self.toggleMapperSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]];
 
     //[self initPianoKeyboard];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_bar]-0-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:NSDictionaryOfVariableBindings(_bar)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:NSDictionaryOfVariableBindings(_tableView)]];
+
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bar(==64)]-0-[_tableView]-0-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:NSDictionaryOfVariableBindings(_bar, _tableView)]];
 }
 
 - (void)initPianoKeyboard {

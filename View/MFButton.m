@@ -24,7 +24,7 @@
         [button setBackgroundImage:[UIImage imageNamed:@"circle"] forState:UIControlStateNormal];
         //        [button.layer setBorderColor:[UIColorFromRGB(117, 192, 255) CGColor]];
 
-        if (type) {
+        if (type == 0) {
             button.titleLabel.font = [UIFont systemFontOfSize:14];
             [button setTitle:title forState:UIControlStateNormal];
         } else {

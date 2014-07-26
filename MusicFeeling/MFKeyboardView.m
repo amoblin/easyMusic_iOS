@@ -47,7 +47,7 @@
 
     if (self) {
         self.isFirst = YES;
-        self.type = 1; // isToneShow
+        self.type = 0; // isToneShow
         self.currentIndex = 0;
         self.currentY = YOFFSET;
         self.currentX = XOFFSET;

@@ -14,6 +14,7 @@
 @interface MFSettingViewController : MFBaseViewController <UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UINavigationBar *bar;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleRandomSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleMapperSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *slider;

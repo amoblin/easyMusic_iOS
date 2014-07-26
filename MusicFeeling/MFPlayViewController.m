@@ -24,8 +24,10 @@
 #import <NSData+Base64.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import <AVOSCloud/AVOSCloud.h>
+
 #define XOFFSET 10
-#define YOFFSET 20
+#define YOFFSET 50
 #define BUTTON_SIZE 65
 #define BUTTON_PADDING_H -7
 #define BUTTON_PADDING_V 15
@@ -61,7 +63,7 @@
 @property (nonatomic) CGFloat lastX_H;
 @property (nonatomic) CGFloat currentY_H;
 
-@property (nonatomic) BOOL isToneShow;
+@property (nonatomic) NSInteger toneStyle;
 @end
 
 @implementation MFPlayViewController
@@ -135,7 +137,7 @@
     self.currentY = YOFFSET;
     self.currentX = XOFFSET;
 
-    self.isToneShow = YES;
+    self.toneStyle = 0;
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.edgesForExtendedLayout=UIRectEdgeNone;
@@ -164,7 +166,7 @@
     if (self.isNew) {
         self.infoLabel = [UILabel autolayoutView];
         self.infoLabel.numberOfLines = 0;
-        self.infoLabel.text = @"连接蓝牙键盘或使用底部的键盘，\n按键来谱曲";
+        self.infoLabel.text = @"使用底部的键盘或连接蓝牙键盘，\n按键来谱曲";
         self.infoLabel.textAlignment = NSTextAlignmentCenter;
         [self.scrollView addSubview:self.infoLabel];
         [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.infoLabel attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
@@ -176,10 +178,29 @@
                                                                                options:0
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
+    } else {
+        NSArray *items = @[@"音符", @"键盘"];
+        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
+        segmentedControl.selectedSegmentIndex = 0;
+        [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.scrollView addSubview:segmentedControl];
+        [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:segmentedControl attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[segmentedControl(==300)]"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(segmentedControl)]];
+        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[segmentedControl(==30)]"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:NSDictionaryOfVariableBindings(segmentedControl)]];
+
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"k2k" style:UIBarButtonItemStylePlain target:self action:@selector(k2kButtonPressed:)];
+    if ([self.songInfo[@"isComposed"] boolValue]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(releaseButtonPressed:)];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -241,13 +262,7 @@
             shouldSave = YES;
         }
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
-        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-        NSString *name = self.textField.text;
-        if ( ! [name isEqualToString:@""] &&  ! [name isEqualToString:self.songInfo[@"name"]]) {
-            path = [delegate.composedDir stringByAppendingPathComponent:name];
-            path = [self findFinalPath:path];
-        }
+        path = [self fetchPath];
         shouldSave = YES;
     }
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
@@ -259,6 +274,18 @@
     }
     self.textField.delegate = nil;
     self.scrollView.delegate = nil;
+}
+
+- (NSString *)fetchPath {
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    NSString *name = self.textField.text;
+    if ( ! [name isEqualToString:@""] &&  ! [name isEqualToString:self.songInfo[@"name"]]) {
+        path = [delegate.composedDir stringByAppendingPathComponent:name];
+        path = [self findFinalPath:path];
+    }
+    return path;
 }
 
 - (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
@@ -386,7 +413,7 @@
             button = (UIButton *)[self.scrollView viewWithTag:self.currentIndex+1];
             if (button == nil) {
                 NSLog(@"create new button");
-                button = [self createButtonWithTitle:item andType:self.isToneShow];
+                button = [self createButtonWithTitle:item andType:self.toneStyle];
                 [self.scrollView addSubview:button];
             } else {
                 self.currentIndex++;
@@ -470,6 +497,46 @@
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (error == nil) {
         self.content = content;
+        if (self.toneStyle == 0) {
+            [self layoutButtonsWithContent:self.content];
+        } else {
+            // show computer keyboard
+        }
+    }
+
+    if ( ! [self.songInfo[@"isComposed"] boolValue]) {
+        if (self.content == nil) {
+            [SVProgressHUD show];
+        }
+        AVFile *file = self.songInfo[@"contentFile"];
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [SVProgressHUD dismiss];
+            NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (self.content == nil) {
+                self.content = content;
+                if (self.toneStyle == 0) {
+                    [self layoutButtonsWithContent:self.content];
+                } else {
+                }
+            }
+            [self saveContent:content atPath:path];
+        } progressBlock:nil];
+    }
+}
+
+/*
+- (void)getContent {
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path;
+    if ([self.songInfo[@"isComposed"] boolValue]) {
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+    } else {
+        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+    }
+    NSError *error;
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    if (error == nil) {
+        self.content = content;
         if (self.isToneShow) {
             [self layoutButtonsWithContent:self.content];
         } else {
@@ -486,20 +553,17 @@
         NSString *url = [NSString stringWithFormat:@"http://apion.github.io/k2k/%@", self.songInfo[@"path"]];
         url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            /*
-            [SVProgressHUD dismiss];
-            NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
-            NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [self saveContent:content atPath:path];
-            if (self.content == nil) {
-                self.content = content;
-                if (self.isToneShow) {
-                    [self layoutButtonsWithContent:self.content];
-                } else {
-                }
-            }
-             */
-        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            [SVProgressHUD dismiss];
+//            NSData *data = [NSData dataFromBase64String:responseObject[@"content"]];
+//            NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            [self saveContent:content atPath:path];
+//            if (self.content == nil) {
+//                self.content = content;
+//                if (self.isToneShow) {
+//                    [self layoutButtonsWithContent:self.content];
+//                } else {
+//                }
+//            }
             [SVProgressHUD dismiss];
             [self saveContent:operation.responseString atPath:path];
             if (self.content == nil) {
@@ -512,6 +576,7 @@
         }];
     }
 }
+ */
 
 - (void)saveContent:(NSString *)content atPath:(NSString *)path {
     NSError *error = nil;
@@ -550,7 +615,7 @@
 
 - (void)addTone:(NSString *)toneName {
     [self addToContent:toneName];
-    UIButton *button = [self createButtonWithTitle:toneName andType:self.isToneShow];
+    UIButton *button = [self createButtonWithTitle:toneName andType:self.toneStyle];
     [self.scrollView addSubview:button];
     [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 
@@ -685,7 +750,7 @@
 
 - (void)toneButtonPressed:(UIButton *)sender {
 //    [self becomeFirstResponder];
-    if ( ! self.isToneShow) {
+    if ( self.toneStyle == 1) {
         [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
         return;
     }
@@ -697,7 +762,7 @@
 
 - (void)toneButtonTouchDown:(UIButton *)sender {
 //    [self becomeFirstResponder];
-    if ( ! self.isToneShow) {
+    if ( self.toneStyle == 1) {
         return;
     }
 
@@ -752,17 +817,32 @@
     }
 }
 
-- (IBAction)k2kButtonPressed:(UIButton *)sender {
+- (IBAction)releaseButtonPressed:(UIButton *)sender {
     if (self.content == nil) {
         [PXAlertView showAlertWithTitle:@"获取内容失败" message:@"请联网，重试一次"];
         return;
     }
-    self.isToneShow = ! self.isToneShow;
-    if (self.isToneShow) {
-        [self computer2tone];
-    } else {
-        [self tone2computer];
-    }
+
+    NSString *path = [self fetchPath];
+    [self saveContent:self.content atPath:path];
+
+    NSData *data = [self.content dataUsingEncoding:NSUTF8StringEncoding];
+    AVFile *file = [AVFile fileWithName:self.songInfo[@"name"] data:data];
+    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", error);
+        } else {
+//            [song setObject:@"amoblin" forKey:@"author"];
+//            [song setObject:@"0" forKey:@"isPublic"];
+//            [song setObject:[NSDate date] forKey:@"createdAt"];
+//            [song setObject:@"123" forKey:@"mtime"];
+            [(AVObject *)self.songInfo setObject:@NO forKey:@"isComposed"];
+            [(AVObject *)self.songInfo setObject:file forKey:@"contentFile"];
+            [(AVObject *)self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [PXAlertView showAlertWithTitle:@"发布成功！" message:@"返回刷新即可看到"];
+            }];
+        }
+    }];
 }
 
 #pragma mark - Rotate Deleagate
@@ -825,5 +905,19 @@
     [self addReturnTone];
 }
 
+- (void)valueChangedAction:(UISegmentedControl *)segmentedControl {
+    switch (segmentedControl.selectedSegmentIndex) {
+        case 0:
+            [self computer2tone];
+            break;
+        case 1:
+            [self tone2computer];
+            break;
+        case 2:
+            break;
+        default:
+            break;
+    }
+}
 
 @end
