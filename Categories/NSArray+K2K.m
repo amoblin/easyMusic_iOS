@@ -22,7 +22,7 @@
                        contentsEnd:&contentsEnd forRange:NSMakeRange(paraEnd, 0)];
         currentRange = NSMakeRange(paraStart, contentsEnd - paraStart);
         NSString *line = [content substringWithRange:currentRange];
-        NSLog(@"%@", line);
+//        NSLog(@"%@", line);
         NSMutableArray *items = [[NSMutableArray alloc] init];
         for (NSString *item in [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -"]]) {
             if ([item isEqualToString:@""]) {
@@ -30,8 +30,7 @@
             }
             [items addObject:item];
         }
-
-        NSLog(@"%@", items);
+//        NSLog(@"%@", items);
         [array addObject:items];
     }
     return [NSArray arrayWithArray:array];

@@ -145,14 +145,14 @@
             if ([item isEqualToString:@""]) {
                 continue;
             }
-            NSLog(@"layout item: %@", item);
-            NSLog(@"create new button");
+//            NSLog(@"layout item: %@", item);
+//            NSLog(@"create new button");
             button = [self createButtonWithTitle:item andType:self.type];
             [self addSubview:button];
-            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
+//            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
             if ( ! [button.titleLabel.text isEqualToString:item]) {
-                NSLog(@"current item is: %@", item);
-                NSLog(@"but the button is: %@", button.titleLabel.text);
+//                NSLog(@"current item is: %@", item);
+//                NSLog(@"but the button is: %@", button.titleLabel.text);
                 break;
             }
             [array addObjectsFromArray:[self layoutButton:button forInterfaceOrientation:interfaceOrientation]];
@@ -206,7 +206,7 @@
         NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:self.currentX],
                                   @"y": [NSNumber numberWithFloat:self.currentY],
                                   @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
-        NSLog(@"%@", matrics);
+//        NSLog(@"%@", matrics);
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
                                                                            options:0
                                                                            metrics:matrics

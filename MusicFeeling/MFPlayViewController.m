@@ -380,7 +380,7 @@
         NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:currentX],
                                   @"y": [NSNumber numberWithFloat:currentY],
                                   @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
-        NSLog(@"%@", matrics);
+//        NSLog(@"%@", matrics);
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
                                                                            options:0
                                                                            metrics:matrics
@@ -429,16 +429,16 @@
             if ([item isEqualToString:@""]) {
                 continue;
             }
-            NSLog(@"layout item: %@", item);
+//            NSLog(@"layout item: %@", item);
             button = (UIButton *)[self.scrollView viewWithTag:self.currentIndex+1];
             if (button == nil) {
-                NSLog(@"create new button");
+//                NSLog(@"create new button");
                 button = [self createButtonWithTitle:item andType:self.toneStyle];
                 [self.scrollView addSubview:button];
             } else {
                 self.currentIndex++;
             }
-            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
+//            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
             if ( ! [button.titleLabel.text isEqualToString:item]) {
                 NSLog(@"current item is: %@", item);
                 NSLog(@"but the button is: %@", button.titleLabel.text);
@@ -813,13 +813,13 @@
  */
 
 - (void)tone2computer {
-    NSLog(@"%@", self.scrollView.subviews);
+//    NSLog(@"%@", self.scrollView.subviews);
     for (id item in self.scrollView.subviews) {
         if ([[item class] isSubclassOfClass:[UIButton class]]) {
             UIButton *button = item;
             NSString *toneName = button.titleLabel.text;
             button.titleLabel.font = [UIFont systemFontOfSize:50];
-            [button setTitle:self.router[toneName.lowercaseString] forState:UIControlStateNormal];
+            [button setTitle:self.router[toneName] forState:UIControlStateNormal];
             [button setBackgroundImage:nil forState:UIControlStateNormal];
         }
         //
@@ -827,7 +827,7 @@
 }
 
 - (void)computer2tone {
-    NSLog(@"%@", self.scrollView.subviews);
+//    NSLog(@"%@", self.scrollView.subviews);
     for (id item in self.scrollView.subviews) {
         if ([[item class] isSubclassOfClass:[UIButton class]]) {
             UIButton *button = item;

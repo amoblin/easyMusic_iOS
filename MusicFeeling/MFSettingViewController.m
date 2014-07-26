@@ -9,6 +9,7 @@
 #import "MFSettingViewController.h"
 #import "MFArrayDataSource.h"
 #import "MFSettingsTableViewCell.h"
+#import "UIView+AutoLayout.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <UMFeedback.h>
@@ -85,14 +86,14 @@
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tableView];
 
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
-//    CGRect frame = [view frame];
-//    frame.size.height = 150;
-//    view.frame = frame;
+    UIView *view = [[UIView alloc] init];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    CGRect frame = [view frame];
+    frame.size.height = 150;
+    view.frame = frame;
 
-    UILabel *titleLabel = [UILabel new];
+    UILabel *titleLabel = [UILabel autolayoutView];
     titleLabel.font = [UIFont systemFontOfSize:20];
-    titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"傻瓜演奏家";
     [view addSubview:titleLabel];
