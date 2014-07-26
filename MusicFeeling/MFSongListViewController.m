@@ -115,6 +115,7 @@
             if (indexPath.section == 0) {
                 [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"path"]] error:nil];
             } else {
+                [[item objectForKey:@"contentFile"] deleteInBackground];
                 [item deleteInBackground];
             }
         };

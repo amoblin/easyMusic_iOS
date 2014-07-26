@@ -85,10 +85,10 @@
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tableView];
 
-    UIView *view = [[UIView alloc] init];
-    CGRect frame = [view frame];
-    frame.size.height = 150;
-    view.frame = frame;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
+//    CGRect frame = [view frame];
+//    frame.size.height = 150;
+//    view.frame = frame;
 
     UILabel *titleLabel = [UILabel new];
     titleLabel.font = [UIFont systemFontOfSize:20];

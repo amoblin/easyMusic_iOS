@@ -31,6 +31,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+//        self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
         // Initialization code
         self.titleLabel = [UILabel autolayoutView];
         self.titleLabel.font = [UIFont systemFontOfSize:18];
@@ -86,7 +87,7 @@
                                                                             options:0
                                                                             metrics:nil
                                                                               views:NSDictionaryOfVariableBindings(_titleLabel, _dateLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_authorLabel]-[_viewLabel(==20)]-5-[_viewCountLabel(==20)]-[_finishLabel(==20)]-5-[_finishCountLabel(==20)]-5-|"
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_authorLabel(==50)]-[_viewLabel(==20)]-5-[_viewCountLabel(==20)]-5-[_finishLabel(==20)]-5-[_finishCountLabel(==20)]-5-|"
                                                                             options:0
                                                                             metrics:nil
                                                                               views:NSDictionaryOfVariableBindings(_authorLabel, _viewLabel, _viewCountLabel, _finishLabel, _finishCountLabel)]];

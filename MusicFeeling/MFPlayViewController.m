@@ -128,16 +128,18 @@
         self.UMPageName = @"修改详情";
         self.keyboardViewHeight = @152;
 
-        AVQuery *query = [AVQuery queryWithClassName:@"Song"];
-        [query whereKey:@"author" equalTo:[AVUser currentUser].username];
-        [query whereKey:@"name" equalTo:self.songInfo[@"name"]];
-        [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-            if (error == nil) {
-                self.navigationItem.rightBarButtonItem.title = @"更新";
-                self.songInfo = object;
-                self.songInfo[@"isComposed"] = @YES;
-            }
-        }];
+        if ([AVUser currentUser] != nil) {
+            AVQuery *query = [AVQuery queryWithClassName:@"Song"];
+            [query whereKey:@"author" equalTo:[AVUser currentUser].username];
+            [query whereKey:@"name" equalTo:self.songInfo[@"name"]];
+            [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+                if (error == nil) {
+                    self.navigationItem.rightBarButtonItem.title = @"更新";
+                    self.songInfo = object;
+                    self.songInfo[@"isComposed"] = @YES;
+                }
+            }];
+        }
     } else {
         self.UMPageName = @"曲目详情";
         self.keyboardViewHeight = @0;
@@ -877,17 +879,19 @@
             AVFile *oldFile = self.songInfo[@"contentFile"];
             [oldFile deleteInBackground];
 
-            [(AVObject *)self.songInfo setObject:@NO forKey:@"isComposed"];
-            [(AVObject *)self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
-            [(AVObject *)self.songInfo setObject:file forKey:@"contentFile"];
+            [self.songInfo setObject:self.title forKey:@"name"];
+            [self.songInfo setObject:@NO forKey:@"isComposed"];
+            [self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
+            [self.songInfo setObject:file forKey:@"contentFile"];
             if ([self.songInfo objectForKey:@"finishCount"] == nil) {
                 msg = @"发布成功！";
-                [(AVObject *)self.songInfo setObject:@1 forKey:@"finishCount"];
+                [self.songInfo setObject:@1 forKey:@"finishCount"];
+                [self.songInfo setObject:@1 forKey:@"viewCount"];
             }
-            [(AVObject *)self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
-            [(AVObject *)self.songInfo setObject:[AVUser currentUser] forKey:@"userid"];
-            [(AVObject *)self.songInfo setObject:[AVUser currentUser].username forKey:@"author"];
-            [(AVObject *)self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
+            [self.songInfo setObject:[AVUser currentUser] forKey:@"userid"];
+            [self.songInfo setObject:[AVUser currentUser].username forKey:@"author"];
+            [self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [PXAlertView showAlertWithTitle:msg message:@"返回刷新即可看到"];
                 self.songInfo[@"isComposed"] = @YES;
             }];
