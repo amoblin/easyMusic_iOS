@@ -34,6 +34,12 @@
 #if DEBUG
     [self getDeviceInfo];
 #endif
+    if ( [[NSUserDefaults standardUserDefaults] objectForKey:@"uuid"] == nil) {
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:@"uuid"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
     [self.window setTintColor:UIColorFromRGB(57, 170, 255)];
 
     [AVOSCloud setApplicationId:@"em7crzhon1098l4b8rxdl1ql98rf954lflo9q8rzvww2lybm"

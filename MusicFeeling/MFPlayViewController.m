@@ -832,12 +832,16 @@
         if (error != nil) {
             NSLog(@"%@", error);
         } else {
+            AVQuery *query = [AVQuery queryWithClassName:@"Config"];
+            AVObject *config = [query getFirstObject];
 //            [song setObject:@"amoblin" forKey:@"author"];
 //            [song setObject:@"0" forKey:@"isPublic"];
 //            [song setObject:[NSDate date] forKey:@"createdAt"];
 //            [song setObject:@"123" forKey:@"mtime"];
             [(AVObject *)self.songInfo setObject:@NO forKey:@"isComposed"];
             [(AVObject *)self.songInfo setObject:file forKey:@"contentFile"];
+            [(AVObject *)self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
+            [(AVObject *)self.songInfo setObject:self.uuid forKey:@"userUUID"];
             [(AVObject *)self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [PXAlertView showAlertWithTitle:@"发布成功！" message:@"返回刷新即可看到"];
             }];

@@ -44,6 +44,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSString *)uuid {
+    if (_uuid == nil) {
+        _uuid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uuid"];
+    }
+    return _uuid;
+}
+
 - (NSDictionary *)mapper {
     if (_mapper == nil) {
         _mapper = @{@"1": @"c6", @"2": @"d6", @"3": @"e6", @"4": @"f6", @"7": @"g6", @"8": @"a6", @"9": @"b6",

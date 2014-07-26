@@ -216,6 +216,7 @@
      */
 
     AVQuery *query = [AVQuery queryWithClassName:@"Song"];
+    [query whereKey:@"isHidden" notEqualTo:@YES];
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         /*
