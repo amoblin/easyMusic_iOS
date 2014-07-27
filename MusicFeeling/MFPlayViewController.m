@@ -864,11 +864,25 @@
 }
 
 - (void)postSong {
+    if ( ! [self.songInfo[@"name"] isEqualToString:self.textField.text]) {
+        // changed the name and update.
+        MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSString *path = [delegate.composedDir stringByAppendingPathComponent:self.textField.text];
+        NSString *temp = [path stringByAppendingPathExtension:@"k2k.txt"];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:temp]) {
+            [PXAlertView showAlertWithTitle:@"出错了" message:@"本地已存在同名曲目，请删除后再试"];
+            return;
+        }
+        self.title = self.textField.text;
+    }
+
+    [self becomeFirstResponder];
+
     NSString *path = [self fetchPath];
     [self saveContent:self.content atPath:path];
 
     NSData *data = [self.content dataUsingEncoding:NSUTF8StringEncoding];
-    AVFile *file = [AVFile fileWithName:self.songInfo[@"name"] data:data];
+    AVFile *file = [AVFile fileWithName:self.title data:data];
     [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error != nil) {
             NSLog(@"%@", error);
@@ -880,10 +894,11 @@
             AVFile *oldFile = self.songInfo[@"contentFile"];
             [oldFile deleteInBackground];
 
-            [self.songInfo setObject:self.title forKey:@"name"];
+        [self.songInfo setObject:self.title forKey:@"name"];
             [self.songInfo setObject:@NO forKey:@"isComposed"];
             [self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
             [self.songInfo setObject:file forKey:@"contentFile"];
+            [self.songInfo setObject:[NSDate date] forKey:@"updatedAt"];
             if ([self.songInfo objectForKey:@"finishCount"] == nil) {
                 msg = @"发布成功！";
                 [self.songInfo setObject:@1 forKey:@"finishCount"];
@@ -892,9 +907,10 @@
             [self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
             [self.songInfo setObject:[AVUser currentUser] forKey:@"userid"];
             [self.songInfo setObject:[AVUser currentUser].username forKey:@"author"];
+            [SVProgressHUD show];
             [self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [PXAlertView showAlertWithTitle:msg message:@"返回刷新即可看到"];
-                self.songInfo[@"isComposed"] = @YES;
+                [SVProgressHUD dismiss];
+                [self.navigationController popViewControllerAnimated:YES];
             }];
         }
     }];

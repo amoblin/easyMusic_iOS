@@ -37,7 +37,8 @@
         [song setObject:[[file stringByDeletingPathExtension] stringByDeletingPathExtension] forKey:@"name"];
         [song setObject:file forKey:@"path"];
         [song setObject:@YES forKey:@"isComposed"];
-        [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
+        [song setObject:[attributes fileCreationDate] forKey:@"createdAt"];
+        [song setObject:[attributes fileModificationDate] forKey:@"updatedAt"];
         [_composedSongs addObject:song];
         /*
   @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
@@ -194,7 +195,7 @@
 
     AVQuery *query = [AVQuery queryWithClassName:@"Song"];
     [query whereKey:@"isHidden" notEqualTo:@YES];
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:@"updatedAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         /*
         NSArray *array = [[[objects rac_sequence] map:^id(id value) {
@@ -256,12 +257,14 @@
     self.tableView.dataSource = self.arrayDataSource;
     self.tableView.delegate = self;
     [self.tableView registerClass:[MFSongListTableViewCell class] forCellReuseIdentifier:@"cellId"];
-    [self getContents];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    /*
     self.arrayDataSource.items = @[self.composedSongs, self.arrayDataSource.items[1]];
     [self.tableView reloadData];
+     */
+    [self pullToRefresh];
 }
 
 - (void)didReceiveMemoryWarning

@@ -87,7 +87,7 @@
     [self.view addSubview:self.tableView];
 
     UIView *view = [[UIView alloc] init];
-    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     CGRect frame = [view frame];
     frame.size.height = 150;
     view.frame = frame;
