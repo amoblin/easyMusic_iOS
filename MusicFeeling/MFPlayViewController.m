@@ -214,7 +214,7 @@
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
-    if ([self.songInfo[@"isComposed"] boolValue]) {
+    if ( self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(releaseButtonPressed:)];
         /*
     } else if ([self.songInfo[@"author"] isEqualToString:[AVUser currentUser].username]) {
@@ -864,6 +864,10 @@
 }
 
 - (void)postSong {
+    if ([self.content isEqualToString:@""] || [self.textField.text isEqualToString:@""]) {
+        [PXAlertView showAlertWithTitle:@"出错了" message:@"标题或内容不能为空哦"];
+        return;
+    }
     if ( ! [self.songInfo[@"name"] isEqualToString:self.textField.text]) {
         // changed the name and update.
         MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
