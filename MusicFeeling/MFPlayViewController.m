@@ -293,8 +293,7 @@
 
 - (NSString *)fetchPath {
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSString *path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    NSString *path;
     NSString *name = self.textField.text;
     if ([name isEqualToString:@""]) {
         if (self.isNew) {
@@ -302,6 +301,13 @@
         } else {
             name = self.songInfo[@"name"];
         }
+    }
+    if (self.songInfo[@"path"] != nil) {
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    } else {
+        self.songInfo[@"path"] = [NSString stringWithFormat:@"%@.k2k.txt", name];
+        path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     }
     if ( ! [name isEqualToString:self.songInfo[@"name"]]) {
         path = [delegate.composedDir stringByAppendingPathComponent:name];
@@ -867,7 +873,7 @@
 
 - (void)postSong {
     if ([self.content isEqualToString:@""] || [self.textField.text isEqualToString:@""]) {
-        [PXAlertView showAlertWithTitle:@"出错了" message:@"标题或内容不能为空哦"];
+        [PXAlertView showAlertWithTitle:@"" message:@"标题或内容不能为空哦"];
         return;
     }
     if ( ! [self.songInfo[@"name"] isEqualToString:self.textField.text]) {
@@ -876,7 +882,7 @@
         NSString *path = [delegate.composedDir stringByAppendingPathComponent:self.textField.text];
         NSString *temp = [path stringByAppendingPathExtension:@"k2k.txt"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:temp]) {
-            [PXAlertView showAlertWithTitle:@"出错了" message:@"本地已存在同名曲目，请删除后再试"];
+            [PXAlertView showAlertWithTitle:@"" message:@"本地已存在同名曲目，请删除后再试"];
             return;
         }
         self.title = self.textField.text;
@@ -934,7 +940,7 @@
         if (succeeded) {
             [self postSong];
         } else {
-            [PXAlertView showAlertWithTitle:@"出错了" message:@"出了点状况，请再试一次吧"];
+            [PXAlertView showAlertWithTitle:@"" message:@"出了点状况，请再试一次吧"];
         }
     }];
 }
