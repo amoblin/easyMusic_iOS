@@ -124,6 +124,7 @@
     if (self.isNew) {
         self.UMPageName = @"创作曲目";
         self.keyboardViewHeight = @152;
+        self.songInfo = [AVObject objectWithClassName:@"Song"];
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         self.UMPageName = @"修改详情";
         self.keyboardViewHeight = @152;
@@ -267,17 +268,11 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     [SVProgressHUD dismiss];
     BOOL shouldSave = NO;
     if (self.isNew) {
-        NSString *name = self.textField.text;
-        if ([name isEqualToString:@""]) {
-            name = @"新曲目";
-        }
-        path = [delegate.composedDir stringByAppendingPathComponent:name];
-        path = [self findFinalPath:path];
+        path = [self fetchPath];
         if ( ! [self.content isEqualToString:@""]) {
             shouldSave = YES;
         }
@@ -301,7 +296,14 @@
     NSString *path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     NSString *name = self.textField.text;
-    if ( ! [name isEqualToString:@""] &&  ! [name isEqualToString:self.songInfo[@"name"]]) {
+    if ([name isEqualToString:@""]) {
+        if (self.isNew) {
+            name = @"新曲目";
+        } else {
+            name = self.songInfo[@"name"];
+        }
+    }
+    if ( ! [name isEqualToString:self.songInfo[@"name"]]) {
         path = [delegate.composedDir stringByAppendingPathComponent:name];
         path = [self findFinalPath:path];
     }
@@ -878,6 +880,9 @@
             return;
         }
         self.title = self.textField.text;
+        if (self.songInfo[@"path"] == nil) {
+            self.songInfo[@"path"] = [NSString stringWithFormat:@"%@.k2k.txt", self.title];
+        }
     }
 
     [self becomeFirstResponder];
