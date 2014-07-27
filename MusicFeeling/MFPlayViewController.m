@@ -933,6 +933,15 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *name = [[alertView textFieldAtIndex:0] text];
+    NSString *core = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([name isEqualToString:@""]) {
+        [PXAlertView showAlertWithTitle:@"用户名格式不对哦" message:@"用户名不能为空，请认真点吧"];
+        return;
+    }
+    if ([core isEqualToString:@""]) {
+        [PXAlertView showAlertWithTitle:@"用户名格式不对哦" message:@"用户名不能全为空格，请认真点吧"];
+        return;
+    }
     AVUser * user = [AVUser user];
     user.username = name;
     user.password =  self.uuid;
@@ -940,7 +949,11 @@
         if (succeeded) {
             [self postSong];
         } else {
-            [PXAlertView showAlertWithTitle:@"" message:@"出了点状况，请再试一次吧"];
+            if (error.code == 202) {
+                [PXAlertView showAlertWithTitle:@"用户名已被占用" message:@"很抱歉，该名字已经有用户使用了，请换一个吧"];
+            } else {
+                [PXAlertView showAlertWithTitle:@"" message:@"出了点状况，请再试一次吧"];
+            }
         }
     }];
 }
