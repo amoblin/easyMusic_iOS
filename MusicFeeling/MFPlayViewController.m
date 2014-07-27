@@ -783,6 +783,7 @@
 - (void)toneButtonTouchDown:(UIButton *)sender {
 //    [self becomeFirstResponder];
     if ( self.toneStyle == 1) {
+        [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
         return;
     }
 
@@ -974,6 +975,7 @@
 }
 
 - (void)valueChangedAction:(UISegmentedControl *)segmentedControl {
+    self.toneStyle = segmentedControl.selectedSegmentIndex;
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
             [self computer2tone];
