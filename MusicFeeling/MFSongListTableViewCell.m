@@ -39,7 +39,7 @@
 
         self.authorLabel = [UILabel autolayoutView];
         self.authorLabel.font = [UIFont italicSystemFontOfSize:13];
-        self.authorLabel.textColor = [UIColor grayColor];
+        self.authorLabel.textColor = UIColorFromRGB(180, 180, 180);
         [self.contentView addSubview:self.authorLabel];
 
 //        self.viewImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"green"]];
@@ -47,13 +47,13 @@
 //        [self.contentView addSubview:self.viewImageView];
 
         self.viewLabel = [UILabel autolayoutView];
-        self.viewLabel.font = [UIFont systemFontOfSize:10];
-        self.viewLabel.textColor = [UIColor grayColor];
+        self.viewLabel.font = [UIFont systemFontOfSize:11];
+        self.viewLabel.textColor = UIColorFromRGB(100, 100, 100);
         self.viewLabel.text = @"浏览";
         [self.contentView addSubview:self.viewLabel];
 
         self.viewCountLabel = [UILabel autolayoutView];
-        self.viewCountLabel.font = [UIFont systemFontOfSize:10];
+        self.viewCountLabel.font = [UIFont italicSystemFontOfSize:11];
         self.viewCountLabel.textColor = UIColorFromRGB(126, 200, 33);
         [self.contentView addSubview:self.viewCountLabel];
 
@@ -62,20 +62,20 @@
 //        [self.contentView addSubview:self.finishImageView];
 
         self.finishLabel = [UILabel autolayoutView];
-        self.finishLabel.textColor = [UIColor grayColor];
-        self.finishLabel.font = [UIFont systemFontOfSize:10];
+        self.finishLabel.textColor = UIColorFromRGB(100, 100, 100);
+        self.finishLabel.font = [UIFont systemFontOfSize:11];
         self.finishLabel.text = @"演奏";
         [self.contentView addSubview:self.finishLabel];
 
         self.finishCountLabel = [UILabel autolayoutView];
-        self.finishCountLabel.font = [UIFont systemFontOfSize:10];
+        self.finishCountLabel.font = [UIFont italicSystemFontOfSize:11];
         self.finishCountLabel.textColor = UIColorFromRGB(57, 170, 255);
         [self.contentView addSubview:self.finishCountLabel];
 
         self.dateLabel = [UILabel autolayoutView];
         self.dateLabel.textAlignment = NSTextAlignmentRight;
         self.dateLabel.font = [UIFont systemFontOfSize:10];
-        self.dateLabel.textColor = [UIColor grayColor];
+        self.dateLabel.textColor = UIColorFromRGB(180, 180, 180);
         [self.contentView addSubview:self.dateLabel];
     }
     return self;
@@ -95,7 +95,7 @@
                                                                             options:0
                                                                             metrics:nil
                                                                               views:NSDictionaryOfVariableBindings(_authorLabel, _viewLabel, _viewCountLabel, _finishLabel, _finishCountLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_viewLabel(==20)]-5-[_viewCountLabel(==30)]-5-[_finishLabel(==20)]-5-[_finishCountLabel(==30)]-5-|"
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_viewLabel(==25)]-5-[_viewCountLabel(==30)]-5-[_finishLabel(==25)]-5-[_finishCountLabel(==30)]-5-|"
                                                                             options:0
                                                                             metrics:nil
                                                                               views:NSDictionaryOfVariableBindings(_authorLabel, _viewLabel, _viewCountLabel, _finishLabel, _finishCountLabel)]];
@@ -120,7 +120,7 @@
                                                                     toItem:self.authorLabel
                                                                  attribute:NSLayoutAttributeBottom
                                                                 multiplier:1.0
-                                                                  constant:0.0]];
+                                                                  constant:-1.0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.finishLabel
                                                                  attribute:NSLayoutAttributeBottom
                                                                  relatedBy:NSLayoutRelationEqual
@@ -134,7 +134,7 @@
                                                                     toItem:self.authorLabel
                                                                  attribute:NSLayoutAttributeBottom
                                                                 multiplier:1.0
-                                                                  constant:0.0]];
+                                                                  constant:-1.0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dateLabel
                                                                  attribute:NSLayoutAttributeTop
                                                                  relatedBy:NSLayoutRelationEqual
