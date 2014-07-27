@@ -898,7 +898,7 @@
             [self.songInfo setObject:@NO forKey:@"isComposed"];
             [self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
             [self.songInfo setObject:file forKey:@"contentFile"];
-            [self.songInfo setObject:[NSDate date] forKey:@"updatedAt"];
+            [self.songInfo setObject:[NSDate date] forKey:@"mtime"];
             if ([self.songInfo objectForKey:@"finishCount"] == nil) {
                 msg = @"发布成功！";
                 [self.songInfo setObject:@1 forKey:@"finishCount"];

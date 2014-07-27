@@ -38,7 +38,7 @@
         [song setObject:file forKey:@"path"];
         [song setObject:@YES forKey:@"isComposed"];
         [song setObject:[attributes fileCreationDate] forKey:@"createdAt"];
-        [song setObject:[attributes fileModificationDate] forKey:@"updatedAt"];
+        [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
         [_composedSongs addObject:song];
         /*
   @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
@@ -195,7 +195,7 @@
 
     AVQuery *query = [AVQuery queryWithClassName:@"Song"];
     [query whereKey:@"isHidden" notEqualTo:@YES];
-    [query orderByDescending:@"updatedAt"];
+    [query orderByDescending:@"mtime"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         /*
         NSArray *array = [[[objects rac_sequence] map:^id(id value) {

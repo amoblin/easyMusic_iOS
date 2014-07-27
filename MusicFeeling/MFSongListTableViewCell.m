@@ -153,7 +153,7 @@
 
 - (void)configWithItem:(AVObject *)item {
     self.titleLabel.text = item[@"name"];
-    self.dateLabel.text = [self humanableInfoFromDate:item[@"updatedAt"]];
+    self.dateLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
     self.authorLabel.text = item[@"author"];
     self.viewCountLabel.text = [item[@"viewCount"] stringValue];
     self.finishCountLabel.text = [item[@"finishCount"] stringValue];
