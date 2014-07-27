@@ -206,6 +206,9 @@
                      @"dateType": @1};
         }] array];
          */
+        if (error != nil) {
+            return;
+        }
         [SVProgressHUD dismiss];
         [self.refreshControl endRefreshing];
         self.arrayDataSource.items = @[self.composedSongs, objects];
