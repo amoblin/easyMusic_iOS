@@ -22,7 +22,7 @@ task :dmg => :xcode do |t|
 end
 
 task :tag do |t|
-  puts `defaults write #{$infoFile} CFBundleShortVersionString 0.6.3`
+  puts `defaults write #{$infoFile} CFBundleShortVersionString 0.8`
 end
 
 task :tr do |t|

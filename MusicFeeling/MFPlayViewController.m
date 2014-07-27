@@ -862,8 +862,12 @@
         [PXAlertView showAlertWithTitle:@"获取内容失败" message:@"请联网，重试一次"];
         return;
     }
+    if ([self.content isEqualToString:@""] || [self.textField.text isEqualToString:@""]) {
+        [PXAlertView showAlertWithTitle:@"" message:@"标题或内容不能为空哦"];
+        return;
+    }
     if ([AVUser currentUser] == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"欢迎" message:@"输入你的名字吧" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"输入你的大名吧" message:@"注意，设置后不能修改" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert show];
     } else {
@@ -872,10 +876,6 @@
 }
 
 - (void)postSong {
-    if ([self.content isEqualToString:@""] || [self.textField.text isEqualToString:@""]) {
-        [PXAlertView showAlertWithTitle:@"" message:@"标题或内容不能为空哦"];
-        return;
-    }
     if ( ! [self.songInfo[@"name"] isEqualToString:self.textField.text]) {
         // changed the name and update.
         MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
