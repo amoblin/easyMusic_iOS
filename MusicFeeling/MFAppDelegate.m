@@ -14,7 +14,7 @@
 
 #import <UMengAnalytics/MobClick.h>
 //#import <TalkingData.h>
-#import <JPush/APService.h>
+#import <UMessage.h>
 
 #import <AVOSCloud/AVOSCloud.h>
 
@@ -64,10 +64,11 @@
     navigationController.navigationBar.translucent = YES;
     self.window.rootViewController = navigationController;
 
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)];
-    [APService setupWithOption:launchOptions];
+    [UMessage startWithAppkey:UMENG_KEY launchOptions:launchOptions];
+    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+     |UIRemoteNotificationTypeSound
+     |UIRemoteNotificationTypeAlert];
+
     return YES;
 }
 
@@ -102,11 +103,21 @@
 # pragma mark - remote notification
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [APService handleRemoteNotification:userInfo];
+    [UMessage didReceiveRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [APService registerDeviceToken:deviceToken];
+    NSString *str = [NSString stringWithFormat:@"%@", deviceToken];
+    NSString *_deviceToken = nil;
+    int tokenLength = [str length];
+    if ([str length] > 10)
+    {
+        NSRange range = NSMakeRange (1, tokenLength-2);
+        _deviceToken = [NSString stringWithFormat:@"%@", [str substringWithRange:range]];
+        NSLog(@"device token is: %@", [_deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""]);
+    }
+
+    [UMessage registerDeviceToken:deviceToken];
 }
 
 // for MFBaseViewControll using

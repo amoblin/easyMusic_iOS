@@ -21,7 +21,7 @@
 #import "PXAlertView.h"
 #import <SVProgressHUD.h>
 #import <AFNetworking.h>
-#import <NSData+Base64.h>
+//#import <NSData+Base64.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import <AVOSCloud/AVOSCloud.h>
