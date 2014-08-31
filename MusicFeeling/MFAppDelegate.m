@@ -32,7 +32,7 @@
     [MobClick startWithAppkey:UMENG_KEY];
     //[TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
 #if DEBUG
-    [self getDeviceInfo];
+//    [self getDeviceInfo];
 #endif
     if ( [[NSUserDefaults standardUserDefaults] objectForKey:@"uuid"] == nil) {
         NSString *uuid = [[NSUUID UUID] UUIDString];
@@ -178,6 +178,7 @@
     return _playerCache;
 }
 
+/*
 - (void)getDeviceInfo {
     Class cls = NSClassFromString(@"UMANUtil");
     SEL deviceIDSelector = @selector(openUDIDString);
@@ -187,5 +188,6 @@
     }
     NSLog(@"{\"oid\": \"%@\"}", deviceID);
 }
+ */
 
 @end
