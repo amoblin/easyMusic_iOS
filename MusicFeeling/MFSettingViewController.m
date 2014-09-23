@@ -52,7 +52,7 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"和我沟通", @"去评分", @"版本信息"]];
+        dataArray = @[@[@"和我沟通", @"去评分", @"版本信息", @"QQ群： 253107875"]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -291,8 +291,18 @@
         case 2:
             [self checkNewVersion];
             break;
+        case 3:
+            [self copyToClipboard];
+            break;
         default:
             break;
     }
 }
+
+- (void)copyToClipboard {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = @"253107875";
+    [SVProgressHUD showSuccessWithStatus:@"QQ号码已复制！"];
+}
+
 @end

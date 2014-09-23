@@ -909,7 +909,7 @@
             AVFile *oldFile = self.songInfo[@"contentFile"];
             [oldFile deleteInBackground];
 
-        [self.songInfo setObject:self.title forKey:@"name"];
+            [self.songInfo setObject:self.title forKey:@"name"];
             [self.songInfo setObject:@NO forKey:@"isComposed"];
             [self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
             [self.songInfo setObject:file forKey:@"contentFile"];

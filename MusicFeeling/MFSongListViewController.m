@@ -37,7 +37,7 @@
         [song setObject:[[file stringByDeletingPathExtension] stringByDeletingPathExtension] forKey:@"name"];
         [song setObject:file forKey:@"path"];
         [song setObject:@YES forKey:@"isComposed"];
-        [song setObject:[attributes fileCreationDate] forKey:@"createdAt"];
+//        [song setObject:[attributes fileCreationDate] forKey:@"createdAt"];
         [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
         [_composedSongs addObject:song];
         /*
@@ -167,6 +167,11 @@
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
     vc.songInfo = [self.arrayDataSource itemAtIndexPath:indexPath];
     vc.title = vc.songInfo[@"name"];
+    if (indexPath.section == 0) {
+        vc.songInfo[@"isComposed"] = @YES;
+    } else {
+        vc.songInfo[@"isComposed"] = @NO;
+    }
     if ([vc.songInfo[@"isComposed"] boolValue]) {
         [vc setEditableTitle:vc.songInfo[@"name"]];
     }
@@ -195,6 +200,7 @@
 
     AVQuery *query = [AVQuery queryWithClassName:@"Song"];
     [query whereKey:@"isHidden" notEqualTo:@YES];
+    [query whereKeyExists:@"author"];
     [query orderByDescending:@"mtime"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         /*
