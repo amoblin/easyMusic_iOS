@@ -33,20 +33,13 @@
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.composedDir error:&error]) {
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.composedDir stringByAppendingPathComponent:file] error:nil];
 
-        AVObject *song = [AVObject objectWithClassName:@"Song"];
-        [song setObject:[[file stringByDeletingPathExtension] stringByDeletingPathExtension] forKey:@"name"];
-        [song setObject:file forKey:@"path"];
-        [song setObject:@YES forKey:@"isComposed"];
-//        [song setObject:[attributes fileCreationDate] forKey:@"createdAt"];
-        [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
+        NSMutableDictionary *song = [[NSMutableDictionary alloc] initWithDictionary:
+                                     @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+                                       @"path": file,
+                                       @"isComposed": @YES,
+                                       @"mtime": [attributes fileModificationDate]}];
+        //        [song setObject:[attributes fileCreationDate] forKey:@"createdAt"];
         [_composedSongs addObject:song];
-        /*
-  @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
-                                    @"path": file,
-                                    @"isComposed": @YES,
-                           @"mtime": [attributes fileModificationDate],
-                           @"dateType": @1}];
-         */
         [_composedSongs sortUsingComparator:^NSComparisonResult(id a, id b) {
             return [b[@"mtime"] compare:a[@"mtime"]];
         }];

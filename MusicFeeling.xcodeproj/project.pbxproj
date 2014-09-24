@@ -1020,6 +1020,37 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(PODS_ROOT)/UMengAnalytics/**\"",
+					"\"$(PODS_ROOT)/UMengFeedback/**\"",
+					"\"$(PODS_ROOT)/UMengMessage/UMessage_Sdk_1.1.0/**\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lMobClickLibrary",
+					"-lUMFeedback",
+					"-lUMessage_Sdk_1.1.0",
+					"-licucore",
+					"-lz",
+					"-framework",
+					AVOSCloud,
+					"-framework",
+					CFNetwork,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreLocation,
+					"-framework",
+					CoreTelephony,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "11BC76E1-B4AC-4676-AA74-DF18FB44569E";
 				WRAPPER_EXTENSION = app;
@@ -1042,6 +1073,37 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(PODS_ROOT)/UMengAnalytics/**\"",
+					"\"$(PODS_ROOT)/UMengFeedback/**\"",
+					"\"$(PODS_ROOT)/UMengMessage/UMessage_Sdk_1.1.0/**\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lMobClickLibrary",
+					"-lUMFeedback",
+					"-lUMessage_Sdk_1.1.0",
+					"-licucore",
+					"-lz",
+					"-framework",
+					AVOSCloud,
+					"-framework",
+					CFNetwork,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreLocation,
+					"-framework",
+					CoreTelephony,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9505CBD3-2581-4756-8E6C-D23EF7F322D0";
 				WRAPPER_EXTENSION = app;

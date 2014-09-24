@@ -164,7 +164,6 @@
     [self.viewCountLabel setHidden: ! flag];
     [self.finishLabel setHidden: ! flag];
     [self.finishCountLabel setHidden: ! flag];
-
 }
 
 - (NSString *)humanableInfoFromDate: (NSDate *) theDate {
