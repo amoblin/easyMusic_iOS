@@ -46,6 +46,7 @@
 @property (strong, nonatomic) UILabel *infoLabel;
 @property (strong, nonatomic) NSArray *vConstraints;
 @property (strong, nonatomic) NSArray *hConstraints;
+@property (strong, nonatomic) NSArray *segmentedControlConstraints;
 
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
 @property (strong, nonatomic) UIButton *prevButton;
@@ -202,26 +203,38 @@
         [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
         segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
         [self.scrollView addSubview:segmentedControl];
-        [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:segmentedControl attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[segmentedControl(==300)]"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:NSDictionaryOfVariableBindings(segmentedControl)]];
-        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[segmentedControl(==30)]"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:NSDictionaryOfVariableBindings(segmentedControl)]];
-
+        self.segmentedControlConstraints = [self segmentedControlConstraintsFromObject:segmentedControl];
+        [self.scrollView addConstraints:self.segmentedControlConstraints];
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
     if ( self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(releaseButtonPressed:)];
         /*
-    } else if ([self.songInfo[@"author"] isEqualToString:[AVUser currentUser].username]) {
+         } else if ([self.songInfo[@"author"] isEqualToString:[AVUser currentUser].username]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed:)];
          */
     }
+}
+
+- (NSArray *)segmentedControlConstraintsFromObject:(id)segmentedControl {
+    NSMutableArray *array = [NSMutableArray new];
+    [array addObject:[NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:segmentedControl
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.0f
+                                  constant:0.0f]];
+    [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[segmentedControl(==300)]"
+                                            options:0
+                                            metrics:nil
+                                              views:NSDictionaryOfVariableBindings(segmentedControl)]];
+    [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[segmentedControl(==30)]"
+                                            options:0
+                                            metrics:nil
+                                              views:NSDictionaryOfVariableBindings(segmentedControl)]];
+    return array;
 }
 
 - (void)viewWillLayoutSubviews {
@@ -966,11 +979,13 @@
         case UIInterfaceOrientationPortraitUpsideDown:
             [self.scrollView removeConstraints:self.scrollView.constraints];
             [self.scrollView addConstraints:self.vConstraints];
+            [self.scrollView addConstraints:self.segmentedControlConstraints];
             break;
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
             [self.scrollView removeConstraints:self.scrollView.constraints];
             [self.scrollView addConstraints:self.hConstraints];
+            [self.scrollView addConstraints:self.segmentedControlConstraints];
             break;
         default:
             break;

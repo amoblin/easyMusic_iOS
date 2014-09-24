@@ -48,11 +48,26 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];
     self.composedDir = [paths[0] stringByAppendingPathComponent:@"composed"];
+    for (NSString *name in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:paths[0] error:nil]) {
+        if ([name hasSuffix:@".k2k.txt"]) {
+            NSLog(@"found file: %@", name);
+            [[NSFileManager defaultManager] removeItemAtPath:[self.composedDir stringByAppendingPathComponent:name]
+                                                       error:nil];
+            [[NSFileManager defaultManager] moveItemAtPath:[paths[0] stringByAppendingPathComponent:name]
+                                                    toPath:[self.composedDir stringByAppendingPathComponent:name] error:nil];
+        }
+    }
     if ( ! [[NSFileManager defaultManager] fileExistsAtPath:self.localDir]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:self.localDir withIntermediateDirectories:NO attributes:nil error:nil];
+        [[NSFileManager defaultManager] createDirectoryAtPath:self.localDir
+                                  withIntermediateDirectories:NO
+                                                   attributes:nil
+                                                        error:nil];
     }
     if ( ! [[NSFileManager defaultManager] fileExistsAtPath:self.composedDir]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:self.composedDir withIntermediateDirectories:NO attributes:nil error:nil];
+        [[NSFileManager defaultManager] createDirectoryAtPath:self.composedDir
+                                  withIntermediateDirectories:NO
+                                                   attributes:nil
+                                                        error:nil];
         /*
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Do Re Mi.k2k" ofType:@".txt"];
         [[NSFileManager defaultManager] copyItemAtPath:path toPath:[self.composedDir stringByAppendingPathComponent:@"Do Re Mi.k2k.txt"] error:nil];
