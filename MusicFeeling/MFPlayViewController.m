@@ -358,7 +358,13 @@
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown: {
-            width = [UIScreen mainScreen].bounds.size.width;
+            if (IS_IOS_8_OR_LATER &&
+                (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+                 || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
+                    width = [UIScreen mainScreen].bounds.size.height;
+                } else {
+                    width = [UIScreen mainScreen].bounds.size.width;
+                }
             // 测试添加后是否越界
             if (self.currentX + BUTTON_SIZE + BUTTON_PADDING_H > width) {
                 self.lastX = self.currentX;
@@ -376,7 +382,14 @@
         }
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight: {
-            width = [UIScreen mainScreen].bounds.size.height;
+            if (IS_IOS_8_OR_LATER &&
+                (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+                 || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
+                    width = [UIScreen mainScreen].bounds.size.height;
+                width = [UIScreen mainScreen].bounds.size.width;
+            } else {
+                width = [UIScreen mainScreen].bounds.size.height;
+            }
             // 测试添加后是否越界
             if (self.currentX_H + BUTTON_SIZE + BUTTON_PADDING_H > width) {
                 self.lastX_H = self.currentX_H;
