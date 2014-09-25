@@ -1010,7 +1010,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1052,7 +1052,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11BC76E1-B4AC-4676-AA74-DF18FB44569E";
+				PROVISIONING_PROFILE = "7d39cbf4-4d22-408e-af8e-bdd8a46cb72f";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1063,7 +1063,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CUI GUILIN (5ELCMRHSMM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
