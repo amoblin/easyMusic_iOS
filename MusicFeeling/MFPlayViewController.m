@@ -473,7 +473,8 @@
                 self.currentIndex++;
             }
 //            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
-            if ( ! [button.titleLabel.text isEqualToString:item]) {
+            if ( (self.toneStyle == 0 && (![button.titleLabel.text isEqualToString:item]))
+                || (self.toneStyle == 1 && (![button.titleLabel.text isEqualToString:self.router[item]]))) {
                 NSLog(@"current item is: %@", item);
                 NSLog(@"but the button is: %@", button.titleLabel.text);
                 break;
