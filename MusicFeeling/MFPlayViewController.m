@@ -49,7 +49,7 @@
 @property (strong, nonatomic) NSArray *segmentedControlConstraints;
 
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
-@property (strong, nonatomic) UIButton *prevButton;
+@property (strong, nonatomic) MFButton *prevButton;
 @property (nonatomic) NSInteger currentIndex;
 
 @property (nonatomic) NSInteger currentLine;
@@ -155,7 +155,7 @@
     self.currentY = YOFFSET;
     self.currentX = XOFFSET;
 
-    self.toneStyle = 0;
+    self.toneStyle = [[NSUserDefaults standardUserDefaults] integerForKey:@"keyboardType"];
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.edgesForExtendedLayout=UIRectEdgeNone;
@@ -197,7 +197,7 @@
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
     } else {
-        NSArray *items = @[@"音符", @"键盘"];
+        NSArray *items = @[@"音符", @"简谱", @"键盘"];
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
         segmentedControl.selectedSegmentIndex = 0;
         [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
@@ -351,7 +351,7 @@
     }
 }
 
-- (NSArray *)layoutButton:(UIButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (NSArray *)layoutButton:(MFButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     CGFloat width, currentX, currentY;
     BOOL isFirst;
@@ -458,13 +458,13 @@
             self.currentY_H += BUTTON_SIZE + BUTTON_PADDING_V;
             self.isFirst_H = YES;
         }
-        UIButton *button;
+        MFButton *button;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
             }
 //            NSLog(@"layout item: %@", item);
-            button = (UIButton *)[self.scrollView viewWithTag:self.currentIndex+1];
+            button = (MFButton *)[self.scrollView viewWithTag:self.currentIndex+1];
             if (button == nil) {
 //                NSLog(@"create new button");
                 button = [self createButtonWithTitle:item andType:self.toneStyle];
@@ -473,8 +473,7 @@
                 self.currentIndex++;
             }
 //            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
-            if ( (self.toneStyle == 0 && (![button.titleLabel.text isEqualToString:item]))
-                || (self.toneStyle == 1 && (![button.titleLabel.text isEqualToString:self.router[item]]))) {
+            if ( ![button.tone isEqualToString:item]) {
                 NSLog(@"current item is: %@", item);
                 NSLog(@"but the button is: %@", button.titleLabel.text);
                 break;
@@ -670,7 +669,7 @@
 
 - (void)addTone:(NSString *)toneName {
     [self addToContent:toneName];
-    UIButton *button = [self createButtonWithTitle:toneName andType:self.toneStyle];
+    MFButton *button = [self createButtonWithTitle:toneName andType:self.toneStyle];
     [self.scrollView addSubview:button];
     [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 
@@ -779,7 +778,7 @@
             return;
         }
         self.currentIndex--;
-        self.prevButton = (UIButton *)[self.scrollView viewWithTag:self.currentIndex];
+        self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentIndex];
     }
     [self adjustOffsetWithFlag:NO];
 }
@@ -805,7 +804,7 @@
 
 - (void)toneButtonPressed:(UIButton *)sender {
 //    [self becomeFirstResponder];
-    if ( self.toneStyle == 1) {
+    if ( self.toneStyle == 2) {
         [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
         return;
     }
@@ -815,14 +814,14 @@
     }];
 }
 
-- (void)toneButtonTouchDown:(UIButton *)sender {
+- (void)toneButtonTouchDown:(MFButton *)sender {
 //    [self becomeFirstResponder];
-    if ( self.toneStyle == 1) {
+    if ( self.toneStyle == 2) {
         [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
         return;
     }
 
-    NSString *toneName = sender.titleLabel.text;
+    NSString *toneName = sender.tone;
 //    NSLog(@"%@, tag: %ll", toneName, sender.tag);
     if (toneName.length > 0) {
         [self playTone:toneName];
@@ -851,12 +850,10 @@
 - (void)tone2computer {
 //    NSLog(@"%@", self.scrollView.subviews);
     for (id item in self.scrollView.subviews) {
-        if ([[item class] isSubclassOfClass:[UIButton class]]) {
-            UIButton *button = item;
-            NSString *toneName = button.titleLabel.text;
-            button.titleLabel.font = [UIFont systemFontOfSize:50];
-            [button setTitle:self.router[toneName] forState:UIControlStateNormal];
-            [button setBackgroundImage:nil forState:UIControlStateNormal];
+        if ([[item class] isSubclassOfClass:[MFButton class]]) {
+            MFButton *button = item;
+            [button setStyle:2];
+
         }
         //
     }
@@ -865,12 +862,10 @@
 - (void)computer2tone {
 //    NSLog(@"%@", self.scrollView.subviews);
     for (id item in self.scrollView.subviews) {
-        if ([[item class] isSubclassOfClass:[UIButton class]]) {
-            UIButton *button = item;
-            NSString *computerKey = button.titleLabel.text;
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
-            [button setTitle:self.mapper[computerKey] forState:UIControlStateNormal];
-            [button setBackgroundImage:[UIImage imageNamed:@"circle"] forState:UIControlStateNormal];
+        if ([[item class] isSubclassOfClass:[MFButton class]]) {
+            [(MFButton *)item setStyle:0];
+            /*
+             */
         }
     }
 }
@@ -1049,17 +1044,11 @@
 
 - (void)valueChangedAction:(UISegmentedControl *)segmentedControl {
     self.toneStyle = segmentedControl.selectedSegmentIndex;
-    switch (segmentedControl.selectedSegmentIndex) {
-        case 0:
-            [self computer2tone];
-            break;
-        case 1:
-            [self tone2computer];
-            break;
-        case 2:
-            break;
-        default:
-            break;
+
+    for (id item in self.scrollView.subviews) {
+        if ([[item class] isSubclassOfClass:[MFButton class]]) {
+            [(MFButton *)item setStyle:self.toneStyle];
+        }
     }
 }
 

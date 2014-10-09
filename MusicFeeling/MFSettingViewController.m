@@ -52,12 +52,18 @@
         static NSString *cellId;
         void (^block)(id, id, NSIndexPath*);
 
-        dataArray = @[@[@"和我沟通", @"去评分", @"版本信息", @"QQ群： 253107875"]];
+        dataArray = @[@[@"键盘布局", @"和我沟通", @"去评分", @"版本信息", @"QQ群： 253107875"]];
         cellId = @"cellId";
         block = ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = item;
-            if (indexPath.row == 2) {
+            if (indexPath.row == 0) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"keyboardType"] == 0) {
+                    cell.detailTextLabel.text = @"音符";
+                } else {
+                    cell.detailTextLabel.text = @"简谱";
+                }
+            } else if (indexPath.row == 3) {
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
             }
         };
@@ -283,15 +289,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            [UMFeedback showFeedback:self withAppkey:UMENG_KEY];
+            if ([[NSUserDefaults standardUserDefaults] integerForKey:@"keyboardType"] == 0) {
+                [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"keyboardType"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@0 forKey:@"keyboardType"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case 1:
-            [self goAppStore];
+            [UMFeedback showFeedback:self withAppkey:UMENG_KEY];
             break;
         case 2:
-            [self checkNewVersion];
+            [self goAppStore];
             break;
         case 3:
+            [self checkNewVersion];
+            break;
+        case 4:
             [self copyToClipboard];
             break;
         default:

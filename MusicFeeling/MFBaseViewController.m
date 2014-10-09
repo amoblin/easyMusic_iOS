@@ -51,47 +51,6 @@
     return _uuid;
 }
 
-- (NSDictionary *)mapper {
-    if (_mapper == nil) {
-        _mapper = @{@"1": @"C6", @"2": @"D6", @"3": @"E6", @"4": @"F6", @"7": @"G6", @"8": @"A6", @"9": @"B6",
-                    @"0": @"C7", @"-": @"D7", @"=": @"E7",
-
-                    @"q": @"C5", @"w": @"D5", @"e": @"E5", @"r": @"F5", @"u": @"G5", @"i": @"A5", @"o": @"B5",
-                    @"p": @"C6", @"[": @"D6", @"]": @"E6", @"\\": @"F6",
-
-                    @"a": @"C4", @"s": @"D4", @"d": @"E4", @"f": @"F4", @"j": @"G4", @"k": @"A4", @"l": @"B4",
-                    @";": @"C5", @"'": @"D5",
-
-                    @"z": @"C3", @"x": @"D3", @"c": @"E3", @"v": @"F3", @"m": @"G3", @",": @"A3", @".": @"B3",
-                    @"/": @"C4",
-
-                    @"g": @"D4m", @"h": @"F4m",
-                    @"t": @"D5m", @"y": @"F5m",
-                    @"b": @"D3m", @"n": @"F3m",
-
-                    // b
-                    @"∑": @"C5m", @"´": @"D5m", @"¨": @"F5m", @"ˆ": @"G5m", @"ø": @"A5m",
-                    @"ß": @"C4m", @"∂": @"D4m", @"∆": @"F4m", @"˚": @"G4m", @"¬": @"A4m",
-                    @"≈": @"C3m", @"ç": @"D3m", @"µ": @"F3m", @"≤": @"G3m", @"≥": @"A3m",
-
-                    // #
-                    @"Q": @"C5m", @"W": @"D5m", @"R": @"F5m", @"U": @"G5m", @"I": @"A5m",
-                    @"A": @"C4m", @"S": @"D4m", @"F": @"F4m", @"J": @"G4m", @"K": @"A4m",
-                    @"Z": @"C3m", @"X": @"D3m", @"V": @"F3m", @"M": @"G3m", @"<": @"A3m"
-                    };
-    }
-    return _mapper;
-}
-
-- (NSDictionary *)router {
-    if (_router == nil) {
-        NSString *filter = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789,.-=";
-        NSDictionary *dic = [self getFilteredDict:self.mapper withFilter:filter];
-        _router = [self reverseDict:dic];
-    }
-    return _router;
-}
-
 - (NSUInteger)playCount {
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.playCount;

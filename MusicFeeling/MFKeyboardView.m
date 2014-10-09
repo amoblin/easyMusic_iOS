@@ -25,7 +25,6 @@
 
 @property (strong, nonatomic) NSMutableArray *buttonArray;
 @property (strong, nonatomic) NSArray *tonesArray;
-@property (nonatomic) NSInteger type;
 
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) CGFloat currentX;
@@ -47,7 +46,7 @@
 
     if (self) {
         self.isFirst = YES;
-        self.type = 0; // isToneShow
+        self.keyboardType = [[NSUserDefaults standardUserDefaults] integerForKey:@"keyboardType"];
         self.currentIndex = 0;
         self.currentY = YOFFSET;
         self.currentX = XOFFSET;
@@ -140,17 +139,17 @@
     for (NSArray *items in self.tonesArray) {
         self.currentX = XOFFSET;
         self.isFirst = YES;
-        UIButton *button;
+        MFButton *button;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
             }
 //            NSLog(@"layout item: %@", item);
 //            NSLog(@"create new button");
-            button = [self createButtonWithTitle:item andType:self.type];
+            button = [self createButtonWithTitle:item andType:self.keyboardType];
             [self addSubview:button];
 //            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
-            if ( ! [button.titleLabel.text isEqualToString:item]) {
+            if ( ! [button.tone isEqualToString:item]) {
 //                NSLog(@"current item is: %@", item);
 //                NSLog(@"but the button is: %@", button.titleLabel.text);
                 break;
@@ -162,7 +161,7 @@
     return array;
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
+- (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
     button.layer.borderWidth = 0;
@@ -263,11 +262,11 @@
      */
 }
 
-- (void)toneButtonTouchDown:(UIButton *)sender {
+- (void)toneButtonTouchDown:(MFButton *)sender {
     NSLog(@"%s", __func__);
 //    [self becomeFirstResponder];
     [sender setHighlighted:YES];
-    NSString *toneName = sender.titleLabel.text;
+    NSString *toneName = sender.tone;
     NSLog(@"%@, tag: %d", toneName, sender.tag);
     if ([self.delegate respondsToSelector:@selector(tonePressed:)]) {
         [self.delegate tonePressed:toneName];

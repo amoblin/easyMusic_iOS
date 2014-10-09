@@ -21,4 +21,5 @@
 
 @property (nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property (strong, nonatomic) id<MFKeyboardDelegate> delegate;
+@property (nonatomic) NSInteger keyboardType;
 @end
