@@ -250,10 +250,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.UMPageName = @"曲目";
+    self.UMPageName = NSLocalizedString(@"Songs", nil);
 
-    self.title = @"曲目";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonPressed:)];
+    self.title = NSLocalizedString(@"Songs", nil);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil)
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(leftBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
     self.tableView.dataSource = self.arrayDataSource;

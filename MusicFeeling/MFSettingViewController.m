@@ -76,21 +76,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"设置";
-    self.UMPageName = @"设置";
+    self.title = NSLocalizedString(@"Settings", nil);
+    self.UMPageName = NSLocalizedString(@"Settings", nil);
     self.view.backgroundColor = [UIColor whiteColor];
 
     UINavigationBar *bar = [[UINavigationBar alloc] init];
     bar.translatesAutoresizingMaskIntoConstraints = NO;
-    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"设置"];
+    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil)];
     [bar setItems:@[item]];
-    item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStyleDone target:self action:@selector(close:)];
+    item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(close:)];
     self.bar = bar;
     [self.view addSubview:bar];
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tableView];
+    [self.view bringSubviewToFront:bar];
 
     UIView *view = [[UIView alloc] init];
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -114,7 +118,7 @@
     [view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:logoImageView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[logoImageView(==60)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView)]];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(titleLabel)]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[logoImageView(==60)]-10-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView, titleLabel)]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[logoImageView(==60)]-0-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView, titleLabel)]];
     self.tableView.tableHeaderView = view;
     [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];
     [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view(==100)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];

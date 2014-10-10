@@ -1,0 +1,42 @@
+
+/* Class = "IBUIBarButtonItem"; title = "设置"; ObjectID = "0aS-oW-VZP"; */
+"0aS-oW-VZP.title" = "设置";
+
+/* Class = "IBUIBarButtonItem"; title = "Play"; ObjectID = "0rw-KU-xKb"; */
+"0rw-KU-xKb.title" = "Play";
+
+/* Class = "IBUIBarButtonItem"; title = "k2k"; ObjectID = "1Om-Ea-rHE"; */
+"1Om-Ea-rHE.title" = "k2k";
+
+/* Class = "IBUILabel"; text = "速度"; ObjectID = "7u7-JQ-4vc"; */
+"7u7-JQ-4vc.text" = "速度";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "896-wJ-Rue"; */
+"896-wJ-Rue.title" = "Settings";
+
+/* Class = "IBUILabel"; text = "字母映射"; ObjectID = "Ndw-aP-veq"; */
+"Ndw-aP-veq.text" = "字母映射";
+
+/* Class = "IBUINavigationItem"; title = "清单"; ObjectID = "Q1a-0N-2yT"; */
+"Q1a-0N-2yT.title" = "清单";
+
+/* Class = "IBUISegmentedControl"; WTP-ch-fE2.segmentTitles[0] = "钢琴"; ObjectID = "WTP-ch-fE2"; */
+"WTP-ch-fE2.segmentTitles[0]" = "钢琴";
+
+/* Class = "IBUISegmentedControl"; WTP-ch-fE2.segmentTitles[1] = "吉他"; ObjectID = "WTP-ch-fE2"; */
+"WTP-ch-fE2.segmentTitles[1]" = "吉他";
+
+/* Class = "IBUIBarButtonItem"; title = "测试"; ObjectID = "nMv-bZ-dNg"; */
+"nMv-bZ-dNg.title" = "测试";
+
+/* Class = "IBUINavigationItem"; title = "钢琴物语"; ObjectID = "qM5-9E-ZSJ"; */
+"qM5-9E-ZSJ.title" = "钢琴物语";
+
+/* Class = "IBUILabel"; text = "a0m"; ObjectID = "rxV-nP-mgF"; */
+"rxV-nP-mgF.text" = "a0m";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "t41-mk-Oyw"; */
+"t41-mk-Oyw.title" = "Settings";
+
+/* Class = "IBUILabel"; text = "随机度"; ObjectID = "tde-lg-eMb"; */
+"tde-lg-eMb.text" = "随机度";
