@@ -467,7 +467,7 @@
             button = (MFButton *)[self.scrollView viewWithTag:self.currentIndex+1];
             if (button == nil) {
 //                NSLog(@"create new button");
-                button = [self createButtonWithTitle:item andType:self.toneStyle];
+                button = [self createButtonWithTitle:item andType:0];
                 [self.scrollView addSubview:button];
             } else {
                 self.currentIndex++;
@@ -551,11 +551,7 @@
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (error == nil) {
         self.content = content;
-        if (self.toneStyle == 0) {
-            [self layoutButtonsWithContent:self.content];
-        } else {
-            // show computer keyboard
-        }
+        [self layoutButtonsWithContent:self.content];
     }
 
     if ( ! [self.songInfo[@"isComposed"] boolValue]) {
@@ -568,10 +564,7 @@
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             if (self.content == nil) {
                 self.content = content;
-                if (self.toneStyle == 0) {
-                    [self layoutButtonsWithContent:self.content];
-                } else {
-                }
+                [self layoutButtonsWithContent:self.content];
             }
             [self saveContent:content atPath:path];
         } progressBlock:nil];
