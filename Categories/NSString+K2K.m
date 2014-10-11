@@ -7,7 +7,16 @@
 //
 
 #import "NSString+K2K.h"
+#import "MFUtils.h"
 
 @implementation NSString (K2K)
+
+- (NSString *)numberString {
+    return [MFUtils staffToNumber:self];
+}
+
+- (NSString *)keyboardString {
+    return [MFUtils staffToKeyboard:self];
+}
 
 @end

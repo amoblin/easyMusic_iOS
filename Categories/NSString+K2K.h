@@ -10,4 +10,6 @@
 
 @interface NSString (K2K)
 
+- (NSString *)numberString;
+- (NSString *)keyboardString;
 @end

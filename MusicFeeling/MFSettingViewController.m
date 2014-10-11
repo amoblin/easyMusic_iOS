@@ -115,19 +115,42 @@
     logoImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [view addSubview:logoImageView];
 
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:logoImageView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[logoImageView(==60)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView)]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(titleLabel)]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[logoImageView(==60)]-0-[titleLabel]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(logoImageView, titleLabel)]];
+    [view addConstraint:[NSLayoutConstraint constraintWithItem:view
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:logoImageView
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1.0f
+                                                      constant:0]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[logoImageView(==60)]"
+                                                                 options:0
+                                                                 metrics:0
+                                                                   views:NSDictionaryOfVariableBindings(logoImageView)]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[titleLabel]-|"
+                                                                 options:0
+                                                                 metrics:0
+                                                                   views:NSDictionaryOfVariableBindings(titleLabel)]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[logoImageView(==60)]-0-[titleLabel]-|"
+                                                                 options:0
+                                                                 metrics:0
+                                                                   views:NSDictionaryOfVariableBindings(logoImageView, titleLabel)]];
     self.tableView.tableHeaderView = view;
-    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];
-    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view(==100)]" options:0 metrics:0 views:NSDictionaryOfVariableBindings(view)]];
+    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|"
+                                                                           options:0
+                                                                           metrics:0
+                                                                             views:NSDictionaryOfVariableBindings(view)]];
+    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view(==100)]"
+                                                                           options:0
+                                                                           metrics:0
+                                                                             views:NSDictionaryOfVariableBindings(view)]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self.arrayDataSource;
     [self.tableView registerClass:[MFSettingsTableViewCell class] forCellReuseIdentifier:@"cellId"];
-
+    
     [self.toggleRandomSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"randomDegree"]];
-    [self.toggleRandomSwitch addTarget:self action:@selector(toggleRandomDegree:) forControlEvents:UIControlEventTouchUpInside];
+    [self.toggleRandomSwitch addTarget:self
+                                action:@selector(toggleRandomDegree:)
+                      forControlEvents:UIControlEventTouchUpInside];
     [self.toggleMapperSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]];
 
     //[self initPianoKeyboard];

@@ -843,29 +843,6 @@
 }
  */
 
-- (void)tone2computer {
-//    NSLog(@"%@", self.scrollView.subviews);
-    for (id item in self.scrollView.subviews) {
-        if ([[item class] isSubclassOfClass:[MFButton class]]) {
-            MFButton *button = item;
-            [button setStyle:2];
-
-        }
-        //
-    }
-}
-
-- (void)computer2tone {
-//    NSLog(@"%@", self.scrollView.subviews);
-    for (id item in self.scrollView.subviews) {
-        if ([[item class] isSubclassOfClass:[MFButton class]]) {
-            [(MFButton *)item setStyle:0];
-            /*
-             */
-        }
-    }
-}
-
 - (void)editButtonPressed:(UIButton *)sender {
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
     vc.songInfo = self.songInfo;

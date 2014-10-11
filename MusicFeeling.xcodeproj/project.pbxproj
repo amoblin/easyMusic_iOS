@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ADA1062402CB48B79EE619A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C19C32FB76D74988964FFD1F /* libPods.a */; };
 		DA20CF7119E77EFD00CD179B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA20CF7319E77EFD00CD179B /* Localizable.strings */; };
+		DA20CF8719E986C300CD179B /* MFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA20CF8619E986C300CD179B /* MFUtils.m */; };
 		DA2EF15C18EFB6C300DC1617 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2EF15B18EFB6C300DC1617 /* AVFoundation.framework */; };
 		DA2EF1B618EFB89800DC1617 /* a0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF15E18EFB89800DC1617 /* a0.mp3 */; };
 		DA2EF1B718EFB89800DC1617 /* a0m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF15F18EFB89800DC1617 /* a0m.mp3 */; };
@@ -162,6 +163,8 @@
 		DA20CF7519E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA20CF7619E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA20CF7719E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DA20CF8519E986C300CD179B /* MFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUtils.h; sourceTree = "<group>"; };
+		DA20CF8619E986C300CD179B /* MFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUtils.m; sourceTree = "<group>"; };
 		DA2EF15B18EFB6C300DC1617 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DA2EF15E18EFB89800DC1617 /* a0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = a0.mp3; sourceTree = "<group>"; };
 		DA2EF15F18EFB89800DC1617 /* a0m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = a0m.mp3; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				DA41D3FE18ECD43800ED4BD7 /* SLEditableTitleViewController.m */,
 				DA527CBC18D3E623009A825E /* Images.xcassets */,
 				DA527CA818D3E623009A825E /* Supporting Files */,
+				DA20CF8519E986C300CD179B /* MFUtils.h */,
+				DA20CF8619E986C300CD179B /* MFUtils.m */,
 			);
 			path = MusicFeeling;
 			sourceTree = "<group>";
@@ -879,6 +884,7 @@
 			files = (
 				DA527CAE18D3E623009A825E /* main.m in Sources */,
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
+				DA20CF8719E986C300CD179B /* MFUtils.m in Sources */,
 				DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
 				DAA262B61953B017002B66CA /* MFButton.m in Sources */,
