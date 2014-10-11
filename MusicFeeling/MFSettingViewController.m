@@ -23,7 +23,7 @@
 #define WHITE_HEIGHT @144
 #define BLACK_HEIGHT @90
 
-@interface MFSettingViewController ()
+@interface MFSettingViewController () <UINavigationBarDelegate>
 
 @end
 
@@ -81,6 +81,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     UINavigationBar *bar = [[UINavigationBar alloc] init];
+    bar.delegate = self;
     bar.translatesAutoresizingMaskIntoConstraints = NO;
     UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil)];
     [bar setItems:@[item]];
@@ -146,7 +147,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self.arrayDataSource;
     [self.tableView registerClass:[MFSettingsTableViewCell class] forCellReuseIdentifier:@"cellId"];
-    
+
     [self.toggleRandomSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"randomDegree"]];
     [self.toggleRandomSwitch addTarget:self
                                 action:@selector(toggleRandomDegree:)
@@ -154,6 +155,22 @@
     [self.toggleMapperSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"mapper"]];
 
     //[self initPianoKeyboard];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self updateLayoutWithOrientation:self.interfaceOrientation];
+}
+
+-(UIBarPosition)positionForBar:(id<UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
+}
+
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self updateLayoutWithOrientation:toInterfaceOrientation];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -346,6 +363,44 @@
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = @"253107875";
     [SVProgressHUD showSuccessWithStatus:@"QQ号码已复制！"];
+}
+
+- (void)updateLayoutWithOrientation:(UIInterfaceOrientation)orientation {
+    switch (orientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown: {
+            CGFloat viewWidth, viewHeight;
+            viewWidth = [UIScreen mainScreen].bounds.size.width;
+            viewHeight= [UIScreen mainScreen].bounds.size.height;
+
+            self.bar.frame = CGRectMake(0, 20, viewWidth, 44);
+            self.tableView.frame = CGRectMake(0, 64, viewWidth, viewHeight - 44 - 64);
+            break;
+        }
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight: {
+            CGFloat viewWidth, viewHeight, originY;
+            if (IS_IOS_8_OR_LATER) {
+                originY = 0;
+                viewWidth = [UIScreen mainScreen].bounds.size.width;
+                viewHeight= [UIScreen mainScreen].bounds.size.height;
+            } else {
+                originY = 20;
+                viewWidth = [UIScreen mainScreen].bounds.size.height;
+                viewHeight = [UIScreen mainScreen].bounds.size.width;
+            }
+            self.bar.frame = CGRectMake(0, originY, viewWidth, 32);
+
+            if (IS_IOS_8_OR_LATER) {
+                self.tableView.frame = CGRectMake(0, 32, viewWidth, viewHeight - 44 - 32);
+            } else {
+                self.tableView.frame = CGRectMake(0, 52, viewWidth, viewHeight - 44 - 52);
+            }
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end
