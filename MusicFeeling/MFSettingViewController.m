@@ -25,6 +25,7 @@
 
 @interface MFSettingViewController () <UINavigationBarDelegate>
 
+@property (nonatomic) CGFloat barHeight;
 @end
 
 @implementation MFSettingViewController
@@ -91,6 +92,7 @@
                                                               action:@selector(close:)];
     self.bar = bar;
     [self.view addSubview:bar];
+    self.barHeight = 64;
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -184,9 +186,9 @@
                                                                       metrics:nil
                                                                         views:NSDictionaryOfVariableBindings(_tableView)]];
 
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bar(==64)]-0-[_tableView]-0-|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bar(==barHeight)]-0-[_tableView]-0-|"
                                                                       options:0
-                                                                      metrics:nil
+                                                                      metrics:@{@"barHeight": @(self.barHeight)}
                                                                         views:NSDictionaryOfVariableBindings(_bar, _tableView)]];
 }
 
@@ -373,6 +375,7 @@
             viewWidth = [UIScreen mainScreen].bounds.size.width;
             viewHeight= [UIScreen mainScreen].bounds.size.height;
 
+            self.barHeight = 64;
             self.bar.frame = CGRectMake(0, 20, viewWidth, 44);
             self.tableView.frame = CGRectMake(0, 64, viewWidth, viewHeight - 44 - 64);
             break;
@@ -390,6 +393,7 @@
                 viewHeight = [UIScreen mainScreen].bounds.size.width;
             }
             self.bar.frame = CGRectMake(0, originY, viewWidth, 32);
+            self.barHeight = 32;
 
             if (IS_IOS_8_OR_LATER) {
                 self.tableView.frame = CGRectMake(0, 32, viewWidth, viewHeight - 44 - 32);
