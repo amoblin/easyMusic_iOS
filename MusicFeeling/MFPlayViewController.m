@@ -356,7 +356,7 @@
 
 - (NSArray *)layoutButton:(MFButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    CGFloat width, currentX, currentY;
+    CGFloat width, currentX=self.currentX, currentY=self.currentY;
     BOOL isFirst;
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:

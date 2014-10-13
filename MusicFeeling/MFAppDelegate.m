@@ -15,6 +15,7 @@
 #import <UMengAnalytics/MobClick.h>
 //#import <TalkingData.h>
 #import <UMessage.h>
+#import <UMFeedback.h>
 
 #import <AVOSCloud/AVOSCloud.h>
 
@@ -39,7 +40,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:@"uuid"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
+
     /*
     Class cls = NSClassFromString(@"UMANUtil");
     SEL deviceIDSelector = @selector(openUDIDString);
@@ -90,6 +91,18 @@
     self.window.rootViewController = navigationController;
 
     [UMessage startWithAppkey:UMENG_KEY launchOptions:launchOptions];
+
+    if (IS_IOS_8_OR_LATER) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+                                                                                             |UIRemoteNotificationTypeSound
+                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert |
+         UIRemoteNotificationTypeBadge |
+         UIRemoteNotificationTypeSound];
+    }
+
     [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
      |UIRemoteNotificationTypeSound
      |UIRemoteNotificationTypeAlert];
@@ -128,7 +141,7 @@
 # pragma mark - remote notification
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [UMessage didReceiveRemoteNotification:userInfo];
+    [UMFeedback didReceiveRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -143,7 +156,30 @@
     }
 
     [UMessage registerDeviceToken:deviceToken];
+    [UMessage addAlias:[UMFeedback uuid] type:@"Umeng" response:^(id responseObject, NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", error);
+            NSLog(@"%@", responseObject);
+        }
+    }];
 }
+
+#pragma mark For iOS8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"]){
+    }
+    else if ([identifier isEqualToString:@"answerAction"]){
+    }
+}
+
 
 // for MFBaseViewControll using
 - (void)playTone:(NSString *)name {
