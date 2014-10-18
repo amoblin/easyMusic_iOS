@@ -15,6 +15,7 @@ pod 'UMengFeedback', '~> 1.4.2'
 # remote notification
 pod 'UMengMessage', '~> 1.1.0'
 
+pod 'TSMessages', '~> 0.9.10'
 pod 'SVProgressHUD', '~> 1.0'
 #pod 'PXAlertView', '~> 0.1.0'
 #pod 'NSData+Base64', '~> 1.0.0'

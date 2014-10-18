@@ -2,3 +2,5 @@
 *.xcworkspace/
 Pods/
 Podfile.lock
+Build/
+ModuleCache/

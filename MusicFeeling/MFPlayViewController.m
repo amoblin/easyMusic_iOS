@@ -904,22 +904,25 @@
             AVFile *oldFile = self.songInfo[@"contentFile"];
             [oldFile deleteInBackground];
 
-            [self.songInfo setObject:self.title forKey:@"name"];
-            [self.songInfo setObject:@NO forKey:@"isComposed"];
-            [self.songInfo setObject:[path lastPathComponent] forKey:@"path"];
-            [self.songInfo setObject:file forKey:@"contentFile"];
-            [self.songInfo setObject:[NSDate date] forKey:@"mtime"];
+            AVObject *songInfo = [AVObject objectWithClassName:@"Song"];
+
+            [songInfo setObject:self.title forKey:@"name"];
+            [songInfo setObject:@NO forKey:@"isComposed"];
+            [songInfo setObject:[path lastPathComponent] forKey:@"path"];
+            [songInfo setObject:file forKey:@"contentFile"];
+            [songInfo setObject:[NSDate date] forKey:@"mtime"];
             if ([self.songInfo objectForKey:@"finishCount"] == nil) {
                 msg = @"发布成功！";
                 [self.songInfo setObject:@1 forKey:@"finishCount"];
                 [self.songInfo setObject:@1 forKey:@"viewCount"];
             }
-            [self.songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
-            [self.songInfo setObject:[AVUser currentUser] forKey:@"userid"];
-            [self.songInfo setObject:[AVUser currentUser].username forKey:@"author"];
+            [songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
+            [songInfo setObject:[AVUser currentUser] forKey:@"userid"];
+            [songInfo setObject:[AVUser currentUser].username forKey:@"author"];
             [SVProgressHUD show];
-            [self.songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [SVProgressHUD dismiss];
+                self.songInfo = songInfo;
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }
