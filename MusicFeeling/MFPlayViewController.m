@@ -826,8 +826,10 @@
             [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
 //            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
             self.playCount = 0;
-            [self.songInfo incrementKey:@"finishCount"];
-            [self.songInfo saveInBackground];
+            if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
+                [self.songInfo incrementKey:@"finishCount"];
+                [self.songInfo saveInBackground];
+            }
         }
     }
 }
