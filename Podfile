@@ -6,7 +6,7 @@ pod 'ReactiveCocoa', '~> 2.3'
 pod 'AFNetworking', '~> 2.4.1'
 
 pod 'UMengAnalytics', '~> 3.1.2'
-pod 'UMengFeedback', '~> 1.4.2'
+pod 'UMengFeedback', '~> 2.0'
 #pod 'UMengFeedback', :podspec => '/Users/amoblin/Marboo/Projects/MyProjects/UMeng/FeedbackiOS/UMengFeedback.podspec'
 #pod 'UMengFeedback', :podspec => '/Users/amoblin/Marboo/Projects/MyProjects/UMeng/FeedbackiOS/UMengFeedback-dev.podspec'
 
