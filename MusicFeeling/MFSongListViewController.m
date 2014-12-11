@@ -59,8 +59,10 @@
         for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:delegate.localDir error:&error]) {
             NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[delegate.localDir stringByAppendingPathComponent:file] error:nil];
 
+            NSString *filename = [[file stringByDeletingPathExtension] stringByDeletingPathExtension];
+
             AVObject *song = [AVObject objectWithClassName:@"Song"];
-            [song setObject:[[file stringByDeletingPathExtension] stringByDeletingPathExtension] forKey:@"name"];
+            [song setObject:[filename componentsSeparatedByString:@"_"][0] forKey:@"name"];
             [song setObject:file forKey:@"path"];
             [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
             [array addObject:song];

@@ -132,6 +132,7 @@
 		DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */; };
 		DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B21953AFF6002B66CA /* UIImage+Color.m */; };
 		DAA262B61953B017002B66CA /* MFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B51953B017002B66CA /* MFButton.m */; };
+		DAB7337B1A3927C500857054 /* MFPianoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7337A1A3927C500857054 /* MFPianoScrollView.m */; };
 		DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DABB801019839B7200F09368 /* MFSongListTableViewCell.m */; };
 		DABB801319839E6400F09368 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB801219839E6400F09368 /* green@2x.png */; };
 		DABB801519839E6A00F09368 /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB801419839E6A00F09368 /* blue@2x.png */; };
@@ -309,6 +310,8 @@
 		DAA262B21953AFF6002B66CA /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		DAA262B41953B017002B66CA /* MFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFButton.h; sourceTree = "<group>"; };
 		DAA262B51953B017002B66CA /* MFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFButton.m; sourceTree = "<group>"; };
+		DAB733791A3927C500857054 /* MFPianoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPianoScrollView.h; sourceTree = "<group>"; };
+		DAB7337A1A3927C500857054 /* MFPianoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPianoScrollView.m; sourceTree = "<group>"; };
 		DABB800F19839B7200F09368 /* MFSongListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSongListTableViewCell.h; sourceTree = "<group>"; };
 		DABB801019839B7200F09368 /* MFSongListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSongListTableViewCell.m; sourceTree = "<group>"; };
 		DABB801219839E6400F09368 /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
@@ -527,6 +530,8 @@
 				DABB801019839B7200F09368 /* MFSongListTableViewCell.m */,
 				DADCEE9018E003FE0044455D /* MFPlayViewController.h */,
 				DADCEE9118E003FE0044455D /* MFPlayViewController.m */,
+				DAB733791A3927C500857054 /* MFPianoScrollView.h */,
+				DAB7337A1A3927C500857054 /* MFPianoScrollView.m */,
 				DA9C809419526A0C0029EF68 /* MFKeyboardView.h */,
 				DA9C809519526A0C0029EF68 /* MFKeyboardView.m */,
 				DA41D40018ECD4E900ED4BD7 /* SLNavigationItem.h */,
@@ -889,6 +894,7 @@
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
 				DAA262B61953B017002B66CA /* MFButton.m in Sources */,
 				DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */,
+				DAB7337B1A3927C500857054 /* MFPianoScrollView.m in Sources */,
 				DA4020FC19126557003D593C /* MFSettingsTableViewCell.m in Sources */,
 				DA2EF21718F251E900DC1617 /* PXAlertView.m in Sources */,
 				DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */,
@@ -1061,6 +1067,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1069,7 +1076,7 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(PODS_ROOT)/UMengAnalytics/**\"",
 					"\"$(PODS_ROOT)/UMengFeedback/**\"",
@@ -1095,6 +1102,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1103,7 +1111,7 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MusicFeeling/MusicFeeling-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(PODS_ROOT)/UMengAnalytics/**\"",
 					"\"$(PODS_ROOT)/UMengFeedback/**\"",

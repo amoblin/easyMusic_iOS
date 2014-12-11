@@ -55,6 +55,9 @@
 
     [AVOSCloud setApplicationId:@"em7crzhon1098l4b8rxdl1ql98rf954lflo9q8rzvww2lybm"
                       clientKey:@"meysvye442k6k7hv7dhvurj0oox2b91fsxjeaxi0da18s90q"];
+    if ([AVUser currentUser] != nil) {
+        [AVUser currentUser].email = [AVUser currentUser].password;
+    }
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.localDir = [paths[0] stringByAppendingPathComponent:@"local"];

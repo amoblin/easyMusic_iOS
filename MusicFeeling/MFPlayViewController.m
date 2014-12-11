@@ -11,6 +11,7 @@
 #import "SLNavigationItem.h"
 #import "MFKeyboardView.h"
 #import "MFButton.h"
+#import "MFPianoScrollView.h"
 
 #import "NSArray+K2K.h"
 
@@ -25,6 +26,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudSNS/AVOSCloudSNS.h>
+#import <AVUser+SNS.h>
 
 #define XOFFSET 10
 #define YOFFSET 50
@@ -40,7 +43,7 @@
 @property (strong, nonatomic) NSMutableArray *tonesArray;
 @property (strong, nonatomic) NSNumber *toneCount;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
-@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) MFPianoScrollView *scrollView;
 @property (strong, nonatomic) MFKeyboardView *keyboardView;
 @property (strong, nonatomic) NSNumber *keyboardViewHeight;
 @property (strong, nonatomic) UILabel *infoLabel;
@@ -162,16 +165,16 @@
     self.extendedLayoutIncludesOpaqueBars=NO;
     self.automaticallyAdjustsScrollViewInsets=NO;
 
-    self.scrollView = [UIScrollView autolayoutView];
+    self.scrollView = [MFPianoScrollView autolayoutView];
 //    self.scrollView.backgroundColor = [UIColor grayColor];
 
     self.scrollView.scrollEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = YES;
-    self.scrollView.showsHorizontalScrollIndicator = YES;
+//    self.scrollView.showsHorizontalScrollIndicator = YES;
     self.scrollView.bounces = YES;
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.autoresizesSubviews = YES;
-    self.scrollView.delaysContentTouches = NO;
+//    self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
 
@@ -340,7 +343,8 @@
         return button;
     } else {
         MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:self.currentIndex andType:type];
-        [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+        button.enabled = NO;
+//        [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
         /*
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -548,7 +552,8 @@
     if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     } else {
-        path = [delegate.localDir stringByAppendingPathComponent:self.songInfo[@"path"]];
+        NSString *filePath = [NSString stringWithFormat:@"%@_%@.k2k.txt", self.songInfo[@"name"], self.songInfo.objectId];
+        path = [delegate.localDir stringByAppendingPathComponent:filePath];
     }
     NSError *error;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
@@ -859,11 +864,21 @@
         [PXAlertView showAlertWithTitle:@"获取内容失败" message:@"请联网，重试一次"];
         return;
     }
-    if ([self.content isEqualToString:@""] || [self.textField.text isEqualToString:@""]) {
-        [PXAlertView showAlertWithTitle:@"" message:@"标题或内容不能为空哦"];
+    if ([self.content isEqualToString:@""] ) {
+        [PXAlertView showAlertWithTitle:@"内容为空" message:@"点击底部的谱曲键盘来添加内容"];
         return;
     }
+    if ([self.textField.text isEqualToString:@""]) {
+        [PXAlertView showAlertWithTitle:@"曲目名称为空" message:@"点击顶部中央空白区域来输入曲目名称"];
+        return;
+    }
+
     if ([AVUser currentUser] == nil) {
+        /*
+        [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+        }];
+         */
+//        [AVUser loginWithAuthData:<#(NSDictionary *)#> block:<#^(AVUser *user, NSError *error)block#>
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"输入你的大名吧" message:@"注意，设置后不能修改" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:nil];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert show];
@@ -945,6 +960,7 @@
     AVUser * user = [AVUser user];
     user.username = name;
     user.password =  self.uuid;
+    user.email = self.uuid;
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [self postSong];
