@@ -15,4 +15,5 @@
 - (id)initWithTitle:(NSString *)title size:(NSInteger)size tag:(NSInteger)tag andType:(NSInteger) type;
 
 - (void)setStyle:(NSInteger)style;
+- (void)setCurrent:(BOOL)current;
 @end

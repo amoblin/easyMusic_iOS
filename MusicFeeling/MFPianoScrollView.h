@@ -18,5 +18,6 @@
 
 @interface MFPianoScrollView : UIScrollView
 
+@property (nonatomic) NSInteger toneStyle;
 @property (weak, nonatomic) NSObject <MFPianoScrollViewDelegate> *delegate;
 @end

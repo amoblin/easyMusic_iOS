@@ -29,6 +29,10 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    if (self.toneStyle == 3) {
+        [self.delegate toneButtonTouchDown:nil];
+        return;
+    }
     NSSet *allTouches = [event allTouches];
     for (UITouch *touch in allTouches)
     {
@@ -40,9 +44,12 @@
             {
                 if (CGRectContainsPoint(key.frame, location))
                 {
+                    [self.previousKey setCurrent:NO];
+                    [self.currentKey setCurrent:NO];
                     self.previousKey = key;
                     self.currentKey = key;
                     [self.delegate toneButtonTouchDown:key];
+                    [key setCurrent:YES];
                     /*
                      [key pressAnimation];
                      [self playPitch:key.pitch];
@@ -58,6 +65,10 @@
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (self.toneStyle == 3) {
+        return;
+    }
+
     NSSet *allTouches = [event allTouches];
     for (UITouch *touch in allTouches)
     {
@@ -75,6 +86,8 @@
                     if (self.currentKey != key) {
                         self.currentKey = key;
                         [self.delegate toneButtonTouchDown:key];
+                        [key setCurrent:YES];
+                        [self.previousKey setCurrent:NO];
                     /*
                     [key pressAnimation];
                     [self changePitch:key.pitch];
@@ -85,10 +98,18 @@
                         self.previousKey = key;
                     }
                 } else {
+                    [key setCurrent:NO];
+//                    [key setHighlighted:NO];
 //                    [key releaseAnimation];
                 }
             }
         }
     }
 }
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.currentKey setCurrent:NO];
+    [self.previousKey setCurrent:NO];
+}
+
 @end

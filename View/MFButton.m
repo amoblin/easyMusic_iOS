@@ -83,10 +83,23 @@
             [self setTitle:self.tone.keyboardString forState:UIControlStateNormal];
             [self setBackgroundImage:nil forState:UIControlStateNormal];
             break;
+        case 3:
+            self.titleLabel.font = [UIFont systemFontOfSize:20];
+            [self setTitle:self.tone forState:UIControlStateNormal];
+            [self setBackgroundImage:nil forState:UIControlStateNormal];
+            break;
         default:
             break;
     }
 //            NSString *toneName = self.titleLabel.text;
+}
+
+- (void)setCurrent:(BOOL)current {
+    if (current) {
+        [self setBackgroundImage:[UIImage imageNamed:@"circle_hit"] forState:UIControlStateNormal];
+    } else {
+        [self setBackgroundImage:[UIImage imageNamed:@"circle"] forState:UIControlStateNormal];
+    }
 }
 
 @end

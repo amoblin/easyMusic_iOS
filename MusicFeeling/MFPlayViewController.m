@@ -37,7 +37,7 @@
 #define BUTTON_WRAP_LINE_V -7
 
 // (0,122,255)
-@interface MFPlayViewController () <MFKeyboardDelegate>
+@interface MFPlayViewController () <MFKeyboardDelegate, MFPianoScrollViewDelegate>
 
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSMutableArray *tonesArray;
@@ -45,6 +45,7 @@
 @property (strong, nonatomic) NSMutableArray *buttonPool;
 @property (strong, nonatomic) MFPianoScrollView *scrollView;
 @property (strong, nonatomic) MFKeyboardView *keyboardView;
+
 @property (strong, nonatomic) NSNumber *keyboardViewHeight;
 @property (strong, nonatomic) UILabel *infoLabel;
 @property (strong, nonatomic) NSArray *vConstraints;
@@ -54,6 +55,11 @@
 @property (strong, nonatomic) NSMutableArray *toneButtonsArray;
 @property (strong, nonatomic) MFButton *prevButton;
 @property (nonatomic) NSInteger currentIndex;
+
+
+// for single key style
+@property (strong, nonatomic) NSIndexPath *currentKeyIndex;
+@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 
 @property (nonatomic) NSInteger currentLine;
 @property (nonatomic) BOOL isFirst;
@@ -68,6 +74,8 @@
 @property (nonatomic) CGFloat currentY_H;
 
 @property (nonatomic) NSInteger toneStyle;
+
+@property (nonatomic) BOOL isLastTone;
 @end
 
 @implementation MFPlayViewController
@@ -155,6 +163,7 @@
 
     self.isFirst = YES;
     self.currentIndex = 0;
+    self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
     self.currentY = YOFFSET;
     self.currentX = XOFFSET;
 
@@ -166,17 +175,19 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
 
     self.scrollView = [MFPianoScrollView autolayoutView];
+    self.scrollView.toneStyle = self.toneStyle;
 //    self.scrollView.backgroundColor = [UIColor grayColor];
 
     self.scrollView.scrollEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = YES;
-//    self.scrollView.showsHorizontalScrollIndicator = YES;
     self.scrollView.bounces = YES;
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.autoresizesSubviews = YES;
 //    self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
+
+
 
     self.keyboardView = [MFKeyboardView autolayoutView];
     self.keyboardView.tag = 1;
@@ -200,7 +211,7 @@
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
     } else {
-        NSArray *items = @[@"音符", @"简谱", @"键盘"];
+        NSArray *items = @[@"音符", @"简谱", @"键盘", @"单键"];
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
         segmentedControl.selectedSegmentIndex = 0;
         [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
@@ -265,6 +276,7 @@
     if ( ! self.isNew) {
         [self getContent];
     }
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 
 //    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY  + BUTTON_SIZE + BUTTON_PADDING_V);
 //    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
@@ -816,24 +828,62 @@
 }
 
 - (void)toneButtonTouchDown:(MFButton *)sender {
-//    [self becomeFirstResponder];
+    NSString *toneName;
     if ( self.toneStyle == 2) {
         [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
         return;
+    } else if (self.toneStyle == 3) {
+        NSArray *currentLine = [self.tonesArray objectAtIndex:self.currentKeyIndex.section];
+        if (self.currentKeyIndex.row < currentLine.count) {
+            toneName = [[self.tonesArray objectAtIndex:self.currentKeyIndex.section] objectAtIndex:self.currentKeyIndex.row];
+            self.currentKeyIndex = [NSIndexPath indexPathForRow:self.currentKeyIndex.row + 1 inSection:self.currentKeyIndex.section];
+        }
+
+        if (self.currentKeyIndex.row >= currentLine.count) {
+            self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:self.currentKeyIndex.section + 1];
+        }
+        if (self.currentKeyIndex.section >= self.tonesArray.count) {
+            self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+        }
+    } else {
+        toneName = sender.tone;
     }
 
-    NSString *toneName = sender.tone;
 //    NSLog(@"%@, tag: %ll", toneName, sender.tag);
     if (toneName.length > 0) {
         [self playTone:toneName];
         self.playCount++;
-        if (sender.tag >= self.toneCount.integerValue && self.playCount >= self.toneCount.integerValue) {
-            [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
-//            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
-            self.playCount = 0;
-            if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
-                [self.songInfo incrementKey:@"finishCount"];
-                [self.songInfo saveInBackground];
+    }
+//    NSLog(@"%ld - %ld", self.toneCount.integerValue, self.playCount);
+
+    if (self.playCount >= self.toneCount.integerValue) {
+        if (self.toneStyle == 3 || sender.tag >= self.toneCount.integerValue) {
+            if ( (self.toneStyle == 3 && (! self.isLastTone)) || self.toneStyle != 3) {
+                [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
+                //            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
+                self.playCount = 0;
+                if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
+                    [self.songInfo incrementKey:@"finishCount"];
+                }
+            }
+            if (self.toneStyle == 3) {
+                [PXAlertView showAlertWithTitle:@"演奏完成"
+                                        message:@"是否从头播放？"
+                                    cancelTitle:@"Cancel"
+                                     otherTitle:@"OK"
+                                     completion:^(BOOL cancelled) {
+                                         if ( ! cancelled) {
+                                             self.isLastTone = NO;
+                                             self.playCount = 0;
+                                             self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+                                         } else {
+                                             self.isLastTone = YES;
+                                             NSInteger section = self.tonesArray.count -1;
+                                             NSInteger row = [self.tonesArray[section] count] -1 ;
+                                             self.playCount = self.toneCount.integerValue - 1;
+                                             self.currentKeyIndex = [NSIndexPath indexPathForRow:row inSection:section];
+                                         }
+                                     }];
             }
         }
     }
@@ -1038,6 +1088,7 @@
 
 - (void)valueChangedAction:(UISegmentedControl *)segmentedControl {
     self.toneStyle = segmentedControl.selectedSegmentIndex;
+    self.scrollView.toneStyle = self.toneStyle;
 
     for (id item in self.scrollView.subviews) {
         if ([[item class] isSubclassOfClass:[MFButton class]]) {
