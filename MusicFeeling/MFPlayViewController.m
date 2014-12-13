@@ -854,7 +854,7 @@
         [self playTone:toneName];
         self.playCount++;
     }
-//    NSLog(@"%ld - %ld", self.toneCount.integerValue, self.playCount);
+    NSLog(@"%lu - %lu", self.toneCount.integerValue, self.playCount);
 
     if (self.playCount >= self.toneCount.integerValue) {
         if (self.toneStyle == 3 || sender.tag >= self.toneCount.integerValue) {
@@ -868,7 +868,7 @@
             }
             if (self.toneStyle == 3) {
                 [PXAlertView showAlertWithTitle:@"演奏完成"
-                                        message:@"是否从头播放？"
+                                        message:@"再来一遍？"
                                     cancelTitle:@"Cancel"
                                      otherTitle:@"OK"
                                      completion:^(BOOL cancelled) {
@@ -1089,6 +1089,9 @@
 - (void)valueChangedAction:(UISegmentedControl *)segmentedControl {
     self.toneStyle = segmentedControl.selectedSegmentIndex;
     self.scrollView.toneStyle = self.toneStyle;
+
+    self.playCount = 0;
+    self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
 
     for (id item in self.scrollView.subviews) {
         if ([[item class] isSubclassOfClass:[MFButton class]]) {
