@@ -276,7 +276,10 @@
     if ( ! self.isNew) {
         [self getContent];
     }
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
+    if (IS_IOS_7_OR_LATER) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 
 //    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY  + BUTTON_SIZE + BUTTON_PADDING_V);
 //    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
@@ -854,7 +857,7 @@
         [self playTone:toneName];
         self.playCount++;
     }
-    NSLog(@"%lu - %lu", self.toneCount.integerValue, self.playCount);
+    NSLog(@"%d - %d", self.toneCount.integerValue, self.playCount);
 
     if (self.playCount >= self.toneCount.integerValue) {
         if (self.toneStyle == 3 || sender.tag >= self.toneCount.integerValue) {
