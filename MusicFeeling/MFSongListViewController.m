@@ -16,6 +16,7 @@
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
 #import <UMengAnalytics/MobClick.h>
+#import <Masonry.h>
 
 #import <AVOSCloud/AVOSCloud.h>
 
@@ -125,15 +126,6 @@
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
 
         [self.view addSubview:_tableView];
-
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableView]-0-|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:NSDictionaryOfVariableBindings(_tableView)]];
         [_tableView addSubview:self.refreshControl];
     }
     return _tableView;
@@ -146,6 +138,17 @@
         [_refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
+}
+
+- (void)viewWillLayoutSubviews {
+    WS(ws);
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.left.equalTo(ws.view);
+        make.top.equalTo(ws.view);
+        make.bottom.equalTo(ws.view);
+    }];
+    [super viewWillLayoutSubviews];
 }
 
 #pragma mark - UITableViewDelegate

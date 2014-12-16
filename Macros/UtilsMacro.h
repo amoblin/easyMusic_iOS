@@ -15,4 +15,8 @@
 #define IS_IOS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define IS_IOS_7_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
+#define Local(key) NSLocalizedString(key, nil)
+
+// for Masonry
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 #endif

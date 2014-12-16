@@ -19,6 +19,7 @@
 #import "UIView+AutoLayout.h"
 
 
+#import <Masonry.h>
 #import "PXAlertView.h"
 #import <SVProgressHUD.h>
 #import <AFNetworking.h>
@@ -74,6 +75,7 @@
 @property (nonatomic) CGFloat currentY_H;
 
 @property (nonatomic) NSInteger toneStyle;
+@property (nonatomic) BOOL singleTapMode;
 
 @property (nonatomic) BOOL isLastTone;
 @end
@@ -174,8 +176,7 @@
     self.extendedLayoutIncludesOpaqueBars=NO;
     self.automaticallyAdjustsScrollViewInsets=NO;
 
-    self.scrollView = [MFPianoScrollView autolayoutView];
-    self.scrollView.toneStyle = self.toneStyle;
+    self.scrollView = [MFPianoScrollView new];
 //    self.scrollView.backgroundColor = [UIColor grayColor];
 
     self.scrollView.scrollEnabled = YES;
@@ -183,11 +184,9 @@
     self.scrollView.bounces = YES;
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.autoresizesSubviews = YES;
-//    self.scrollView.delaysContentTouches = NO;
+    self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
-
-
 
     self.keyboardView = [MFKeyboardView autolayoutView];
     self.keyboardView.tag = 1;
@@ -211,7 +210,7 @@
                                                                                metrics:nil
                                                                                  views:NSDictionaryOfVariableBindings(_infoLabel)]];
     } else {
-        NSArray *items = @[@"音符", @"简谱", @"键盘", @"单键"];
+        NSArray *items = @[@"音符", @"简谱", @"键盘"];
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
         segmentedControl.selectedSegmentIndex = 0;
         [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
@@ -231,6 +230,11 @@
          } else if ([self.songInfo[@"author"] isEqualToString:[AVUser currentUser].username]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed:)];
          */
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Single Tap")
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(toggleSingleTapMode)];
     }
 }
 
@@ -255,19 +259,19 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollView, _keyboardView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_scrollView]-0-|"
-                                                                      options:0
-                                                                      metrics:0
-                                                                        views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_keyboardView]-0-|"
-                                                                      options:0
-                                                                      metrics:0
-                                                                        views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]-0-[_keyboardView(==height)]-0-|"
-                                                                      options:0
-                                                                      metrics:@{@"height": self.keyboardViewHeight}
-                                                                        views:viewsDictionary]];
+    WS(ws);
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.left.equalTo(ws.view);
+        make.top.equalTo(ws.view);
+        make.bottom.equalTo(ws.keyboardView.mas_top);
+    }];
+    [self.keyboardView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.left.equalTo(ws.view);
+        make.bottom.equalTo(ws.view);
+        make.height.mas_equalTo(self.keyboardViewHeight);
+    }];
     [super viewWillLayoutSubviews];
 }
 
@@ -358,8 +362,8 @@
         return button;
     } else {
         MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:self.currentIndex andType:type];
-        button.enabled = NO;
-//        [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+//        button.enabled = NO;
+        [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
         /*
         [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
@@ -482,7 +486,7 @@
         }
         MFButton *button;
         for (NSString *item in items) {
-            if ([item isEqualToString:@""]) {
+            if ([item isEqualToString:@""] || [item isEqualToString:@"(null)"]) {
                 continue;
             }
 //            NSLog(@"layout item: %@", item);
@@ -830,12 +834,16 @@
     }];
 }
 
+- (void)tapViewAction:(UIGestureRecognizer *)tap {
+    if (self.singleTapMode) {
+        [self toneButtonTouchDown:nil];
+    }
+}
+
 - (void)toneButtonTouchDown:(MFButton *)sender {
     NSString *toneName;
-    if ( self.toneStyle == 2) {
-        [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
-        return;
-    } else if (self.toneStyle == 3) {
+    if (self.singleTapMode) {
+//        [sender setEnabled:NO];
         NSArray *currentLine = [self.tonesArray objectAtIndex:self.currentKeyIndex.section];
         if (self.currentKeyIndex.row < currentLine.count) {
             toneName = [[self.tonesArray objectAtIndex:self.currentKeyIndex.section] objectAtIndex:self.currentKeyIndex.row];
@@ -849,7 +857,13 @@
             self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
         }
     } else {
-        toneName = sender.tone;
+//        [sender setEnabled:YES];
+        if ( self.toneStyle == 2) {
+            [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
+            return;
+        } else {
+            toneName = sender.tone;
+        }
     }
 
 //    NSLog(@"%@, tag: %ll", toneName, sender.tag);
@@ -870,10 +884,10 @@
                 }
             }
             if (self.toneStyle == 3) {
-                [PXAlertView showAlertWithTitle:@"演奏完成"
-                                        message:@"再来一遍？"
-                                    cancelTitle:@"Cancel"
-                                     otherTitle:@"OK"
+                [PXAlertView showAlertWithTitle:Local(@"演奏完成")
+                                        message:Local(@"再来一遍？")
+                                    cancelTitle:Local(@"Cancel")
+                                     otherTitle:Local(@"OK")
                                      completion:^(BOOL cancelled) {
                                          if ( ! cancelled) {
                                              self.isLastTone = NO;
@@ -1091,7 +1105,6 @@
 
 - (void)valueChangedAction:(UISegmentedControl *)segmentedControl {
     self.toneStyle = segmentedControl.selectedSegmentIndex;
-    self.scrollView.toneStyle = self.toneStyle;
 
     self.playCount = 0;
     self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -1101,6 +1114,11 @@
             [(MFButton *)item setStyle:self.toneStyle];
         }
     }
+}
+
+- (void)toggleSingleTapMode {
+    self.singleTapMode = ! self.singleTapMode;
+    self.scrollView.isSingleTapMode = self.singleTapMode;
 }
 
 @end

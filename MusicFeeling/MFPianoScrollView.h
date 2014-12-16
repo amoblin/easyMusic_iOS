@@ -18,6 +18,6 @@
 
 @interface MFPianoScrollView : UIScrollView
 
-@property (nonatomic) NSInteger toneStyle;
+@property (nonatomic) BOOL isSingleTapMode;
 @property (weak, nonatomic) NSObject <MFPianoScrollViewDelegate> *delegate;
 @end
