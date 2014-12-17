@@ -846,10 +846,10 @@
 }
 
 - (void)toneButtonTouchDown:(MFButton *)sender {
+    [self.prevButton setCurrent:NO];
     NSString *toneName;
     if (self.smartMode) {
         [sender setSmart:YES];
-        [self.prevButton setCurrent:NO];
 
         self.currentKeyIndex++;
         self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentKeyIndex];
@@ -892,6 +892,9 @@
          */
     } else {
         [sender setSmart:NO];
+        self.currentKeyIndex = sender.tag;
+        self.prevButton = sender;
+        [self.prevButton setCurrent:YES];
         if ( self.toneStyle == 2) {
             [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
             return;
@@ -1163,6 +1166,8 @@
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(toggleSingleTapMode)];
+
+        self.playCount = MIN(self.playCount, self.currentKeyIndex);
     } else {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Smart")
                                                                                   style:UIBarButtonItemStylePlain
@@ -1170,6 +1175,7 @@
                                                                                  action:@selector(toggleSingleTapMode)];
     }
     self.scrollView.smartMode = self.smartMode;
+//    self.currentKeyIndex = self.prevButton.tag;
 }
 
 @end
