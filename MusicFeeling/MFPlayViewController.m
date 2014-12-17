@@ -231,7 +231,7 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed:)];
          */
     } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Single Tap")
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Smart")
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(toggleSingleTapMode)];
@@ -486,7 +486,7 @@
         }
         MFButton *button;
         for (NSString *item in items) {
-            if ([item isEqualToString:@""] || [item isEqualToString:@"(null)"]) {
+            if ([item isEqualToString:@""]) {
                 continue;
             }
 //            NSLog(@"layout item: %@", item);
@@ -577,6 +577,9 @@
     NSError *error;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (error == nil) {
+        if ([content hasPrefix:@"(null)"]) {
+            content = [content substringFromIndex:6];
+        }
         self.content = content;
         [self layoutButtonsWithContent:self.content];
     }
@@ -881,6 +884,7 @@
                 self.playCount = 0;
                 if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
                     [self.songInfo incrementKey:@"finishCount"];
+                    [self.songInfo saveInBackground];
                 }
             }
             if (self.toneStyle == 3) {
@@ -1118,6 +1122,17 @@
 
 - (void)toggleSingleTapMode {
     self.singleTapMode = ! self.singleTapMode;
+    if (self.singleTapMode) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Manually")
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(toggleSingleTapMode)];
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Smart")
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(toggleSingleTapMode)];
+    }
     self.scrollView.isSingleTapMode = self.singleTapMode;
 }
 

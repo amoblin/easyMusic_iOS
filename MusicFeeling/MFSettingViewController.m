@@ -9,11 +9,11 @@
 #import "MFSettingViewController.h"
 #import "MFArrayDataSource.h"
 #import "MFSettingsTableViewCell.h"
-#import "UIView+AutoLayout.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <UMFeedback.h>
 #import <SVProgressHUD.h>
+#import <Masonry.h>
 
 #define TOP @350
 #define WHITE_WIDTH @44
@@ -95,7 +95,6 @@
     self.barHeight = 64;
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tableView];
     [self.view bringSubviewToFront:bar];
 
@@ -105,7 +104,7 @@
     frame.size.height = 150;
     view.frame = frame;
 
-    UILabel *titleLabel = [UILabel autolayoutView];
+    UILabel *titleLabel = [UILabel new];
     titleLabel.font = [UIFont systemFontOfSize:20];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"傻瓜演奏家";
@@ -115,37 +114,33 @@
     logoImageView.layer.cornerRadius = 10.0;
     logoImageView.layer.masksToBounds = YES;
     logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    logoImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [view addSubview:logoImageView];
 
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:logoImageView
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0f
-                                                      constant:0]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[logoImageView(==60)]"
-                                                                 options:0
-                                                                 metrics:0
-                                                                   views:NSDictionaryOfVariableBindings(logoImageView)]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[titleLabel]-|"
-                                                                 options:0
-                                                                 metrics:0
-                                                                   views:NSDictionaryOfVariableBindings(titleLabel)]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[logoImageView(==60)]-0-[titleLabel]-|"
-                                                                 options:0
-                                                                 metrics:0
-                                                                   views:NSDictionaryOfVariableBindings(logoImageView, titleLabel)]];
+    WS(ws);
+    
+    [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(view);
+        make.top.mas_equalTo(30);
+        make.size.mas_equalTo(CGSizeMake(60, 60));
+//        make.bottom.equalTo(view);
+        
+    }];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(view);
+        make.left.equalTo(view);
+        make.top.equalTo(logoImageView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(view).with.offset(-10);
+    }];
+
     self.tableView.tableHeaderView = view;
-    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|"
-                                                                           options:0
-                                                                           metrics:0
-                                                                             views:NSDictionaryOfVariableBindings(view)]];
-    [self.tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view(==100)]"
-                                                                           options:0
-                                                                           metrics:0
-                                                                             views:NSDictionaryOfVariableBindings(view)]];
+
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.tableView);
+        make.left.equalTo(ws.tableView);
+        make.height.mas_equalTo(150);
+        make.top.equalTo(ws.tableView);
+    }];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self.arrayDataSource;
     [self.tableView registerClass:[MFSettingsTableViewCell class] forCellReuseIdentifier:@"cellId"];
@@ -177,19 +172,21 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_bar]-0-|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:NSDictionaryOfVariableBindings(_bar)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:NSDictionaryOfVariableBindings(_tableView)]];
+    WS(ws);
+    [self.bar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.left.equalTo(ws.view);
+        make.top.equalTo(ws.view);
+        make.height.mas_equalTo(ws.barHeight);
+        make.bottom.equalTo(ws.tableView.mas_top);
+    }];
 
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bar(==barHeight)]-0-[_tableView]-0-|"
-                                                                      options:0
-                                                                      metrics:@{@"barHeight": @(self.barHeight)}
-                                                                        views:NSDictionaryOfVariableBindings(_bar, _tableView)]];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(ws.view);
+        make.left.equalTo(ws.view);
+        make.top.equalTo(ws.bar.mas_bottom);
+        make.bottom.equalTo(ws.view);
+    }];
 }
 
 - (void)initPianoKeyboard {
