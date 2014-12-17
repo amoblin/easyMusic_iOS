@@ -29,7 +29,7 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    if (self.isSingleTapMode) {
+    if (self.smartMode) {
         [self.delegate toneButtonTouchDown:nil];
         return;
     }

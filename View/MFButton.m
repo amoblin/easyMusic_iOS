@@ -102,4 +102,14 @@
     }
 }
 
+- (void)setSmart:(BOOL)isSmart {
+    if (isSmart) {
+        [self setBackgroundImage:nil forState:UIControlStateHighlighted];
+        [self setBackgroundImage:nil forState:UIControlStateSelected];
+    } else {
+        [self setBackgroundImage:[UIImage imageNamed:@"circle_hit"] forState:UIControlStateHighlighted];
+        [self setBackgroundImage:[UIImage imageNamed:@"circle_hit"] forState:UIControlStateSelected];
+    }
+
+}
 @end

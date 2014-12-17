@@ -16,4 +16,5 @@
 
 - (void)setStyle:(NSInteger)style;
 - (void)setCurrent:(BOOL)current;
+- (void)setSmart:(BOOL)isSmart;
 @end

@@ -59,7 +59,8 @@
 
 
 // for single key style
-@property (strong, nonatomic) NSIndexPath *currentKeyIndex;
+@property (strong, nonatomic) NSIndexPath *currentKeyIndexPath;
+@property (nonatomic) NSUInteger currentKeyIndex;
 @property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 
 @property (nonatomic) NSInteger currentLine;
@@ -75,7 +76,7 @@
 @property (nonatomic) CGFloat currentY_H;
 
 @property (nonatomic) NSInteger toneStyle;
-@property (nonatomic) BOOL singleTapMode;
+@property (nonatomic) BOOL smartMode;
 
 @property (nonatomic) BOOL isLastTone;
 @end
@@ -156,6 +157,7 @@
             }];
         }
     } else {
+        self.smartMode = YES;
         self.UMPageName = @"曲目详情";
         self.keyboardViewHeight = @0;
 
@@ -165,7 +167,8 @@
 
     self.isFirst = YES;
     self.currentIndex = 0;
-    self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    self.currentKeyIndex = 0;
+    self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     self.currentY = YOFFSET;
     self.currentX = XOFFSET;
 
@@ -186,6 +189,7 @@
     self.scrollView.autoresizesSubviews = YES;
     self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
+    self.scrollView.smartMode = self.smartMode;
     [self.view addSubview:self.scrollView];
 
     self.keyboardView = [MFKeyboardView autolayoutView];
@@ -231,7 +235,7 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed:)];
          */
     } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Smart")
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Manually")
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(toggleSingleTapMode)];
@@ -285,8 +289,6 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 
-//    CGFloat height = MAX(self.scrollView.frame.size.height, self.currentY  + BUTTON_SIZE + BUTTON_PADDING_V);
-//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, height);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -838,29 +840,58 @@
 }
 
 - (void)tapViewAction:(UIGestureRecognizer *)tap {
-    if (self.singleTapMode) {
+    if (self.smartMode) {
         [self toneButtonTouchDown:nil];
     }
 }
 
 - (void)toneButtonTouchDown:(MFButton *)sender {
     NSString *toneName;
-    if (self.singleTapMode) {
-//        [sender setEnabled:NO];
-        NSArray *currentLine = [self.tonesArray objectAtIndex:self.currentKeyIndex.section];
-        if (self.currentKeyIndex.row < currentLine.count) {
-            toneName = [[self.tonesArray objectAtIndex:self.currentKeyIndex.section] objectAtIndex:self.currentKeyIndex.row];
-            self.currentKeyIndex = [NSIndexPath indexPathForRow:self.currentKeyIndex.row + 1 inSection:self.currentKeyIndex.section];
+    if (self.smartMode) {
+        [sender setSmart:YES];
+        [self.prevButton setCurrent:NO];
+
+        self.currentKeyIndex++;
+        self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentKeyIndex];
+        toneName = self.prevButton.tone;
+        [self.prevButton setCurrent:YES];
+        CGRect frame = self.prevButton.frame;
+        if (frame.origin.y > self.scrollView.contentOffset.y + (BUTTON_SIZE + BUTTON_PADDING_V) * 2) {
+            frame.origin.y += self.scrollView.frame.size.height - BUTTON_SIZE;
+
+            if (self.scrollView.contentSize.height == 0) {
+                CGFloat height;
+                if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+                    height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+                } else {
+                    height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+                }
+                self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+            }
+
+            if (frame.origin.y >= self.scrollView.contentSize.height) {
+                frame.origin.y = self.scrollView.contentSize.height - BUTTON_SIZE;
+            }
+
+            [self.scrollView scrollRectToVisible:frame animated:YES];
+        }
+        /*
+        NSArray *currentLine = [self.tonesArray objectAtIndex:self.currentKeyIndexPath.section];
+        if (self.currentKeyIndexPath.row < currentLine.count) {
+            toneName = [[self.tonesArray objectAtIndex:self.currentKeyIndexPath.section] objectAtIndex:self.currentKeyIndexPath.row];
+            self.currentKeyIndexPath = [NSIndexPath indexPathForRow:self.currentKeyIndexPath.row + 1 inSection:self.currentKeyIndexPath.section];
         }
 
-        if (self.currentKeyIndex.row >= currentLine.count) {
-            self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:self.currentKeyIndex.section + 1];
+
+        if (self.currentKeyIndexPath.row >= currentLine.count) {
+            self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:self.currentKeyIndexPath.section + 1];
         }
-        if (self.currentKeyIndex.section >= self.tonesArray.count) {
-            self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+        if (self.currentKeyIndexPath.section >= self.tonesArray.count) {
+            self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         }
+         */
     } else {
-//        [sender setEnabled:YES];
+        [sender setSmart:NO];
         if ( self.toneStyle == 2) {
             [PXAlertView showAlertWithTitle:@"需要连接蓝牙键盘" message:@"接入蓝牙键盘，然后按照内容键入"];
             return;
@@ -874,11 +905,13 @@
         [self playTone:toneName];
         self.playCount++;
     }
-    NSLog(@"%d - %d", self.toneCount.integerValue, self.playCount);
+    NSLog(@"%ld - %ld", self.toneCount.integerValue, self.playCount);
 
     if (self.playCount >= self.toneCount.integerValue) {
-        if (self.toneStyle == 3 || sender.tag >= self.toneCount.integerValue) {
-            if ( (self.toneStyle == 3 && (! self.isLastTone)) || self.toneStyle != 3) {
+        if ((self.smartMode && self.prevButton.tag >= self.toneCount.integerValue)
+            || ((!self.smartMode) && sender.tag >= self.toneCount.integerValue)) {
+
+            if ( (self.smartMode && (! self.isLastTone)) || (!self.smartMode)) {
                 [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
                 //            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
                 self.playCount = 0;
@@ -887,22 +920,24 @@
                     [self.songInfo saveInBackground];
                 }
             }
-            if (self.toneStyle == 3) {
-                [PXAlertView showAlertWithTitle:Local(@"演奏完成")
-                                        message:Local(@"再来一遍？")
+            if (self.smartMode) {
+                [PXAlertView showAlertWithTitle:Local(@"Perfect!")
+                                        message:Local(@"Play again?")
                                     cancelTitle:Local(@"Cancel")
                                      otherTitle:Local(@"OK")
                                      completion:^(BOOL cancelled) {
                                          if ( ! cancelled) {
                                              self.isLastTone = NO;
                                              self.playCount = 0;
-                                             self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+                                             self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                                             self.currentKeyIndex = 0;
                                          } else {
                                              self.isLastTone = YES;
                                              NSInteger section = self.tonesArray.count -1;
                                              NSInteger row = [self.tonesArray[section] count] -1 ;
                                              self.playCount = self.toneCount.integerValue - 1;
-                                             self.currentKeyIndex = [NSIndexPath indexPathForRow:row inSection:section];
+                                             self.currentKeyIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                                             self.currentKeyIndex = self.toneCount.integerValue - 1;
                                          }
                                      }];
             }
@@ -1111,7 +1146,8 @@
     self.toneStyle = segmentedControl.selectedSegmentIndex;
 
     self.playCount = 0;
-    self.currentKeyIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    self.currentKeyIndex = 0;
 
     for (id item in self.scrollView.subviews) {
         if ([[item class] isSubclassOfClass:[MFButton class]]) {
@@ -1121,8 +1157,8 @@
 }
 
 - (void)toggleSingleTapMode {
-    self.singleTapMode = ! self.singleTapMode;
-    if (self.singleTapMode) {
+    self.smartMode= ! self.smartMode;
+    if (self.smartMode) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Manually")
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
@@ -1133,7 +1169,7 @@
                                                                                  target:self
                                                                                  action:@selector(toggleSingleTapMode)];
     }
-    self.scrollView.isSingleTapMode = self.singleTapMode;
+    self.scrollView.smartMode = self.smartMode;
 }
 
 @end
