@@ -573,7 +573,7 @@
     if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     } else {
-        NSString *filePath = [NSString stringWithFormat:@"%@_%@.k2k.txt", self.songInfo[@"name"], self.songInfo.objectId];
+        NSString *filePath = self.songInfo[@"path"];
         path = [delegate.localDir stringByAppendingPathComponent:filePath];
     }
     NSError *error;
