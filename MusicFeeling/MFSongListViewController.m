@@ -287,20 +287,11 @@
             if (obj2[@"mtime"] == NULL) {
                 return NSOrderedDescending;
             }
-            NSLog(@"***\n %@ %@ %@", obj1[@"mtime"], [obj1[@"mtime"] className], obj1[@"name"]);
-            NSLog(@"%@ %@ %@", obj2[@"mtime"], [obj2[@"mtime"] className], obj2[@"name"]);
             return [obj2[@"mtime"] compare:obj1[@"mtime"]];
         }];
     } else {
         self.mViewModel.indexPathDataList[1] = [self.mViewModel.indexPathDataList[1] sortedArrayUsingComparator:^NSComparisonResult(AVObject *obj1, AVObject *obj2) {
             return [obj2[@"finishCount"] compare:obj1[@"finishCount"]];
-            /*
-            if ([obj1[@"finishCount"] integerValue] > [obj2[@"finishCount"] integerValue]) {
-                return NSOrderedAscending;
-            } else {
-                return NSOrderedDescending;
-            }
-             */
         }];
     }
     [self.mTableView reloadData];
