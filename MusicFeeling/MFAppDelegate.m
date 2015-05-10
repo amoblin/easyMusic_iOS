@@ -91,6 +91,7 @@
     MFSongListViewController *controller = [[MFSongListViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     navigationController.navigationBar.translucent = YES;
+    
     self.window.rootViewController = navigationController;
 
     [UMessage startWithAppkey:UMENG_KEY launchOptions:launchOptions];

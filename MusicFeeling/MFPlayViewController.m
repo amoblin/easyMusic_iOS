@@ -136,6 +136,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     if (self.isNew) {
         self.UMPageName = @"创作曲目";
         self.keyboardViewHeight = @152;
@@ -573,7 +574,12 @@
     if ([self.songInfo[@"isComposed"] boolValue]) {
         path = [delegate.composedDir stringByAppendingPathComponent:self.songInfo[@"path"]];
     } else {
-        NSString *filePath = self.songInfo[@"path"];
+        NSString *filePath;
+        if (self.songInfo.objectId) {
+            filePath = [NSString stringWithFormat:@"%@_%@.k2k.txt", self.songInfo[@"name"], self.songInfo.objectId];
+        } else {
+            filePath = self.songInfo[@"path"];
+        }
         path = [delegate.localDir stringByAppendingPathComponent:filePath];
     }
     NSError *error;
@@ -928,7 +934,7 @@
                                         message:Local(@"Play again?")
                                     cancelTitle:Local(@"Cancel")
                                      otherTitle:Local(@"OK")
-                                     completion:^(BOOL cancelled) {
+                                     completion:^(BOOL cancelled, NSInteger buttonIndex) {
                                          if ( ! cancelled) {
                                              self.isLastTone = NO;
                                              self.playCount = 0;

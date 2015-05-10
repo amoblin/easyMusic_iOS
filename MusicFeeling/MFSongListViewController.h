@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "MFBaseViewController.h"
 #import "MFArrayDataSource.h"
+#import "WATableViewController.h"
 
-@interface MFSongListViewController : MFBaseViewController<UITableViewDelegate>
+@interface MFSongListViewController : WATableViewController
 
-@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *composedSongs;
-@property (strong, nonatomic) MFArrayDataSource *arrayDataSource;
+//@property (strong, nonatomic) MFArrayDataSource *arrayDataSource;
 @end

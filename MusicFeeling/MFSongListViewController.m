@@ -48,6 +48,7 @@
     return _composedSongs;
 }
 
+/*
 - (MFArrayDataSource *)arrayDataSource {
     if (_arrayDataSource == nil) {
         NSArray *dataArray;
@@ -67,13 +68,10 @@
             [song setObject:file forKey:@"path"];
             [song setObject:[attributes fileModificationDate] forKey:@"mtime"];
             [array addObject:song];
-             /*
-  @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
-                               @"path": file,
-                               @"mtime": [attributes fileModificationDate],
-                               @"dateType": @1}];
-              */
-        }
+//  @{@"name": [[file stringByDeletingPathExtension] stringByDeletingPathExtension],
+//                               @"path": file,
+//                               @"mtime": [attributes fileModificationDate],
+//                               @"dateType": @1}];
         [array sortUsingComparator:^NSComparisonResult(id a, id b) {
             return [b[@"mtime"] compare:a[@"mtime"]];
         }];
@@ -81,74 +79,16 @@
         dataArray = @[self.composedSongs, array];
         cellId = @"cellId";
         block = ^(MFSongListTableViewCell *cell, AVObject *item, NSIndexPath *indexPath) {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            if (indexPath.section == 0) {
-                [cell showCount:NO];
-            } else {
-                [cell showCount:YES];
-            }
-            [cell configWithItem:item];
-            /*
-            if (item[@"mtime"] != nil) {
-                cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
-                if ([[item[@"mtime"] class] isSubclassOfClass:[NSDate class]]) {
-//                    NSDateFormatter *gmtFormatter=[[NSDateFormatter alloc] init];
-//                    [gmtFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss VVVV"];
-//                    NSDate *d = [gmtFormatter dateFromString:item[@"mtime"]];
-                    cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
-                } else {
-                    NSDateFormatter *date=[[NSDateFormatter alloc] init];
-                    [date setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-                    NSDate *d = [date dateFromString:item[@"mtime"]];
-                    cell.detailTextLabel.text = [self humanableInfoFromDate:d];
-                }
-            }
-             */
         };
         _arrayDataSource = [[MFArrayDataSource alloc] initWithItems:dataArray cellIdentifier:cellId configureCellBlock:block];
-	    _arrayDataSource.sectionHeaderArray = @[@"我创作的", @"大家创作的"];
-        _arrayDataSource.editCellBlock = ^(AVObject *item, NSIndexPath *indexPath) {
-            MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
-            if (indexPath.section == 0) {
-                [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"path"]] error:nil];
-            } else {
-                [[item objectForKey:@"contentFile"] deleteInBackground];
-                [item deleteInBackground];
-            }
-        };
     }
     return _arrayDataSource;
 }
-
-- (UITableView *)tableView {
-    if (_tableView == nil) {
-        _tableView = [[UITableView alloc] init];
-        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
-
-        [self.view addSubview:_tableView];
-        [_tableView addSubview:self.refreshControl];
-    }
-    return _tableView;
-}
-
-- (UIRefreshControl *)refreshControl {
-    if (_refreshControl == nil) {
-        _refreshControl = [[UIRefreshControl alloc] init];
-//        _refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
-        [_refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
-    }
-    return _refreshControl;
-}
+*/
 
 - (void)viewWillLayoutSubviews {
-    WS(ws);
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
-        make.left.equalTo(ws.view);
-        make.top.equalTo(ws.view);
-        make.bottom.equalTo(ws.view);
-    }];
     [super viewWillLayoutSubviews];
+    [self layoutTableView];
 }
 
 #pragma mark - UITableViewDelegate
@@ -163,7 +103,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MFPlayViewController *vc = [[MFPlayViewController alloc] init];
-    vc.songInfo = [self.arrayDataSource itemAtIndexPath:indexPath];
+    vc.songInfo = [self.mViewModel itemForRowAtIndexPath:indexPath];
     vc.title = vc.songInfo[@"name"];
     if (indexPath.section == 0) {
         vc.songInfo[@"isComposed"] = @YES;
@@ -176,7 +116,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)getContents {
+- (void)refreshData {
     /*
     //[SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -215,13 +155,11 @@
         }
         [SVProgressHUD dismiss];
         [self.refreshControl endRefreshing];
-        self.arrayDataSource.items = @[self.composedSongs, objects];
-        [self.tableView reloadData];
+//        self.arrayDataSource.items = @[self.composedSongs, objects];
+        self.mViewModel = [[WAViewModel alloc] initWithArray:@[self.composedSongs, objects]];
+        self.mViewModel.sectionTitleList = [NSMutableArray arrayWithArray:@[@"我创作的", @"大家创作的"]];
+        [self.mTableView reloadData];
     }];
-}
-
-- (void)pullToRefresh {
-    [self getContents];
 }
 
 - (void)addButtonPressed:(id)sender {
@@ -235,9 +173,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MFPlayViewController *vc = segue.destinationViewController;
     if ([segue.identifier isEqualToString:@"songDetailSegue"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        vc.songInfo = [self.arrayDataSource itemAtIndexPath:indexPath];
-        [vc setEditableTitle:[[[self.arrayDataSource itemAtIndexPath:indexPath][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
+        NSIndexPath *indexPath = [self.mTableView indexPathForSelectedRow];
+        vc.songInfo = [self.mViewModel itemForRowAtIndexPath:indexPath];
+        [vc setEditableTitle:[[[self.mViewModel itemForRowAtIndexPath:indexPath][@"name"] stringByDeletingPathExtension] stringByDeletingPathExtension]];
     } else {
         vc.isNew = YES;
     }
@@ -255,7 +193,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.UMPageName = NSLocalizedString(@"Songs", nil);
+//    self.UMPageName = NSLocalizedString(@"Songs", nil);
 
     self.title = NSLocalizedString(@"Songs", nil);
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil)
@@ -264,23 +202,73 @@
                                                                             action:@selector(leftBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
 
-    self.tableView.dataSource = self.arrayDataSource;
-    self.tableView.delegate = self;
-    [self.tableView registerClass:[MFSongListTableViewCell class] forCellReuseIdentifier:@"cellId"];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    /*
-    self.arrayDataSource.items = @[self.composedSongs, self.arrayDataSource.items[1]];
-    [self.tableView reloadData];
-     */
-    [self pullToRefresh];
+//    self.mTableView.dataSource = self.arrayDataSource;
+    [self.mTableView registerClass:[MFSongListTableViewCell class] forCellReuseIdentifier:@"cellId"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFSongListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId" forIndexPath:indexPath];
+    NSDictionary *item = [self.mViewModel itemForRowAtIndexPath:indexPath];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%d-%d", indexPath.section+1, indexPath.row+1];
+//    [cell.mImageView setImageWithURL:[NSURL URLWithString:item[@"img_url"]] placeholderImage:nil];
+    
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    if (indexPath.section == 0) {
+        [cell showCount:NO];
+    } else {
+        [cell showCount:YES];
+    }
+    [cell configWithItem:item];
+    //                cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
+    //                if ([[item[@"mtime"] class] isSubclassOfClass:[NSDate class]]) {
+    ////                    NSDateFormatter *gmtFormatter=[[NSDateFormatter alloc] init];
+    ////                    [gmtFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss VVVV"];
+    ////                    NSDate *d = [gmtFormatter dateFromString:item[@"mtime"]];
+    //                    cell.detailTextLabel.text = [self humanableInfoFromDate:item[@"mtime"]];
+    //                } else {
+    //                    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    //                    [date setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+    //                    NSDate *d = [date dateFromString:item[@"mtime"]];
+    //                    cell.detailTextLabel.text = [self humanableInfoFromDate:d];
+    //                }
+    //            }
+    
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return YES;
+    }
+    NSString *author = [AVUser currentUser].username;
+    if ([[[self.mViewModel itemForRowAtIndexPath:indexPath] objectForKey:@"author"] isEqualToString:author]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    id item = [self.mViewModel itemForRowAtIndexPath:indexPath];
+    
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (indexPath.section == 0) {
+        [[NSFileManager defaultManager] removeItemAtPath:[delegate.composedDir stringByAppendingPathComponent:item[@"path"]] error:nil];
+    } else {
+        [[item objectForKey:@"contentFile"] deleteInBackground];
+        [item deleteInBackground];
+    }
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.mViewModel removeItemAtIndexPath:indexPath];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 @end
