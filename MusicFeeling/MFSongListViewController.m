@@ -117,8 +117,8 @@
 }
 
 - (void)refreshData {
+    [SVProgressHUD show];
     /*
-    //[SVProgressHUD show];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    NSString *url = @"http://k2k.marboo.biz/api/songs";
     NSString *url = @"http://apion.github.io/k2k/songs.json";
@@ -155,7 +155,6 @@
         }
         [SVProgressHUD dismiss];
         [self.refreshControl endRefreshing];
-//        self.arrayDataSource.items = @[self.composedSongs, objects];
         self.mViewModel = [[WAViewModel alloc] initWithArray:@[self.composedSongs, objects]];
         self.mViewModel.sectionTitleList = [NSMutableArray arrayWithArray:@[@"我创作的", @"大家创作的"]];
         [self.mTableView reloadData];
@@ -195,7 +194,15 @@
     [super viewDidLoad];
 //    self.UMPageName = NSLocalizedString(@"Songs", nil);
 
-    self.title = NSLocalizedString(@"Songs", nil);
+//    self.title = NSLocalizedString(@"Songs", nil);
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"最新", @"最热"]];
+    segmentedControl.selectedSegmentIndex = 0;
+    CGRect frame = segmentedControl.frame;
+    frame.size.width = 140;
+    segmentedControl.frame = frame;
+    [segmentedControl addTarget:self action:@selector(segmentedControlValueChangedAction:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segmentedControl;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil)
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
@@ -271,4 +278,32 @@
     }
 }
 
+- (void)segmentedControlValueChangedAction:(UISegmentedControl *)segmentedControl {
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        self.mViewModel.indexPathDataList[1] = [self.mViewModel.indexPathDataList[1] sortedArrayUsingComparator:^NSComparisonResult(AVObject *obj1, AVObject *obj2) {
+            if (obj1[@"mtime"] == NULL) {
+                return NSOrderedAscending;
+            }
+            if (obj2[@"mtime"] == NULL) {
+                return NSOrderedDescending;
+            }
+            NSLog(@"***\n %@ %@ %@", obj1[@"mtime"], [obj1[@"mtime"] className], obj1[@"name"]);
+            NSLog(@"%@ %@ %@", obj2[@"mtime"], [obj2[@"mtime"] className], obj2[@"name"]);
+            return [obj2[@"mtime"] compare:obj1[@"mtime"]];
+        }];
+    } else {
+        self.mViewModel.indexPathDataList[1] = [self.mViewModel.indexPathDataList[1] sortedArrayUsingComparator:^NSComparisonResult(AVObject *obj1, AVObject *obj2) {
+            return [obj2[@"finishCount"] compare:obj1[@"finishCount"]];
+            /*
+            if ([obj1[@"finishCount"] integerValue] > [obj2[@"finishCount"] integerValue]) {
+                return NSOrderedAscending;
+            } else {
+                return NSOrderedDescending;
+            }
+             */
+        }];
+    }
+    [self.mTableView reloadData];
+    [self.mTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:YES scrollPosition:UITableViewScrollPositionTop];
+}
 @end

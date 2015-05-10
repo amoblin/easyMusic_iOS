@@ -83,4 +83,9 @@
     [self.pointerArray[indexPath.section] removeObjectAtIndex:indexPath.row];
 }
 
+- (void)sortByBlock:(void (^)(id, id))block {
+    [self.sectionArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return 0;
+    }];
+}
 @end

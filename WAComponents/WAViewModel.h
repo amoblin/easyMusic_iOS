@@ -24,6 +24,8 @@
 
 - (id)itemForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)sortByBlock:(void (^)(id a, id b))block;
+
 - (NSDictionary *)itemForRowAtSection:(NSInteger)section;
 
 - (NSString *)titleForSection:(NSInteger)section;
