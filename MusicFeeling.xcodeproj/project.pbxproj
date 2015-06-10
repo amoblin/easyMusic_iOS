@@ -124,6 +124,7 @@
 		DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CCF18D3E623009A825E /* MusicFeelingTests.m */; };
 		DA6A8673191875890087E640 /* Do Re Mi.k2k.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */; };
 		DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */; };
+		DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA795F741B28EDE1000552A4 /* LaunchScreen.xib */; };
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
 		DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9C809519526A0C0029EF68 /* MFKeyboardView.m */; };
 		DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */; };
@@ -295,6 +296,7 @@
 		DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Do Re Mi.k2k.txt"; sourceTree = "<group>"; };
 		DA6A87EF191F011C0087E640 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		DA795F741B28EDE1000552A4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
 		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
 		DA9C809419526A0C0029EF68 /* MFKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFKeyboardView.h; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 		DA527CA818D3E623009A825E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DA795F741B28EDE1000552A4 /* LaunchScreen.xib */,
 				DA527CA918D3E623009A825E /* MusicFeeling-Info.plist */,
 				DA527CAA18D3E623009A825E /* InfoPlist.strings */,
 				DA527CAD18D3E623009A825E /* main.m */,
@@ -837,6 +840,7 @@
 				DA2EF1D318EFB89800DC1617 /* c3m.mp3 in Resources */,
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
+				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
 				DA2EF20918EFB89800DC1617 /* g5m.mp3 in Resources */,
 				DA2EF1BA18EFB89800DC1617 /* a2.mp3 in Resources */,
