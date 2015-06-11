@@ -37,5 +37,6 @@
 - (NSDictionary *)itemFiltByKey:(NSString *)key andValue:(NSString *)value;
 
 - (void)removeObjectFromPointerArrayAtIndexPath:(NSIndexPath *)indexPath;
+- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

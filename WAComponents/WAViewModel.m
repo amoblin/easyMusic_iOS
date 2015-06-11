@@ -83,4 +83,8 @@
     [self.pointerArray[indexPath.section] removeObjectAtIndex:indexPath.row];
 }
 
+- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self removeObjectFromPointerArrayAtIndexPath:indexPath];
+}
+
 @end

@@ -11,7 +11,6 @@
 #import "WATableViewCell.h"
 #import "WAEditViewController.h"
 #import "WAProfileTableViewCell.h"
-#import <RESideMenu.h>
 #import "WANetwork.h"
 #import <AFNetworking.h>
 
@@ -54,7 +53,7 @@
                                                                             target:self
                                                                             action:@selector(leftMenuPressed:)];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = MAIN_COLOR;
+//    self.navigationController.navigationBar.barTintColor = MAIN_COLOR;
 }
 
 - (void)refreshData {
@@ -101,10 +100,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)leftMenuPressed:(UIButton *)sender {
-    [self.sideMenuViewController presentLeftMenuViewController];
 }
 
 - (void)rightButtonPressed:(UIButton *)sender {
