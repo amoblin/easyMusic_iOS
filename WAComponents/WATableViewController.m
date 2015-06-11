@@ -1,6 +1,6 @@
 //
 //  WATableViewController.m
-//  ShuDongPo
+//  marboo.io
 //
 //  Created by amoblin on 15/3/11.
 //  Copyright (c) 2015年 amoblin. All rights reserved.
@@ -22,31 +22,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [self.mTableView addSubview:refreshControl];
-    [refreshControl addTarget:self action:@selector(refreshTableView:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.mTableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshTableView:) forControlEvents:UIControlEventValueChanged];
     
     [self refreshData];
 }
 
 - (void)refreshTableView:(UIRefreshControl *)refreshControl {
-    [refreshControl endRefreshing];
     [self refreshData];
 }
 
 - (void)refreshData {
+    [self.refreshControl endRefreshing];
+}
+
+- (UITableView *)mTableView {
+    if (_mTableView == nil) {
+        _mTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    }
+    return _mTableView;
 }
 
 - (void)loadView {
     [super loadView];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.mTableView = [UITableView new];
     self.mTableView.dataSource = self;
     self.mTableView.delegate = self;
+    self.mTableView.tableFooterView = [UIView new];
     [self.view addSubview:self.mTableView];
-    
+    [self.mTableView registerClass:[WATableViewCell class] forCellReuseIdentifier:self.cellId];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,13 +63,14 @@
     }
 }
 
-- (void)layoutTableView {
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
     WS(ws);
     [self.mTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view);
-        make.left.equalTo(ws.view);
-        make.right.equalTo(ws.view);
-        make.bottom.equalTo(ws.view).with.offset(0);
+        make.top.equalTo(ws.view).with.priorityLow();
+        make.left.equalTo(ws.view).with.priorityLow();
+        make.right.equalTo(ws.view).with.priorityLow();
+        make.bottom.equalTo(ws.view).with.offset(0).with.priorityLow();
     }];
 }
 
@@ -91,19 +99,36 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.mViewModel titleForSection:section];
+    NSString *title = [self.mViewModel titleForSection:section];
+    if (title == nil) {
+        return [NSString stringWithFormat:@"Section %d", section];
+    }
+    return title;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WATableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId" forIndexPath:indexPath];
+    WATableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellId forIndexPath:indexPath];
     NSDictionary *item = [self.mViewModel itemForRowAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%d-%d", indexPath.section+1, indexPath.row+1];
-//    [cell.mImageView setImageWithURL:[NSURL URLWithString:item[@"img_url"]] placeholderImage:nil];
+    [cell config:item atIndexPath:(NSIndexPath *)indexPath];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40;
+    return self.defaultHeight;
+}
+
+- (CGFloat)defaultHeight {
+    if (_defaultHeight == 0) {
+        _defaultHeight = 40;
+    }
+    return _defaultHeight;
+}
+
+- (NSString *)cellId {
+    if (_cellId == nil) {
+        _cellId = @"cellId";
+    }
+    return _cellId;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,10 +141,9 @@
     NSString *keyPath = conf[@"key_path"];
     [[WANetwork sharedInstace] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
 
-    [SVProgressHUD show];
     NSDictionary *payload =  @{@"os": @"ios"};
     [[WANetwork sharedInstace] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
-        [SVProgressHUD dismiss];
+        [self.refreshControl endRefreshing];
         //        self.userList = result[@"result"];
         NSArray *data = [result valueForKeyPath:keyPath];
         self.mViewModel = [[WAViewModel alloc] initWithArray:@[data]];
@@ -132,15 +156,18 @@
     }];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [UIView new];
+}
+
 - (void)fetchDataWithConfig:(NSDictionary *)conf andCallback:(void (^)(id))callback {
     NSURL *url = [NSURL URLWithString:conf[@"url"]];
     NSString *keyPath = conf[@"key_path"];
     [[WANetwork sharedInstace] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
 
-    [SVProgressHUD show];
     NSDictionary *payload =  @{@"os": @"ios"};
     [[WANetwork sharedInstace] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
-        [SVProgressHUD dismiss];
+        [self.refreshControl endRefreshing];
         callback([result valueForKeyPath:keyPath]);
     } failure:^(NSError *error) {
     }];

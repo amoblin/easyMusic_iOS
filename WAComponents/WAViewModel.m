@@ -1,6 +1,6 @@
 //
 //  WAViewModel.m
-//  ShuDongPo
+//  marboo.io
 //
 //  Created by amoblin on 15/3/11.
 //  Copyright (c) 2015年 amoblin. All rights reserved.
@@ -24,8 +24,8 @@
     return self;
 }
 
-- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.sectionArray[indexPath.section] removeObjectAtIndex:indexPath.row];
+- (void)addArray:(NSArray *)info atSection:(NSInteger)section {
+    [self.indexPathDataList[section] addObjectsFromArray:info];
 }
 
 - (NSArray *)titleArray {
@@ -83,9 +83,4 @@
     [self.pointerArray[indexPath.section] removeObjectAtIndex:indexPath.row];
 }
 
-- (void)sortByBlock:(void (^)(id, id))block {
-    [self.sectionArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return 0;
-    }];
-}
 @end

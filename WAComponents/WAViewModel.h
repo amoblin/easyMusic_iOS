@@ -1,6 +1,6 @@
 //
 //  WAViewModel.h
-//  ShuDongPo
+//  marboo.io
 //
 //  Created by amoblin on 15/3/11.
 //  Copyright (c) 2015年 amoblin. All rights reserved.
@@ -22,9 +22,9 @@
 
 - (id)initWithArray:(NSArray *)info;
 
-- (id)itemForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)addArray:(NSArray *)info atSection:(NSInteger)section;
 
-- (void)sortByBlock:(void (^)(id a, id b))block;
+- (id)itemForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (NSDictionary *)itemForRowAtSection:(NSInteger)section;
 
@@ -38,5 +38,4 @@
 
 - (void)removeObjectFromPointerArrayAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 @end

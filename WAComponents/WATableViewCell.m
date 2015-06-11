@@ -1,6 +1,6 @@
 //
 //  WATableViewCell.m
-//  ShuDongPo
+//  marboo.io
 //
 //  Created by amoblin on 15/3/12.
 //  Copyright (c) 2015年 amoblin. All rights reserved.
@@ -19,12 +19,28 @@
     // Value1: Left Right
     // Value1: small Left Right
     // Subtitle: Top Bottom
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.mImageView = [UIImageView new];
         [self waAddSubview:self.mImageView];
     }
     return self;
+}
+
+- (UILabel *)nameLabel {
+    if (_nameLabel == nil) {
+        _nameLabel = [UILabel new];
+        [self waAddSubview:_nameLabel];
+    }
+    return _nameLabel;
+}
+
+- (UILabel *)introLabel {
+    if (_introLabel == nil) {
+        _introLabel = [UILabel new];
+        [self waAddSubview:_introLabel];
+    }
+    return _introLabel;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -43,10 +59,14 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    WS(ws);
-    [self.mImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(ws);
-        make.centerY.equalTo(ws.mas_centerY);
-    }];
 }
+
+- (void)config:(NSDictionary *)item atIndexPath:(NSIndexPath *)indexPath {
+    [self.mImageView setImageWithURL:[NSURL URLWithString:item[@"img_url"]] placeholderImage:nil];
+}
+
+- (void)testWithIndexPath:(NSIndexPath *)indexPath {
+    self.textLabel.text = [NSString stringWithFormat:@"%ld-%ld", indexPath.section+1, indexPath.row+1];
+}
+
 @end

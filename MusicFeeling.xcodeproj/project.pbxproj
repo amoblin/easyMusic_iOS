@@ -126,6 +126,25 @@
 		DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */; };
 		DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA795F741B28EDE1000552A4 /* LaunchScreen.xib */; };
 		DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA865C3318DD168D00B520FF /* MFSettingViewController.m */; };
+		DA991FC31B29D0EF0034418A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FAD1B29D0EF0034418A /* Default-568h@2x.png */; };
+		DA991FC41B29D0EF0034418A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FAE1B29D0EF0034418A /* Default@2x.png */; };
+		DA991FC51B29D0EF0034418A /* WAEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB01B29D0EF0034418A /* WAEditViewController.m */; };
+		DA991FC61B29D0EF0034418A /* WAHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB21B29D0EF0034418A /* WAHeadView.m */; };
+		DA991FC71B29D0EF0034418A /* WANetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB41B29D0EF0034418A /* WANetwork.m */; };
+		DA991FC81B29D0EF0034418A /* WAProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB61B29D0EF0034418A /* WAProfileTableViewCell.m */; };
+		DA991FC91B29D0EF0034418A /* WAProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB81B29D0EF0034418A /* WAProfileViewController.m */; };
+		DA991FCA1B29D0EF0034418A /* WASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FBA1B29D0EF0034418A /* WASettingsViewController.m */; };
+		DA991FCB1B29D0EF0034418A /* WATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FBC1B29D0EF0034418A /* WATableViewCell.m */; };
+		DA991FCC1B29D0EF0034418A /* WATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FBE1B29D0EF0034418A /* WATableViewController.m */; };
+		DA991FCD1B29D0EF0034418A /* WAViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FC01B29D0EF0034418A /* WAViewModel.m */; };
+		DA991FD91B29D1720034418A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA991FCE1B29D1720034418A /* Localizable.strings */; };
+		DA991FDA1B29D1720034418A /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FCF1B29D1720034418A /* password@2x.png */; };
+		DA991FDB1B29D1720034418A /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FD01B29D1720034418A /* phone@2x.png */; };
+		DA991FDC1B29D1720034418A /* validation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FD11B29D1720034418A /* validation@2x.png */; };
+		DA991FDD1B29D1720034418A /* WAAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FD31B29D1720034418A /* WAAuthViewController.m */; };
+		DA991FDE1B29D1720034418A /* WAAuthViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FD51B29D1720034418A /* WAAuthViewModel.m */; };
+		DA991FDF1B29D1720034418A /* WATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FD71B29D1720034418A /* WATextField.m */; };
+		DA991FE01B29D1720034418A /* wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FD81B29D1720034418A /* wechat@2x.png */; };
 		DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9C809519526A0C0029EF68 /* MFKeyboardView.m */; };
 		DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA1CAD0190B24F20046AA42 /* MFArrayDataSource.m */; };
 		DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262A81953A88F002B66CA /* NSString+K2K.m */; };
@@ -299,6 +318,37 @@
 		DA795F741B28EDE1000552A4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DA865C3218DD168D00B520FF /* MFSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSettingViewController.h; sourceTree = "<group>"; };
 		DA865C3318DD168D00B520FF /* MFSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSettingViewController.m; sourceTree = "<group>"; };
+		DA991FAD1B29D0EF0034418A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DA991FAE1B29D0EF0034418A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DA991FAF1B29D0EF0034418A /* WAEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAEditViewController.h; sourceTree = "<group>"; };
+		DA991FB01B29D0EF0034418A /* WAEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAEditViewController.m; sourceTree = "<group>"; };
+		DA991FB11B29D0EF0034418A /* WAHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHeadView.h; sourceTree = "<group>"; };
+		DA991FB21B29D0EF0034418A /* WAHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHeadView.m; sourceTree = "<group>"; };
+		DA991FB31B29D0EF0034418A /* WANetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WANetwork.h; sourceTree = "<group>"; };
+		DA991FB41B29D0EF0034418A /* WANetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WANetwork.m; sourceTree = "<group>"; };
+		DA991FB51B29D0EF0034418A /* WAProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileTableViewCell.h; sourceTree = "<group>"; };
+		DA991FB61B29D0EF0034418A /* WAProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileTableViewCell.m; sourceTree = "<group>"; };
+		DA991FB71B29D0EF0034418A /* WAProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileViewController.h; sourceTree = "<group>"; };
+		DA991FB81B29D0EF0034418A /* WAProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileViewController.m; sourceTree = "<group>"; };
+		DA991FB91B29D0EF0034418A /* WASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASettingsViewController.h; sourceTree = "<group>"; };
+		DA991FBA1B29D0EF0034418A /* WASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASettingsViewController.m; sourceTree = "<group>"; };
+		DA991FBB1B29D0EF0034418A /* WATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATableViewCell.h; sourceTree = "<group>"; };
+		DA991FBC1B29D0EF0034418A /* WATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATableViewCell.m; sourceTree = "<group>"; };
+		DA991FBD1B29D0EF0034418A /* WATableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATableViewController.h; sourceTree = "<group>"; };
+		DA991FBE1B29D0EF0034418A /* WATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATableViewController.m; sourceTree = "<group>"; };
+		DA991FBF1B29D0EF0034418A /* WAViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewModel.h; sourceTree = "<group>"; };
+		DA991FC01B29D0EF0034418A /* WAViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewModel.m; sourceTree = "<group>"; };
+		DA991FCE1B29D1720034418A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		DA991FCF1B29D1720034418A /* password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password@2x.png"; sourceTree = "<group>"; };
+		DA991FD01B29D1720034418A /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
+		DA991FD11B29D1720034418A /* validation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "validation@2x.png"; sourceTree = "<group>"; };
+		DA991FD21B29D1720034418A /* WAAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAuthViewController.h; sourceTree = "<group>"; };
+		DA991FD31B29D1720034418A /* WAAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAuthViewController.m; sourceTree = "<group>"; };
+		DA991FD41B29D1720034418A /* WAAuthViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAuthViewModel.h; sourceTree = "<group>"; };
+		DA991FD51B29D1720034418A /* WAAuthViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAuthViewModel.m; sourceTree = "<group>"; };
+		DA991FD61B29D1720034418A /* WATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WATextField.h; sourceTree = "<group>"; };
+		DA991FD71B29D1720034418A /* WATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATextField.m; sourceTree = "<group>"; };
+		DA991FD81B29D1720034418A /* wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@2x.png"; sourceTree = "<group>"; };
 		DA9C809419526A0C0029EF68 /* MFKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFKeyboardView.h; sourceTree = "<group>"; };
 		DA9C809519526A0C0029EF68 /* MFKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyboardView.m; sourceTree = "<group>"; };
 		DAA1CACF190B24F20046AA42 /* MFArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFArrayDataSource.h; sourceTree = "<group>"; };
@@ -636,6 +686,37 @@
 		DAB8A16B1AFF0EF0008CE3ED /* WAComponents */ = {
 			isa = PBXGroup;
 			children = (
+				DA991FCE1B29D1720034418A /* Localizable.strings */,
+				DA991FCF1B29D1720034418A /* password@2x.png */,
+				DA991FD01B29D1720034418A /* phone@2x.png */,
+				DA991FD11B29D1720034418A /* validation@2x.png */,
+				DA991FD21B29D1720034418A /* WAAuthViewController.h */,
+				DA991FD31B29D1720034418A /* WAAuthViewController.m */,
+				DA991FD41B29D1720034418A /* WAAuthViewModel.h */,
+				DA991FD51B29D1720034418A /* WAAuthViewModel.m */,
+				DA991FD61B29D1720034418A /* WATextField.h */,
+				DA991FD71B29D1720034418A /* WATextField.m */,
+				DA991FD81B29D1720034418A /* wechat@2x.png */,
+				DA991FAD1B29D0EF0034418A /* Default-568h@2x.png */,
+				DA991FAE1B29D0EF0034418A /* Default@2x.png */,
+				DA991FAF1B29D0EF0034418A /* WAEditViewController.h */,
+				DA991FB01B29D0EF0034418A /* WAEditViewController.m */,
+				DA991FB11B29D0EF0034418A /* WAHeadView.h */,
+				DA991FB21B29D0EF0034418A /* WAHeadView.m */,
+				DA991FB31B29D0EF0034418A /* WANetwork.h */,
+				DA991FB41B29D0EF0034418A /* WANetwork.m */,
+				DA991FB51B29D0EF0034418A /* WAProfileTableViewCell.h */,
+				DA991FB61B29D0EF0034418A /* WAProfileTableViewCell.m */,
+				DA991FB71B29D0EF0034418A /* WAProfileViewController.h */,
+				DA991FB81B29D0EF0034418A /* WAProfileViewController.m */,
+				DA991FB91B29D0EF0034418A /* WASettingsViewController.h */,
+				DA991FBA1B29D0EF0034418A /* WASettingsViewController.m */,
+				DA991FBB1B29D0EF0034418A /* WATableViewCell.h */,
+				DA991FBC1B29D0EF0034418A /* WATableViewCell.m */,
+				DA991FBD1B29D0EF0034418A /* WATableViewController.h */,
+				DA991FBE1B29D0EF0034418A /* WATableViewController.m */,
+				DA991FBF1B29D0EF0034418A /* WAViewModel.h */,
+				DA991FC01B29D0EF0034418A /* WAViewModel.m */,
 				DAB8A16C1AFF0EF0008CE3ED /* WANetwork.h */,
 				DAB8A16D1AFF0EF0008CE3ED /* WANetwork.m */,
 				DAB8A16E1AFF0EF0008CE3ED /* WATableViewCell.h */,
@@ -755,6 +836,7 @@
 				DA2EF1F718EFB89800DC1617 /* f3m.mp3 in Resources */,
 				DA2EF20518EFB89800DC1617 /* g3m.mp3 in Resources */,
 				DA2EF1D718EFB89800DC1617 /* c5m.mp3 in Resources */,
+				DA991FDA1B29D1720034418A /* password@2x.png in Resources */,
 				DA2EF1E818EFB89800DC1617 /* d6m.mp3 in Resources */,
 				DA2EF1DE18EFB89800DC1617 /* d1m.mp3 in Resources */,
 				DA2EF1C418EFB89800DC1617 /* a7.mp3 in Resources */,
@@ -769,6 +851,7 @@
 				DA2EF1C718EFB89800DC1617 /* b1.mp3 in Resources */,
 				DA6A8673191875890087E640 /* Do Re Mi.k2k.txt in Resources */,
 				DA2EF1F318EFB89800DC1617 /* f1m.mp3 in Resources */,
+				DA991FE01B29D1720034418A /* wechat@2x.png in Resources */,
 				DA2EF1D218EFB89800DC1617 /* c3.mp3 in Resources */,
 				DA2EF1EC18EFB89800DC1617 /* e2.mp3 in Resources */,
 				DA2EF1D918EFB89800DC1617 /* c6m.mp3 in Resources */,
@@ -813,15 +896,18 @@
 				DA2EF20C18EFB89800DC1617 /* g7.mp3 in Resources */,
 				DA2EF1B918EFB89800DC1617 /* a1m.mp3 in Resources */,
 				DADD012B1956672F0073C8B7 /* delete@2x.png in Resources */,
+				DA991FC31B29D0EF0034418A /* Default-568h@2x.png in Resources */,
 				DA2EF1F218EFB89800DC1617 /* f1.mp3 in Resources */,
 				DA2EF20A18EFB89800DC1617 /* g6.mp3 in Resources */,
 				DA2EF1F818EFB89800DC1617 /* f4.mp3 in Resources */,
 				DA2EF20718EFB89800DC1617 /* g4m.mp3 in Resources */,
 				DA2EF1C118EFB89800DC1617 /* a5m.mp3 in Resources */,
 				DA2EF1CC18EFB89800DC1617 /* b6.mp3 in Resources */,
+				DA991FDC1B29D1720034418A /* validation@2x.png in Resources */,
 				DA2EF1F118EFB89800DC1617 /* e7.mp3 in Resources */,
 				DA2EF1D118EFB89800DC1617 /* c2m.mp3 in Resources */,
 				DA2EF20618EFB89800DC1617 /* g4.mp3 in Resources */,
+				DA991FC41B29D0EF0034418A /* Default@2x.png in Resources */,
 				DA2EF1CF18EFB89800DC1617 /* c1m.mp3 in Resources */,
 				DA2EF1DF18EFB89800DC1617 /* d2.mp3 in Resources */,
 				DA527CBD18D3E623009A825E /* Images.xcassets in Resources */,
@@ -840,6 +926,8 @@
 				DA2EF1D318EFB89800DC1617 /* c3m.mp3 in Resources */,
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
+				DA991FDB1B29D1720034418A /* phone@2x.png in Resources */,
+				DA991FD91B29D1720034418A /* Localizable.strings in Resources */,
 				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
 				DA2EF20918EFB89800DC1617 /* g5m.mp3 in Resources */,
@@ -909,14 +997,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB8A1741AFF0EF0008CE3ED /* WANetwork.m in Sources */,
+				DA991FC51B29D0EF0034418A /* WAEditViewController.m in Sources */,
 				DA527CAE18D3E623009A825E /* main.m in Sources */,
 				DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */,
 				DA20CF8719E986C300CD179B /* MFUtils.m in Sources */,
 				DA9C809619526A0C0029EF68 /* MFKeyboardView.m in Sources */,
 				DA45477718E2476E0018874F /* MFSongListViewController.m in Sources */,
+				DA991FC91B29D0EF0034418A /* WAProfileViewController.m in Sources */,
 				DAA262B61953B017002B66CA /* MFButton.m in Sources */,
+				DA991FDF1B29D1720034418A /* WATextField.m in Sources */,
+				DA991FCC1B29D0EF0034418A /* WATableViewController.m in Sources */,
+				DA991FC61B29D0EF0034418A /* WAHeadView.m in Sources */,
 				DAB8A1761AFF0EF0008CE3ED /* WATableViewController.m in Sources */,
 				DAA262A91953A88F002B66CA /* NSString+K2K.m in Sources */,
+				DA991FC81B29D0EF0034418A /* WAProfileTableViewCell.m in Sources */,
 				DAB7337B1A3927C500857054 /* MFPianoScrollView.m in Sources */,
 				DAB8A1751AFF0EF0008CE3ED /* WATableViewCell.m in Sources */,
 				DAB8A1771AFF0EF0008CE3ED /* WAViewModel.m in Sources */,
@@ -929,11 +1023,17 @@
 				DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
 				DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */,
+				DA991FC71B29D0EF0034418A /* WANetwork.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */,
+				DA991FCA1B29D0EF0034418A /* WASettingsViewController.m in Sources */,
+				DA991FCD1B29D0EF0034418A /* WAViewModel.m in Sources */,
+				DA991FDE1B29D1720034418A /* WAAuthViewModel.m in Sources */,
 				DA527CB218D3E623009A825E /* MFAppDelegate.m in Sources */,
 				DAA1CAD1190B24F20046AA42 /* MFArrayDataSource.m in Sources */,
+				DA991FDD1B29D1720034418A /* WAAuthViewController.m in Sources */,
+				DA991FCB1B29D0EF0034418A /* WATableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
