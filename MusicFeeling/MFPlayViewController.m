@@ -28,7 +28,7 @@
 
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
-#import <AVUser+SNS.h>
+#import <AVOSCloudSNS/AVOSCloudSNS.h>
 
 #define XOFFSET 10
 #define YOFFSET 50

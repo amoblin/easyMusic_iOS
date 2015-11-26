@@ -6,8 +6,8 @@ pod 'ReactiveViewModel'
 pod 'ReactiveCocoa', '~> 2.3'
 pod 'AFNetworking', '~> 2.4.1'
 
-pod 'UMengAnalytics', '~> 3.1.2'
-pod 'UMengFeedback', '~> 2.0'
+pod 'UMengAnalytics'
+pod 'UMengFeedback'
 
 #pod 'iVersion', '~> 1.10.6'
 
