@@ -267,7 +267,7 @@
 //    [self becomeFirstResponder];
     [sender setHighlighted:YES];
     NSString *toneName = sender.tone;
-    NSLog(@"%@, tag: %d", toneName, sender.tag);
+    NSLog(@"%@, tag: %@", toneName, @(sender.tag));
     if ([self.delegate respondsToSelector:@selector(tonePressed:)]) {
         [self.delegate tonePressed:toneName];
     }

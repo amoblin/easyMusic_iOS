@@ -101,7 +101,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *title = [self.mViewModel titleForSection:section];
     if (title == nil) {
-        return [NSString stringWithFormat:@"Section %d", section];
+        return [NSString stringWithFormat:@"Section %@", @(section)];
     }
     return title;
 }

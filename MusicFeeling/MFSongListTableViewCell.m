@@ -177,12 +177,12 @@
         delta = delta / 60;
         if (delta < 60) {
             // n分钟前
-            info = [NSString stringWithFormat:@"%d分钟前", (NSUInteger)delta];
+            info = [NSString stringWithFormat:@"%@分钟前", @(delta)];
         } else {
             delta = delta / 60;
             if (delta < 24) {
                 // n小时前
-                info = [NSString stringWithFormat:@"%d小时前", (NSUInteger)delta];
+                info = [NSString stringWithFormat:@"%@小时前", @(delta)];
             } else {
                 delta = delta / 24;
                 if ((NSInteger)delta == 1) {

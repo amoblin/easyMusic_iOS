@@ -98,7 +98,6 @@
 		DA2EF20B18EFB89800DC1617 /* g6m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B318EFB89800DC1617 /* g6m.mp3 */; };
 		DA2EF20C18EFB89800DC1617 /* g7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B418EFB89800DC1617 /* g7.mp3 */; };
 		DA2EF20D18EFB89800DC1617 /* g7m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF1B518EFB89800DC1617 /* g7m.mp3 */; };
-		DA2EF21218F2472E00DC1617 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF21018F244C800DC1617 /* PushConfig.plist */; };
 		DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */; };
 		DA35C8DA18D405770021BD55 /* MFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35C8D918D405770021BD55 /* MFTestViewController.m */; };
 		DA3E7840197258D30040403F /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3E783F197258D30040403F /* star@2x.png */; };
@@ -145,6 +144,7 @@
 		DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B21953AFF6002B66CA /* UIImage+Color.m */; };
 		DAA262B61953B017002B66CA /* MFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA262B51953B017002B66CA /* MFButton.m */; };
 		DAB7337B1A3927C500857054 /* MFPianoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7337A1A3927C500857054 /* MFPianoScrollView.m */; };
+		DAB7C6C61C6F6571004B3070 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAB7C6C51C6F6571004B3070 /* PushConfig.plist */; };
 		DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DABB801019839B7200F09368 /* MFSongListTableViewCell.m */; };
 		DABB801319839E6400F09368 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB801219839E6400F09368 /* green@2x.png */; };
 		DABB801519839E6A00F09368 /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABB801419839E6A00F09368 /* blue@2x.png */; };
@@ -256,7 +256,6 @@
 		DA2EF1B318EFB89800DC1617 /* g6m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g6m.mp3; sourceTree = "<group>"; };
 		DA2EF1B418EFB89800DC1617 /* g7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g7.mp3; sourceTree = "<group>"; };
 		DA2EF1B518EFB89800DC1617 /* g7m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = g7m.mp3; sourceTree = "<group>"; };
-		DA2EF21018F244C800DC1617 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PushConfig.plist; path = MusicFeelingTests/PushConfig.plist; sourceTree = SOURCE_ROOT; };
 		DA35C8D518D3FD030021BD55 /* MFCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCollectionViewCell.h; sourceTree = "<group>"; };
 		DA35C8D618D3FD030021BD55 /* MFCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCollectionViewCell.m; sourceTree = "<group>"; };
 		DA35C8D818D405770021BD55 /* MFTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTestViewController.h; sourceTree = "<group>"; };
@@ -339,6 +338,7 @@
 		DAA262B51953B017002B66CA /* MFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFButton.m; sourceTree = "<group>"; };
 		DAB733791A3927C500857054 /* MFPianoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPianoScrollView.h; sourceTree = "<group>"; };
 		DAB7337A1A3927C500857054 /* MFPianoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPianoScrollView.m; sourceTree = "<group>"; };
+		DAB7C6C51C6F6571004B3070 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		DAB8A1781AFF102F008CE3ED /* Prefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.h; sourceTree = "<group>"; };
 		DABB800F19839B7200F09368 /* MFSongListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSongListTableViewCell.h; sourceTree = "<group>"; };
 		DABB801019839B7200F09368 /* MFSongListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSongListTableViewCell.m; sourceTree = "<group>"; };
@@ -562,7 +562,7 @@
 				DA527CA918D3E623009A825E /* MusicFeeling-Info.plist */,
 				DA527CAA18D3E623009A825E /* InfoPlist.strings */,
 				DA527CAD18D3E623009A825E /* main.m */,
-				DA2EF21018F244C800DC1617 /* PushConfig.plist */,
+				DAB7C6C51C6F6571004B3070 /* PushConfig.plist */,
 				DA527CAF18D3E623009A825E /* MusicFeeling-Prefix.pch */,
 				DA20CF7319E77EFD00CD179B /* Localizable.strings */,
 			);
@@ -689,7 +689,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MF;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = amoblin;
 				TargetAttributes = {
 					DA527C9D18D3E623009A825E = {
@@ -763,7 +763,6 @@
 				DA2EF1D218EFB89800DC1617 /* c3.mp3 in Resources */,
 				DA2EF1EC18EFB89800DC1617 /* e2.mp3 in Resources */,
 				DA2EF1D918EFB89800DC1617 /* c6m.mp3 in Resources */,
-				DA2EF21218F2472E00DC1617 /* PushConfig.plist in Resources */,
 				DA2EF1C218EFB89800DC1617 /* a6.mp3 in Resources */,
 				DA2EF20B18EFB89800DC1617 /* g6m.mp3 in Resources */,
 				DA2EF1BD18EFB89800DC1617 /* a3m.mp3 in Resources */,
@@ -835,6 +834,7 @@
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
 				DA991FDB1B29D1720034418A /* phone@2x.png in Resources */,
+				DAB7C6C61C6F6571004B3070 /* PushConfig.plist in Resources */,
 				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
 				DA2EF20918EFB89800DC1617 /* g5m.mp3 in Resources */,
@@ -984,10 +984,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1003,6 +999,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CUI GUILIN (2L2Z2R7J6H)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1029,10 +1026,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1068,10 +1061,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E20951ED8C9DE0C8D5AED8F0 /* Pods-k2k.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1105,10 +1094,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 066D2B18B72BD61800560294 /* Pods-k2k.release.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

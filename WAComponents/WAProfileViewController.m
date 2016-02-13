@@ -48,10 +48,10 @@
     [self.mTableView registerClass:[WAProfileTableViewCell class] forCellReuseIdentifier:self.cellId];
     
 //    navController.navigationItem.leftBarButtonItem =
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(leftMenuPressed:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
+//                                                                             style:UIBarButtonItemStylePlain
+//                                                                            target:self
+//                                                                            action:@selector(leftMenuPressed:)];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 //    self.navigationController.navigationBar.barTintColor = MAIN_COLOR;
 }
