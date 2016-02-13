@@ -77,16 +77,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = NSLocalizedString(@"Settings", nil);
-    self.UMPageName = NSLocalizedString(@"Settings", nil);
+    self.title = Local(@"Settings");
+    self.UMPageName = Local(@"Settings");
     self.view.backgroundColor = [UIColor whiteColor];
 
     UINavigationBar *bar = [[UINavigationBar alloc] init];
     bar.delegate = self;
     bar.translatesAutoresizingMaskIntoConstraints = NO;
-    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil)];
+    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:Local(@"Settings")];
     [bar setItems:@[item]];
-    item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
+    item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Close")
                                                                style:UIBarButtonItemStyleDone
                                                               target:self
                                                               action:@selector(close:)];

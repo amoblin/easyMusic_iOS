@@ -116,11 +116,6 @@
 		DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA527CB318D3E623009A825E /* Main_iPhone.storyboard */; };
 		DA527CBB18D3E623009A825E /* MFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CBA18D3E623009A825E /* MFViewController.m */; };
 		DA527CBD18D3E623009A825E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA527CBC18D3E623009A825E /* Images.xcassets */; };
-		DA527CC418D3E623009A825E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CC318D3E623009A825E /* XCTest.framework */; };
-		DA527CC518D3E623009A825E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA118D3E623009A825E /* Foundation.framework */; };
-		DA527CC618D3E623009A825E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA527CA518D3E623009A825E /* UIKit.framework */; };
-		DA527CCE18D3E623009A825E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA527CCC18D3E623009A825E /* InfoPlist.strings */; };
-		DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CCF18D3E623009A825E /* MusicFeelingTests.m */; };
 		DA6A8673191875890087E640 /* Do Re Mi.k2k.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */; };
 		DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */; };
 		DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA795F741B28EDE1000552A4 /* LaunchScreen.xib */; };
@@ -136,7 +131,6 @@
 		DA991FCB1B29D0EF0034418A /* WATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FBC1B29D0EF0034418A /* WATableViewCell.m */; };
 		DA991FCC1B29D0EF0034418A /* WATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FBE1B29D0EF0034418A /* WATableViewController.m */; };
 		DA991FCD1B29D0EF0034418A /* WAViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FC01B29D0EF0034418A /* WAViewModel.m */; };
-		DA991FD91B29D1720034418A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA991FCE1B29D1720034418A /* Localizable.strings */; };
 		DA991FDA1B29D1720034418A /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FCF1B29D1720034418A /* password@2x.png */; };
 		DA991FDB1B29D1720034418A /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FD01B29D1720034418A /* phone@2x.png */; };
 		DA991FDC1B29D1720034418A /* validation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FD11B29D1720034418A /* validation@2x.png */; };
@@ -164,16 +158,6 @@
 		FB5D1C58B5AA8C4B340E3E04 /* libPods-k2k.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C81D0CC7F96D7B2C1265A97 /* libPods-k2k.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		DA527CC718D3E623009A825E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA527C9618D3E623009A825E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA527C9D18D3E623009A825E;
-			remoteInfo = MusicFeeling;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		066D2B18B72BD61800560294 /* Pods-k2k.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-k2k.release.xcconfig"; path = "Pods/Target Support Files/Pods-k2k/Pods-k2k.release.xcconfig"; sourceTree = "<group>"; };
 		3C81D0CC7F96D7B2C1265A97 /* libPods-k2k.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-k2k.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,7 +165,6 @@
 		DA20CF7419E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
 		DA20CF7519E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA20CF7619E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DA20CF7719E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA20CF8519E986C300CD179B /* MFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUtils.h; sourceTree = "<group>"; };
 		DA20CF8619E986C300CD179B /* MFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUtils.m; sourceTree = "<group>"; };
 		DA2EF15B18EFB6C300DC1617 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -302,11 +285,7 @@
 		DA527CB918D3E623009A825E /* MFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFViewController.h; sourceTree = "<group>"; };
 		DA527CBA18D3E623009A825E /* MFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFViewController.m; sourceTree = "<group>"; };
 		DA527CBC18D3E623009A825E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicFeelingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA527CC318D3E623009A825E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DA527CCB18D3E623009A825E /* MusicFeelingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicFeelingTests-Info.plist"; sourceTree = "<group>"; };
-		DA527CCD18D3E623009A825E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA527CCF18D3E623009A825E /* MusicFeelingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicFeelingTests.m; sourceTree = "<group>"; };
 		DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Do Re Mi.k2k.txt"; sourceTree = "<group>"; };
 		DA6A87EF191F011C0087E640 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
@@ -387,16 +366,6 @@
 				DA527CA618D3E623009A825E /* UIKit.framework in Frameworks */,
 				DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */,
 				FB5D1C58B5AA8C4B340E3E04 /* libPods-k2k.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DA527CBF18D3E623009A825E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CC418D3E623009A825E /* XCTest.framework in Frameworks */,
-				DA527CC618D3E623009A825E /* UIKit.framework in Frameworks */,
-				DA527CC518D3E623009A825E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +486,6 @@
 				DA6A87EE191F011C0087E640 /* Categories */,
 				DA527CD918D3E6E0009A825E /* resources */,
 				DA527CA718D3E623009A825E /* MusicFeeling */,
-				DA527CC918D3E623009A825E /* MusicFeelingTests */,
 				DA527CA018D3E623009A825E /* Frameworks */,
 				DA527C9F18D3E623009A825E /* Products */,
 				9032772FE9260B7B8D783BB8 /* Pods */,
@@ -528,7 +496,6 @@
 			isa = PBXGroup;
 			children = (
 				DA527C9E18D3E623009A825E /* k2k.app */,
-				DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -598,24 +565,6 @@
 				DA2EF21018F244C800DC1617 /* PushConfig.plist */,
 				DA527CAF18D3E623009A825E /* MusicFeeling-Prefix.pch */,
 				DA20CF7319E77EFD00CD179B /* Localizable.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DA527CC918D3E623009A825E /* MusicFeelingTests */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CCF18D3E623009A825E /* MusicFeelingTests.m */,
-				DA527CCA18D3E623009A825E /* Supporting Files */,
-			);
-			path = MusicFeelingTests;
-			sourceTree = "<group>";
-		};
-		DA527CCA18D3E623009A825E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA527CCB18D3E623009A825E /* MusicFeelingTests-Info.plist */,
-				DA527CCC18D3E623009A825E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -733,24 +682,6 @@
 			productReference = DA527C9E18D3E623009A825E /* k2k.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA527CC118D3E623009A825E /* MusicFeelingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DA527CD618D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeelingTests" */;
-			buildPhases = (
-				DA527CBE18D3E623009A825E /* Sources */,
-				DA527CBF18D3E623009A825E /* Frameworks */,
-				DA527CC018D3E623009A825E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DA527CC818D3E623009A825E /* PBXTargetDependency */,
-			);
-			name = MusicFeelingTests;
-			productName = MusicFeelingTests;
-			productReference = DA527CC218D3E623009A825E /* MusicFeelingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -772,9 +703,6 @@
 							};
 						};
 					};
-					DA527CC118D3E623009A825E = {
-						TestTargetID = DA527C9D18D3E623009A825E;
-					};
 				};
 			};
 			buildConfigurationList = DA527C9918D3E623009A825E /* Build configuration list for PBXProject "MusicFeeling" */;
@@ -792,7 +720,6 @@
 			projectRoot = "";
 			targets = (
 				DA527C9D18D3E623009A825E /* k2k */,
-				DA527CC118D3E623009A825E /* MusicFeelingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -908,19 +835,10 @@
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
 				DA991FDB1B29D1720034418A /* phone@2x.png in Resources */,
-				DA991FD91B29D1720034418A /* Localizable.strings in Resources */,
 				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
 				DA2EF20918EFB89800DC1617 /* g5m.mp3 in Resources */,
 				DA2EF1BA18EFB89800DC1617 /* a2.mp3 in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DA527CC018D3E623009A825E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CCE18D3E623009A825E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1029,23 +947,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA527CBE18D3E623009A825E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DA527CD018D3E623009A825E /* MusicFeelingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DA527CC818D3E623009A825E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA527C9D18D3E623009A825E /* k2k */;
-			targetProxy = DA527CC718D3E623009A825E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DA20CF7319E77EFD00CD179B /* Localizable.strings */ = {
@@ -1073,15 +975,6 @@
 				DA20CF7419E77F2100CD179B /* zh-Hans */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		DA527CCC18D3E623009A825E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA527CCD18D3E623009A825E /* en */,
-				DA20CF7719E77F2100CD179B /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1245,46 +1138,6 @@
 			};
 			name = Release;
 		};
-		DA527CD718D3E623009A825E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MusicFeeling.app/MusicFeeling";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "MusicFeelingTests/MusicFeelingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		DA527CD818D3E623009A825E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MusicFeeling.app/MusicFeeling";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MusicFeeling/MusicFeeling-Prefix.pch";
-				INFOPLIST_FILE = "MusicFeelingTests/MusicFeelingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1302,15 +1155,6 @@
 			buildConfigurations = (
 				DA527CD418D3E623009A825E /* Debug */,
 				DA527CD518D3E623009A825E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DA527CD618D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeelingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DA527CD718D3E623009A825E /* Debug */,
-				DA527CD818D3E623009A825E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
