@@ -2,6 +2,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '6.1'
 
+target "k2k" do
 pod 'ReactiveViewModel'
 pod 'ReactiveCocoa', '~> 2.3'
 pod 'AFNetworking', '~> 2.4.1'
@@ -21,3 +22,5 @@ pod 'PXAlertView', '~> 0.1.0'
 pod 'AVOSCloud', '~> 2.6.4'
 pod 'AVOSCloudSNS', '~> 2.6.8.1'
 pod 'Masonry'
+
+end

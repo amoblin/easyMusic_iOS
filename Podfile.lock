@@ -24,7 +24,7 @@ PODS:
   - AVOSCloudSNS (2.6.8.1):
     - AVOSCloud
   - HexColors (2.2.1)
-  - Masonry (0.6.3)
+  - Masonry (0.6.4)
   - PXAlertView (0.1.1)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -61,7 +61,7 @@ SPEC CHECKSUMS:
   AVOSCloud: c4e261f5d68f42c6e4c4a64934490b2f38c9cff7
   AVOSCloudSNS: b9afeef67cb473ef2301982a71b2e9de129337ec
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
-  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   PXAlertView: bb8a7e6bb95f73fe3fe091cacd279b683460f084
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReactiveViewModel: 58918dcbcec2d3151195ab1ed9163c57a8163999
@@ -71,4 +71,6 @@ SPEC CHECKSUMS:
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
   UMengMessage: 48fac77da8a71729c3d9c40eed16151d8917d9b3
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 5bb6e739dae1214b8d0b54ffa3badcf531044f39
+
+COCOAPODS: 1.0.0.beta.2
