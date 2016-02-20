@@ -1,27 +1,27 @@
 PODS:
-  - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection (= 2.4.1)
-    - AFNetworking/NSURLSession (= 2.4.1)
-    - AFNetworking/Reachability (= 2.4.1)
-    - AFNetworking/Security (= 2.4.1)
-    - AFNetworking/Serialization (= 2.4.1)
-    - AFNetworking/UIKit (= 2.4.1)
-  - AFNetworking/NSURLConnection (2.4.1):
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.4.1):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.4.1)
-  - AFNetworking/Security (2.4.1)
-  - AFNetworking/Serialization (2.4.1)
-  - AFNetworking/UIKit (2.4.1):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (2.6.11.2)
-  - AVOSCloudSNS (2.6.8.1):
+  - AVOSCloud (3.2.4.1)
+  - AVOSCloudSNS (3.1.2.9):
     - AVOSCloud
   - HexColors (2.2.1)
   - Masonry (0.6.4)
@@ -43,23 +43,23 @@ PODS:
   - UMengMessage (1.1.0.2)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.4.1)
-  - AVOSCloud (~> 2.6.4)
-  - AVOSCloudSNS (~> 2.6.8.1)
+  - AFNetworking
+  - AVOSCloud
+  - AVOSCloudSNS
   - Masonry
-  - PXAlertView (~> 0.1.0)
-  - ReactiveCocoa (~> 2.3)
+  - PXAlertView
+  - ReactiveCocoa
   - ReactiveViewModel
-  - SVProgressHUD (~> 1.0)
-  - TSMessages (~> 0.9.10)
+  - SVProgressHUD
+  - TSMessages
   - UMengAnalytics
   - UMengFeedback
-  - UMengMessage (~> 1.1.0)
+  - UMengMessage
 
 SPEC CHECKSUMS:
-  AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
-  AVOSCloud: c4e261f5d68f42c6e4c4a64934490b2f38c9cff7
-  AVOSCloudSNS: b9afeef67cb473ef2301982a71b2e9de129337ec
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AVOSCloud: fc22102af00ddb84597495400262e0292da59af8
+  AVOSCloudSNS: 4f9f1df8663fc7bfa76b9b38578ac535d275ee8f
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   PXAlertView: bb8a7e6bb95f73fe3fe091cacd279b683460f084
@@ -71,6 +71,4 @@ SPEC CHECKSUMS:
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
   UMengMessage: 48fac77da8a71729c3d9c40eed16151d8917d9b3
 
-PODFILE CHECKSUM: 5bb6e739dae1214b8d0b54ffa3badcf531044f39
-
-COCOAPODS: 1.0.0.beta.2
+COCOAPODS: 0.39.0
