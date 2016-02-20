@@ -1083,7 +1083,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.marboo.k2k;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.marboo.k2k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1116,7 +1116,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.marboo.k2k;
+				PRODUCT_BUNDLE_IDENTIFIER = biz.marboo.k2k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
