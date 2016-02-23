@@ -87,7 +87,7 @@
                                                                             options:0
                                                                             metrics:nil
                                                                               views:NSDictionaryOfVariableBindings(_titleLabel, _dateLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_dateLabel(==50)]-10-|"
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_dateLabel(==70)]-10-|"
                                                                             options:0
                                                                             metrics:nil
                                                                               views:NSDictionaryOfVariableBindings(_titleLabel, _dateLabel)]];
@@ -177,12 +177,12 @@
         delta = delta / 60;
         if (delta < 60) {
             // n分钟前
-            info = [NSString stringWithFormat:@"%@分钟前", @(delta)];
+            info = [NSString stringWithFormat:@"%@分钟前", @((NSInteger)delta)];
         } else {
             delta = delta / 60;
             if (delta < 24) {
                 // n小时前
-                info = [NSString stringWithFormat:@"%@小时前", @(delta)];
+                info = [NSString stringWithFormat:@"%@小时前", @((NSInteger)delta)];
             } else {
                 delta = delta / 24;
                 if ((NSInteger)delta == 1) {
@@ -192,7 +192,7 @@
                     info = @"前天";
                 } else {
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    [dateFormatter setDateFormat:@"MM-dd"];
+                    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
                     info = [dateFormatter stringFromDate:theDate];
 //                    info = [NSString stringWithFormat:@"%d天前", (NSUInteger)delta];
                 }

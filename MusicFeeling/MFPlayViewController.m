@@ -1075,7 +1075,7 @@
     AVUser * user = [AVUser user];
     user.username = name;
     user.password =  self.uuid;
-    user.email = self.uuid;
+//    user.email = self.uuid;
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [self postSong];
