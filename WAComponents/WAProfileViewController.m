@@ -57,7 +57,7 @@
 }
 
 - (void)refreshData {
-    [[WANetwork sharedInstace] requestWithPath:@"/user/info" method:@"GET" params:nil success:^(id result) {
+    [[WANetwork sharedInstance] requestWithPath:@"/user/info" method:@"GET" params:nil success:^(id result) {
         NSLog(@"%@", result);
         [self.refreshControl endRefreshing];
         NSDictionary *info = [result valueForKeyPath:@"data.user"];
@@ -71,7 +71,7 @@
         self.mViewModel = [[WAViewModel alloc] initWithArray:arr];
         
         [self.mTableView reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(id response, NSError *error) {
         [self.refreshControl endRefreshing];
         NSLog(@"%@", error.localizedDescription);
     }];
@@ -141,12 +141,12 @@
             return;
         }
         NSDictionary *payload = @{@"gender": @(buttonIndex + 1)};
-        [[WANetwork sharedInstace] requestWithPath:@"/user/info" method:@"POST" params:payload success:^(id result) {
+        [[WANetwork sharedInstance] requestWithPath:@"/user/info" method:@"POST" params:payload success:^(id result) {
             NSLog(@"%@", result);
             //        NSDictionary *info = [result valueForKeyPath:@"data.user"];
             self.info[@"gender"] = @(buttonIndex+1);
             [[NSUserDefaults standardUserDefaults] setValue:self.info forKeyPath:@"info"];
-        } failure:^(NSError *error) {
+        } failure:^(id response, NSError *error) {
             NSLog(@"%@", error.localizedDescription);
         }];
     }
@@ -167,7 +167,7 @@
 - (void)uploadAvatar:(NSData *)data {
     NSData *avatarData = data;
     NSDictionary *params = @{@"filetype":@"jpg", @"is_temp":@1, @"file": @"test.jpg"};
-    [[WANetwork sharedInstace] uploadWithPath:@"/user/pic" params:params data:data success:^(id responseObject) {
+    [[WANetwork sharedInstance] uploadWithPath:@"/user/pic" params:params data:data success:^(id responseObject) {
         NSLog(@"%@", responseObject);
         NSString *filename = [responseObject objectForKey:@"filename"];
 //        [self.userIconButton setImageWithURL:[NSURL URLWithString:responseObject[@"url"]]];

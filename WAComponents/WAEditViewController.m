@@ -7,7 +7,7 @@
 //
 
 #import "WAEditViewController.h"
-#import "WANetwork.h"
+#import <WANetwork.h>
 
 @interface WAEditViewController ()
 
@@ -56,12 +56,12 @@
     NSLog(@"saved");
     WS(ws);
     NSDictionary *payload = @{self.info[@"key_string"]: self.textView.text};
-    [[WANetwork sharedInstace] requestWithPath:@"/user/info" method:@"POST" params:payload success:^(id result) {
+    [[WANetwork sharedInstance] requestWithPath:@"/user/info" method:@"POST" params:payload success:^(id result) {
         NSLog(@"%@", result);
         ws.userInfo[ws.info[@"key_string"]] = ws.textView.text;
         [[NSUserDefaults standardUserDefaults] setValue:self.userInfo forKeyPath:@"info"];
         [ws.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSError *error) {
+    } failure:^(id response, NSError *error) {
         NSLog(@"%@", error.localizedDescription);
     }];
 }

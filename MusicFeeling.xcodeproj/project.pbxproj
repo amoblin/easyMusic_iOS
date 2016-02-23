@@ -123,7 +123,6 @@
 		DA991FC41B29D0EF0034418A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA991FAE1B29D0EF0034418A /* Default@2x.png */; };
 		DA991FC51B29D0EF0034418A /* WAEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB01B29D0EF0034418A /* WAEditViewController.m */; };
 		DA991FC61B29D0EF0034418A /* WAHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB21B29D0EF0034418A /* WAHeadView.m */; };
-		DA991FC71B29D0EF0034418A /* WANetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB41B29D0EF0034418A /* WANetwork.m */; };
 		DA991FC81B29D0EF0034418A /* WAProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB61B29D0EF0034418A /* WAProfileTableViewCell.m */; };
 		DA991FC91B29D0EF0034418A /* WAProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FB81B29D0EF0034418A /* WAProfileViewController.m */; };
 		DA991FCA1B29D0EF0034418A /* WASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA991FBA1B29D0EF0034418A /* WASettingsViewController.m */; };
@@ -297,8 +296,6 @@
 		DA991FB01B29D0EF0034418A /* WAEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAEditViewController.m; sourceTree = "<group>"; };
 		DA991FB11B29D0EF0034418A /* WAHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHeadView.h; sourceTree = "<group>"; };
 		DA991FB21B29D0EF0034418A /* WAHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHeadView.m; sourceTree = "<group>"; };
-		DA991FB31B29D0EF0034418A /* WANetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WANetwork.h; sourceTree = "<group>"; };
-		DA991FB41B29D0EF0034418A /* WANetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WANetwork.m; sourceTree = "<group>"; };
 		DA991FB51B29D0EF0034418A /* WAProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileTableViewCell.h; sourceTree = "<group>"; };
 		DA991FB61B29D0EF0034418A /* WAProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAProfileTableViewCell.m; sourceTree = "<group>"; };
 		DA991FB71B29D0EF0034418A /* WAProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAProfileViewController.h; sourceTree = "<group>"; };
@@ -640,8 +637,6 @@
 				DA991FB01B29D0EF0034418A /* WAEditViewController.m */,
 				DA991FB11B29D0EF0034418A /* WAHeadView.h */,
 				DA991FB21B29D0EF0034418A /* WAHeadView.m */,
-				DA991FB31B29D0EF0034418A /* WANetwork.h */,
-				DA991FB41B29D0EF0034418A /* WANetwork.m */,
 				DA991FB51B29D0EF0034418A /* WAProfileTableViewCell.h */,
 				DA991FB61B29D0EF0034418A /* WAProfileTableViewCell.m */,
 				DA991FB71B29D0EF0034418A /* WAProfileViewController.h */,
@@ -933,7 +928,6 @@
 				DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
 				DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */,
-				DA991FC71B29D0EF0034418A /* WANetwork.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */,

@@ -23,4 +23,5 @@ pod 'AVOSCloud'
 pod 'AVOSCloudSNS'
 pod 'Masonry'
 
+pod 'WABrick', :path => "../../Marboo/WABrick"
 end

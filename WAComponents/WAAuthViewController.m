@@ -344,7 +344,7 @@
     } else {
         path = @"/login/index";
     }
-    [[WANetwork sharedInstace] requestWithPath:path method:@"POST" params:payload success:^(id result) {
+    [[WANetwork sharedInstance] requestWithPath:path method:@"POST" params:payload success:^(id result) {
         [SVProgressHUD dismiss];
         [SVProgressHUD showSuccessWithStatus:@"登录成功"];
         NSLog(@"%@", result);
@@ -367,7 +367,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
         }
-    } failure:^(NSError *error) {
+    } failure:^(id response, NSError *error) {
         NSLog(@"%@", error.localizedDescription);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];

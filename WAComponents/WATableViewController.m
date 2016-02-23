@@ -139,16 +139,16 @@
 - (void)fetchDataWithConfig:(NSDictionary *)conf {
     NSURL *url = [NSURL URLWithString:conf[@"url"]];
     NSString *keyPath = conf[@"key_path"];
-    [[WANetwork sharedInstace] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
+    [[WANetwork sharedInstance] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
 
     NSDictionary *payload =  @{@"os": @"ios"};
-    [[WANetwork sharedInstace] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
+    [[WANetwork sharedInstance] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
         [self.refreshControl endRefreshing];
         //        self.userList = result[@"result"];
         NSArray *data = [result valueForKeyPath:keyPath];
         self.mViewModel = [[WAViewModel alloc] initWithArray:@[data]];
         [self.mTableView reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(id response, NSError *error) {
         [SVProgressHUD dismiss];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络错误" message:error.localizedDescription delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
@@ -163,13 +163,13 @@
 - (void)fetchDataWithConfig:(NSDictionary *)conf andCallback:(void (^)(id))callback {
     NSURL *url = [NSURL URLWithString:conf[@"url"]];
     NSString *keyPath = conf[@"key_path"];
-    [[WANetwork sharedInstace] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
+    [[WANetwork sharedInstance] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
 
     NSDictionary *payload =  @{@"os": @"ios"};
-    [[WANetwork sharedInstace] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
+    [[WANetwork sharedInstance] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
         [self.refreshControl endRefreshing];
         callback([result valueForKeyPath:keyPath]);
-    } failure:^(NSError *error) {
+    } failure:^(id response, NSError *error) {
     }];
 }
 
