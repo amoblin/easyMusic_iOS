@@ -7,7 +7,6 @@
 //
 
 #import "MFSongListTableViewCell.h"
-#import "UIView+AutoLayout.h"
 
 #import <AVOSCloud/AVOSCloud.h>
 
@@ -33,49 +32,36 @@
     if (self) {
 //        self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         // Initialization code
-        self.titleLabel = [UILabel autolayoutView];
-        self.titleLabel.font = [UIFont systemFontOfSize:18];
+        self.titleLabel = [UILabel labelWithFont:WASystemFontSize18 textColor:nil];
         [self.contentView addSubview:self.titleLabel];
 
-        self.authorLabel = [UILabel autolayoutView];
-        self.authorLabel.font = [UIFont italicSystemFontOfSize:13];
-        self.authorLabel.textColor = UIColorFromRGB(180, 180, 180);
+        self.authorLabel = [UILabel labelWithFont:WASystemFontSize13 textColor:WAHexColorB4B4B4];
         [self.contentView addSubview:self.authorLabel];
 
 //        self.viewImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"green"]];
 //        self.viewImageView.translatesAutoresizingMaskIntoConstraints = NO;
 //        [self.contentView addSubview:self.viewImageView];
 
-        self.viewLabel = [UILabel autolayoutView];
-        self.viewLabel.font = [UIFont systemFontOfSize:11];
-        self.viewLabel.textColor = UIColorFromRGB(100, 100, 100);
+        self.viewLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor646464];
         self.viewLabel.text = @"浏览";
         [self.contentView addSubview:self.viewLabel];
 
-        self.viewCountLabel = [UILabel autolayoutView];
-        self.viewCountLabel.font = [UIFont italicSystemFontOfSize:11];
-        self.viewCountLabel.textColor = UIColorFromRGB(126, 200, 33);
+        self.viewCountLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor7EC821];
         [self.contentView addSubview:self.viewCountLabel];
 
 //        self.finishImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blue"]];
 //        self.finishImageView.translatesAutoresizingMaskIntoConstraints = NO;
 //        [self.contentView addSubview:self.finishImageView];
 
-        self.finishLabel = [UILabel autolayoutView];
-        self.finishLabel.textColor = UIColorFromRGB(100, 100, 100);
-        self.finishLabel.font = [UIFont systemFontOfSize:11];
+        self.finishLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor646464];
         self.finishLabel.text = @"演奏";
         [self.contentView addSubview:self.finishLabel];
 
-        self.finishCountLabel = [UILabel autolayoutView];
-        self.finishCountLabel.font = [UIFont italicSystemFontOfSize:11];
-        self.finishCountLabel.textColor = UIColorFromRGB(57, 170, 255);
+        self.finishCountLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor39AAFF];
         [self.contentView addSubview:self.finishCountLabel];
 
-        self.dateLabel = [UILabel autolayoutView];
+        self.dateLabel = [UILabel labelWithFont:WASystemFontSize10 textColor:WAHexColorB4B4B4];
         self.dateLabel.textAlignment = NSTextAlignmentRight;
-        self.dateLabel.font = [UIFont systemFontOfSize:10];
-        self.dateLabel.textColor = UIColorFromRGB(180, 180, 180);
         [self.contentView addSubview:self.dateLabel];
     }
     return self;
