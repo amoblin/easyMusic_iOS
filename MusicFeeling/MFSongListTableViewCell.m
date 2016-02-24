@@ -12,15 +12,15 @@
 
 @interface MFSongListTableViewCell()
 
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *authorLabel;
+@property (strong, nonatomic) UILabel     *titleLabel;
+@property (strong, nonatomic) UILabel     *authorLabel;
 @property (strong, nonatomic) UIImageView *viewImageView;
-@property (strong, nonatomic) UILabel *viewLabel;
-@property (strong, nonatomic) UILabel *viewCountLabel;
+@property (strong, nonatomic) UILabel     *viewLabel;
+@property (strong, nonatomic) UILabel     *viewCountLabel;
 @property (strong, nonatomic) UIImageView *finishImageView;
-@property (strong, nonatomic) UILabel *finishLabel;
-@property (strong, nonatomic) UILabel *finishCountLabel;
-@property (strong, nonatomic) UILabel *dateLabel;
+@property (strong, nonatomic) UILabel     *finishLabel;
+@property (strong, nonatomic) UILabel     *finishCountLabel;
+@property (strong, nonatomic) UILabel     *dateLabel;
 
 @end
 
@@ -30,17 +30,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        // Initialization code
         self.titleLabel = [UILabel labelWithFont:WASystemFontSize18 textColor:nil];
         [self.contentView addSubview:self.titleLabel];
 
         self.authorLabel = [UILabel labelWithFont:WAItalicSystemFontSize13 textColor:WAHexColorB4B4B4];
         [self.contentView addSubview:self.authorLabel];
-
-//        self.viewImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"green"]];
-//        self.viewImageView.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self.contentView addSubview:self.viewImageView];
 
         self.viewLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor646464];
         self.viewLabel.text = @"浏览";
@@ -48,10 +42,6 @@
 
         self.viewCountLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor7EC821];
         [self.contentView addSubview:self.viewCountLabel];
-
-//        self.finishImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blue"]];
-//        self.finishImageView.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self.contentView addSubview:self.finishImageView];
 
         self.finishLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor646464];
         self.finishLabel.text = @"演奏";
@@ -63,12 +53,12 @@
         self.dateLabel = [UILabel labelWithFont:WASystemFontSize10 textColor:WAHexColorB4B4B4];
         self.dateLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.dateLabel];
+        [self configConstraints];
     }
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (void)configConstraints {
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.contentView).with.offset(10);
         make.size.mas_equalTo(CGSizeMake(270, 20));
@@ -103,13 +93,6 @@
         make.bottom.equalTo(self.authorLabel);
         make.right.equalTo(self.viewCountLabel.mas_left).with.offset(-5);
     }];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)configWithItem:(AVObject *)item {

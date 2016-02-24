@@ -9,8 +9,10 @@
 #import <WABaseTableViewData.h>
 
 @class AVObject;
+
 @interface MFSongListTableViewCell : WABaseTableViewCell
 
 - (void)configWithItem:(AVObject *)item;
 - (void)showCount:(BOOL)flag;
+
 @end
