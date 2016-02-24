@@ -35,7 +35,7 @@
         self.titleLabel = [UILabel labelWithFont:WASystemFontSize18 textColor:nil];
         [self.contentView addSubview:self.titleLabel];
 
-        self.authorLabel = [UILabel labelWithFont:WASystemFontSize13 textColor:WAHexColorB4B4B4];
+        self.authorLabel = [UILabel labelWithFont:WAItalicSystemFontSize13 textColor:WAHexColorB4B4B4];
         [self.contentView addSubview:self.authorLabel];
 
 //        self.viewImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"green"]];
@@ -69,65 +69,40 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel(==270)]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_titleLabel, _dateLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_dateLabel(==70)]-10-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_titleLabel, _dateLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_authorLabel(==210)]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_authorLabel, _viewLabel, _viewCountLabel, _finishLabel, _finishCountLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_viewLabel(==25)]-5-[_viewCountLabel(==30)]-5-[_finishLabel(==25)]-5-[_finishCountLabel(==30)]-5-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_authorLabel, _viewLabel, _viewCountLabel, _finishLabel, _finishCountLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_titleLabel(==20)]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_titleLabel, _authorLabel)]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_authorLabel(==15)]-10-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:NSDictionaryOfVariableBindings(_titleLabel, _authorLabel)]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.viewLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.authorLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.viewCountLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.authorLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                multiplier:1.0
-                                                                  constant:-1.0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.finishLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.authorLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.finishCountLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.authorLabel
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                multiplier:1.0
-                                                                  constant:-1.0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.dateLabel
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.titleLabel
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(self.contentView).with.offset(10);
+        make.size.mas_equalTo(CGSizeMake(270, 20));
+    }];
+    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView).with.offset(-10);
+        make.width.mas_equalTo(70);
+        make.top.equalTo(self.titleLabel);
+    }];
+    [self.authorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel);
+        make.size.mas_equalTo(CGSizeMake(210, 15));
+        make.bottom.equalTo(self.contentView).with.offset(-10);
+    }];
+    [self.finishCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(30);
+        make.bottom.equalTo(self.authorLabel);
+        make.right.equalTo(self.contentView).with.offset(-5);
+    }];
+    [self.finishLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.authorLabel);
+        make.right.equalTo(self.finishCountLabel.mas_left).with.offset(-5);
+        make.width.mas_equalTo(25);
+    }];
+    [self.viewCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(30);
+        make.bottom.equalTo(self.authorLabel);
+        make.right.equalTo(self.finishLabel.mas_left).with.offset(-5);
+    }];
+    [self.viewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(25);
+        make.bottom.equalTo(self.authorLabel);
+        make.right.equalTo(self.viewCountLabel.mas_left).with.offset(-5);
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
