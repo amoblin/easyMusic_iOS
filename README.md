@@ -10,7 +10,7 @@ This file is created by Marboo<http://marboo.io> template file $MARBOO_HOME/.med
 
 https://itunes.apple.com/cn/app/sha-gua-yan-zou-jia/id848880040?mt=8
 
-![](ScreenShots/1.png)
-![](ScreenShots/2.png)
-![](ScreenShots/3.png)
-![](ScreenShots/4.png)
+<img src="ScreenShots/1.png" width="200" />
+<img src="ScreenShots/2.png" width="200" />
+<img src="ScreenShots/3.png" width="200" />
+<img src="ScreenShots/4.png" width="200" />
