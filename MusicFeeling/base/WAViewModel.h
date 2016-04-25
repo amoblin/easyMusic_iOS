@@ -6,10 +6,9 @@
 //  Copyright (c) 2015年 amoblin. All rights reserved.
 //
 
-#import "RVMViewModel.h"
+#import <DDBaseModel.h>
 
-@interface WAViewModel : RVMViewModel
-
+@interface WAViewModel : DDBaseModel
 
 @property (strong, nonatomic) NSMutableArray *indexPathDataList;
 @property (strong, nonatomic) NSMutableArray *sectionTitleList;

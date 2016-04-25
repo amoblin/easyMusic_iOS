@@ -28,18 +28,9 @@ PODS:
     - Masonry
   - HexColors (2.2.1)
   - JSONModel (1.2.0)
-  - Masonry (0.6.4)
+  - Masonry (1.0.0)
   - PXAlertView (0.1.1)
-  - ReactiveCocoa (2.5):
-    - ReactiveCocoa/UI (= 2.5)
-  - ReactiveCocoa/Core (2.5):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.5)
-  - ReactiveCocoa/UI (2.5):
-    - ReactiveCocoa/Core
-  - ReactiveViewModel (0.3):
-    - ReactiveCocoa (~> 2.4)
-  - SVProgressHUD (2.0)
+  - SVProgressHUD (2.0.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
   - UMengAnalytics (3.6.6)
@@ -47,26 +38,23 @@ PODS:
   - UMengMessage (1.1.0.2)
   - WANetwork (0.2):
     - AFNetworking (~> 2.5)
+    - DDBrick
+    - PXAlertView
+    - SVProgressHUD
 
 DEPENDENCIES:
-  - AFNetworking
   - AVOSCloud
   - AVOSCloudSNS
   - DDBrick
-  - Masonry
-  - PXAlertView
-  - ReactiveCocoa
-  - ReactiveViewModel
-  - SVProgressHUD
   - TSMessages
   - UMengAnalytics
   - UMengFeedback
   - UMengMessage
-  - WANetwork (from `../WANetwork`)
+  - WANetwork (from `https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec`)
 
 EXTERNAL SOURCES:
   WANetwork:
-    :path: "../WANetwork"
+    :podspec: https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -75,15 +63,13 @@ SPEC CHECKSUMS:
   DDBrick: 718ba5ddeb856bc5220e7c9e687c46c289db29d6
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
-  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   PXAlertView: bb8a7e6bb95f73fe3fe091cacd279b683460f084
-  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  ReactiveViewModel: 58918dcbcec2d3151195ab1ed9163c57a8163999
-  SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   UMengAnalytics: 4bf831415146b9c57cb10be65fbd43462ef8cf65
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
   UMengMessage: 48fac77da8a71729c3d9c40eed16151d8917d9b3
-  WANetwork: 701b9f0f88c82b30f1368e0e33cd403a011bb30e
+  WANetwork: 767203a3746406fda2ef4453f41a307092f68a92
 
 COCOAPODS: 0.39.0

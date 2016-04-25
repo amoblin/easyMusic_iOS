@@ -302,7 +302,7 @@
     NSInteger i = 2;
     NSString *temp = [path stringByAppendingPathExtension:@"k2k.txt"];
     while ([[NSFileManager defaultManager] fileExistsAtPath:temp]) {
-        temp = [NSString stringWithFormat:@"%@-%d.k2k.txt", path, i];
+        temp = [NSString stringWithFormat:@"%@-%@.k2k.txt", path, @(i)];
         i++;
     }
     return temp;
