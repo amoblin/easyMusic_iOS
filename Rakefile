@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-$name = "MusicFeeling"
-$infoFile = "\`pwd\`/#{$name}/#{$name}-Info"
+$projectName = "easyMusic"
+$targetName = "MusicFeeling"
+$infoFile = "\`pwd\`/#{$targetName}/#{$projectName}-Info"
 $revision = `defaults read #{$infoFile} CFBundleVersion`.rstrip
 
 task :default do |t|
