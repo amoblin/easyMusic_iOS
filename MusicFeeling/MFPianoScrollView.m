@@ -30,7 +30,7 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if (self.smartMode) {
-        [self.delegate toneButtonTouchDown:nil];
+        [self.pianoDelegate toneButtonTouchDown:nil];
         return;
     }
     return;
@@ -49,7 +49,7 @@
                     [self.currentKey setCurrent:NO];
                     self.previousKey = key;
                     self.currentKey = key;
-                    [self.delegate toneButtonTouchDown:key];
+                    [self.pianoDelegate toneButtonTouchDown:key];
                     [key setCurrent:YES];
                 }
 

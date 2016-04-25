@@ -19,5 +19,5 @@
 @interface MFPianoScrollView : UIScrollView
 
 @property (nonatomic, assign) BOOL smartMode;
-@property (weak, nonatomic) NSObject <MFPianoScrollViewDelegate> *delegate;
+@property (weak, nonatomic) NSObject <MFPianoScrollViewDelegate> *pianoDelegate;
 @end

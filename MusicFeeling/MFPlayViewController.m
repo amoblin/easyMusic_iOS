@@ -190,6 +190,7 @@
     self.scrollView.autoresizesSubviews = YES;
     self.scrollView.delaysContentTouches = NO;
     self.scrollView.delegate = self;
+    self.scrollView.pianoDelegate = self;
     self.scrollView.smartMode = self.smartMode;
     [self.view addSubview:self.scrollView];
 

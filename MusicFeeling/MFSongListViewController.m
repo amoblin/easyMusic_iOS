@@ -22,7 +22,6 @@
 
 @interface MFSongListViewController ()
 
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation MFSongListViewController
@@ -135,6 +134,7 @@
     [query whereKey:@"isHidden" notEqualTo:@YES];
     [query whereKeyExists:@"author"];
     [query orderByDescending:@"mtime"];
+    query.limit = 1000;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         /*
         NSArray *array = [[[objects rac_sequence] map:^id(id value) {
@@ -216,7 +216,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MFSongListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId" forIndexPath:indexPath];
-    NSDictionary *item = [self.mViewModel itemForRowAtIndexPath:indexPath];
+    AVObject *item = [self.mViewModel itemForRowAtIndexPath:indexPath];
 //    cell.textLabel.text = [NSString stringWithFormat:@"%d-%d", indexPath.section+1, indexPath.row+1];
 //    [cell.mImageView setImageWithURL:[NSURL URLWithString:item[@"img_url"]] placeholderImage:nil];
     
@@ -286,6 +286,12 @@
         }];
     } else {
         self.mViewModel.indexPathDataList[1] = [self.mViewModel.indexPathDataList[1] sortedArrayUsingComparator:^NSComparisonResult(AVObject *obj1, AVObject *obj2) {
+            if (obj1[@"finishCount"] == nil) {
+                obj1[@"finishCount"] = 0;
+            }
+            if (obj2[@"finishCount"] == nil) {
+                obj2[@"finishCount"] = 0;
+            }
             return [obj2[@"finishCount"] compare:obj1[@"finishCount"]];
         }];
     }
