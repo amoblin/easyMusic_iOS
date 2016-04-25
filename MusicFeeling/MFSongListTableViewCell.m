@@ -30,27 +30,27 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.titleLabel = [UILabel labelWithFont:WASystemFontSize18 textColor:nil];
+        self.titleLabel = [UILabel labelWithFont:DDSystemFontSize18 textColor:nil];
         [self.contentView addSubview:self.titleLabel];
 
-        self.authorLabel = [UILabel labelWithFont:WAItalicSystemFontSize13 textColor:WAHexColorB4B4B4];
+        self.authorLabel = [UILabel labelWithFont:DDItalicSystemFontSize13 textColor:DDHexColorB4B4B4];
         [self.contentView addSubview:self.authorLabel];
 
-        self.viewLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor646464];
+        self.viewLabel = [UILabel labelWithFont:DDSystemFontSize11 textColor:DDHexColor646464];
         self.viewLabel.text = @"浏览";
         [self.contentView addSubview:self.viewLabel];
 
-        self.viewCountLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor7EC821];
+        self.viewCountLabel = [UILabel labelWithFont:DDSystemFontSize11 textColor:DDHexColor7EC821];
         [self.contentView addSubview:self.viewCountLabel];
 
-        self.finishLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor646464];
+        self.finishLabel = [UILabel labelWithFont:DDSystemFontSize11 textColor:DDHexColor646464];
         self.finishLabel.text = @"演奏";
         [self.contentView addSubview:self.finishLabel];
 
-        self.finishCountLabel = [UILabel labelWithFont:WASystemFontSize11 textColor:WAHexColor39AAFF];
+        self.finishCountLabel = [UILabel labelWithFont:DDSystemFontSize11 textColor:DDHexColor39AAFF];
         [self.contentView addSubview:self.finishCountLabel];
 
-        self.dateLabel = [UILabel labelWithFont:WASystemFontSize10 textColor:WAHexColorB4B4B4];
+        self.dateLabel = [UILabel labelWithFont:DDSystemFontSize10 textColor:DDHexColorB4B4B4];
         self.dateLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.dateLabel];
         [self configConstraints];

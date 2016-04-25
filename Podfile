@@ -2,7 +2,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '6.1'
 
-target "k2k" do
+target "MusicFeeling" do
 pod 'ReactiveViewModel'
 pod 'ReactiveCocoa'
 pod 'AFNetworking'
@@ -23,5 +23,6 @@ pod 'AVOSCloud'
 pod 'AVOSCloudSNS'
 pod 'Masonry'
 
-pod 'WABrick', :path => "../../Marboo/WABrick"
+pod 'DDBrick'
+pod 'WANetwork', :path => "../WANetwork"
 end

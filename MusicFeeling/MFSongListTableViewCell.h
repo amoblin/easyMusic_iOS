@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 amoblin. All rights reserved.
 //
 
-#import <WABaseTableViewData.h>
+#import <DDBaseTableViewData.h>
 
 @class AVObject;
 
-@interface MFSongListTableViewCell : WABaseTableViewCell
+@interface MFSongListTableViewCell : DDBaseTableViewCell
 
 - (void)configWithItem:(AVObject *)item;
 - (void)showCount:(BOOL)flag;
