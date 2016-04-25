@@ -264,17 +264,16 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    WS(ws);
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
-        make.left.equalTo(ws.view);
-        make.top.equalTo(ws.view);
-        make.bottom.equalTo(ws.keyboardView.mas_top);
+        make.centerX.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view);
+        make.bottom.equalTo(self.keyboardView.mas_top);
     }];
     [self.keyboardView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
-        make.left.equalTo(ws.view);
-        make.bottom.equalTo(ws.view);
+        make.centerX.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.bottom.equalTo(self.view);
         make.height.mas_equalTo(self.keyboardViewHeight);
     }];
     [super viewWillLayoutSubviews];
@@ -286,7 +285,7 @@
         [self getContent];
     }
 
-    if (IS_IOS_7_OR_LATER) {
+    if (IOS_7_OR_LATER) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 
@@ -387,7 +386,7 @@
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown: {
-            if (IS_IOS_8_OR_LATER &&
+            if (IOS_8_OR_LATER &&
                 (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft
                  || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
                     width = [UIScreen mainScreen].bounds.size.height;
@@ -411,7 +410,7 @@
         }
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight: {
-            if (IS_IOS_8_OR_LATER &&
+            if (IOS_8_OR_LATER &&
                 (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft
                  || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
                     width = [UIScreen mainScreen].bounds.size.height;

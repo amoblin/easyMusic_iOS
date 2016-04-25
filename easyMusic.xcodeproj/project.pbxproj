@@ -284,7 +284,6 @@
 		DAA262A81953A88F002B66CA /* NSString+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+K2K.m"; sourceTree = "<group>"; };
 		DAA262AA1953A8E9002B66CA /* NSArray+K2K.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+K2K.h"; sourceTree = "<group>"; };
 		DAA262AB1953A8E9002B66CA /* NSArray+K2K.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+K2K.m"; sourceTree = "<group>"; };
-		DAA262AE1953ACDC002B66CA /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		DAA262AF1953AD2C002B66CA /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		DAA262B11953AFF6002B66CA /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		DAA262B21953AFF6002B66CA /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
@@ -563,7 +562,6 @@
 		DAA262AD1953AC8C002B66CA /* Macros */ = {
 			isa = PBXGroup;
 			children = (
-				DAA262AE1953ACDC002B66CA /* UtilsMacro.h */,
 				DAA262AF1953AD2C002B66CA /* AppMacro.h */,
 			);
 			path = Macros;

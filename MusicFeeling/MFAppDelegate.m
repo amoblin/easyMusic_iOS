@@ -96,7 +96,7 @@
 
     [UMessage startWithAppkey:UMENG_KEY launchOptions:launchOptions];
 
-    if (IS_IOS_8_OR_LATER) {
+    if (IOS_8_OR_LATER) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
                                                                                              |UIRemoteNotificationTypeSound
                                                                                              |UIRemoteNotificationTypeAlert) categories:nil];

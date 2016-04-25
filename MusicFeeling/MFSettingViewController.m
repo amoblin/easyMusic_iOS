@@ -117,8 +117,6 @@
     logoImageView.contentMode = UIViewContentModeScaleAspectFit;
     [view addSubview:logoImageView];
 
-    WS(ws);
-    
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(view);
         make.top.mas_equalTo(30);
@@ -136,10 +134,10 @@
     self.tableView.tableHeaderView = view;
 
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.tableView);
-        make.left.equalTo(ws.tableView);
+        make.centerX.equalTo(self.tableView);
+        make.left.equalTo(self.tableView);
         make.height.mas_equalTo(150);
-        make.top.equalTo(ws.tableView);
+        make.top.equalTo(self.tableView);
     }];
 
     self.tableView.delegate = self;
@@ -173,20 +171,19 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    WS(ws);
     [self.bar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
-        make.left.equalTo(ws.view);
-        make.top.equalTo(ws.view);
-        make.height.mas_equalTo(ws.barHeight);
-        make.bottom.equalTo(ws.tableView.mas_top);
+        make.centerX.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view);
+        make.height.mas_equalTo(self.barHeight);
+        make.bottom.equalTo(self.tableView.mas_top);
     }];
 
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(ws.view);
-        make.left.equalTo(ws.view);
-        make.top.equalTo(ws.bar.mas_bottom);
-        make.bottom.equalTo(ws.view);
+        make.centerX.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.bar.mas_bottom);
+        make.bottom.equalTo(self.view);
     }];
 }
 
@@ -381,7 +378,7 @@
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight: {
             CGFloat viewWidth, viewHeight, originY;
-            if (IS_IOS_8_OR_LATER) {
+            if (IOS_8_OR_LATER) {
                 originY = 0;
                 viewWidth = [UIScreen mainScreen].bounds.size.width;
                 viewHeight= [UIScreen mainScreen].bounds.size.height;
@@ -393,7 +390,7 @@
             self.bar.frame = CGRectMake(0, originY, viewWidth, 32);
             self.barHeight = 32;
 
-            if (IS_IOS_8_OR_LATER) {
+            if (IOS_8_OR_LATER) {
                 self.tableView.frame = CGRectMake(0, 32, viewWidth, viewHeight - 44 - 32);
             } else {
                 self.tableView.frame = CGRectMake(0, 52, viewWidth, viewHeight - 44 - 52);

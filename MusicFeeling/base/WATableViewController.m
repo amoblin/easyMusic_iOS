@@ -66,12 +66,11 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    WS(ws);
     [self.mTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(ws.view).with.priorityLow();
-        make.left.equalTo(ws.view).with.priorityLow();
-        make.right.equalTo(ws.view).with.priorityLow();
-        make.bottom.equalTo(ws.view).with.offset(0).with.priorityLow();
+        make.top.equalTo(self.view).with.priorityLow();
+        make.left.equalTo(self.view).with.priorityLow();
+        make.right.equalTo(self.view).with.priorityLow();
+        make.bottom.equalTo(self.view).with.offset(0).with.priorityLow();
     }];
 }
 
