@@ -79,9 +79,17 @@
 @property (nonatomic) BOOL smartMode;
 
 @property (nonatomic) BOOL isLastTone;
+
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation MFPlayViewController
+
+- (void)dealloc;
+{
+    NSLog(@"dealloc");
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -149,11 +157,12 @@
             AVQuery *query = [AVQuery queryWithClassName:@"Song"];
             [query whereKey:@"author" equalTo:[AVUser currentUser].username];
             [query whereKey:@"name" equalTo:self.songInfo[@"name"]];
+            __weak typeof(self) weakSelf = self;
             [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
                 if (error == nil) {
-                    self.navigationItem.rightBarButtonItem.title = @"更新";
-                    self.songInfo = object;
-                    self.songInfo[@"isComposed"] = @YES;
+                    weakSelf.navigationItem.rightBarButtonItem.title = @"更新";
+                    weakSelf.songInfo = object;
+                    weakSelf.songInfo[@"isComposed"] = @YES;
                 }
             }];
         }
@@ -227,21 +236,28 @@
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
+    UIBarButtonItem *item1;
     if ( self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Publish")
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(releaseButtonPressed:)];
+        item1 = [[UIBarButtonItem alloc] initWithTitle:Local(@"Publish")
+                                                 style:UIBarButtonItemStylePlain
+                                                target:self
+                                                action:@selector(releaseButtonPressed:)];
         /*
          } else if ([self.songInfo[@"author"] isEqualToString:[AVUser currentUser].username]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed:)];
          */
     } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:Local(@"Manually")
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(toggleSingleTapMode)];
+        item1 = [[UIBarButtonItem alloc] initWithTitle:Local(@"Manually")
+                                                 style:UIBarButtonItemStylePlain
+                                                target:self
+                                                action:@selector(toggleSingleTapMode)];
     }
+    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:Local(@"Play")
+                                                              style:UIBarButtonItemStylePlain
+                                                             target:self
+                                                             action:@selector(playSong:)];
+    
+    self.navigationItem.rightBarButtonItems = @[item1, item2];
 }
 
 - (NSArray *)segmentedControlConstraintsFromObject:(id)segmentedControl {
@@ -330,6 +346,13 @@
     }
     self.textField.delegate = nil;
     self.scrollView.delegate = nil;
+}
+
+- (void)viewDidDisappear:(BOOL)animated;
+{
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (NSString *)fetchPath {
@@ -846,41 +869,51 @@
 }
 
 - (void)tapViewAction:(UIGestureRecognizer *)tap {
-    if (self.smartMode) {
-        [self toneButtonTouchDown:nil];
-    }
+    [self playNextTone];
 }
 
-- (void)toneButtonTouchDown:(MFButton *)sender {
+- (void)playNextTone;
+{
+    [self.prevButton setCurrent:NO];
+
+    NSString *toneName;
+
+    self.currentKeyIndex++;
+    self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentKeyIndex];
+    toneName = self.prevButton.tone;
+    [self.prevButton setCurrent:YES];
+    CGRect frame = self.prevButton.frame;
+    if (frame.origin.y > self.scrollView.contentOffset.y + (BUTTON_SIZE + BUTTON_PADDING_V) * 2) {
+        frame.origin.y += self.scrollView.frame.size.height - BUTTON_SIZE;
+        
+        if (self.scrollView.contentSize.height == 0) {
+            CGFloat height;
+            if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+                height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+            } else {
+                height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+            }
+            self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+        }
+        
+        if (frame.origin.y >= self.scrollView.contentSize.height) {
+            frame.origin.y = self.scrollView.contentSize.height - BUTTON_SIZE;
+        }
+        
+        [self.scrollView scrollRectToVisible:frame animated:YES];
+    }
+    
+    [self playTone:toneName];
+}
+
+- (void)toneButtonTouchDown:(MFButton *)sender;
+{
     [self.prevButton setCurrent:NO];
     NSString *toneName;
     if (self.smartMode) {
         [sender setSmart:YES];
 
-        self.currentKeyIndex++;
-        self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentKeyIndex];
-        toneName = self.prevButton.tone;
-        [self.prevButton setCurrent:YES];
-        CGRect frame = self.prevButton.frame;
-        if (frame.origin.y > self.scrollView.contentOffset.y + (BUTTON_SIZE + BUTTON_PADDING_V) * 2) {
-            frame.origin.y += self.scrollView.frame.size.height - BUTTON_SIZE;
-
-            if (self.scrollView.contentSize.height == 0) {
-                CGFloat height;
-                if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-                    height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
-                } else {
-                    height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
-                }
-                self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
-            }
-
-            if (frame.origin.y >= self.scrollView.contentSize.height) {
-                frame.origin.y = self.scrollView.contentSize.height - BUTTON_SIZE;
-            }
-
-            [self.scrollView scrollRectToVisible:frame animated:YES];
-        }
+        [self playNextTone];
         /*
         NSArray *currentLine = [self.tonesArray objectAtIndex:self.currentKeyIndexPath.section];
         if (self.currentKeyIndexPath.row < currentLine.count) {
@@ -910,48 +943,69 @@
     }
 
 //    NSLog(@"%@, tag: %ll", toneName, sender.tag);
-    if (toneName.length > 0) {
-        [self playTone:toneName];
-        self.playCount++;
+    [self playTone:toneName];
+
+    if ((!self.smartMode) && sender.tag >= self.toneCount.integerValue) {
+        self.playCount = 0;
+        if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
+            [self.songInfo incrementKey:@"finishCount"];
+            [self.songInfo saveInBackground];
+        }
+        [self congratulate];
     }
+}
+
+- (void)playTone:(NSString *)name;
+{
+    if (name.length <= 0) {
+        return;
+    }
+
+    [super playTone:name];
+    self.playCount++;
+
     NSLog(@"%ld - %ld", self.toneCount.integerValue, self.playCount);
+    
+    if (self.playCount < self.toneCount.integerValue) {
+        return;
+    }
 
-    if (self.playCount >= self.toneCount.integerValue) {
-        if ((self.smartMode && self.prevButton.tag >= self.toneCount.integerValue)
-            || ((!self.smartMode) && sender.tag >= self.toneCount.integerValue)) {
-
-            if ( (self.smartMode && (! self.isLastTone)) || (!self.smartMode)) {
-                [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
-                //            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
-                self.playCount = 0;
-                if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
-                    [self.songInfo incrementKey:@"finishCount"];
-                    [self.songInfo saveInBackground];
-                }
-            }
-            if (self.smartMode) {
-                [PXAlertView showAlertWithTitle:Local(@"Perfect!")
-                                        message:Local(@"Play again?")
-                                    cancelTitle:Local(@"Cancel")
-                                     otherTitle:Local(@"OK")
-                                     completion:^(BOOL cancelled, NSInteger buttonIndex) {
-                                         if ( ! cancelled) {
-                                             self.isLastTone = NO;
-                                             self.playCount = 0;
-                                             self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                                             self.currentKeyIndex = 0;
-                                         } else {
-                                             self.isLastTone = YES;
-                                             NSInteger section = self.tonesArray.count -1;
-                                             NSInteger row = [self.tonesArray[section] count] -1 ;
-                                             self.playCount = self.toneCount.integerValue - 1;
-                                             self.currentKeyIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-                                             self.currentKeyIndex = self.toneCount.integerValue - 1;
-                                         }
-                                     }];
+    if (self.smartMode && self.prevButton.tag >= self.toneCount.integerValue) {
+        if ( ! self.isLastTone) {
+            [SVProgressHUD showSuccessWithStatus:@"Perfect!"];
+            //            [SVProgressHUD showImage:[UIImage imageNamed:@"star"] status:nil];
+            self.playCount = 0;
+            if ([[self.songInfo class] isSubclassOfClass:[AVObject class]]) {
+                [self.songInfo incrementKey:@"finishCount"];
+                [self.songInfo saveInBackground];
             }
         }
+        [self congratulate];
     }
+}
+
+- (void)congratulate;
+{
+    [PXAlertView showAlertWithTitle:Local(@"Perfect!")
+                            message:Local(@"Play again?")
+                        cancelTitle:Local(@"Cancel")
+                         otherTitle:Local(@"OK")
+                         completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             if ( ! cancelled) {
+                                 self.isLastTone = NO;
+                                 self.playCount = 0;
+                                 self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                                 self.currentKeyIndex = 0;
+                             } else {
+                                 self.isLastTone = YES;
+                                 NSInteger section = self.tonesArray.count -1;
+                                 NSInteger row = [self.tonesArray[section] count] -1 ;
+                                 self.playCount = self.toneCount.integerValue - 1;
+                                 self.currentKeyIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                                 self.currentKeyIndex = self.toneCount.integerValue - 1;
+                             }
+                         }];
+    
 }
 
 /*
@@ -1167,6 +1221,8 @@
     }
 }
 
+#pragma mark - Button Actions
+
 - (void)toggleSingleTapMode {
     self.smartMode= ! self.smartMode;
     if (self.smartMode) {
@@ -1184,6 +1240,18 @@
     }
     self.scrollView.smartMode = self.smartMode;
 //    self.currentKeyIndex = self.prevButton.tag;
+}
+
+- (void)playSong:(UIBarButtonItem *)sender;
+{
+    if (self.timer == nil) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(playNextTone) userInfo:nil repeats:YES];
+        [sender setTitle:Local(@"Pause")];
+    } else {
+        [self.timer invalidate];
+        self.timer = nil;
+        [sender setTitle:Local(@"Play")];
+    }
 }
 
 @end
