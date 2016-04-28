@@ -26,6 +26,7 @@
 //#import <NSData+Base64.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import <Masonry.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
@@ -89,15 +90,6 @@
 - (void)dealloc;
 {
     NSLog(@"dealloc");
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (NSMutableArray *)toneButtonsArray {
@@ -215,15 +207,11 @@
         self.infoLabel.text = @"使用底部的键盘或连接蓝牙键盘，\n按键来谱曲";
         self.infoLabel.textAlignment = NSTextAlignmentCenter;
         [self.scrollView addSubview:self.infoLabel];
-        [self.scrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.scrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.infoLabel attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_infoLabel(==300)]"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:NSDictionaryOfVariableBindings(_infoLabel)]];
-        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[_infoLabel(==50)]"
-                                                                               options:0
-                                                                               metrics:nil
-                                                                                 views:NSDictionaryOfVariableBindings(_infoLabel)]];
+        [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.scrollView);
+            make.top.equalTo(@30);
+            make.size.mas_equalTo(CGSizeMake(300, 50));
+        }];
     } else {
         NSArray *items = @[@"音符", @"简谱", @"键盘"];
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
@@ -258,6 +246,9 @@
                                                              action:@selector(playSong:)];
     
     self.navigationItem.rightBarButtonItems = @[item1, item2];
+    
+    self.textField.delegate = self;
+    self.scrollView.delegate = self;
 }
 
 - (NSArray *)segmentedControlConstraintsFromObject:(id)segmentedControl {
@@ -282,15 +273,11 @@
 
 - (void)viewWillLayoutSubviews {
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.left.equalTo(self.view);
-        make.top.equalTo(self.view);
+        make.top.left.centerX.equalTo(self.view);
         make.bottom.equalTo(self.keyboardView.mas_top);
     }];
     [self.keyboardView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.left.equalTo(self.view);
-        make.bottom.equalTo(self.view);
+        make.left.bottom.centerX.equalTo(self.view);
         make.height.mas_equalTo(self.keyboardViewHeight);
     }];
     [super viewWillLayoutSubviews];
@@ -305,13 +292,6 @@
     if (IOS_7_OR_LATER) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.textField.delegate = self;
-    self.scrollView.delegate = self;
 }
 
 - (NSString *)findFinalPath:(NSString *)path {
@@ -344,8 +324,6 @@
             [self saveContent:self.content atPath:path];
         }
     }
-    self.textField.delegate = nil;
-    self.scrollView.delegate = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated;
@@ -620,14 +598,15 @@
             [SVProgressHUD show];
         }
         AVFile *file = self.songInfo[@"contentFile"];
+        __weak typeof(self) weakSelf = self;
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             [SVProgressHUD dismiss];
             NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if (self.content == nil) {
-                self.content = content;
-                [self layoutButtonsWithContent:self.content];
+            if (weakSelf.content == nil) {
+                weakSelf.content = content;
+                [weakSelf layoutButtonsWithContent:weakSelf.content];
             }
-            [self saveContent:content atPath:path];
+            [weakSelf saveContent:content atPath:path];
         } progressBlock:nil];
     }
 }
@@ -1079,6 +1058,7 @@
 
     NSData *data = [self.content dataUsingEncoding:NSUTF8StringEncoding];
     AVFile *file = [AVFile fileWithName:self.title data:data];
+    __weak typeof(self) weakSelf = self;
     [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error != nil) {
             NSLog(@"%@", error);
@@ -1092,15 +1072,15 @@
 
             AVObject *songInfo = [AVObject objectWithClassName:@"Song"];
 
-            [songInfo setObject:self.title forKey:@"name"];
+            [songInfo setObject:weakSelf.title forKey:@"name"];
             [songInfo setObject:@NO forKey:@"isComposed"];
             [songInfo setObject:[path lastPathComponent] forKey:@"path"];
             [songInfo setObject:file forKey:@"contentFile"];
             [songInfo setObject:[NSDate date] forKey:@"mtime"];
-            if ([self.songInfo objectForKey:@"finishCount"] == nil) {
+            if ([weakSelf.songInfo objectForKey:@"finishCount"] == nil) {
                 msg = @"发布成功！";
-                [self.songInfo setObject:@1 forKey:@"finishCount"];
-                [self.songInfo setObject:@1 forKey:@"viewCount"];
+                [weakSelf.songInfo setObject:@1 forKey:@"finishCount"];
+                [weakSelf.songInfo setObject:@1 forKey:@"viewCount"];
             }
             [songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
             [songInfo setObject:[AVUser currentUser] forKey:@"userid"];
@@ -1108,8 +1088,8 @@
             [SVProgressHUD show];
             [songInfo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [SVProgressHUD dismiss];
-                self.songInfo = songInfo;
-                [self.navigationController popViewControllerAnimated:YES];
+                weakSelf.songInfo = songInfo;
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }];
         }
     }];
@@ -1130,9 +1110,10 @@
     user.username = name;
     user.password =  self.uuid;
 //    user.email = self.uuid;
+    __weak typeof(self) weakSelf = self;
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            [self postSong];
+            [weakSelf postSong];
         } else {
             if (error.code == 202) {
                 [PXAlertView showAlertWithTitle:@"用户名已被占用" message:@"很抱歉，该名字已经有用户使用了，请换一个吧"];
