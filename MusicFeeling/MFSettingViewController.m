@@ -107,7 +107,7 @@
     UILabel *titleLabel = [UILabel new];
     titleLabel.font = [UIFont systemFontOfSize:20];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = [NSString stringWithFormat:@"傻瓜演奏家%@(%@)", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    titleLabel.text = [NSString stringWithFormat:@"演奏家%@(%@)", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
     
     [view addSubview:titleLabel];
 
