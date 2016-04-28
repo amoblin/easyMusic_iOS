@@ -1096,7 +1096,9 @@
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
             [self.scrollView removeConstraints:self.scrollView.constraints];
-            [self.scrollView addConstraints:self.vConstraints];
+            if (self.vConstraints) {
+                [self.scrollView addConstraints:self.vConstraints];
+            }
             [self.scrollView addConstraints:self.segmentedControlConstraints];
             break;
         case UIInterfaceOrientationLandscapeLeft:

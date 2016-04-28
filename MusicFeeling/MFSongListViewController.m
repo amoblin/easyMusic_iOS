@@ -286,13 +286,15 @@
         }];
     } else {
         self.mViewModel.indexPathDataList[1] = [self.mViewModel.indexPathDataList[1] sortedArrayUsingComparator:^NSComparisonResult(AVObject *obj1, AVObject *obj2) {
-            if (obj1[@"finishCount"] == nil) {
-                obj1[@"finishCount"] = 0;
+            NSNumber *f1 = obj1[@"finishCount"];
+            if (f1 == nil) {
+                f1 = @0;
             }
-            if (obj2[@"finishCount"] == nil) {
-                obj2[@"finishCount"] = 0;
+            NSNumber *f2 = obj2[@"finishCount"];
+            if (f2 == nil) {
+                f2 = @0;
             }
-            return [obj2[@"finishCount"] compare:obj1[@"finishCount"]];
+            return [f2 compare:f1];
         }];
     }
     [self.mTableView reloadData];
