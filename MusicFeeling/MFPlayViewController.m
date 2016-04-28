@@ -1079,8 +1079,8 @@
             [songInfo setObject:[NSDate date] forKey:@"mtime"];
             if ([weakSelf.songInfo objectForKey:@"finishCount"] == nil) {
                 msg = @"发布成功！";
-                [weakSelf.songInfo setObject:@1 forKey:@"finishCount"];
-                [weakSelf.songInfo setObject:@1 forKey:@"viewCount"];
+                [songInfo setObject:@1 forKey:@"finishCount"];
+                [songInfo setObject:@1 forKey:@"viewCount"];
             }
             [songInfo setObject:config[@"isDefaultHidden"] forKey:@"isHidden"];
             [songInfo setObject:[AVUser currentUser] forKey:@"userid"];
@@ -1226,7 +1226,7 @@
 - (void)playSong:(UIBarButtonItem *)sender;
 {
     if (self.timer == nil) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(playNextTone) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(playNextTone) userInfo:nil repeats:YES];
         [sender setTitle:Local(@"Pause")];
     } else {
         [self.timer invalidate];
