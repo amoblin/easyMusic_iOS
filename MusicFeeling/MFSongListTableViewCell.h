@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 amoblin. All rights reserved.
 //
 
-#import <DDBaseTableViewData.h>
+#import <DDBaseData.h>
 
 @class AVObject;
 

@@ -16,6 +16,6 @@ target "MusicFeeling" do
   pod 'AVOSCloud'
   pod 'AVOSCloudSNS'
 
-  pod 'DDBrick'
+  pod 'DDBrick', :path => "../DDBrick"
   pod 'WANetwork', :podspec => 'https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec'
 end
