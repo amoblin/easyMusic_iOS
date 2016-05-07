@@ -182,6 +182,7 @@
 
         [self.songInfo incrementKey:@"viewCount"];
         [self.songInfo saveInBackground];
+        self.compositionView.editable = YES;
     }
 
     self.isFirst = YES;
@@ -1175,7 +1176,8 @@
 
 #pragma mark - MFKeyboard View Delegate
 
-- (void)tonePressed:(NSString *)toneName {
+- (void)tonePressed:(NSString *)toneName;
+{
     [self playTone:toneName];
     if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
         [self.infoLabel setHidden:YES];

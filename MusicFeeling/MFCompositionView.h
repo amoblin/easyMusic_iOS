@@ -14,6 +14,8 @@
 
 - (void)toneButtonTouchDown:(MFButton *)sender;
 
+- (void)tonePressed:(NSString *)toneName;
+
 @end
 
 @interface MFCompositionView : UIScrollView <UIKeyInput>

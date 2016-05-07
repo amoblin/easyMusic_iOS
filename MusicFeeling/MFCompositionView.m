@@ -112,4 +112,21 @@
     return NO;
 }
 
+- (void)deleteBackward
+{
+    NSLog(@"delete ");
+}
+
+- (void)insertText:(NSString *)text
+{
+    if ([self.pianoDelegate respondsToSelector:@selector(tonePressed:)]) {
+        [self.pianoDelegate tonePressed:text];
+    }
+}
+
+- (BOOL)hasText
+{
+    return YES;
+}
+
 @end
