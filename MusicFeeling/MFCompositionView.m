@@ -1,5 +1,5 @@
 //
-//  MFPianoScrollView.m
+//  MFCompositionView.m
 //  MusicFeeling
 //
 //  Created by amoblin on 14/12/11.

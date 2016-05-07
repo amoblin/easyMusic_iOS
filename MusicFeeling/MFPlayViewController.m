@@ -139,7 +139,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.compositionView = [MFCompositionView new];
-//    self.scrollView.backgroundColor = [UIColor grayColor];
 
     self.compositionView.scrollEnabled = YES;
     self.compositionView.showsVerticalScrollIndicator = YES;
@@ -149,7 +148,6 @@
     self.compositionView.delaysContentTouches = NO;
     self.compositionView.delegate = self;
     self.compositionView.pianoDelegate = self;
-    self.compositionView.smartMode = self.smartMode;
     [self.view addSubview:self.compositionView];
     
     if (self.isNew) {
@@ -177,6 +175,7 @@
         self.compositionView.editable = YES;
     } else {
         self.smartMode = YES;
+        self.compositionView.smartMode = YES;
         self.UMPageName = @"曲目详情";
         self.keyboardViewHeight = @0;
 
