@@ -14,9 +14,9 @@
 #import "UIImage+Color.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define XOFFSET 15
-#define YOFFSET 10
-#define BUTTON_SIZE 44
+#define XOFFSET 10
+#define YOFFSET 8
+#define BUTTON_SIZE 50
 #define BUTTON_PADDING_H -5
 #define BUTTON_PADDING_V 0
 #define BUTTON_WRAP_LINE_V -7
@@ -50,7 +50,10 @@
         self.currentIndex = 0;
         self.currentY = YOFFSET;
         self.currentX = XOFFSET;
-        self.tonesArray = [NSArray arrayWithK2KString:@"C5 D5 E5 F5 G5 A5 B5\n C4 D4 E4 F4 G4 A4 B4\n C3 D3 E3 F3 G3 A3 B3"];
+        self.tonesArray = [NSArray arrayWithK2KString:@"C6 D6 E6 F6 G6 A6 B6\n\
+                           C5 D5 E5 F5 G5 A5 B5\n\
+                           C4 D4 E4 F4 G4 A4 B4\n\
+                           C3 D3 E3 F3 G3 A3 B3"];
 
         self.delButton = [UIButton new];
         [self.delButton setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
@@ -110,7 +113,7 @@
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_returnButton)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_delButton(==44)]-(40)-[_returnButton(==44)]"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_delButton(==44)]-(50)-[_returnButton(==44)]"
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(_delButton, _returnButton)]];
@@ -164,6 +167,7 @@
 - (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
+    [button setBackgroundImage:[UIImage imageNamed:@"circle_gray"] forState:UIControlStateNormal];
     button.layer.borderWidth = 0;
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     /*

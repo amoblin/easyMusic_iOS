@@ -134,6 +134,7 @@
 		DABE633C1CC2947D004714F2 /* WATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE63371CC2947D004714F2 /* WATableViewCell.m */; };
 		DABE633D1CC2947D004714F2 /* WATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE63391CC2947D004714F2 /* WATableViewController.m */; };
 		DABE633E1CC2947D004714F2 /* WAViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE633B1CC2947D004714F2 /* WAViewModel.m */; };
+		DAD682C41CDDD00C00820D04 /* circle_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD682C31CDDD00C00820D04 /* circle_gray@2x.png */; };
 		DADCEE8F18DD23730044455D /* music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCEE8E18DD23730044455D /* music@2x.png */; };
 		DADCEE9218E003FE0044455D /* MFPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9118E003FE0044455D /* MFPlayViewController.m */; };
 		DADCEE9518E004350044455D /* MFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCEE9418E004350044455D /* MFBaseViewController.m */; };
@@ -303,6 +304,7 @@
 		DABE63391CC2947D004714F2 /* WATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WATableViewController.m; sourceTree = "<group>"; };
 		DABE633A1CC2947D004714F2 /* WAViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAViewModel.h; sourceTree = "<group>"; };
 		DABE633B1CC2947D004714F2 /* WAViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAViewModel.m; sourceTree = "<group>"; };
+		DAD682C31CDDD00C00820D04 /* circle_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_gray@2x.png"; sourceTree = "<group>"; };
 		DADCEE8E18DD23730044455D /* music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music@2x.png"; sourceTree = "<group>"; };
 		DADCEE9018E003FE0044455D /* MFPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPlayViewController.h; sourceTree = "<group>"; };
 		DADCEE9118E003FE0044455D /* MFPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPlayViewController.m; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				DADD01281956671E0073C8B7 /* return@2x.png */,
 				DA4020F819126015003D593C /* treble_clef@2x.png */,
 				DADCEE8E18DD23730044455D /* music@2x.png */,
+				DAD682C31CDDD00C00820D04 /* circle_gray@2x.png */,
 				DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */,
 				DA2EF15D18EFB89800DC1617 /* Piano */,
 			);
@@ -760,6 +763,7 @@
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
 				DAB7C6C61C6F6571004B3070 /* PushConfig.plist in Resources */,
+				DAD682C41CDDD00C00820D04 /* circle_gray@2x.png in Resources */,
 				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
 				DA2EF20918EFB89800DC1617 /* g5m.mp3 in Resources */,

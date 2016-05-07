@@ -154,12 +154,12 @@
     
     if (self.isNew) {
         self.UMPageName = @"创作曲目";
-        self.keyboardViewHeight = @152;
+        self.keyboardViewHeight = @216;
         self.songInfo = [AVObject objectWithClassName:@"Song"];
         self.compositionView.editable = YES;
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         self.UMPageName = @"修改详情";
-        self.keyboardViewHeight = @152;
+        self.keyboardViewHeight = @216;
 
         if ([AVUser currentUser] != nil) {
             AVQuery *query = [AVQuery queryWithClassName:@"Song"];
