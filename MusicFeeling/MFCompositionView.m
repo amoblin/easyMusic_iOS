@@ -6,17 +6,17 @@
 //  Copyright (c) 2014年 amoblin. All rights reserved.
 //
 
-#import "MFPianoScrollView.h"
+#import "MFCompositionView.h"
 #import "MFButton.h"
 
-@interface MFPianoScrollView()
+@interface MFCompositionView()
 
 @property (strong, nonatomic) MFButton *previousKey;
 @property (strong, nonatomic) MFButton *currentKey;
 
 @end
 
-@implementation MFPianoScrollView
+@implementation MFCompositionView
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -104,6 +104,12 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.currentKey setCurrent:NO];
     [self.previousKey setCurrent:NO];
+    [self becomeFirstResponder];
+}
+
+- (BOOL)canBecomeFirstResponder {
+    if (self.editable) return YES;
+    return NO;
 }
 
 @end

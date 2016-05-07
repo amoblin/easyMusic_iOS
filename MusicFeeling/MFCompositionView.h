@@ -16,8 +16,9 @@
 
 @end
 
-@interface MFPianoScrollView : UIScrollView
+@interface MFCompositionView : UIScrollView <UIKeyInput>
 
+@property (nonatomic, assign) BOOL editable;
 @property (nonatomic, assign) BOOL smartMode;
 @property (weak, nonatomic) NSObject <MFPianoScrollViewDelegate> *pianoDelegate;
 @end

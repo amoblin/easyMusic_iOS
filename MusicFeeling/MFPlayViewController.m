@@ -11,7 +11,7 @@
 #import "SLNavigationItem.h"
 #import "MFKeyboardView.h"
 #import "MFButton.h"
-#import "MFPianoScrollView.h"
+#import "MFCompositionView.h"
 
 #import "NSArray+K2K.h"
 
@@ -45,7 +45,7 @@
 @property (strong, nonatomic) NSMutableArray *tonesArray;
 @property (strong, nonatomic) NSNumber *toneCount;
 @property (strong, nonatomic) NSMutableArray *buttonPool;
-@property (strong, nonatomic) MFPianoScrollView *scrollView;
+@property (strong, nonatomic) MFCompositionView *compositionView;
 @property (strong, nonatomic) MFKeyboardView *keyboardView;
 
 @property (strong, nonatomic) NSNumber *keyboardViewHeight;
@@ -137,10 +137,26 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.compositionView = [MFCompositionView new];
+//    self.scrollView.backgroundColor = [UIColor grayColor];
+
+    self.compositionView.scrollEnabled = YES;
+    self.compositionView.showsVerticalScrollIndicator = YES;
+    self.compositionView.bounces = YES;
+    self.compositionView.alwaysBounceVertical = YES;
+    self.compositionView.autoresizesSubviews = YES;
+    self.compositionView.delaysContentTouches = NO;
+    self.compositionView.delegate = self;
+    self.compositionView.pianoDelegate = self;
+    self.compositionView.smartMode = self.smartMode;
+    [self.view addSubview:self.compositionView];
+    
     if (self.isNew) {
         self.UMPageName = @"创作曲目";
         self.keyboardViewHeight = @152;
         self.songInfo = [AVObject objectWithClassName:@"Song"];
+        self.compositionView.editable = YES;
     } else if ([self.songInfo[@"isComposed"] boolValue]) {
         self.UMPageName = @"修改详情";
         self.keyboardViewHeight = @152;
@@ -158,6 +174,7 @@
                 }
             }];
         }
+        self.compositionView.editable = YES;
     } else {
         self.smartMode = YES;
         self.UMPageName = @"曲目详情";
@@ -181,20 +198,6 @@
     self.extendedLayoutIncludesOpaqueBars=NO;
     self.automaticallyAdjustsScrollViewInsets=NO;
 
-    self.scrollView = [MFPianoScrollView new];
-//    self.scrollView.backgroundColor = [UIColor grayColor];
-
-    self.scrollView.scrollEnabled = YES;
-    self.scrollView.showsVerticalScrollIndicator = YES;
-    self.scrollView.bounces = YES;
-    self.scrollView.alwaysBounceVertical = YES;
-    self.scrollView.autoresizesSubviews = YES;
-    self.scrollView.delaysContentTouches = NO;
-    self.scrollView.delegate = self;
-    self.scrollView.pianoDelegate = self;
-    self.scrollView.smartMode = self.smartMode;
-    [self.view addSubview:self.scrollView];
-
     self.keyboardView = [MFKeyboardView autolayoutView];
     self.keyboardView.tag = 1;
     self.keyboardView.interfaceOrientation = self.interfaceOrientation;
@@ -206,9 +209,9 @@
         self.infoLabel.numberOfLines = 0;
         self.infoLabel.text = @"使用底部的键盘或连接蓝牙键盘，\n按键来谱曲";
         self.infoLabel.textAlignment = NSTextAlignmentCenter;
-        [self.scrollView addSubview:self.infoLabel];
+        [self.compositionView addSubview:self.infoLabel];
         [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.scrollView);
+            make.centerX.equalTo(self.compositionView);
             make.top.equalTo(@30);
             make.size.mas_equalTo(CGSizeMake(300, 50));
         }];
@@ -218,9 +221,9 @@
         segmentedControl.selectedSegmentIndex = 0;
         [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
         segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.scrollView addSubview:segmentedControl];
+        [self.compositionView addSubview:segmentedControl];
         self.segmentedControlConstraints = [self segmentedControlConstraintsFromObject:segmentedControl];
-        [self.scrollView addConstraints:self.segmentedControlConstraints];
+        [self.compositionView addConstraints:self.segmentedControlConstraints];
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
@@ -248,12 +251,12 @@
     self.navigationItem.rightBarButtonItems = @[item1, item2];
     
     self.textField.delegate = self;
-    self.scrollView.delegate = self;
+    self.compositionView.delegate = self;
 }
 
 - (NSArray *)segmentedControlConstraintsFromObject:(id)segmentedControl {
     NSMutableArray *array = [NSMutableArray new];
-    [array addObject:[NSLayoutConstraint constraintWithItem:self.scrollView
+    [array addObject:[NSLayoutConstraint constraintWithItem:self.compositionView
                                  attribute:NSLayoutAttributeCenterX
                                  relatedBy:NSLayoutRelationEqual
                                     toItem:segmentedControl
@@ -272,7 +275,7 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.compositionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.centerX.equalTo(self.view);
         make.bottom.equalTo(self.keyboardView.mas_top);
     }];
@@ -494,11 +497,11 @@
                 continue;
             }
 //            NSLog(@"layout item: %@", item);
-            button = (MFButton *)[self.scrollView viewWithTag:self.currentIndex+1];
+            button = (MFButton *)[self.compositionView viewWithTag:self.currentIndex+1];
             if (button == nil) {
 //                NSLog(@"create new button");
                 button = [self createButtonWithTitle:item andType:0];
-                [self.scrollView addSubview:button];
+                [self.compositionView addSubview:button];
             } else {
                 self.currentIndex++;
             }
@@ -532,11 +535,11 @@
     switch (self.interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            [self.scrollView addConstraints:self.vConstraints];
+            [self.compositionView addConstraints:self.vConstraints];
             break;
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
-            [self.scrollView addConstraints:self.hConstraints];
+            [self.compositionView addConstraints:self.hConstraints];
             break;
         default:
             break;
@@ -687,24 +690,24 @@
 - (void) adjustOffsetWithFlag:(BOOL)flag {
     CGFloat height;
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-        height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+        height = MAX(self.compositionView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
     } else {
-        height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+        height = MAX(self.compositionView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
     }
     if (flag) {
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
+        self.compositionView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
     }
 
-    CGFloat offset = height - self.scrollView.bounds.size.height;
+    CGFloat offset = height - self.compositionView.bounds.size.height;
     CGPoint bottomOffset = CGPointMake(0, offset);
-    [self.scrollView setContentOffset:bottomOffset animated:YES];
+    [self.compositionView setContentOffset:bottomOffset animated:YES];
 }
 
 - (void)addTone:(NSString *)toneName {
     [self addToContent:toneName];
     MFButton *button = [self createButtonWithTitle:toneName andType:self.toneStyle];
-    [self.scrollView addSubview:button];
-    [self.scrollView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
+    [self.compositionView addSubview:button];
+    [self.compositionView addConstraints:[self layoutButton:button forInterfaceOrientation:self.interfaceOrientation]];
 
     [self adjustOffsetWithFlag:YES];
 }
@@ -715,17 +718,17 @@
     if ([keyCommand.input isEqualToString:@" "]) {
         CGFloat offset;
         if (keyCommand.modifierFlags == UIKeyModifierShift) {
-            offset = self.scrollView.contentOffset.y - self.scrollView.frame.size.height * 0.8;
+            offset = self.compositionView.contentOffset.y - self.compositionView.frame.size.height * 0.8;
             if ( offset <= 0) {
                 offset = 0;
             }
         } else {
-            offset = self.scrollView.contentOffset.y + self.scrollView.frame.size.height * 0.8;
-            if (offset + self.scrollView.bounds.size.height > self.scrollView.contentSize.height) {
-                offset = self.scrollView.contentSize.height - self.scrollView.bounds.size.height;
+            offset = self.compositionView.contentOffset.y + self.compositionView.frame.size.height * 0.8;
+            if (offset + self.compositionView.bounds.size.height > self.compositionView.contentSize.height) {
+                offset = self.compositionView.contentSize.height - self.compositionView.bounds.size.height;
             }
         }
-        self.scrollView.contentOffset = CGPointMake(0, offset);
+        self.compositionView.contentOffset = CGPointMake(0, offset);
         return;
     }
     if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
@@ -811,7 +814,7 @@
             return;
         }
         self.currentIndex--;
-        self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentIndex];
+        self.prevButton = (MFButton *)[self.compositionView viewWithTag:self.currentIndex];
     }
     [self adjustOffsetWithFlag:NO];
 }
@@ -858,28 +861,28 @@
     NSString *toneName;
 
     self.currentKeyIndex++;
-    self.prevButton = (MFButton *)[self.scrollView viewWithTag:self.currentKeyIndex];
+    self.prevButton = (MFButton *)[self.compositionView viewWithTag:self.currentKeyIndex];
     toneName = self.prevButton.tone;
     [self.prevButton setCurrent:YES];
     CGRect frame = self.prevButton.frame;
-    if (frame.origin.y > self.scrollView.contentOffset.y + (BUTTON_SIZE + BUTTON_PADDING_V) * 2) {
-        frame.origin.y += self.scrollView.frame.size.height - BUTTON_SIZE;
+    if (frame.origin.y > self.compositionView.contentOffset.y + (BUTTON_SIZE + BUTTON_PADDING_V) * 2) {
+        frame.origin.y += self.compositionView.frame.size.height - BUTTON_SIZE;
         
-        if (self.scrollView.contentSize.height == 0) {
+        if (self.compositionView.contentSize.height == 0) {
             CGFloat height;
             if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-                height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+                height = MAX(self.compositionView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
             } else {
-                height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+                height = MAX(self.compositionView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
             }
-            self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+            self.compositionView.contentSize = CGSizeMake(self.view.frame.size.width, height);
         }
         
-        if (frame.origin.y >= self.scrollView.contentSize.height) {
-            frame.origin.y = self.scrollView.contentSize.height - BUTTON_SIZE;
+        if (frame.origin.y >= self.compositionView.contentSize.height) {
+            frame.origin.y = self.compositionView.contentSize.height - BUTTON_SIZE;
         }
         
-        [self.scrollView scrollRectToVisible:frame animated:YES];
+        [self.compositionView scrollRectToVisible:frame animated:YES];
     }
     
     [self playTone:toneName];
@@ -1130,17 +1133,17 @@
     switch (toInterfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            [self.scrollView removeConstraints:self.scrollView.constraints];
+            [self.compositionView removeConstraints:self.compositionView.constraints];
             if (self.vConstraints) {
-                [self.scrollView addConstraints:self.vConstraints];
+                [self.compositionView addConstraints:self.vConstraints];
             }
-            [self.scrollView addConstraints:self.segmentedControlConstraints];
+            [self.compositionView addConstraints:self.segmentedControlConstraints];
             break;
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
-            [self.scrollView removeConstraints:self.scrollView.constraints];
-            [self.scrollView addConstraints:self.hConstraints];
-            [self.scrollView addConstraints:self.segmentedControlConstraints];
+            [self.compositionView removeConstraints:self.compositionView.constraints];
+            [self.compositionView addConstraints:self.hConstraints];
+            [self.compositionView addConstraints:self.segmentedControlConstraints];
             break;
         default:
             break;
@@ -1150,11 +1153,11 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     CGFloat height;
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-        height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+        height = MAX(self.compositionView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
     } else {
-        height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+        height = MAX(self.compositionView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
     }
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
+    self.compositionView.contentSize = CGSizeMake(self.view.frame.size.width,  height);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -1162,11 +1165,11 @@
     if (scrollView.contentSize.height == 0) {
         CGFloat height;
         if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-            height = MAX(self.scrollView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
+            height = MAX(self.compositionView.frame.size.height, self.currentY + BUTTON_SIZE + BUTTON_PADDING_V);
         } else {
-            height = MAX(self.scrollView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
+            height = MAX(self.compositionView.frame.size.height, self.currentY_H + BUTTON_SIZE + BUTTON_PADDING_V);
         }
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+        self.compositionView.contentSize = CGSizeMake(self.view.frame.size.width, height);
     }
 }
 
@@ -1195,7 +1198,7 @@
     self.currentKeyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     self.currentKeyIndex = 0;
 
-    for (id item in self.scrollView.subviews) {
+    for (id item in self.compositionView.subviews) {
         if ([[item class] isSubclassOfClass:[MFButton class]]) {
             [(MFButton *)item setStyle:self.toneStyle];
         }
@@ -1219,7 +1222,7 @@
                                                                                  target:self
                                                                                  action:@selector(toggleSingleTapMode)];
     }
-    self.scrollView.smartMode = self.smartMode;
+    self.compositionView.smartMode = self.smartMode;
 //    self.currentKeyIndex = self.prevButton.tag;
 }
 
