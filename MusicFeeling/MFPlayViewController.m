@@ -182,7 +182,6 @@
 
         [self.songInfo incrementKey:@"viewCount"];
         [self.songInfo saveInBackground];
-        self.compositionView.editable = YES;
     }
 
     self.isFirst = YES;

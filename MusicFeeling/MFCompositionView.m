@@ -18,14 +18,6 @@
 
 @implementation MFCompositionView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
@@ -124,7 +116,7 @@
 - (void)insertText:(NSString *)text
 {
     if ([self.pianoDelegate respondsToSelector:@selector(tonePressed:)]) {
-        [self.pianoDelegate tonePressed:text];
+        [self.pianoDelegate tonePressed:[text stringByReplacingOccurrencesOfString:@" " withString:@""]];
     }
 }
 

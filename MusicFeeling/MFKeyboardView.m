@@ -55,21 +55,21 @@
                            C4 D4 E4 F4 G4 A4 B4\n\
                            C3 D3 E3 F3 G3 A3 B3"];
 
-        self.delButton = [UIButton new];
+        self.delButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.delButton setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
         [self.delButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
         [self.delButton addTarget:self action:@selector(delButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.delButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//        [self.delButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 //        [self.delButton setBackgroundColor:[UIColor grayColor]];
         self.delButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.delButton];
 
-        self.returnButton = [UIButton new];
-        [self.returnButton setTitle:@"换行" forState:UIControlStateNormal];
+        self.returnButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.returnButton setImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
         [self.returnButton setImageEdgeInsets:UIEdgeInsetsMake(15, 10, 10, 15)];
         [self.returnButton addTarget:self action:@selector(returnButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.returnButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//        [self.returnButton setTitle:@"换行" forState:UIControlStateNormal];
+//        [self.returnButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 //        [self.returnButton setBackgroundColor:[UIColor grayColor]];
         self.returnButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.returnButton];
