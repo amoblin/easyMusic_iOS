@@ -104,7 +104,11 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.currentKey setCurrent:NO];
     [self.previousKey setCurrent:NO];
-    [self becomeFirstResponder];
+    if (self.isFirstResponder) {
+        [self resignFirstResponder];
+    } else {
+        [self becomeFirstResponder];
+    }
 }
 
 - (BOOL)canBecomeFirstResponder {

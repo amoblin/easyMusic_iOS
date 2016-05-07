@@ -147,6 +147,11 @@
     return _router;
 }
 
+- (NSDictionary *)getFilteredDictWithFilter:(NSString *)filter;
+{
+    return [self getFilteredDict:self.mapper withFilter:filter];
+}
+
 - (NSDictionary *)getFilteredDict:(NSDictionary *)dict withFilter:(NSString *)filter {
     NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:filter] invertedSet];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:dict];

@@ -8,6 +8,7 @@
 
 #import "MFBaseViewController.h"
 #import "MFAppDelegate.h"
+#import "MFUtils.h"
 
 #import <UMengAnalytics/MobClick.h>
 
@@ -61,19 +62,6 @@
     delegate.playCount = playCount;
 }
 
-- (NSDictionary *)getFilteredDict:(NSDictionary *)dict withFilter:(NSString *)filter {
-    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:filter] invertedSet];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:dict];
-    for (NSString *key in dict.allKeys) {
-        if ([key rangeOfCharacterFromSet:set].location != NSNotFound) {
-            //NSLog(@"This string contains illegal characters");
-            [dic removeObjectForKey:key];
-            continue;
-        }
-    }
-    return dic;
-}
-
 - (NSDictionary *)reverseDict:(NSDictionary *)dict {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:50];
     for (NSString *key in dict.allKeys) {
@@ -91,10 +79,10 @@
     return YES;
 }
 
-- (NSArray *)keyCommands {
+- (NSArray<UIKeyCommand *> *)keyCommands {
     if (_keyCommandArray == nil) {
         NSString *filter = @"abcdefghijklmnopqrstuvwxyz0123456789-=[]\\;',./";
-        NSDictionary *dic = [self getFilteredDict:self.mapper withFilter:filter];
+        NSDictionary *dic = [[MFUtils sharedInstance] getFilteredDictWithFilter:filter];
 
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:50];
         NSArray *keys = [dic allKeys];
