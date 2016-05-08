@@ -49,7 +49,6 @@
 @property (strong, nonatomic) MFKeyboardView *keyboardView;
 
 @property (strong, nonatomic) NSNumber *keyboardViewHeight;
-@property (strong, nonatomic) UILabel *infoLabel;
 @property (strong, nonatomic) NSArray *vConstraints;
 @property (strong, nonatomic) NSArray *hConstraints;
 @property (strong, nonatomic) NSArray *segmentedControlConstraints;
@@ -203,27 +202,14 @@
     self.keyboardView.delegate = self;
     [self.view addSubview:self.keyboardView];
 
-    if (self.isNew) {
-        self.infoLabel = [UILabel autolayoutView];
-        self.infoLabel.numberOfLines = 0;
-        self.infoLabel.text = @"使用底部的键盘或连接蓝牙键盘，\n按键来谱曲";
-        self.infoLabel.textAlignment = NSTextAlignmentCenter;
-        [self.compositionView addSubview:self.infoLabel];
-        [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.compositionView);
-            make.top.equalTo(@30);
-            make.size.mas_equalTo(CGSizeMake(300, 50));
-        }];
-    } else {
-        NSArray *items = @[@"音符", @"简谱", @"键盘"];
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
-        segmentedControl.selectedSegmentIndex = 0;
-        [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.compositionView addSubview:segmentedControl];
-        self.segmentedControlConstraints = [self segmentedControlConstraintsFromObject:segmentedControl];
-        [self.compositionView addConstraints:self.segmentedControlConstraints];
-    }
+    NSArray *items = @[@"音符", @"简谱", @"键盘"];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
+    segmentedControl.selectedSegmentIndex = 0;
+    [segmentedControl addTarget:self action:@selector(valueChangedAction:) forControlEvents:UIControlEventValueChanged];
+    segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.compositionView addSubview:segmentedControl];
+    self.segmentedControlConstraints = [self segmentedControlConstraintsFromObject:segmentedControl];
+    [self.compositionView addConstraints:self.segmentedControlConstraints];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:@"textFieldDidEndEditingNotification" object:nil];
     UIBarButtonItem *item1;
@@ -746,7 +732,6 @@
         return;
     }
     if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
-        [self.infoLabel setHidden:YES];
         if ([keyCommand.input isEqualToString:@"\r"]) {
             [self addReturnTone];
             return;
@@ -1193,7 +1178,6 @@
 {
     [self playTone:toneName];
     if (self.isNew || [self.songInfo[@"isComposed"] boolValue]) {
-        [self.infoLabel setHidden:YES];
         [self addTone:toneName];
     }
 }
