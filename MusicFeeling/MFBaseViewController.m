@@ -70,6 +70,12 @@
     return dic;
 }
 
+- (void)triggerNote:(NSUInteger)note isOn:(BOOL)isOn;
+{
+    MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate triggerNote:note isOn:isOn];
+}
+
 - (void)playTone:(NSString *)toneName {
     MFAppDelegate *delegate = (MFAppDelegate *)[[UIApplication sharedApplication] delegate];
     [delegate playTone:toneName];

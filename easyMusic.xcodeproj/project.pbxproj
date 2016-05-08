@@ -147,6 +147,10 @@
 		DAF5325D1CDF6E4B00E69CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF5325B1CDF6E4B00E69CAD /* Main.storyboard */; };
 		DAF5325F1CDF6E4B00E69CAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAF5325E1CDF6E4B00E69CAD /* Assets.xcassets */; };
 		DAF532621CDF6E4B00E69CAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF532601CDF6E4B00E69CAD /* LaunchScreen.storyboard */; };
+		DAF532681CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */; };
+		DAF532691CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */; };
+		DAF5326B1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */; };
+		DAF5326C1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -326,6 +330,8 @@
 		DAF5325E1CDF6E4B00E69CAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAF532611CDF6E4B00E69CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAF532631CDF6E4B00E69CAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS SoftSynth v1.44.sf2"; sourceTree = "<group>"; };
+		DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimGM6mb.sf2; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,6 +558,8 @@
 		DA527CD918D3E6E0009A825E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */,
+				DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */,
 				DABB801419839E6A00F09368 /* blue@2x.png */,
 				DABB801219839E6400F09368 /* green@2x.png */,
 				DAEB10FF196EBBF300ADC956 /* circle@2x.png */,
@@ -809,6 +817,7 @@
 				DA2EF20118EFB89800DC1617 /* g1m.mp3 in Resources */,
 				DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */,
 				DA2EF1FD18EFB89800DC1617 /* f6m.mp3 in Resources */,
+				DAF532681CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */,
 				DA2EF20018EFB89800DC1617 /* g1.mp3 in Resources */,
 				DABB801519839E6A00F09368 /* blue@2x.png in Resources */,
 				DA2EF1E118EFB89800DC1617 /* d3.mp3 in Resources */,
@@ -820,6 +829,7 @@
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
 				DAB7C6C61C6F6571004B3070 /* PushConfig.plist in Resources */,
+				DAF5326B1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */,
 				DAD682C41CDDD00C00820D04 /* circle_gray@2x.png in Resources */,
 				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
@@ -833,8 +843,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAF532621CDF6E4B00E69CAD /* LaunchScreen.storyboard in Resources */,
+				DAF532691CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */,
 				DAF5325F1CDF6E4B00E69CAD /* Assets.xcassets in Resources */,
 				DAF5325D1CDF6E4B00E69CAD /* Main.storyboard in Resources */,
+				DAF5326C1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

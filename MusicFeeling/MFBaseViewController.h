@@ -20,5 +20,6 @@
 - (void)keyPressed:(UIKeyCommand *)keyCommand;
 
 - (void)playTone:(NSString *)name;
+- (void)triggerNote:(NSUInteger)note isOn:(BOOL)isOn;
 - (NSString *)getPreviousHalfTone:(NSString *)tone;
 @end

@@ -19,8 +19,15 @@
 
 #import <AVOSCloud/AVOSCloud.h>
 
+#import <AudioToolbox/AudioToolbox.h>
+
 @interface MFAppDelegate()
+
 @property (nonatomic, strong) NSMutableArray *playerCache;
+
+@property (nonatomic, assign) AUGraph AUGraph;
+@property (nonatomic, assign) AudioUnit samplerUnit;
+
 @end
 
 @implementation MFAppDelegate
@@ -107,8 +114,105 @@
          |UIRemoteNotificationTypeAlert];
     }
 
+    [self prepareAUGraph];
+    [self loadSamplerPath:2];
+    [self noteOn:@21 velocity:@127];
+//    [self noteOn:<#(NSNumber *)#> velocity:@0];
     return YES;
 }
+
+- (void)prepareAUGraph {
+    OSStatus err;
+
+    AUNode samplerNode;
+    AUNode remoteOutputNode;
+
+    NewAUGraph(&_AUGraph);
+    AUGraphOpen(_AUGraph);
+
+    AudioComponentDescription cd;
+    cd.componentType = kAudioUnitType_Output;
+    cd.componentSubType =  kAudioUnitSubType_RemoteIO;
+    cd.componentManufacturer = kAudioUnitManufacturer_Apple;
+    cd.componentFlags = cd.componentFlagsMask = 0;
+
+    err = AUGraphAddNode(_AUGraph, &cd, &remoteOutputNode);
+    if (err) {
+        NSLog(@"err = %ld", err);
+    }
+    cd.componentType = kAudioUnitType_MusicDevice;
+    cd.componentSubType = kAudioUnitSubType_Sampler;
+    err = AUGraphAddNode(_AUGraph, &cd, &samplerNode);
+    if (err) {
+        NSLog(@"err = %ld", err);
+    }
+    err = AUGraphConnectNodeInput(_AUGraph, samplerNode, 0, remoteOutputNode, 0);
+    if (err) {
+        NSLog(@"err = %ld", err);
+    }
+
+    err = AUGraphInitialize(_AUGraph);
+    if (err) {
+        NSLog(@"err = %ld", err);
+    }
+    err = AUGraphStart(_AUGraph);
+    if (err) {
+        NSLog(@"err = %ld", err);
+    }
+
+    err = AUGraphNodeInfo(_AUGraph,
+                          samplerNode,
+                          NULL,
+                          &_samplerUnit);
+    if (err) {
+        NSLog(@"err = %ld", err);
+    }
+}
+
+- (void)noteOn:(NSNumber *)noteNumber velocity:(NSNumber *)velocityNumber {
+    NSUInteger note = [noteNumber integerValue];
+    NSUInteger velocity = [velocityNumber integerValue];
+    MusicDeviceMIDIEvent(_samplerUnit,
+                         0x90,
+                         note,
+                         velocity,
+                         0);
+}
+
+
+- (void)loadSamplerPath:(int)pathId {
+    NSURL *presetURL;
+//    presetURL = [[NSBundle mainBundle] URLForResource:@"GeneralUser GS SoftSynth v1.44"
+    presetURL = [[NSBundle mainBundle] URLForResource:@"TimGM6mb"
+                                        withExtension:@"sf2"];
+    [self loadFromDLSOrSoundFont:presetURL withPatch:30];
+}
+
+
+- (OSStatus)loadFromDLSOrSoundFont:(NSURL *)bankURL withPatch:(int)presetNumber {
+    OSStatus result = noErr;
+    // fill out a bank preset data structure
+    AUSamplerBankPresetData bpdata;
+    bpdata.bankURL  = (__bridge CFURLRef)bankURL;
+    bpdata.bankMSB  = kAUSampler_DefaultMelodicBankMSB;
+    bpdata.bankLSB  = kAUSampler_DefaultBankLSB;
+    bpdata.presetID = (UInt8)presetNumber;
+
+    // set the kAUSamplerProperty_LoadPresetFromBank property
+    result = AudioUnitSetProperty(_samplerUnit,
+                                  kAUSamplerProperty_LoadPresetFromBank,
+                                  kAudioUnitScope_Global,
+                                  0,
+                                  &bpdata,
+                                  sizeof(bpdata));
+    // check for errors
+    NSCAssert(result == noErr,
+              @"Unable to set the preset property on the Sampler. Error code:%d '%.4s'",
+              (int)result,
+              (const char *)&result);
+    return result;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -182,6 +286,12 @@
 
 
 // for MFBaseViewControll using
+
+- (void)triggerNote:(NSUInteger)note isOn:(BOOL)isOn;
+{
+    [self noteOn:@(note) velocity:isOn ? @127: @0];
+}
+
 - (void)playTone:(NSString *)name {
     NSLog(@"%@", name);
     NSURL *resourceURL;
