@@ -360,7 +360,10 @@
     return path;
 }
 
-- (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
+#pragma mark - Tone Flow Layout
+
+- (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type;
+{
     self.currentIndex++;
     if (self.buttonPool.count > 0) {
         MFButton *button = self.buttonPool[0];
@@ -383,7 +386,8 @@
     }
 }
 
-- (NSArray *)layoutButton:(MFButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (NSArray *)layoutButton:(MFButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+{
     NSMutableArray *array = [[NSMutableArray alloc] init];
     CGFloat width, currentX=self.currentX, currentY=self.currentY;
     BOOL isFirst;
@@ -440,6 +444,16 @@
         default:
             break;
     }
+    
+    /*
+    // 测试添加后是否越界
+    if (self.currentX + 50 > width) {
+        self.currentX = XOFFSET;
+        self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+        self.isFirst = YES;
+    }
+     */
+
     if (isFirst) {
         self.isFirst = NO;
         self.isFirst_H = NO;
@@ -466,7 +480,8 @@
     return array;
 }
 
-- (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+{
     NSMutableArray *array = [[NSMutableArray alloc] init];
     self.currentIndex = 0;
     if (interfaceOrientation == UIInterfaceOrientationPortrait) {
@@ -945,7 +960,7 @@
     [super playTone:name];
     self.playCount++;
 
-    NSLog(@"%ld - %ld", self.toneCount.integerValue, self.playCount);
+    NSLog(@"%@ - %@", self.toneCount, @(self.playCount));
     
     if (self.playCount < self.toneCount.integerValue) {
         return;

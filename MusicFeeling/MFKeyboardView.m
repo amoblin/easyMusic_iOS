@@ -28,7 +28,15 @@
 
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) CGFloat currentX;
+@property (nonatomic) CGFloat lastX;
 @property (nonatomic) CGFloat currentY;
+
+@property (nonatomic) BOOL isFirst_H;
+@property (nonatomic) CGFloat currentX_H;
+@property (nonatomic) CGFloat lastX_H;
+@property (nonatomic) CGFloat currentY_H;
+
+
 @property (nonatomic) NSInteger currentIndex;
 @property (strong, nonatomic) NSArray *vConstraints;
 @property (strong, nonatomic) NSArray *hConstraints;
@@ -137,38 +145,48 @@
 
 - (NSArray *)getConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    self.currentY = YOFFSET;
     self.currentIndex = 0;
+    if (interfaceOrientation == UIInterfaceOrientationPortrait) {
+        self.currentY = YOFFSET;
+        if (self.tonesArray.count > 0) {
+            self.currentY -= BUTTON_SIZE + BUTTON_PADDING_V;
+        }
+    } else {
+        self.currentY_H = YOFFSET;
+        if (self.tonesArray.count > 0) {
+            self.currentY_H -= BUTTON_SIZE + BUTTON_PADDING_V;
+        }
+    }
     for (NSArray *items in self.tonesArray) {
-        self.currentX = XOFFSET;
-        self.isFirst = YES;
+        if (interfaceOrientation == UIInterfaceOrientationPortrait) {
+            self.currentX = XOFFSET;
+            self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
+            self.isFirst = YES;
+        } else {
+            self.currentX_H = XOFFSET;
+            self.currentY_H += BUTTON_SIZE + BUTTON_PADDING_V;
+            self.isFirst_H = YES;
+        }
         MFButton *button;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
             }
-//            NSLog(@"layout item: %@", item);
-//            NSLog(@"create new button");
             button = [self createButtonWithTitle:item andType:self.keyboardType];
             [self addSubview:button];
 //            NSLog(@"button is: %@\n%@", button.titleLabel.text, button);
-            if ( ! [button.tone isEqualToString:item]) {
-//                NSLog(@"current item is: %@", item);
-//                NSLog(@"but the button is: %@", button.titleLabel.text);
+            if ( ![button.tone isEqualToString:item]) {
                 break;
             }
             [array addObjectsFromArray:[self layoutButton:button forInterfaceOrientation:interfaceOrientation]];
         }
-        self.currentY += BUTTON_SIZE + BUTTON_PADDING_V;
     }
     return array;
 }
-
 - (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
     [button setBackgroundImage:[UIImage imageNamed:@"circle_gray"] forState:UIControlStateNormal];
-    button.layer.borderWidth = 0;
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     /*
     [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -183,31 +201,79 @@
     return button;
 }
 
-- (NSArray *)layoutButton:(UIButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (NSArray *)layoutButton:(UIButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+{
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    CGFloat width;
+    CGFloat width, currentX=self.currentX, currentY=self.currentY;
+    BOOL isFirst;
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
-        case UIInterfaceOrientationPortraitUpsideDown:
-            width = [UIScreen mainScreen].bounds.size.width;
+        case UIInterfaceOrientationPortraitUpsideDown: {
+            if (IOS_8_OR_LATER &&
+                (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+                 || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
+                    width = [UIScreen mainScreen].bounds.size.height;
+                } else {
+                    width = [UIScreen mainScreen].bounds.size.width;
+                }
+            // 测试添加后是否越界
+            if (self.currentX + BUTTON_SIZE + BUTTON_PADDING_H > width) {
+                self.lastX = self.currentX;
+                self.currentX = XOFFSET;
+                self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+                self.isFirst = YES;
+            }
+            currentX = self.currentX;
+            currentY = self.currentY;
+            isFirst = self.isFirst;
+
+            // 为添加下一个做准备
+            self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
             break;
+        }
         case UIInterfaceOrientationLandscapeLeft:
-        case UIInterfaceOrientationLandscapeRight:
-            width = [UIScreen mainScreen].bounds.size.height;
+        case UIInterfaceOrientationLandscapeRight: {
+            if (IOS_8_OR_LATER &&
+                (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+                 || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
+                    width = [UIScreen mainScreen].bounds.size.height;
+                width = [UIScreen mainScreen].bounds.size.width;
+            } else {
+                width = [UIScreen mainScreen].bounds.size.height;
+            }
+            // 测试添加后是否越界
+            if (self.currentX_H + BUTTON_SIZE + BUTTON_PADDING_H > width) {
+                self.lastX_H = self.currentX_H;
+                self.currentX_H = XOFFSET;
+                self.currentY_H += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
+                self.isFirst_H = YES;
+            }
+            currentX = self.currentX_H;
+            currentY = self.currentY_H;
+            isFirst = self.isFirst_H;
+
+            // 为添加下一个做准备
+            self.currentX_H += BUTTON_SIZE + BUTTON_PADDING_H;
             break;
+        }
         default:
             break;
     }
+
+    /*
+    // 测试添加后是否越界
     if (self.currentX + 50 > width) {
         self.currentX = XOFFSET;
         self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
         self.isFirst = YES;
     }
+     */
 
-    if (self.isFirst) {
+    if (isFirst) {
         self.isFirst = NO;
-        NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:self.currentX],
-                                  @"y": [NSNumber numberWithFloat:self.currentY],
+        self.isFirst_H = NO;
+        NSDictionary *matrics = @{@"x":[NSNumber numberWithFloat:currentX],
+                                  @"y": [NSNumber numberWithFloat:currentY],
                                   @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
 //        NSLog(@"%@", matrics);
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
@@ -225,7 +291,7 @@
         [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
         [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
     }
-    self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
+//    self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
     self.prevButton = button;
     return array;
 }

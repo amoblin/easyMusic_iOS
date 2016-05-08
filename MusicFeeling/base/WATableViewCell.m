@@ -66,7 +66,7 @@
 }
 
 - (void)testWithIndexPath:(NSIndexPath *)indexPath {
-    self.textLabel.text = [NSString stringWithFormat:@"%ld-%ld", indexPath.section+1, indexPath.row+1];
+    self.textLabel.text = [NSString stringWithFormat:@"%@-%@", @(indexPath.section+1), @(indexPath.row+1)];
 }
 
 @end
