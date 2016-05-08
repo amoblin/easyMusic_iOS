@@ -142,6 +142,11 @@
 		DADD012B1956672F0073C8B7 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DADD012A1956672F0073C8B7 /* delete@2x.png */; };
 		DAEB1100196EBBF300ADC956 /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB10FF196EBBF300ADC956 /* circle@2x.png */; };
 		DAEB1102196F497100ADC956 /* circle_hit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAEB1101196F497100ADC956 /* circle_hit@2x.png */; };
+		DAF532581CDF6E4B00E69CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF532571CDF6E4B00E69CAD /* AppDelegate.swift */; };
+		DAF5325A1CDF6E4B00E69CAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF532591CDF6E4B00E69CAD /* ViewController.swift */; };
+		DAF5325D1CDF6E4B00E69CAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF5325B1CDF6E4B00E69CAD /* Main.storyboard */; };
+		DAF5325F1CDF6E4B00E69CAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAF5325E1CDF6E4B00E69CAD /* Assets.xcassets */; };
+		DAF532621CDF6E4B00E69CAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF532601CDF6E4B00E69CAD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -314,6 +319,13 @@
 		DADD012A1956672F0073C8B7 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		DAEB10FF196EBBF300ADC956 /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
 		DAEB1101196F497100ADC956 /* circle_hit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_hit@2x.png"; sourceTree = "<group>"; };
+		DAF532551CDF6E4B00E69CAD /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAF532571CDF6E4B00E69CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DAF532591CDF6E4B00E69CAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DAF5325C1CDF6E4B00E69CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DAF5325E1CDF6E4B00E69CAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DAF532611CDF6E4B00E69CAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DAF532631CDF6E4B00E69CAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +338,13 @@
 				DA527CA618D3E623009A825E /* UIKit.framework in Frameworks */,
 				DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */,
 				D0DDA2B42A00275043680B1C /* libPods-MusicFeeling.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAF532521CDF6E4B00E69CAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +464,7 @@
 				DA6A87EE191F011C0087E640 /* Categories */,
 				DA527CD918D3E6E0009A825E /* resources */,
 				DA527CA718D3E623009A825E /* MusicFeeling */,
+				DAF532561CDF6E4B00E69CAD /* MusicBox */,
 				DA527CA018D3E623009A825E /* Frameworks */,
 				DA527C9F18D3E623009A825E /* Products */,
 				9032772FE9260B7B8D783BB8 /* Pods */,
@@ -455,6 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				DA527C9E18D3E623009A825E /* MusicFeeling.app */,
+				DAF532551CDF6E4B00E69CAD /* MusicBox.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -592,6 +613,19 @@
 			path = base;
 			sourceTree = "<group>";
 		};
+		DAF532561CDF6E4B00E69CAD /* MusicBox */ = {
+			isa = PBXGroup;
+			children = (
+				DAF532571CDF6E4B00E69CAD /* AppDelegate.swift */,
+				DAF532591CDF6E4B00E69CAD /* ViewController.swift */,
+				DAF5325B1CDF6E4B00E69CAD /* Main.storyboard */,
+				DAF5325E1CDF6E4B00E69CAD /* Assets.xcassets */,
+				DAF532601CDF6E4B00E69CAD /* LaunchScreen.storyboard */,
+				DAF532631CDF6E4B00E69CAD /* Info.plist */,
+			);
+			path = MusicBox;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -616,6 +650,23 @@
 			productReference = DA527C9E18D3E623009A825E /* MusicFeeling.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DAF532541CDF6E4B00E69CAD /* MusicBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAF532641CDF6E4B00E69CAD /* Build configuration list for PBXNativeTarget "MusicBox" */;
+			buildPhases = (
+				DAF532511CDF6E4B00E69CAD /* Sources */,
+				DAF532521CDF6E4B00E69CAD /* Frameworks */,
+				DAF532531CDF6E4B00E69CAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MusicBox;
+			productName = MusicBox;
+			productReference = DAF532551CDF6E4B00E69CAD /* MusicBox.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -623,6 +674,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MF;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = amoblin;
 				TargetAttributes = {
@@ -636,6 +688,10 @@
 								enabled = 0;
 							};
 						};
+					};
+					DAF532541CDF6E4B00E69CAD = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5ELCMRHSMM;
 					};
 				};
 			};
@@ -654,6 +710,7 @@
 			projectRoot = "";
 			targets = (
 				DA527C9D18D3E623009A825E /* MusicFeeling */,
+				DAF532541CDF6E4B00E69CAD /* MusicBox */,
 			);
 		};
 /* End PBXProject section */
@@ -771,6 +828,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAF532531CDF6E4B00E69CAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAF532621CDF6E4B00E69CAD /* LaunchScreen.storyboard in Resources */,
+				DAF5325F1CDF6E4B00E69CAD /* Assets.xcassets in Resources */,
+				DAF5325D1CDF6E4B00E69CAD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -867,6 +934,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAF532511CDF6E4B00E69CAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAF5325A1CDF6E4B00E69CAD /* ViewController.swift in Sources */,
+				DAF532581CDF6E4B00E69CAD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -895,6 +971,22 @@
 				DA20CF7419E77F2100CD179B /* zh-Hans */,
 			);
 			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		DAF5325B1CDF6E4B00E69CAD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAF5325C1CDF6E4B00E69CAD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DAF532601CDF6E4B00E69CAD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAF532611CDF6E4B00E69CAD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1043,6 +1135,48 @@
 			};
 			name = Release;
 		};
+		DAF532651CDF6E4B00E69CAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = MusicBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.marboo.MusicBox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DAF532661CDF6E4B00E69CAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = MusicBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = io.marboo.MusicBox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1063,6 +1197,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DAF532641CDF6E4B00E69CAD /* Build configuration list for PBXNativeTarget "MusicBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAF532651CDF6E4B00E69CAD /* Debug */,
+				DAF532661CDF6E4B00E69CAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
