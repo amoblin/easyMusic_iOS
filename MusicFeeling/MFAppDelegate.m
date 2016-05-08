@@ -181,11 +181,38 @@
 
 
 - (void)loadSamplerPath:(int)pathId {
+    NSArray *resourceArray = @[@"GeneralUser GS SoftSynth v1.44",
+                               @"TimGM6mb",
+                               @"Drama Piano",
+                               @"Electric Grand HQ",
+                               @"Electric Piano 1",
+                               @"Electric Piano 2",
+                               @"Electric Piano 4",
+                               @"Electric Piano 5",
+                               @"Electric Piano 6",
+                               @"Electro Piano 3",
+                               @"FLStudioMania.txt",
+                               @"FM Piano",
+                               @"Fantasy Piano",
+                               @"Fazioli Grand Piano",
+                               @"Full Grand Piano",
+                               @"Giga Piano",
+                               @"Grand Piano",
+                               @"Kawai Grand Piano",
+                               @"Korg Triniton Piano",
+                               @"Motif ES6 Concert Piano",
+                               @"Piano Bass",
+                               @"Reverb Bell Piano",
+                               @"SC55 Piano V2",
+                               @"Stereo Piano",
+                               @"Tight Piano",
+                               @"U20 Electric Grand Piano",
+                               @"West Coast Piano"];
+
     NSURL *presetURL;
-//    presetURL = [[NSBundle mainBundle] URLForResource:@"GeneralUser GS SoftSynth v1.44"
-    presetURL = [[NSBundle mainBundle] URLForResource:@"TimGM6mb"
+    presetURL = [[NSBundle mainBundle] URLForResource:resourceArray[4]
                                         withExtension:@"sf2"];
-    [self loadFromDLSOrSoundFont:presetURL withPatch:2];
+    [self loadFromDLSOrSoundFont:presetURL withPatch:0];
 }
 
 

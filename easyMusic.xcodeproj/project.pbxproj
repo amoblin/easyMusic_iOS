@@ -151,6 +151,56 @@
 		DAF532691CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */; };
 		DAF5326B1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */; };
 		DAF5326C1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */; };
+		DAF532891CE003C900E69CAD /* Drama Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532701CE003C800E69CAD /* Drama Piano.sf2 */; };
+		DAF5328A1CE003C900E69CAD /* Drama Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532701CE003C800E69CAD /* Drama Piano.sf2 */; };
+		DAF5328B1CE003C900E69CAD /* Electric Grand HQ.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532711CE003C800E69CAD /* Electric Grand HQ.sf2 */; };
+		DAF5328C1CE003C900E69CAD /* Electric Grand HQ.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532711CE003C800E69CAD /* Electric Grand HQ.sf2 */; };
+		DAF5328D1CE003C900E69CAD /* Electric Piano 1.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532721CE003C800E69CAD /* Electric Piano 1.sf2 */; };
+		DAF5328E1CE003C900E69CAD /* Electric Piano 1.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532721CE003C800E69CAD /* Electric Piano 1.sf2 */; };
+		DAF5328F1CE003C900E69CAD /* Electric Piano 2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532731CE003C800E69CAD /* Electric Piano 2.sf2 */; };
+		DAF532901CE003C900E69CAD /* Electric Piano 2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532731CE003C800E69CAD /* Electric Piano 2.sf2 */; };
+		DAF532911CE003C900E69CAD /* Electric Piano 4.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532741CE003C800E69CAD /* Electric Piano 4.SF2 */; };
+		DAF532921CE003C900E69CAD /* Electric Piano 4.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532741CE003C800E69CAD /* Electric Piano 4.SF2 */; };
+		DAF532931CE003C900E69CAD /* Electric Piano 5.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532751CE003C800E69CAD /* Electric Piano 5.sf2 */; };
+		DAF532941CE003C900E69CAD /* Electric Piano 5.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532751CE003C800E69CAD /* Electric Piano 5.sf2 */; };
+		DAF532951CE003C900E69CAD /* Electric Piano 6.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532761CE003C800E69CAD /* Electric Piano 6.SF2 */; };
+		DAF532961CE003C900E69CAD /* Electric Piano 6.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532761CE003C800E69CAD /* Electric Piano 6.SF2 */; };
+		DAF532971CE003C900E69CAD /* Electro Piano 3.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532771CE003C800E69CAD /* Electro Piano 3.sf2 */; };
+		DAF532981CE003C900E69CAD /* Electro Piano 3.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532771CE003C800E69CAD /* Electro Piano 3.sf2 */; };
+		DAF532991CE003C900E69CAD /* Fantasy Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532781CE003C800E69CAD /* Fantasy Piano.sf2 */; };
+		DAF5329A1CE003C900E69CAD /* Fantasy Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532781CE003C800E69CAD /* Fantasy Piano.sf2 */; };
+		DAF5329D1CE003C900E69CAD /* FLStudioMania.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327A1CE003C800E69CAD /* FLStudioMania.txt */; };
+		DAF5329E1CE003C900E69CAD /* FLStudioMania.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327A1CE003C800E69CAD /* FLStudioMania.txt */; };
+		DAF5329F1CE003C900E69CAD /* FM Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327B1CE003C800E69CAD /* FM Piano.sf2 */; };
+		DAF532A01CE003C900E69CAD /* FM Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327B1CE003C800E69CAD /* FM Piano.sf2 */; };
+		DAF532A11CE003C900E69CAD /* Full Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327C1CE003C800E69CAD /* Full Grand Piano.sf2 */; };
+		DAF532A21CE003C900E69CAD /* Full Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327C1CE003C800E69CAD /* Full Grand Piano.sf2 */; };
+		DAF532A31CE003C900E69CAD /* Giga Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327D1CE003C800E69CAD /* Giga Piano.sf2 */; };
+		DAF532A41CE003C900E69CAD /* Giga Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327D1CE003C800E69CAD /* Giga Piano.sf2 */; };
+		DAF532A51CE003C900E69CAD /* Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327E1CE003C800E69CAD /* Grand Piano.sf2 */; };
+		DAF532A61CE003C900E69CAD /* Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327E1CE003C800E69CAD /* Grand Piano.sf2 */; };
+		DAF532A71CE003C900E69CAD /* Kawai Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327F1CE003C800E69CAD /* Kawai Grand Piano.sf2 */; };
+		DAF532A81CE003C900E69CAD /* Kawai Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF5327F1CE003C800E69CAD /* Kawai Grand Piano.sf2 */; };
+		DAF532A91CE003C900E69CAD /* Korg Triniton Piano.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532801CE003C800E69CAD /* Korg Triniton Piano.SF2 */; };
+		DAF532AA1CE003C900E69CAD /* Korg Triniton Piano.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532801CE003C800E69CAD /* Korg Triniton Piano.SF2 */; };
+		DAF532AB1CE003C900E69CAD /* Motif ES6 Concert Piano.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532811CE003C800E69CAD /* Motif ES6 Concert Piano.SF2 */; };
+		DAF532AC1CE003C900E69CAD /* Motif ES6 Concert Piano.SF2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532811CE003C800E69CAD /* Motif ES6 Concert Piano.SF2 */; };
+		DAF532AD1CE003C900E69CAD /* Piano Bass.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532821CE003C800E69CAD /* Piano Bass.sf2 */; };
+		DAF532AE1CE003C900E69CAD /* Piano Bass.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532821CE003C800E69CAD /* Piano Bass.sf2 */; };
+		DAF532AF1CE003C900E69CAD /* Reverb Bell Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532831CE003C800E69CAD /* Reverb Bell Piano.sf2 */; };
+		DAF532B01CE003C900E69CAD /* Reverb Bell Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532831CE003C800E69CAD /* Reverb Bell Piano.sf2 */; };
+		DAF532B11CE003C900E69CAD /* SC55 Piano V2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532841CE003C800E69CAD /* SC55 Piano V2.sf2 */; };
+		DAF532B21CE003C900E69CAD /* SC55 Piano V2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532841CE003C800E69CAD /* SC55 Piano V2.sf2 */; };
+		DAF532B31CE003C900E69CAD /* Stereo Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532851CE003C800E69CAD /* Stereo Piano.sf2 */; };
+		DAF532B41CE003C900E69CAD /* Stereo Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532851CE003C800E69CAD /* Stereo Piano.sf2 */; };
+		DAF532B51CE003C900E69CAD /* Tight Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532861CE003C800E69CAD /* Tight Piano.sf2 */; };
+		DAF532B61CE003C900E69CAD /* Tight Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532861CE003C800E69CAD /* Tight Piano.sf2 */; };
+		DAF532B71CE003C900E69CAD /* U20 Electric Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532871CE003C900E69CAD /* U20 Electric Grand Piano.sf2 */; };
+		DAF532B81CE003C900E69CAD /* U20 Electric Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532871CE003C900E69CAD /* U20 Electric Grand Piano.sf2 */; };
+		DAF532B91CE003C900E69CAD /* West Coast Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532881CE003C900E69CAD /* West Coast Piano.sf2 */; };
+		DAF532BA1CE003C900E69CAD /* West Coast Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532881CE003C900E69CAD /* West Coast Piano.sf2 */; };
+		DAF532BC1CE0049200E69CAD /* Fazioli Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532BB1CE0049200E69CAD /* Fazioli Grand Piano.sf2 */; };
+		DAF532BD1CE0049200E69CAD /* Fazioli Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532BB1CE0049200E69CAD /* Fazioli Grand Piano.sf2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -332,6 +382,31 @@
 		DAF532631CDF6E4B00E69CAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS SoftSynth v1.44.sf2"; sourceTree = "<group>"; };
 		DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimGM6mb.sf2; sourceTree = "<group>"; };
+		DAF532701CE003C800E69CAD /* Drama Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Drama Piano.sf2"; sourceTree = "<group>"; };
+		DAF532711CE003C800E69CAD /* Electric Grand HQ.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electric Grand HQ.sf2"; sourceTree = "<group>"; };
+		DAF532721CE003C800E69CAD /* Electric Piano 1.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electric Piano 1.sf2"; sourceTree = "<group>"; };
+		DAF532731CE003C800E69CAD /* Electric Piano 2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electric Piano 2.sf2"; sourceTree = "<group>"; };
+		DAF532741CE003C800E69CAD /* Electric Piano 4.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electric Piano 4.SF2"; sourceTree = "<group>"; };
+		DAF532751CE003C800E69CAD /* Electric Piano 5.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electric Piano 5.sf2"; sourceTree = "<group>"; };
+		DAF532761CE003C800E69CAD /* Electric Piano 6.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electric Piano 6.SF2"; sourceTree = "<group>"; };
+		DAF532771CE003C800E69CAD /* Electro Piano 3.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Electro Piano 3.sf2"; sourceTree = "<group>"; };
+		DAF532781CE003C800E69CAD /* Fantasy Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fantasy Piano.sf2"; sourceTree = "<group>"; };
+		DAF5327A1CE003C800E69CAD /* FLStudioMania.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FLStudioMania.txt; sourceTree = "<group>"; };
+		DAF5327B1CE003C800E69CAD /* FM Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FM Piano.sf2"; sourceTree = "<group>"; };
+		DAF5327C1CE003C800E69CAD /* Full Grand Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Full Grand Piano.sf2"; sourceTree = "<group>"; };
+		DAF5327D1CE003C800E69CAD /* Giga Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Giga Piano.sf2"; sourceTree = "<group>"; };
+		DAF5327E1CE003C800E69CAD /* Grand Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Grand Piano.sf2"; sourceTree = "<group>"; };
+		DAF5327F1CE003C800E69CAD /* Kawai Grand Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kawai Grand Piano.sf2"; sourceTree = "<group>"; };
+		DAF532801CE003C800E69CAD /* Korg Triniton Piano.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Korg Triniton Piano.SF2"; sourceTree = "<group>"; };
+		DAF532811CE003C800E69CAD /* Motif ES6 Concert Piano.SF2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Motif ES6 Concert Piano.SF2"; sourceTree = "<group>"; };
+		DAF532821CE003C800E69CAD /* Piano Bass.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Piano Bass.sf2"; sourceTree = "<group>"; };
+		DAF532831CE003C800E69CAD /* Reverb Bell Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Reverb Bell Piano.sf2"; sourceTree = "<group>"; };
+		DAF532841CE003C800E69CAD /* SC55 Piano V2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SC55 Piano V2.sf2"; sourceTree = "<group>"; };
+		DAF532851CE003C800E69CAD /* Stereo Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Stereo Piano.sf2"; sourceTree = "<group>"; };
+		DAF532861CE003C800E69CAD /* Tight Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tight Piano.sf2"; sourceTree = "<group>"; };
+		DAF532871CE003C900E69CAD /* U20 Electric Grand Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "U20 Electric Grand Piano.sf2"; sourceTree = "<group>"; };
+		DAF532881CE003C900E69CAD /* West Coast Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "West Coast Piano.sf2"; sourceTree = "<group>"; };
+		DAF532BB1CE0049200E69CAD /* Fazioli Grand Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fazioli Grand Piano.sf2"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -558,6 +633,7 @@
 		DA527CD918D3E6E0009A825E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAF5326F1CE003C800E69CAD /* 25 Piano Soundfonts */,
 				DAF532671CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 */,
 				DAF5326A1CDF81A200E69CAD /* TimGM6mb.sf2 */,
 				DABB801419839E6A00F09368 /* blue@2x.png */,
@@ -632,6 +708,38 @@
 				DAF532631CDF6E4B00E69CAD /* Info.plist */,
 			);
 			path = MusicBox;
+			sourceTree = "<group>";
+		};
+		DAF5326F1CE003C800E69CAD /* 25 Piano Soundfonts */ = {
+			isa = PBXGroup;
+			children = (
+				DAF532701CE003C800E69CAD /* Drama Piano.sf2 */,
+				DAF532711CE003C800E69CAD /* Electric Grand HQ.sf2 */,
+				DAF532721CE003C800E69CAD /* Electric Piano 1.sf2 */,
+				DAF532731CE003C800E69CAD /* Electric Piano 2.sf2 */,
+				DAF532741CE003C800E69CAD /* Electric Piano 4.SF2 */,
+				DAF532751CE003C800E69CAD /* Electric Piano 5.sf2 */,
+				DAF532761CE003C800E69CAD /* Electric Piano 6.SF2 */,
+				DAF532771CE003C800E69CAD /* Electro Piano 3.sf2 */,
+				DAF532781CE003C800E69CAD /* Fantasy Piano.sf2 */,
+				DAF532BB1CE0049200E69CAD /* Fazioli Grand Piano.sf2 */,
+				DAF5327A1CE003C800E69CAD /* FLStudioMania.txt */,
+				DAF5327B1CE003C800E69CAD /* FM Piano.sf2 */,
+				DAF5327C1CE003C800E69CAD /* Full Grand Piano.sf2 */,
+				DAF5327D1CE003C800E69CAD /* Giga Piano.sf2 */,
+				DAF5327E1CE003C800E69CAD /* Grand Piano.sf2 */,
+				DAF5327F1CE003C800E69CAD /* Kawai Grand Piano.sf2 */,
+				DAF532801CE003C800E69CAD /* Korg Triniton Piano.SF2 */,
+				DAF532811CE003C800E69CAD /* Motif ES6 Concert Piano.SF2 */,
+				DAF532821CE003C800E69CAD /* Piano Bass.sf2 */,
+				DAF532831CE003C800E69CAD /* Reverb Bell Piano.sf2 */,
+				DAF532841CE003C800E69CAD /* SC55 Piano V2.sf2 */,
+				DAF532851CE003C800E69CAD /* Stereo Piano.sf2 */,
+				DAF532861CE003C800E69CAD /* Tight Piano.sf2 */,
+				DAF532871CE003C900E69CAD /* U20 Electric Grand Piano.sf2 */,
+				DAF532881CE003C900E69CAD /* West Coast Piano.sf2 */,
+			);
+			path = "25 Piano Soundfonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -730,13 +838,19 @@
 			files = (
 				DA2EF1D618EFB89800DC1617 /* c5.mp3 in Resources */,
 				DA2EF1E418EFB89800DC1617 /* d4m.mp3 in Resources */,
+				DAF532AB1CE003C900E69CAD /* Motif ES6 Concert Piano.SF2 in Resources */,
+				DAF532AD1CE003C900E69CAD /* Piano Bass.sf2 in Resources */,
+				DAF5328F1CE003C900E69CAD /* Electric Piano 2.sf2 in Resources */,
+				DAF5329F1CE003C900E69CAD /* FM Piano.sf2 in Resources */,
 				DA2EF20218EFB89800DC1617 /* g2.mp3 in Resources */,
 				DA2EF1C018EFB89800DC1617 /* a5.mp3 in Resources */,
 				DA2EF1D518EFB89800DC1617 /* c4m.mp3 in Resources */,
+				DAF532B11CE003C900E69CAD /* SC55 Piano V2.sf2 in Resources */,
 				DAEB1102196F497100ADC956 /* circle_hit@2x.png in Resources */,
 				DA2EF1FB18EFB89800DC1617 /* f5m.mp3 in Resources */,
 				DA2EF1E318EFB89800DC1617 /* d4.mp3 in Resources */,
 				DA2EF1CD18EFB89800DC1617 /* b7.mp3 in Resources */,
+				DAF532931CE003C900E69CAD /* Electric Piano 5.sf2 in Resources */,
 				DA2EF1E218EFB89800DC1617 /* d3m.mp3 in Resources */,
 				DA2EF20818EFB89800DC1617 /* g5.mp3 in Resources */,
 				DAEB1100196EBBF300ADC956 /* circle@2x.png in Resources */,
@@ -751,6 +865,7 @@
 				DABB801319839E6400F09368 /* green@2x.png in Resources */,
 				DA2EF1BC18EFB89800DC1617 /* a3.mp3 in Resources */,
 				DA2EF1D818EFB89800DC1617 /* c6.mp3 in Resources */,
+				DAF532B91CE003C900E69CAD /* West Coast Piano.sf2 in Resources */,
 				DA2EF1C918EFB89800DC1617 /* b3.mp3 in Resources */,
 				DA2EF1DD18EFB89800DC1617 /* d1.mp3 in Resources */,
 				DA2EF1EA18EFB89800DC1617 /* d7m.mp3 in Resources */,
@@ -760,8 +875,11 @@
 				DA2EF1D218EFB89800DC1617 /* c3.mp3 in Resources */,
 				DA2EF1EC18EFB89800DC1617 /* e2.mp3 in Resources */,
 				DA2EF1D918EFB89800DC1617 /* c6m.mp3 in Resources */,
+				DAF532A11CE003C900E69CAD /* Full Grand Piano.sf2 in Resources */,
 				DA2EF1C218EFB89800DC1617 /* a6.mp3 in Resources */,
+				DAF532A91CE003C900E69CAD /* Korg Triniton Piano.SF2 in Resources */,
 				DA2EF20B18EFB89800DC1617 /* g6m.mp3 in Resources */,
+				DAF5328B1CE003C900E69CAD /* Electric Grand HQ.sf2 in Resources */,
 				DA2EF1BD18EFB89800DC1617 /* a3m.mp3 in Resources */,
 				DA2EF1BB18EFB89800DC1617 /* a2m.mp3 in Resources */,
 				DA4020F919126015003D593C /* treble_clef@2x.png in Resources */,
@@ -776,18 +894,24 @@
 				DA2EF1B618EFB89800DC1617 /* a0.mp3 in Resources */,
 				DA2EF1BF18EFB89800DC1617 /* a4m.mp3 in Resources */,
 				DA2EF1B818EFB89800DC1617 /* a1.mp3 in Resources */,
+				DAF532891CE003C900E69CAD /* Drama Piano.sf2 in Resources */,
+				DAF532B51CE003C900E69CAD /* Tight Piano.sf2 in Resources */,
 				DADD01291956671E0073C8B7 /* return@2x.png in Resources */,
 				DA2EF1FE18EFB89800DC1617 /* f7.mp3 in Resources */,
 				DA2EF1E518EFB89800DC1617 /* d5.mp3 in Resources */,
 				DA2EF1ED18EFB89800DC1617 /* e3.mp3 in Resources */,
 				DA2EF1EF18EFB89800DC1617 /* e5.mp3 in Resources */,
+				DAF532B31CE003C900E69CAD /* Stereo Piano.sf2 in Resources */,
 				DA2EF1F418EFB89800DC1617 /* f2.mp3 in Resources */,
 				DA2EF1EE18EFB89800DC1617 /* e4.mp3 in Resources */,
 				DA2EF1DC18EFB89800DC1617 /* c8.mp3 in Resources */,
 				DA2EF1CB18EFB89800DC1617 /* b5.mp3 in Resources */,
 				DA2EF1CA18EFB89800DC1617 /* b4.mp3 in Resources */,
+				DAF5329D1CE003C900E69CAD /* FLStudioMania.txt in Resources */,
+				DAF532A31CE003C900E69CAD /* Giga Piano.sf2 in Resources */,
 				DA2EF1D418EFB89800DC1617 /* c4.mp3 in Resources */,
 				DA2EF1F518EFB89800DC1617 /* f2m.mp3 in Resources */,
+				DAF532A71CE003C900E69CAD /* Kawai Grand Piano.sf2 in Resources */,
 				DADCEE8F18DD23730044455D /* music@2x.png in Resources */,
 				DA2EF1C318EFB89800DC1617 /* a6m.mp3 in Resources */,
 				DA2EF20318EFB89800DC1617 /* g2m.mp3 in Resources */,
@@ -796,6 +920,7 @@
 				DA2EF1E918EFB89800DC1617 /* d7.mp3 in Resources */,
 				DA2EF1C618EFB89800DC1617 /* b0.mp3 in Resources */,
 				DA20CF7119E77EFD00CD179B /* Localizable.strings in Resources */,
+				DAF532A51CE003C900E69CAD /* Grand Piano.sf2 in Resources */,
 				DA2EF1FC18EFB89800DC1617 /* f6.mp3 in Resources */,
 				DA2EF20C18EFB89800DC1617 /* g7.mp3 in Resources */,
 				DA2EF1B918EFB89800DC1617 /* a1m.mp3 in Resources */,
@@ -815,25 +940,33 @@
 				DA2EF20418EFB89800DC1617 /* g3.mp3 in Resources */,
 				DA3E7840197258D30040403F /* star@2x.png in Resources */,
 				DA2EF20118EFB89800DC1617 /* g1m.mp3 in Resources */,
+				DAF532B71CE003C900E69CAD /* U20 Electric Grand Piano.sf2 in Resources */,
 				DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */,
 				DA2EF1FD18EFB89800DC1617 /* f6m.mp3 in Resources */,
+				DAF532AF1CE003C900E69CAD /* Reverb Bell Piano.sf2 in Resources */,
 				DAF532681CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */,
+				DAF532BC1CE0049200E69CAD /* Fazioli Grand Piano.sf2 in Resources */,
 				DA2EF20018EFB89800DC1617 /* g1.mp3 in Resources */,
 				DABB801519839E6A00F09368 /* blue@2x.png in Resources */,
+				DAF532971CE003C900E69CAD /* Electro Piano 3.sf2 in Resources */,
 				DA2EF1E118EFB89800DC1617 /* d3.mp3 in Resources */,
 				DA2EF1FA18EFB89800DC1617 /* f5.mp3 in Resources */,
 				DA2EF1EB18EFB89800DC1617 /* e1.mp3 in Resources */,
 				DA2EF1F918EFB89800DC1617 /* f4m.mp3 in Resources */,
+				DAF532911CE003C900E69CAD /* Electric Piano 4.SF2 in Resources */,
+				DAF532951CE003C900E69CAD /* Electric Piano 6.SF2 in Resources */,
 				DA2EF1DB18EFB89800DC1617 /* c7m.mp3 in Resources */,
 				DA2EF1D318EFB89800DC1617 /* c3m.mp3 in Resources */,
 				DA2EF1BE18EFB89800DC1617 /* a4.mp3 in Resources */,
 				DA2EF1F018EFB89800DC1617 /* e6.mp3 in Resources */,
+				DAF532991CE003C900E69CAD /* Fantasy Piano.sf2 in Resources */,
 				DAB7C6C61C6F6571004B3070 /* PushConfig.plist in Resources */,
 				DAF5326B1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */,
 				DAD682C41CDDD00C00820D04 /* circle_gray@2x.png in Resources */,
 				DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */,
 				DA527CAC18D3E623009A825E /* InfoPlist.strings in Resources */,
 				DA2EF20918EFB89800DC1617 /* g5m.mp3 in Resources */,
+				DAF5328D1CE003C900E69CAD /* Electric Piano 1.sf2 in Resources */,
 				DA2EF1BA18EFB89800DC1617 /* a2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,11 +975,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAF5328E1CE003C900E69CAD /* Electric Piano 1.sf2 in Resources */,
+				DAF532B01CE003C900E69CAD /* Reverb Bell Piano.sf2 in Resources */,
+				DAF532A41CE003C900E69CAD /* Giga Piano.sf2 in Resources */,
+				DAF532941CE003C900E69CAD /* Electric Piano 5.sf2 in Resources */,
+				DAF5328C1CE003C900E69CAD /* Electric Grand HQ.sf2 in Resources */,
+				DAF532A01CE003C900E69CAD /* FM Piano.sf2 in Resources */,
+				DAF532981CE003C900E69CAD /* Electro Piano 3.sf2 in Resources */,
+				DAF532A21CE003C900E69CAD /* Full Grand Piano.sf2 in Resources */,
+				DAF5328A1CE003C900E69CAD /* Drama Piano.sf2 in Resources */,
 				DAF532621CDF6E4B00E69CAD /* LaunchScreen.storyboard in Resources */,
+				DAF532B41CE003C900E69CAD /* Stereo Piano.sf2 in Resources */,
+				DAF532961CE003C900E69CAD /* Electric Piano 6.SF2 in Resources */,
 				DAF532691CDF76DD00E69CAD /* GeneralUser GS SoftSynth v1.44.sf2 in Resources */,
+				DAF532BD1CE0049200E69CAD /* Fazioli Grand Piano.sf2 in Resources */,
+				DAF532AC1CE003C900E69CAD /* Motif ES6 Concert Piano.SF2 in Resources */,
+				DAF532B81CE003C900E69CAD /* U20 Electric Grand Piano.sf2 in Resources */,
+				DAF532A81CE003C900E69CAD /* Kawai Grand Piano.sf2 in Resources */,
+				DAF532AA1CE003C900E69CAD /* Korg Triniton Piano.SF2 in Resources */,
+				DAF532AE1CE003C900E69CAD /* Piano Bass.sf2 in Resources */,
 				DAF5325F1CDF6E4B00E69CAD /* Assets.xcassets in Resources */,
 				DAF5325D1CDF6E4B00E69CAD /* Main.storyboard in Resources */,
 				DAF5326C1CDF81A200E69CAD /* TimGM6mb.sf2 in Resources */,
+				DAF532A61CE003C900E69CAD /* Grand Piano.sf2 in Resources */,
+				DAF532B21CE003C900E69CAD /* SC55 Piano V2.sf2 in Resources */,
+				DAF532B61CE003C900E69CAD /* Tight Piano.sf2 in Resources */,
+				DAF532901CE003C900E69CAD /* Electric Piano 2.sf2 in Resources */,
+				DAF532921CE003C900E69CAD /* Electric Piano 4.SF2 in Resources */,
+				DAF5329A1CE003C900E69CAD /* Fantasy Piano.sf2 in Resources */,
+				DAF5329E1CE003C900E69CAD /* FLStudioMania.txt in Resources */,
+				DAF532BA1CE003C900E69CAD /* West Coast Piano.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1217,6 +1375,7 @@
 				DAF532661CDF6E4B00E69CAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -364,7 +364,7 @@
 - (void)toneButtonTouchUp:(MFButton *)sender;
 {
     if ([self.delegate respondsToSelector:@selector(triggerNote:isOn:)]) {
-        [self.delegate triggerNote:[MFUtils midiNumberForToneName:sender.tone] isOn:NO];
+//        [self.delegate triggerNote:[MFUtils midiNumberForToneName:sender.tone] isOn:NO];
     }
 }
 
