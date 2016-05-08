@@ -116,7 +116,7 @@
 
     [self prepareAUGraph];
     [self loadSamplerPath:2];
-    [self noteOn:@21 velocity:@127];
+//    [self noteOn:@21 velocity:@127];
 //    [self noteOn:<#(NSNumber *)#> velocity:@0];
     return YES;
 }
@@ -185,7 +185,7 @@
 //    presetURL = [[NSBundle mainBundle] URLForResource:@"GeneralUser GS SoftSynth v1.44"
     presetURL = [[NSBundle mainBundle] URLForResource:@"TimGM6mb"
                                         withExtension:@"sf2"];
-    [self loadFromDLSOrSoundFont:presetURL withPatch:30];
+    [self loadFromDLSOrSoundFont:presetURL withPatch:2];
 }
 
 

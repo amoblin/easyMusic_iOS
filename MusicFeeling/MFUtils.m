@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSDictionary *router;
 @property (strong, nonatomic) NSDictionary *numberDict;
 @property (strong, nonatomic) NSDictionary *revertNumberDict;
+@property (strong, nonatomic) NSDictionary *midiNoteDict;
 
 @end
 @implementation MFUtils
@@ -25,6 +26,16 @@
         _instance = [MFUtils new];
     }
     return _instance;
+}
+
+- (NSDictionary *)midiNoteDict {
+    if (_midiNoteDict == nil) {
+        _midiNoteDict = @{@"C3": @48, @"D3": @50, @"E3": @52, @"F3": @53, @"G3": @55, @"A3": @57, @"B3": @59,
+                          @"C4": @60, @"D4": @62, @"E4": @64, @"F4": @65, @"G4": @67, @"A4": @69, @"B4": @71,
+                          @"C5": @72, @"D5": @74, @"E5": @76, @"F5": @77, @"G5": @79, @"A5": @81, @"B5": @83,
+                          @"C6": @84, @"D6": @86, @"E6": @88, @"F6": @89, @"G6": @91, @"A6": @93, @"B6": @95};
+    }
+    return _midiNoteDict;
 }
 
 - (NSDictionary *)mapper {
@@ -187,6 +198,11 @@
 
 + (NSString *)staffToKeyboard:(NSString *)staffString {
     return [MFUtils sharedInstance].router[staffString];
+}
+
++ (NSInteger)midiNumberForToneName:(NSString *)toneName;
+{
+    return [[MFUtils sharedInstance].midiNoteDict[toneName] integerValue];
 }
 
 @end

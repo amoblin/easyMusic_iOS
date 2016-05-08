@@ -13,6 +13,7 @@
 
 @optional
 - (void)tonePressed:(NSString *)tone;
+- (void)triggerNote:(NSInteger)note isOn:(BOOL)isOn;
 - (void)deleteButtonPressed;
 - (void)returnButtonPressed;
 @end

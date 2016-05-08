@@ -12,6 +12,7 @@
 #import "MFKeyboardView.h"
 #import "MFButton.h"
 #import "MFCompositionView.h"
+#import "MFUtils.h"
 
 #import "NSArray+K2K.h"
 
@@ -359,14 +360,15 @@
         MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:self.currentIndex andType:type];
 //        button.enabled = NO;
         [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [button addTarget:self action:@selector(toneButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(toneButtonTouchUp:) forControlEvents:UIControlEventTouchDragOutside];
+        [button addTarget:self action:@selector(toneButtonTouchUp:) forControlEvents:UIControlEventTouchCancel];
         /*
-        [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
         [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
 
         // repeat method
         [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
-        [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
          */
         return button;
     }
@@ -936,13 +938,19 @@
     }
 }
 
+- (void)toneButtonTouchUp:(MFButton *)sender;
+{
+    [self triggerNote:[MFUtils midiNumberForToneName:sender.tone] isOn:NO];
+}
+
 - (void)playTone:(NSString *)name;
 {
     if (name.length <= 0) {
         return;
     }
 
-    [super playTone:name];
+//    [super playTone:name];
+    [self triggerNote:[MFUtils midiNumberForToneName:name] isOn:YES];
     self.playCount++;
 
     NSLog(@"%@ - %@", self.toneCount, @(self.playCount));

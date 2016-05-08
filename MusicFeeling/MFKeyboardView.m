@@ -9,7 +9,7 @@
 #import "MFKeyboardView.h"
 #import "NSArray+K2K.h"
 #import "MFButton.h"
-
+#import "MFUtils.h"
 
 #import "UIImage+Color.h"
 #import <QuartzCore/QuartzCore.h>
@@ -191,15 +191,16 @@
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
     [button setBackgroundImage:[UIImage imageNamed:@"circle_gray"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(toneButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [button addTarget:self action:@selector(toneButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(toneButtonTouchUp:) forControlEvents:UIControlEventTouchDragOutside];
+    [button addTarget:self action:@selector(toneButtonTouchUp:) forControlEvents:UIControlEventTouchCancel];
     /*
-    [button addTarget:self action:@selector(toneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(toneButtonTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
     [button addTarget:self action:@selector(toneButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
     [button addTarget:self action:@selector(toneEvent:) forControlEvents:UIControlEventAllEvents];
 
     // repeat method
     [button addTarget:self action:@selector(toneButtonTouchDragInside:) forControlEvents:UIControlEventTouchDragInside];
-    [button addTarget:self action:@selector(toneButtonTouchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
      */
     return button;
 }
@@ -359,6 +360,14 @@
         [self.delegate tonePressed:toneName];
     }
 }
+
+- (void)toneButtonTouchUp:(MFButton *)sender;
+{
+    if ([self.delegate respondsToSelector:@selector(triggerNote:isOn:)]) {
+        [self.delegate triggerNote:[MFUtils midiNumberForToneName:sender.tone] isOn:NO];
+    }
+}
+
 
 - (void)delButtonPressed:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(deleteButtonPressed)]) {

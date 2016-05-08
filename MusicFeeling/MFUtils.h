@@ -18,4 +18,6 @@
 //+ (NSString *)numberToStaff:(NSString *)numberString;
 //+ (NSString *)keyboardToStaff:(NSString *)keyboardString;
 - (NSDictionary *)getFilteredDictWithFilter:(NSString *)filter;
+
++ (NSInteger)midiNumberForToneName:(NSString *)toneName;
 @end
