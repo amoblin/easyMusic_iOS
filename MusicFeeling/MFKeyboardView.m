@@ -168,6 +168,7 @@
             self.isFirst_H = YES;
         }
         MFButton *button;
+        NSInteger index = 1;
         for (NSString *item in items) {
             if ([item isEqualToString:@""]) {
                 continue;
@@ -178,11 +179,13 @@
             if ( ![button.tone isEqualToString:item]) {
                 break;
             }
-            [array addObjectsFromArray:[self layoutButton:button forInterfaceOrientation:interfaceOrientation]];
+            [array addObjectsFromArray:[self layoutButton:button isLast:(index == items.count) forInterfaceOrientation:interfaceOrientation]];
+            index += 1;
         }
     }
     return array;
 }
+
 - (MFButton *)createButtonWithTitle:(NSString *)title andType:(NSInteger)type {
     self.currentIndex++;
     MFButton *button = [[MFButton alloc] initWithTitle:title size:BUTTON_SIZE tag:0 andType:type];
@@ -201,7 +204,7 @@
     return button;
 }
 
-- (NSArray *)layoutButton:(UIButton *)button forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (NSArray *)layoutButton:(UIButton *)button isLast:(BOOL)isLast forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     CGFloat width, currentX=self.currentX, currentY=self.currentY;
@@ -216,6 +219,7 @@
                 } else {
                     width = [UIScreen mainScreen].bounds.size.width;
                 }
+            /*
             // 测试添加后是否越界
             if (self.currentX + BUTTON_SIZE + BUTTON_PADDING_H > width) {
                 self.lastX = self.currentX;
@@ -223,6 +227,7 @@
                 self.currentY += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
                 self.isFirst = YES;
             }
+             */
             currentX = self.currentX;
             currentY = self.currentY;
             isFirst = self.isFirst;
@@ -241,6 +246,7 @@
             } else {
                 width = [UIScreen mainScreen].bounds.size.height;
             }
+            /*
             // 测试添加后是否越界
             if (self.currentX_H + BUTTON_SIZE + BUTTON_PADDING_H > width) {
                 self.lastX_H = self.currentX_H;
@@ -248,6 +254,7 @@
                 self.currentY_H += BUTTON_SIZE + BUTTON_WRAP_LINE_V;
                 self.isFirst_H = YES;
             }
+             */
             currentX = self.currentX_H;
             currentY = self.currentY_H;
             isFirst = self.isFirst_H;
@@ -276,21 +283,31 @@
                                   @"y": [NSNumber numberWithFloat:currentY],
                                   @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
 //        NSLog(@"%@", matrics);
-        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(==size)]"
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-x-[button(<=size)]"
                                                                            options:0
                                                                            metrics:matrics
                                                                              views:NSDictionaryOfVariableBindings(button)]];
-        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(==size)]"
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-y-[button(<=size)]"
                                                                            options:0
                                                                            metrics:matrics
                                                                              views:NSDictionaryOfVariableBindings(button)]];
     } else {
         NSDictionary *matrics = @{@"padding_h":[NSNumber numberWithFloat:BUTTON_PADDING_H],
                                   @"size": [NSNumber numberWithFloat:BUTTON_SIZE]};
-        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_prevButton]-padding_h-[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(_prevButton, button)]];
-        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(==size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_prevButton]-padding_h-[button(<=size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(_prevButton, button)]];
+        [array addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button(<=size)]" options:0 metrics:matrics views:NSDictionaryOfVariableBindings(button)]];
         [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBaseline multiplier:1.0 constant:0]];
+        [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
+        [array addObject:[NSLayoutConstraint constraintWithItem:self.prevButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0]];
     }
+    
+    if (isLast) {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationLessThanOrEqual toItem:button.superview  attribute:NSLayoutAttributeRight multiplier:1.0 constant:-44];
+        [array addObject:constraint];
+    }
+
+    [array addObject:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0]];
+
 //    self.currentX += BUTTON_SIZE + BUTTON_PADDING_H;
     self.prevButton = button;
     return array;
