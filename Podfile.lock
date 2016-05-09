@@ -27,13 +27,18 @@ PODS:
     - JSONModel
     - Masonry
     - SDWebImage
+  - DDTile (0.1):
+    - Kingfisher
+    - SnapKit
   - HexColors (2.2.1)
   - JSONModel (1.2.0)
+  - Kingfisher (2.4.0)
   - Masonry (1.0.0)
   - PXAlertView (0.1.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - SnapKit (0.20.0)
   - SVProgressHUD (2.0.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
@@ -50,6 +55,7 @@ DEPENDENCIES:
   - AVOSCloud
   - AVOSCloudSNS
   - DDBrick (from `../DDBrick`)
+  - DDTile (from `../DDTile`)
   - TSMessages
   - UMengAnalytics
   - UMengFeedback
@@ -59,6 +65,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   DDBrick:
     :path: "../DDBrick"
+  DDTile:
+    :path: "../DDTile"
   WANetwork:
     :podspec: https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec
 
@@ -67,11 +75,14 @@ SPEC CHECKSUMS:
   AVOSCloud: 957d1508104d7c8ed501df9d9b734d7a98c2e047
   AVOSCloudSNS: 4f9f1df8663fc7bfa76b9b38578ac535d275ee8f
   DDBrick: 7b591bc8defbe385bd5c4aee6c7af729ab298415
+  DDTile: c9e6e8aec60c9643b237ada629ebd5a81bce4252
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  Kingfisher: 9171a424ee7f8031f518f649bb850d1eab541247
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   PXAlertView: bb8a7e6bb95f73fe3fe091cacd279b683460f084
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   UMengAnalytics: 4bf831415146b9c57cb10be65fbd43462ef8cf65
