@@ -117,6 +117,8 @@
 		DA527CB518D3E623009A825E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA527CB318D3E623009A825E /* Main_iPhone.storyboard */; };
 		DA527CBB18D3E623009A825E /* MFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA527CBA18D3E623009A825E /* MFViewController.m */; };
 		DA527CBD18D3E623009A825E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA527CBC18D3E623009A825E /* Images.xcassets */; };
+		DA69E6A81CE0E241009F6856 /* SFPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA69E6A61CE0E092009F6856 /* SFPlayer.m */; };
+		DA69E6AC1CE0E2FB009F6856 /* SFPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA69E6A61CE0E092009F6856 /* SFPlayer.m */; };
 		DA6A8673191875890087E640 /* Do Re Mi.k2k.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */; };
 		DA6A87F1191F011C0087E640 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */; };
 		DA795F751B28EDE1000552A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA795F741B28EDE1000552A4 /* LaunchScreen.xib */; };
@@ -334,6 +336,10 @@
 		DA527CB918D3E623009A825E /* MFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFViewController.h; sourceTree = "<group>"; };
 		DA527CBA18D3E623009A825E /* MFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFViewController.m; sourceTree = "<group>"; };
 		DA527CBC18D3E623009A825E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DA69E6A41CE0E091009F6856 /* MusicBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MusicBox-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA69E6A51CE0E092009F6856 /* SFPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFPlayer.h; sourceTree = "<group>"; };
+		DA69E6A61CE0E092009F6856 /* SFPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFPlayer.m; sourceTree = "<group>"; };
+		DA69E6A91CE0E277009F6856 /* SFPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFPlayer.swift; sourceTree = "<group>"; };
 		DA6A8672191875890087E640 /* Do Re Mi.k2k.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Do Re Mi.k2k.txt"; sourceTree = "<group>"; };
 		DA6A87EF191F011C0087E640 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		DA6A87F0191F011C0087E640 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
@@ -710,10 +716,14 @@
 			children = (
 				DAF532571CDF6E4B00E69CAD /* AppDelegate.swift */,
 				DAF532591CDF6E4B00E69CAD /* ViewController.swift */,
+				DA69E6A51CE0E092009F6856 /* SFPlayer.h */,
+				DA69E6A61CE0E092009F6856 /* SFPlayer.m */,
+				DA69E6A91CE0E277009F6856 /* SFPlayer.swift */,
 				DAF5325B1CDF6E4B00E69CAD /* Main.storyboard */,
 				DAF5325E1CDF6E4B00E69CAD /* Assets.xcassets */,
 				DAF532601CDF6E4B00E69CAD /* LaunchScreen.storyboard */,
 				DAF532631CDF6E4B00E69CAD /* Info.plist */,
+				DA69E6A41CE0E091009F6856 /* MusicBox-Bridging-Header.h */,
 			);
 			path = MusicBox;
 			sourceTree = "<group>";
@@ -1151,6 +1161,7 @@
 				DAA262AC1953A8E9002B66CA /* NSArray+K2K.m in Sources */,
 				DA41D40218ECD4E900ED4BD7 /* SLNavigationItem.m in Sources */,
 				DABB801119839B7200F09368 /* MFSongListTableViewCell.m in Sources */,
+				DA69E6A81CE0E241009F6856 /* SFPlayer.m in Sources */,
 				DA865C3418DD168D00B520FF /* MFSettingViewController.m in Sources */,
 				DA35C8D718D3FD030021BD55 /* MFCollectionViewCell.m in Sources */,
 				DAA262B31953AFF6002B66CA /* UIImage+Color.m in Sources */,
@@ -1166,6 +1177,7 @@
 			files = (
 				DAF5325A1CDF6E4B00E69CAD /* ViewController.swift in Sources */,
 				DAF532581CDF6E4B00E69CAD /* AppDelegate.swift in Sources */,
+				DA69E6AC1CE0E2FB009F6856 /* SFPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1367,6 +1379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1380,6 +1393,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.marboo.MusicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MusicBox/MusicBox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1390,6 +1404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1404,6 +1419,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.marboo.MusicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MusicBox/MusicBox-Bridging-Header.h";
 			};
 			name = Release;
 		};
