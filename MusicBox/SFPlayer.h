@@ -10,6 +10,9 @@
 
 @interface SFPlayer : NSObject
 
+@property (nonatomic, strong) NSArray *soundFontArray;
+
 - (void)noteOn:(NSNumber *)noteNumber velocity:(NSNumber *)velocityNumber;
+- (void)loadSamplerAtIndex:(NSInteger)index;
 
 @end

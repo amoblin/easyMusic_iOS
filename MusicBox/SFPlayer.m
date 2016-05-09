@@ -22,8 +22,36 @@
 {
     self = [super init];
     if (self) {
+        self.soundFontArray = @[@"GeneralUser GS SoftSynth v1.44",
+                               @"TimGM6mb",
+                               @"Drama Piano",
+                               @"Electric Grand HQ",
+                               @"Electric Piano 1",
+                               @"Electric Piano 2",
+                               @"Electric Piano 4",
+                               @"Electric Piano 5",
+                               @"Electric Piano 6",
+                               @"Electro Piano 3",
+                               @"FLStudioMania.txt",
+                               @"FM Piano",
+                               @"Fantasy Piano",
+                               @"Fazioli Grand Piano", // 13，比较接近
+                               @"Full Grand Piano", // 14 比较接近
+                               @"Giga Piano", // 15，接近
+                               @"Grand Piano", // 16
+                               @"Kawai Grand Piano",
+                               @"Korg Triniton Piano",
+                               @"Motif ES6 Concert Piano",
+                               @"Piano Bass",
+                               @"Reverb Bell Piano",
+                               @"SC55 Piano V2",
+                               @"Stereo Piano",
+                               @"Tight Piano",
+                               @"U20 Electric Grand Piano",
+                               @"West Coast Piano"];
+
         [self prepareAUGraph];
-        [self loadSamplerPath:2];
+        [self loadSamplerAtIndex:2];
     }
     return self;
 }
@@ -46,26 +74,26 @@
 
     err = AUGraphAddNode(_AUGraph, &cd, &remoteOutputNode);
     if (err) {
-        NSLog(@"err = %ld", err);
+        NSLog(@"err = %@", @(err));
     }
     cd.componentType = kAudioUnitType_MusicDevice;
     cd.componentSubType = kAudioUnitSubType_Sampler;
     err = AUGraphAddNode(_AUGraph, &cd, &samplerNode);
     if (err) {
-        NSLog(@"err = %ld", err);
+        NSLog(@"err = %@", @(err));
     }
     err = AUGraphConnectNodeInput(_AUGraph, samplerNode, 0, remoteOutputNode, 0);
     if (err) {
-        NSLog(@"err = %ld", err);
+        NSLog(@"err = %@", @(err));
     }
 
     err = AUGraphInitialize(_AUGraph);
     if (err) {
-        NSLog(@"err = %ld", err);
+        NSLog(@"err = %@", @(err));
     }
     err = AUGraphStart(_AUGraph);
     if (err) {
-        NSLog(@"err = %ld", err);
+        NSLog(@"err = %@", @(err));
     }
 
     err = AUGraphNodeInfo(_AUGraph,
@@ -73,7 +101,7 @@
                           NULL,
                           &_samplerUnit);
     if (err) {
-        NSLog(@"err = %ld", err);
+        NSLog(@"err = %@", @(err));
     }
 }
 
@@ -83,44 +111,16 @@
     NSUInteger velocity = [velocityNumber integerValue];
     MusicDeviceMIDIEvent(_samplerUnit,
                          0x90,
-                         note,
-                         velocity,
+                         (UInt32)note,
+                         (UInt32)velocity,
                          0);
 }
 
 
-- (void)loadSamplerPath:(int)pathId;
+- (void)loadSamplerAtIndex:(NSInteger)index;
 {
-    NSArray *resourceArray = @[@"GeneralUser GS SoftSynth v1.44",
-                               @"TimGM6mb",
-                               @"Drama Piano",
-                               @"Electric Grand HQ",
-                               @"Electric Piano 1",
-                               @"Electric Piano 2",
-                               @"Electric Piano 4",
-                               @"Electric Piano 5",
-                               @"Electric Piano 6",
-                               @"Electro Piano 3",
-                               @"FLStudioMania.txt",
-                               @"FM Piano",
-                               @"Fantasy Piano",
-                               @"Fazioli Grand Piano",
-                               @"Full Grand Piano",
-                               @"Giga Piano",
-                               @"Grand Piano",
-                               @"Kawai Grand Piano",
-                               @"Korg Triniton Piano",
-                               @"Motif ES6 Concert Piano",
-                               @"Piano Bass",
-                               @"Reverb Bell Piano",
-                               @"SC55 Piano V2",
-                               @"Stereo Piano",
-                               @"Tight Piano",
-                               @"U20 Electric Grand Piano",
-                               @"West Coast Piano"];
-
     NSURL *presetURL;
-    presetURL = [[NSBundle mainBundle] URLForResource:resourceArray[4]
+    presetURL = [[NSBundle mainBundle] URLForResource:self.soundFontArray[index]
                                         withExtension:@"sf2"];
     [self loadFromDLSOrSoundFont:presetURL withPatch:0];
 }
