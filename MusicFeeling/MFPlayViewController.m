@@ -940,7 +940,7 @@
 
 - (void)toneButtonTouchUp:(MFButton *)sender;
 {
-    [self triggerNote:[MFUtils midiNumberForToneName:sender.tone] isOn:NO];
+    [self triggerNote:sender.tone isOn:NO];
 }
 
 - (void)playTone:(NSString *)name;
@@ -950,7 +950,7 @@
     }
 
 //    [super playTone:name];
-    [self triggerNote:[MFUtils midiNumberForToneName:name] isOn:YES];
+    [self triggerNote:name isOn:YES];
     self.playCount++;
 
     NSLog(@"%@ - %@", self.toneCount, @(self.playCount));

@@ -17,6 +17,7 @@
 #import <UMessage.h>
 #import <UMFeedback.h>
 #import "SFPlayer.h"
+#import "MFUtils.h"
 
 #import <AVOSCloud/AVOSCloud.h>
 
@@ -36,6 +37,7 @@
     // track analytics
     [MobClick startWithAppkey:UMENG_KEY];
     self.sfPlayer = [[SFPlayer alloc] init];
+    [self.sfPlayer loadSamplerAtIndex:0];
     //[TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
 #if DEBUG
 //    [self getDeviceInfo];
@@ -188,9 +190,15 @@
 
 // for MFBaseViewControll using
 
-- (void)triggerNote:(NSUInteger)note isOn:(BOOL)isOn;
+- (void)triggerNote:(NSString *)toneName isOn:(BOOL)isOn;
 {
-    [self.sfPlayer noteOn:@(note) velocity:isOn ? @127: @0];
+    
+    if (isOn) {
+//        [self playTone:toneName];
+        [self.sfPlayer noteOn:[MFUtils midiNumberForToneName:toneName] velocity:@127];
+    } else {
+        [self.sfPlayer noteOn:[MFUtils midiNumberForToneName:toneName] velocity:@0];
+    }
 }
 
 - (void)playTone:(NSString *)name {

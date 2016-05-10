@@ -136,17 +136,24 @@
     bpdata.presetID = (UInt8)presetNumber;
 
     // set the kAUSamplerProperty_LoadPresetFromBank property
-    result = AudioUnitSetProperty(_samplerUnit,
+    result = AudioUnitSetProperty(self.samplerUnit,
                                   kAUSamplerProperty_LoadPresetFromBank,
                                   kAudioUnitScope_Global,
                                   0,
                                   &bpdata,
                                   sizeof(bpdata));
     // check for errors
+    if (result != noErr) {
+        NSLog(@"Unable to set the preset property on the Sampler. Error code:%d '%.4s'",
+              (int)result,
+              (const char *)&result);
+    }
+    /*
     NSCAssert(result == noErr,
               @"Unable to set the preset property on the Sampler. Error code:%d '%.4s'",
               (int)result,
               (const char *)&result);
+     */
     return result;
 }
 

@@ -18,5 +18,5 @@
 @property (nonatomic) NSUInteger playCount;
 
 - (void)playTone:(NSString *)name;
-- (void)triggerNote:(NSUInteger)note isOn:(BOOL)isOn;
+- (void)triggerNote:(NSString *)toneName isOn:(BOOL)isOn;
 @end

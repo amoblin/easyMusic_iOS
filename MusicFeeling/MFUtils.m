@@ -200,9 +200,9 @@
     return [MFUtils sharedInstance].router[staffString];
 }
 
-+ (NSInteger)midiNumberForToneName:(NSString *)toneName;
++ (NSNumber *)midiNumberForToneName:(NSString *)toneName;
 {
-    return [[MFUtils sharedInstance].midiNoteDict[toneName] integerValue];
+    return [MFUtils sharedInstance].midiNoteDict[toneName];
 }
 
 @end
