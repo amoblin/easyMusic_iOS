@@ -37,7 +37,9 @@
     // track analytics
     [MobClick startWithAppkey:UMENG_KEY];
     self.sfPlayer = [[SFPlayer alloc] init];
-    [self.sfPlayer loadSamplerAtIndex:0];
+    [self.sfPlayer loadSamplerAtIndex:1]; // good
+    [self.sfPlayer loadSamplerAtIndex:2]; // 凑合
+    [self.sfPlayer loadSamplerAtIndex:3]; // 凑合
     //[TalkingData sessionStarted:@"5A13A0629F061B7164BB1475EBADD33F" withChannelId:@""];
 #if DEBUG
 //    [self getDeviceInfo];

@@ -24,5 +24,5 @@ target 'MusicBox' do
   platform :ios, '8.0'
   use_frameworks!
 
-  pod 'DDTile', :path => '../DDTile'
+  pod 'DDTile', :path => '../../Swift/DDTile'
 end

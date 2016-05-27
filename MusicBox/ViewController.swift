@@ -11,6 +11,7 @@ import DDTile
 
 class ViewController: DDBaseCollectionViewController {
     let sfPlayer = SFPlayer()
+    let timer = NSTimer(
 
     override func viewDidLoad() {
         super.viewDidLoad()
