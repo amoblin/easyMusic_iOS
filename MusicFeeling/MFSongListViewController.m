@@ -15,7 +15,7 @@
 
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
-#import <UMengAnalytics/MobClick.h>
+#import <UMMobClick/MobClick.h>
 #import <Masonry.h>
 
 #import <AVOSCloud/AVOSCloud.h>

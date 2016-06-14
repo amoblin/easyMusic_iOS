@@ -12,7 +12,7 @@
 #import <SVProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import <UMengAnalytics/MobClick.h>
+#import <UMMobClick/MobClick.h>
 //#import <TalkingData.h>
 #import <UMessage.h>
 #import <UMFeedback.h>
@@ -35,7 +35,9 @@
     // disable auto lock screen.
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     // track analytics
-    [MobClick startWithAppkey:UMENG_KEY];
+    UMConfigInstance.appKey = UMENG_KEY;
+    UMConfigInstance.channelId = @"App Store";
+    [MobClick startWithConfigure:UMConfigInstance];
     self.sfPlayer = [[SFPlayer alloc] init];
     [self.sfPlayer loadSamplerAtIndex:1]; // good
     [self.sfPlayer loadSamplerAtIndex:2]; // 凑合

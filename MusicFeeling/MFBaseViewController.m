@@ -9,8 +9,7 @@
 #import "MFBaseViewController.h"
 #import "MFAppDelegate.h"
 #import "MFUtils.h"
-
-#import <UMengAnalytics/MobClick.h>
+#import <UMMobClick/MobClick.h>
 
 @implementation MFBaseViewController
 

@@ -767,13 +767,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA527CD318D3E623009A825E /* Build configuration list for PBXNativeTarget "MusicFeeling" */;
 			buildPhases = (
-				57EC7EDD06EC8CEB7A495AB8 /* 📦 Check Pods Manifest.lock */,
+				57EC7EDD06EC8CEB7A495AB8 /* [CP] Check Pods Manifest.lock */,
 				DA527C9A18D3E623009A825E /* Sources */,
 				DA527C9B18D3E623009A825E /* Frameworks */,
 				DA527C9C18D3E623009A825E /* Resources */,
 				DA35C8D218D3F9A20021BD55 /* ShellScript */,
-				3FFAC7867A4EE3CF7FEFB7E9 /* 📦 Embed Pods Frameworks */,
-				E4CFB1B980A95DDE2068B7A9 /* 📦 Copy Pods Resources */,
+				3FFAC7867A4EE3CF7FEFB7E9 /* [CP] Embed Pods Frameworks */,
+				E4CFB1B980A95DDE2068B7A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -788,12 +788,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAF532641CDF6E4B00E69CAD /* Build configuration list for PBXNativeTarget "MusicBox" */;
 			buildPhases = (
-				D194209D82F27A35A978670E /* 📦 Check Pods Manifest.lock */,
+				D194209D82F27A35A978670E /* [CP] Check Pods Manifest.lock */,
 				DAF532511CDF6E4B00E69CAD /* Sources */,
 				DAF532521CDF6E4B00E69CAD /* Frameworks */,
 				DAF532531CDF6E4B00E69CAD /* Resources */,
-				6A374CB5D13AE2274D6323A7 /* 📦 Embed Pods Frameworks */,
-				F9EA33B58B463037CFCC1E31 /* 📦 Copy Pods Resources */,
+				6A374CB5D13AE2274D6323A7 /* [CP] Embed Pods Frameworks */,
+				F9EA33B58B463037CFCC1E31 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1032,14 +1032,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3FFAC7867A4EE3CF7FEFB7E9 /* 📦 Embed Pods Frameworks */ = {
+		3FFAC7867A4EE3CF7FEFB7E9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1047,14 +1047,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MusicFeeling/Pods-MusicFeeling-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		57EC7EDD06EC8CEB7A495AB8 /* 📦 Check Pods Manifest.lock */ = {
+		57EC7EDD06EC8CEB7A495AB8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1062,14 +1062,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6A374CB5D13AE2274D6323A7 /* 📦 Embed Pods Frameworks */ = {
+		6A374CB5D13AE2274D6323A7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1077,14 +1077,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MusicBox/Pods-MusicBox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D194209D82F27A35A978670E /* 📦 Check Pods Manifest.lock */ = {
+		D194209D82F27A35A978670E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1105,14 +1105,14 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
-		E4CFB1B980A95DDE2068B7A9 /* 📦 Copy Pods Resources */ = {
+		E4CFB1B980A95DDE2068B7A9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1120,14 +1120,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MusicFeeling/Pods-MusicFeeling-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F9EA33B58B463037CFCC1E31 /* 📦 Copy Pods Resources */ = {
+		F9EA33B58B463037CFCC1E31 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
