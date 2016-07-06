@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (3.3.2)
+  - AVOSCloud (3.3.4)
   - AVOSCloudSNS (3.1.2.9):
     - AVOSCloud
   - DDBrick (1.1):
@@ -38,7 +38,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
-  - SnapKit (0.21.0)
+  - SnapKit (0.21.1)
   - SVProgressHUD (2.0.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
@@ -72,7 +72,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AVOSCloud: 052f48bcbd88c8b556cb91e61348f7ca92c210e5
+  AVOSCloud: d501e7f43719884b748214d3cb5a3da18a20fb46
   AVOSCloudSNS: 4f9f1df8663fc7bfa76b9b38578ac535d275ee8f
   DDBrick: 95bfc944193d86cc0c7ba520b0faabff0b984ca9
   DDTile: d3e0f38b50a4ecbfde9c9b313e66ecc3b4e40946
@@ -82,7 +82,7 @@ SPEC CHECKSUMS:
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   PXAlertView: bb8a7e6bb95f73fe3fe091cacd279b683460f084
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
+  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199
