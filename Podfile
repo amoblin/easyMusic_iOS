@@ -28,6 +28,8 @@ target "MusicFeeling" do
   pod 'Masonry'
   pod 'PXAlertView'
   pod 'MRProgress'
+  pod 'PromiseKit', '~>1.0'
+  pod 'SDWebImage'
 
   pod 'JZLocationConverter'
   pod 'UITextView+Placeholder', '~> 1.2'
