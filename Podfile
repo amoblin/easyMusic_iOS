@@ -37,5 +37,5 @@ end
 target 'MusicBox' do
   platform :ios, '8.0'
 
-  pod 'DDTile', :path => '../../Swift/DDTile'
+#  pod 'DDTile', :path => '../../Swift/DDTile'
 end
