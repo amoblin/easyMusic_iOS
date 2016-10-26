@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <UIImageView+AFNetworking.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface WATableViewCell : UITableViewCell
 

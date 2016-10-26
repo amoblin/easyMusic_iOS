@@ -1,95 +1,120 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
+  - AFNetworking/NSURLSession (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (3.3.4)
+  - AVOSCloud (3.6.0)
   - AVOSCloudSNS (3.1.2.9):
     - AVOSCloud
-  - DDBrick (1.1):
-    - JSONModel
-    - Masonry
-    - SDWebImage
   - DDTile (0.1):
-    - Kingfisher
-    - SnapKit
+    - Kingfisher (~> 2.4)
+    - SnapKit (~> 0.22)
+  - FontAwesomeKit/Core (2.2.0)
+  - FontAwesomeKit/IonIcons (2.2.0):
+    - FontAwesomeKit/Core
   - HexColors (2.2.1)
-  - JSONModel (1.2.0)
-  - Kingfisher (2.4.1)
-  - Masonry (1.0.1)
+  - JSONModel (1.7.0)
+  - JZLocationConverter (1.0.0)
+  - Kingfisher (2.6.1)
+  - Masonry (1.0.2)
+  - MRProgress (0.8.3):
+    - MRProgress/ActivityIndicator (= 0.8.3)
+    - MRProgress/Blur (= 0.8.3)
+    - MRProgress/Circular (= 0.8.3)
+    - MRProgress/Icons (= 0.8.3)
+    - MRProgress/NavigationBarProgress (= 0.8.3)
+    - MRProgress/Overlay (= 0.8.3)
+  - MRProgress/ActivityIndicator (0.8.3):
+    - MRProgress/Stopable
+  - MRProgress/Blur (0.8.3):
+    - MRProgress/Helper
+  - MRProgress/Circular (0.8.3):
+    - MRProgress/Helper
+    - MRProgress/ProgressBaseClass
+    - MRProgress/Stopable
+  - MRProgress/Helper (0.8.3)
+  - MRProgress/Icons (0.8.3)
+  - MRProgress/NavigationBarProgress (0.8.3):
+    - MRProgress/ProgressBaseClass
+  - MRProgress/Overlay (0.8.3):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+  - MRProgress/ProgressBaseClass (0.8.3)
+  - MRProgress/Stopable (0.8.3):
+    - MRProgress/Helper
   - PXAlertView (0.1.1)
-  - SDWebImage (3.7.6):
-    - SDWebImage/Core (= 3.7.6)
-  - SDWebImage/Core (3.7.6)
-  - SnapKit (0.21.1)
+  - SnapKit (0.22.0)
   - SVProgressHUD (2.0.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
-  - UMengAnalytics (4.0.4)
+  - UITextView+Placeholder (1.2.0)
+  - UMengAnalytics (4.1.0)
   - UMengFeedback (2.3.4)
   - UMengMessage (1.1.0.2)
-  - WANetwork (0.2):
-    - AFNetworking (~> 2.5)
-    - DDBrick
-    - PXAlertView
-    - SVProgressHUD
 
 DEPENDENCIES:
+  - AFNetworking (~> 2.6.3)
   - AVOSCloud
   - AVOSCloudSNS
-  - DDBrick (from `../DDBrick`)
   - DDTile (from `../../Swift/DDTile`)
+  - FontAwesomeKit/IonIcons
+  - JSONModel
+  - JZLocationConverter
+  - Masonry
+  - MRProgress
+  - PXAlertView
+  - SVProgressHUD
   - TSMessages
+  - UITextView+Placeholder (~> 1.2)
   - UMengAnalytics
   - UMengFeedback
   - UMengMessage
-  - WANetwork (from `https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec`)
 
 EXTERNAL SOURCES:
-  DDBrick:
-    :path: "../DDBrick"
   DDTile:
     :path: "../../Swift/DDTile"
-  WANetwork:
-    :podspec: https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AVOSCloud: d501e7f43719884b748214d3cb5a3da18a20fb46
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  AVOSCloud: be838e80e13c3247abf24d95e325b3fd515f9d12
   AVOSCloudSNS: 4f9f1df8663fc7bfa76b9b38578ac535d275ee8f
-  DDBrick: 95bfc944193d86cc0c7ba520b0faabff0b984ca9
-  DDTile: d3e0f38b50a4ecbfde9c9b313e66ecc3b4e40946
+  DDTile: dcf396e5f9fe5758d97c9de67cb6f8c9494f18b9
+  FontAwesomeKit: 025fd4dd1017fe4e3f8d47b03e024deedbb33cd4
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
-  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
-  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
-  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
+  JZLocationConverter: 3d816bee6484aed9c155a6045a02ce444833e2f0
+  Kingfisher: 7e5515bf6c4f2acad91f6400955d2257549cab7b
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
   PXAlertView: bb8a7e6bb95f73fe3fe091cacd279b683460f084
-  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
+  SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
-  UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199
+  UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
+  UMengAnalytics: 19b28253793d77dff10fb7d502faad1fb6b8ce4a
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
   UMengMessage: 48fac77da8a71729c3d9c40eed16151d8917d9b3
-  WANetwork: 74d2696e1db4534202e6a16c2cc7c9ed9802c955
 
-PODFILE CHECKSUM: 95a41a2ce35f229169442d4c265d3ff23f27432d
+PODFILE CHECKSUM: ab6dfa38efa05e4e131c8770d1067845a0132a18
 
 COCOAPODS: 1.0.1

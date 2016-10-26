@@ -8,11 +8,11 @@
 
 #import "WATableViewController.h"
 #import "WATableViewCell.h"
-#import "WANetwork.h"
+#import <DDNetwork/DDNetworking.h>
 
-#import <Masonry.h>
-#import <SVProgressHUD.h>
-#import <UIImageView+AFNetworking.h>
+@import Masonry;
+@import SVProgressHUD;
+@import AFNetworking;
 
 @interface WATableViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -139,10 +139,10 @@
 - (void)fetchDataWithConfig:(NSDictionary *)conf {
     NSURL *url = [NSURL URLWithString:conf[@"url"]];
     NSString *keyPath = conf[@"key_path"];
-    [[WANetwork sharedInstance] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
+    [[DDNetworking sharedInstance] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
 
     NSDictionary *payload =  @{@"os": @"ios"};
-    [[WANetwork sharedInstance] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
+    [[DDNetworking sharedInstance] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
         [self.refreshControl endRefreshing];
         //        self.userList = result[@"result"];
         NSArray *data = [result valueForKeyPath:keyPath];
@@ -163,10 +163,10 @@
 - (void)fetchDataWithConfig:(NSDictionary *)conf andCallback:(void (^)(id))callback {
     NSURL *url = [NSURL URLWithString:conf[@"url"]];
     NSString *keyPath = conf[@"key_path"];
-    [[WANetwork sharedInstance] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
+    [[DDNetworking sharedInstance] setApiRoot:[NSString stringWithFormat:@"%@://%@", url.scheme, url.host]];
 
     NSDictionary *payload =  @{@"os": @"ios"};
-    [[WANetwork sharedInstance] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
+    [[DDNetworking sharedInstance] requestWithString:url.path method:@"GET" params:payload success:^(id result) {
         [self.refreshControl endRefreshing];
         callback([result valueForKeyPath:keyPath]);
     } failure:^(id response, NSError *error) {

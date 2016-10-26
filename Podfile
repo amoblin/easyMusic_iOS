@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
 target "MusicFeeling" do
-  platform :ios, '6.1'
+  platform :ios, '8.0'
 
   pod 'UMengAnalytics'
   pod 'UMengFeedback'
@@ -16,13 +17,25 @@ target "MusicFeeling" do
   pod 'AVOSCloud'
   pod 'AVOSCloudSNS'
 
-  pod 'DDBrick', :path => "../DDBrick"
-  pod 'WANetwork', :podspec => 'https://raw.githubusercontent.com/amoblin/WANetwork/master/WANetwork.podspec'
+#  pod 'DDUIKit', :path => "../DDKit"
+#  pod 'DDBrick', :path => "../DDBrick"
+#  pod 'DDNetwork', :path => "../DDNetwork"
+  pod 'JSONModel'
+  pod 'SVProgressHUD'
+  # only cocoapods
+  pod 'AFNetworking', '~> 2.6.3'
+  pod 'FontAwesomeKit/IonIcons'
+  pod 'Masonry'
+  pod 'PXAlertView'
+  pod 'MRProgress'
+
+  pod 'JZLocationConverter'
+  pod 'UITextView+Placeholder', '~> 1.2'
+
 end
 
 target 'MusicBox' do
   platform :ios, '8.0'
-  use_frameworks!
 
   pod 'DDTile', :path => '../../Swift/DDTile'
 end

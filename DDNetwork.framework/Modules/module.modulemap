@@ -1,0 +1,6 @@
+framework module DDNetwork {
+  umbrella header "DDNetwork.h"
+
+  export *
+  module * { export * }
+}

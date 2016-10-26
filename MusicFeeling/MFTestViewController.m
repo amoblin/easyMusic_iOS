@@ -8,7 +8,7 @@
 
 #import "MFTestViewController.h"
 #import "MFAppDelegate.h"
-#import <SVProgressHUD.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 #import "PXAlertView.h"
 

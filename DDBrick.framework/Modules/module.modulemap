@@ -1,0 +1,6 @@
+framework module DDBrick {
+  umbrella header "DDBrick.h"
+
+  export *
+  module * { export * }
+}

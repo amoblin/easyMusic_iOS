@@ -1,0 +1,6 @@
+framework module DDDynamicCrypt {
+  umbrella header "DDDynamicCrypt.h"
+
+  export *
+  module * { export * }
+}

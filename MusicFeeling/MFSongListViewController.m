@@ -13,10 +13,10 @@
 #import "MFSettingsTableViewCell.h"
 #import "MFSongListTableViewCell.h"
 
-#import <AFNetworking.h>
-#import <SVProgressHUD.h>
+@import AFNetworking;
+@import SVProgressHUD;
 #import <UMMobClick/MobClick.h>
-#import <Masonry.h>
+@import Masonry;
 
 #import <AVOSCloud/AVOSCloud.h>
 

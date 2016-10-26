@@ -11,9 +11,9 @@
 #import "MFSettingsTableViewCell.h"
 
 #import <QuartzCore/QuartzCore.h>
-#import <UMFeedback.h>
-#import <SVProgressHUD.h>
-#import <Masonry.h>
+@import UMengFeedback;
+@import SVProgressHUD;
+@import Masonry;
 
 #define TOP @350
 #define WHITE_WIDTH @44

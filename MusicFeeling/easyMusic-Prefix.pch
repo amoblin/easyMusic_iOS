@@ -14,7 +14,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "AppMacro.h"
-    #import <DDColors.h>
-    #import <WAMacros.h>
+    #import <DDBrick/DDColors.h>
+    #import <DDUIKit/DDMacros.h>
     #import "Prefix.h"
 #endif

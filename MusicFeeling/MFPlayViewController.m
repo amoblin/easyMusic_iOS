@@ -20,14 +20,13 @@
 #import "UIView+AutoLayout.h"
 
 
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 #import "PXAlertView.h"
-#import <SVProgressHUD.h>
-#import <AFNetworking.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <AFNetworking/AFNetworking.h>
 //#import <NSData+Base64.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import <Masonry.h>
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>

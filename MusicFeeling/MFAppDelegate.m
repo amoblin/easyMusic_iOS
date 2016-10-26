@@ -9,13 +9,13 @@
 #import "MFAppDelegate.h"
 #import "MFSongListViewController.h"
 
-#import <SVProgressHUD.h>
+@import SVProgressHUD;
 #import <AVFoundation/AVFoundation.h>
 
 #import <UMMobClick/MobClick.h>
 //#import <TalkingData.h>
 #import <UMessage.h>
-#import <UMFeedback.h>
+@import UMengFeedback;
 #import "SFPlayer.h"
 #import "MFUtils.h"
 

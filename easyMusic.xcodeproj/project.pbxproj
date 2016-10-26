@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037C44F02AC388A60E36B49B /* Pods_MusicFeeling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF82FA5D918C6CE20F0F802 /* Pods_MusicFeeling.framework */; };
 		AF1FD8E9698EC432344AE1B9 /* Pods_MusicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C899067A55974E8B5FF6E28C /* Pods_MusicBox.framework */; };
-		C25455F14AE7D7E4CC1A9813 /* libPods-MusicFeeling.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98EAD41335CD63E991F9CAAF /* libPods-MusicFeeling.a */; };
 		DA20CF7119E77EFD00CD179B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA20CF7319E77EFD00CD179B /* Localizable.strings */; };
 		DA20CF8719E986C300CD179B /* MFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA20CF8619E986C300CD179B /* MFUtils.m */; };
+		DA28F0E11DC02DB300764F37 /* DDBrick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0DD1DC02DB300764F37 /* DDBrick.framework */; };
+		DA28F0E21DC02DB300764F37 /* DDBrick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0DD1DC02DB300764F37 /* DDBrick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA28F0E31DC02DB300764F37 /* DDDynamicCrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0DE1DC02DB300764F37 /* DDDynamicCrypt.framework */; };
+		DA28F0E41DC02DB300764F37 /* DDDynamicCrypt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0DE1DC02DB300764F37 /* DDDynamicCrypt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA28F0E51DC02DB300764F37 /* DDNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0DF1DC02DB300764F37 /* DDNetwork.framework */; };
+		DA28F0E61DC02DB300764F37 /* DDNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0DF1DC02DB300764F37 /* DDNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA28F0E71DC02DB300764F37 /* DDUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0E01DC02DB300764F37 /* DDUIKit.framework */; };
+		DA28F0E81DC02DB300764F37 /* DDUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA28F0E01DC02DB300764F37 /* DDUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA2EF15C18EFB6C300DC1617 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2EF15B18EFB6C300DC1617 /* AVFoundation.framework */; };
 		DA2EF1B618EFB89800DC1617 /* a0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF15E18EFB89800DC1617 /* a0.mp3 */; };
 		DA2EF1B718EFB89800DC1617 /* a0m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF15F18EFB89800DC1617 /* a0m.mp3 */; };
@@ -206,11 +214,28 @@
 		DAF532BD1CE0049200E69CAD /* Fazioli Grand Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DAF532BB1CE0049200E69CAD /* Fazioli Grand Piano.sf2 */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DA28F0E91DC02DB300764F37 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA28F0E21DC02DB300764F37 /* DDBrick.framework in Embed Frameworks */,
+				DA28F0E41DC02DB300764F37 /* DDDynamicCrypt.framework in Embed Frameworks */,
+				DA28F0E61DC02DB300764F37 /* DDNetwork.framework in Embed Frameworks */,
+				DA28F0E81DC02DB300764F37 /* DDUIKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0EF82FA5D918C6CE20F0F802 /* Pods_MusicFeeling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicFeeling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F871CDCC8B6718E0C553E0 /* Pods-MusicFeeling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicFeeling.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicFeeling/Pods-MusicFeeling.debug.xcconfig"; sourceTree = "<group>"; };
 		307F1A8EA791B067C1C760ED /* Pods-MusicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicBox/Pods-MusicBox.debug.xcconfig"; sourceTree = "<group>"; };
 		5E061A564649BA1839B0BED4 /* Pods-MusicFeeling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicFeeling.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicFeeling/Pods-MusicFeeling.release.xcconfig"; sourceTree = "<group>"; };
-		98EAD41335CD63E991F9CAAF /* libPods-MusicFeeling.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MusicFeeling.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C899067A55974E8B5FF6E28C /* Pods_MusicBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6FFDFFD1FE9529BBA7963F8 /* Pods-MusicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicBox/Pods-MusicBox.release.xcconfig"; sourceTree = "<group>"; };
 		DA20CF7219E77EFD00CD179B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -219,6 +244,10 @@
 		DA20CF7619E77F2100CD179B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA20CF8519E986C300CD179B /* MFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUtils.h; sourceTree = "<group>"; };
 		DA20CF8619E986C300CD179B /* MFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUtils.m; sourceTree = "<group>"; };
+		DA28F0DD1DC02DB300764F37 /* DDBrick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DDBrick.framework; sourceTree = "<group>"; };
+		DA28F0DE1DC02DB300764F37 /* DDDynamicCrypt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DDDynamicCrypt.framework; sourceTree = "<group>"; };
+		DA28F0DF1DC02DB300764F37 /* DDNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DDNetwork.framework; sourceTree = "<group>"; };
+		DA28F0E01DC02DB300764F37 /* DDUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DDUIKit.framework; sourceTree = "<group>"; };
 		DA2EF15B18EFB6C300DC1617 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DA2EF15E18EFB89800DC1617 /* a0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = a0.mp3; sourceTree = "<group>"; };
 		DA2EF15F18EFB89800DC1617 /* a0m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = a0m.mp3; sourceTree = "<group>"; };
@@ -425,10 +454,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA2EF15C18EFB6C300DC1617 /* AVFoundation.framework in Frameworks */,
+				DA28F0E51DC02DB300764F37 /* DDNetwork.framework in Frameworks */,
 				DA527CA418D3E623009A825E /* CoreGraphics.framework in Frameworks */,
+				DA28F0E31DC02DB300764F37 /* DDDynamicCrypt.framework in Frameworks */,
+				DA28F0E11DC02DB300764F37 /* DDBrick.framework in Frameworks */,
+				DA28F0E71DC02DB300764F37 /* DDUIKit.framework in Frameworks */,
 				DA527CA618D3E623009A825E /* UIKit.framework in Frameworks */,
 				DA527CA218D3E623009A825E /* Foundation.framework in Frameworks */,
-				C25455F14AE7D7E4CC1A9813 /* libPods-MusicFeeling.a in Frameworks */,
+				037C44F02AC388A60E36B49B /* Pods_MusicFeeling.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +585,10 @@
 		DA527C9518D3E623009A825E = {
 			isa = PBXGroup;
 			children = (
+				DA28F0DD1DC02DB300764F37 /* DDBrick.framework */,
+				DA28F0DE1DC02DB300764F37 /* DDDynamicCrypt.framework */,
+				DA28F0DF1DC02DB300764F37 /* DDNetwork.framework */,
+				DA28F0E01DC02DB300764F37 /* DDUIKit.framework */,
 				DAB8A1781AFF102F008CE3ED /* Prefix.h */,
 				DAA262B01953AFDB002B66CA /* View */,
 				DAA262AD1953AC8C002B66CA /* Macros */,
@@ -582,7 +619,7 @@
 				DA527CA318D3E623009A825E /* CoreGraphics.framework */,
 				DA527CA518D3E623009A825E /* UIKit.framework */,
 				C899067A55974E8B5FF6E28C /* Pods_MusicBox.framework */,
-				98EAD41335CD63E991F9CAAF /* libPods-MusicFeeling.a */,
+				0EF82FA5D918C6CE20F0F802 /* Pods_MusicFeeling.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -774,6 +811,7 @@
 				DA35C8D218D3F9A20021BD55 /* ShellScript */,
 				3FFAC7867A4EE3CF7FEFB7E9 /* [CP] Embed Pods Frameworks */,
 				E4CFB1B980A95DDE2068B7A9 /* [CP] Copy Pods Resources */,
+				DA28F0E91DC02DB300764F37 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1325,7 +1363,8 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/easyMusic-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MusicFeeling/easyMusic-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(PODS_ROOT)/UMengAnalytics/**\"",
 					"\"$(PODS_ROOT)/UMengFeedback/**\"",
@@ -1358,7 +1397,8 @@
 				GCC_PREFIX_HEADER = "MusicFeeling/easyMusic-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "MusicFeeling/easyMusic-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(PODS_ROOT)/UMengAnalytics/**\"",
 					"\"$(PODS_ROOT)/UMengFeedback/**\"",

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 amoblin. All rights reserved.
 //
 
-#import <DDBaseModel.h>
+#import <DDUIKit/DDBaseModel.h>
 
 @interface WAViewModel : DDBaseModel
 

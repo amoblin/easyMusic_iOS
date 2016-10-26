@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 amoblin. All rights reserved.
 //
 
-#import <DDBaseData.h>
+#import <DDBrick/DDBaseData.h>
 
 @class AVObject;
 
